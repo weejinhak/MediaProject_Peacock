@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView_snsLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sns_login_text"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/googleLogin_button"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
+    <View
+        android:layout_width="384dp"
+        android:layout_height="1dp"
+        android:background="#000000"
+        android:id="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/guideline4"/>
+    <TextView
+        android:id="@+id/textView_emailLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/email_login_text"
+        app:layout_constraintTop_toBottomOf="@+id/view"
+        app:layout_constraintBottom_toTopOf="@+id/view2"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <View
+        android:layout_width="384dp"
+        android:layout_height="1dp"
+        android:background="#000000"
+        android:id="@+id/view2"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2" />
+
+
+    <ImageButton
+        android:id="@+id/googleLogin_button"
+        android:layout_width="43dp"
+        android:layout_height="46dp"
+        android:background="#FFFFFF"
+        android:scaleType="centerInside"
+        app:srcCompat="@drawable/login_layout_snsgoogle_img"
+        app:layout_constraintBottom_toTopOf="@+id/guideline4"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginBottom="26dp"/>
+
+    <EditText
+        android:id="@+id/editText_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:drawableRight="@drawable/login_layout_email_img"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintBottom_toTopOf="@+id/editText_passWord"
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
+    <EditText
+        android:id="@+id/editText_passWord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:drawableRight="@drawable/login_layout_password_img"
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/editText_email"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+    <TextView
+        android:id="@+id/textView_passWord_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/password_search_text"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline3" />
+
+    <ImageButton
+        android:id="@+id/loginOk_button"
+        android:layout_width="384dp"
+        android:layout_height="50dp"
+        android:background="@color/colorAccent"
+        app:srcCompat="@drawable/login_layout_loginok_img"
+        android:scaleType="centerInside"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintBottom_toTopOf="@+id/join_button"
+        app:layout_constraintTop_toTopOf="@+id/guideline3"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
+    <Button
+        android:id="@+id/join_button"
+        android:layout_width="384dp"
+        android:layout_height="wrap_content"
+        android:text="@string/join_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginOk_button"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline"
+        app:layout_constraintGuide_begin="192dp"
+        android:orientation="vertical"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline2"
+        app:layout_constraintGuide_begin="184dp"
+        android:orientation="horizontal" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline3"
+        app:layout_constraintGuide_begin="371dp"
+        android:orientation="horizontal" />
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline4"
+        app:layout_constraintGuide_begin="105dp"
+        android:orientation="horizontal" />
+
+</android.support.constraint.ConstraintLayout>
