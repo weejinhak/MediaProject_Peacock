@@ -5,8 +5,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
@@ -20,6 +23,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 /**
@@ -32,13 +36,25 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private GoogleApiClient mGoogleApiClient;
     private FirebaseAuth mAuth;
 
+    private TextView joinTextView;
+    private EditText login_EditTextEmail;
+    private EditText login_EditTextPassword;
+    private ImageButton loginOkButton;
+
+    private FirebaseAuth.AuthStateListener mAuthListener;
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         mAuth = FirebaseAuth.getInstance();
+        joinTextView=findViewById(R.id.login_layout_textView_join);
+        loginOkButton=findViewById(R.id.login_layout_loginOk_imgButton);
+        login_EditTextEmail=findViewById(R.id.login_layout_editText_email);
+        login_EditTextPassword=findViewById(R.id.login_layout_editText_passWord);
 
-        ImageButton googleLoginButton = findViewById(R.id.googleLogin_button);
+        ImageButton googleLoginButton = findViewById(R.id.login_layout_googleLogin_imgButton);
 
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -59,7 +75,59 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             }
         });
 
+        mAuthListener =new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if(user !=null) {
+                    Intent intent= new Intent(getApplicationContext(),MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else{
+
+                }
+            }
+        };
+
+        /*이메일로 가입하기로 넘어가기 이벤트*/
+        joinTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(getApplicationContext(),EmailJoinActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+        /*로그인 하기 버튼 이벤트*/
+        loginOkButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loginUser(login_EditTextEmail.getText().toString(),login_EditTextPassword.getText().toString());
+            }
+        });
+
+
+
     }
+
+   private void loginUser(final String email, final String password){
+       mAuth.signInWithEmailAndPassword(email, password)
+               .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                   @Override
+                   public void onComplete(@NonNull Task<AuthResult> task) {
+                       if (!task.isSuccessful()) {
+                           // Sign in success, update UI with the signed-in user's information
+                           loginUser(email,password);
+                       } else {
+                           // If sign in fails, display a message to the user.
+                           Toast.makeText(LoginActivity.this,"로그인이성공!!",Toast.LENGTH_SHORT).show();
+                       }
+
+                       // ...
+                   }
+               });
+
+   }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -92,9 +160,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         } else {
                             // Sign in success, update UI with the signed-in user's information
                             Toast.makeText(LoginActivity.this,"로그인이성공!!",Toast.LENGTH_SHORT).show();
-                            Intent intent= new Intent(getApplicationContext(),MainActivity.class);
-                            startActivity(intent);
-                            finish();
                         }
                     }
                 });
@@ -103,5 +168,19 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(mAuthListener!=null){
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
     }
 }

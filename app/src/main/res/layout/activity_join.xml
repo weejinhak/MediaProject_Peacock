@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/join_layout_text_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/join_layout_name_tag_img"
+        android:ems="15"
+        android:gravity="center"
+        android:hint="@string/editText_email_hint"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/join_layout_text_password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline11" />
+
+    <EditText
+        android:id="@+id/join_layout_text_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/join_layout_birthday_img"
+        android:ems="15"
+        android:gravity="center"
+        android:hint="@string/editText_password_hint"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/guideline8"
+        app:layout_constraintEnd_toEndOf="@+id/join_layout_text_email"
+        app:layout_constraintStart_toStartOf="@+id/join_layout_text_email"
+        app:layout_constraintTop_toBottomOf="@+id/join_layout_text_email" />
+
+    <ImageButton
+        android:id="@+id/join_layout_imageButton_joinOk_button"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/join_layout_joinok_click_change"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline12"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <!--Guideline start-->
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="205dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="301dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="128dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="194dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="546dp" />
+    <!--GuideEnd-->
+
+
+</android.support.constraint.ConstraintLayout>

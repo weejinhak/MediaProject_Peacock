@@ -34,4 +34,15 @@
         </menu>
     </item>
 
+
+    <item android:title="Preferences">
+        <menu>
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Logout" />
+
+        </menu>
+    </item>
+
 </menu>

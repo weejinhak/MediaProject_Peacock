@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/memberInfo_layout_imageView_photo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/join_layout_photo_add_img" />
+
+    <EditText
+        android:id="@+id/memberInfo_layout_text_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/join_layout_name_tag_img"
+        android:ems="15"
+        android:gravity="center"
+        android:hint="@string/join_layout_name_text"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/memberInfo_layout_text_date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline11" />
+
+    <EditText
+        android:id="@+id/memberInfo_layout_text_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/join_layout_birthday_img"
+        android:ems="15"
+        android:gravity="center"
+        android:hint="@string/join_layout_birthday_text"
+        android:inputType="date"
+        app:layout_constraintBottom_toTopOf="@+id/guideline8"
+        app:layout_constraintEnd_toEndOf="@+id/memberInfo_layout_text_name"
+        app:layout_constraintStart_toStartOf="@+id/memberInfo_layout_text_name"
+        app:layout_constraintTop_toBottomOf="@+id/memberInfo_layout_text_name" />
+
+    <ImageView
+        android:id="@+id/memberInfo_imageView"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="4dp"
+        app:layout_constraintStart_toStartOf="@+id/memberInfo_layout_text_date"
+        app:srcCompat="@drawable/join_layout_gender_img"
+        tools:layout_editor_absoluteY="324dp" />
+
+    <RadioButton
+        android:id="@+id/memberInfo_layout_radio_man_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/join_layout_man_text"
+        app:layout_constraintEnd_toStartOf="@+id/memberInfo_layout_radio_woman_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/memberInfo_imageView"
+        app:layout_constraintTop_toTopOf="@+id/memberInfo_imageView" />
+
+    <RadioButton
+        android:id="@+id/memberInfo_layout_radio_woman_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/join_layout_woman_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/memberInfo_layout_radio_man_button"
+        app:layout_constraintTop_toTopOf="@+id/memberInfo_layout_radio_man_button" />
+
+    <EditText
+        android:id="@+id/memberInfo_layout_text_job"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="15"
+        android:gravity="center"
+        android:hint="@string/join_layout_job_text"
+        android:inputType="textPersonName"
+        android:drawableLeft="@drawable/join_layout_job_img"
+        app:layout_constraintBottom_toTopOf="@+id/guideline12"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/memberInfo_layout_imageButton_joinOk_button"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/join_layout_joinok_click_change"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!--Guideline start-->
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="205dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="301dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="128dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="194dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="410dp" />
+    <!--GuideEnd-->
+
+
+</android.support.constraint.ConstraintLayout>
