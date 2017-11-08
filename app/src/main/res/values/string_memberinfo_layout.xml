@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="member_info_layout_name_text">이름</string>
+    <string name="member_info_layout_birthday_text">생년월일</string>
+    <string name="member_info_layout_gender_text">성별</string>
+    <string name="member_info_layout_job_text">직업</string>
+    <string name="member_info_layout_monthBudget_text">월예산</string>
+
+</resources>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/memberinfo_layout_imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/join_layout_title_img"
+        tools:layout_editor_absoluteX="148dp"
+        tools:layout_editor_absoluteY="31dp"
+        tools:ignore="MissingConstraints" />
+
+
+    <EditText
+        android:id="@+id/memberinfo_layout_editText_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:drawableStart="@drawable/join_layout_name_tag_img"
+        android:ems="15"
+        android:hint="@string/member_info_layout_name_text"
+        android:gravity="center"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/memberinfo_layout_editText_birthday"
+        app:layout_constraintTop_toTopOf="@+id/guideline13"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="45dp" />
+
+    <EditText
+        android:id="@+id/memberinfo_layout_editText_birthday"
+        android:layout_width="wrap_content"
+        android:layout_height="76dp"
+        android:drawableStart="@drawable/join_layout_birthday_img"
+        android:ems="15"
+        android:hint="@string/member_info_layout_birthday_text"
+        android:inputType="date"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@+id/memberinfo_layout_editText_gender"
+        app:layout_constraintTop_toBottomOf="@+id/memberinfo_layout_editText_name"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="45dp" />
+
+    <EditText
+        android:id="@+id/memberinfo_layout_editText_gender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/join_layout_gender_img"
+        android:ems="15"
+        android:hint="@string/member_info_layout_gender_text"
+        android:inputType="textPersonName"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@+id/memberinfo_layout_editText_job"
+        app:layout_constraintTop_toBottomOf="@+id/memberinfo_layout_editText_birthday"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="45dp" />
+
+    <EditText
+        android:id="@+id/memberinfo_layout_editText_job"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/join_layout_job_img"
+        android:ems="15"
+        android:gravity="center"
+        android:hint="@string/member_info_layout_job_text"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/memberinfo_layout_editText_monthBudget"
+        app:layout_constraintTop_toBottomOf="@+id/memberinfo_layout_editText_gender"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="45dp" />
+
+    <EditText
+        android:id="@+id/memberinfo_layout_editText_monthBudget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:drawableStart="@drawable/join_layout_budget_img"
+        android:ems="15"
+        android:gravity="center"
+        android:hint="@string/member_info_layout_monthBudget_text"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/imageButton2"
+        app:layout_constraintTop_toBottomOf="@+id/memberinfo_layout_editText_job"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="45dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/join_layout_register_button"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="506dp"
+        tools:ignore="MissingConstraints" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="206dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="92dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="506dp" />
+
+</android.support.constraint.ConstraintLayout>
