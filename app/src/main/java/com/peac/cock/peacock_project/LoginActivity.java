@@ -36,10 +36,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private GoogleApiClient mGoogleApiClient;
     private FirebaseAuth mAuth;
 
-    private TextView joinTextView;
     private EditText login_EditTextEmail;
     private EditText login_EditTextPassword;
-    private ImageButton loginOkButton;
 
     private FirebaseAuth.AuthStateListener mAuthListener;
 
@@ -48,13 +46,17 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        mAuth = FirebaseAuth.getInstance();
-        joinTextView=findViewById(R.id.login_layout_textView_join);
-        loginOkButton=findViewById(R.id.login_layout_loginOk_imgButton);
-        login_EditTextEmail=findViewById(R.id.login_layout_editText_email);
-        login_EditTextPassword=findViewById(R.id.login_layout_editText_passWord);
 
+        //firebase Auth정보 get
+        mAuth = FirebaseAuth.getInstance();
+
+        //button 및 사용할 아이템
+        TextView joinTextView = findViewById(R.id.login_layout_textView_join);
+        ImageButton loginOkButton = findViewById(R.id.login_layout_loginOk_imgButton);
+        login_EditTextEmail = findViewById(R.id.login_layout_editText_email);
+        login_EditTextPassword = findViewById(R.id.login_layout_editText_passWord);
         ImageButton googleLoginButton = findViewById(R.id.login_layout_googleLogin_imgButton);
+
 
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -75,15 +77,15 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             }
         });
 
-        mAuthListener =new FirebaseAuth.AuthStateListener() {
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                if(user !=null) {
-                    Intent intent= new Intent(getApplicationContext(),MainActivity.class);
+                if (user != null) {//인증된 user 일시 보내는 화면
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
                     finish();
-                }else{
+                } else {//비인증 유져라면 보내는 화면
 
                 }
             }
@@ -93,7 +95,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         joinTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent= new Intent(getApplicationContext(),EmailJoinActivity.class);
+                Intent intent = new Intent(getApplicationContext(), EmailJoinActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -102,32 +104,29 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         loginOkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginUser(login_EditTextEmail.getText().toString(),login_EditTextPassword.getText().toString());
+                loginUser(login_EditTextEmail.getText().toString(), login_EditTextPassword.getText().toString());
             }
         });
 
 
-
     }
 
-   private void loginUser(final String email, final String password){
-       mAuth.signInWithEmailAndPassword(email, password)
-               .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                   @Override
-                   public void onComplete(@NonNull Task<AuthResult> task) {
-                       if (!task.isSuccessful()) {
-                           // Sign in success, update UI with the signed-in user's information
-                           loginUser(email,password);
-                       } else {
-                           // If sign in fails, display a message to the user.
-                           Toast.makeText(LoginActivity.this,"로그인이성공!!",Toast.LENGTH_SHORT).show();
-                       }
+    private void loginUser(final String email, final String password) {
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (!task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            loginUser(email, password);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Toast.makeText(LoginActivity.this, "로그인이성공!!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
 
-                       // ...
-                   }
-               });
-
-   }
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -156,10 +155,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (!task.isSuccessful()) {
                             // If sign in fails, display a message to the user.
-
                         } else {
                             // Sign in success, update UI with the signed-in user's information
-                            Toast.makeText(LoginActivity.this,"로그인이성공!!",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "로그인이성공!!", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -179,7 +177,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     @Override
     protected void onStop() {
         super.onStop();
-        if(mAuthListener!=null){
+        if (mAuthListener != null) {
             mAuth.removeAuthStateListener(mAuthListener);
         }
     }
