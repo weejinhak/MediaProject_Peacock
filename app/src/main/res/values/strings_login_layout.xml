@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="email_login_text">이메일 주소로 로그인</string>
-    <string name="join_text">회원가입</string>
-    <string name="password_search_text">비밀번호 찾기</string>
-    <string name="editText_email_hint">email</string>
-    <string name="editText_password_hint">password</string>
+    <string name="login_layout_editText_email_login_text">이메일</string>
+    <string name="login_layout_editText_password_login_text">비밀번호</string>
+    <string name="login_layout_textVitw_join_text">회원가입</string>
+    <string name="login_layout_password_search_text">아이디/비밀번호 찾기</string>
 </resources>
