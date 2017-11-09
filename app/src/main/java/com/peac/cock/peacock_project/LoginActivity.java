@@ -1,10 +1,12 @@
 package com.peac.cock.peacock_project;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -46,6 +48,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        //툴바 설정
+        Toolbar toolbar = findViewById(R.id.my_toolbar);
+        setSupportActionBar(toolbar);
+
 
         //firebase Auth정보 get
         mAuth = FirebaseAuth.getInstance();

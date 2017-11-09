@@ -5,14 +5,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <ImageView
+            android:id="@+id/tv_header_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/common_layout_logo" />
+    </android.support.v7.widget.Toolbar>
+
 
     <ImageView
         android:id="@+id/memberinfo_layout_imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
         app:srcCompat="@drawable/join_layout_title_img"
-        tools:layout_editor_absoluteX="148dp"
-        tools:layout_editor_absoluteY="31dp"
         tools:ignore="MissingConstraints" />
 
 
@@ -20,16 +41,19 @@
         android:id="@+id/memberinfo_layout_editText_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:drawableStart="@drawable/join_layout_name_tag_img"
         android:ems="15"
-        android:hint="@string/member_info_layout_name_text"
         android:gravity="center"
+        android:hint="@string/member_info_layout_name_text"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/memberinfo_layout_editText_birthday"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline13"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="45dp" />
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/memberinfo_layout_editText_birthday"
@@ -37,9 +61,9 @@
         android:layout_height="76dp"
         android:drawableStart="@drawable/join_layout_birthday_img"
         android:ems="15"
+        android:gravity="center"
         android:hint="@string/member_info_layout_birthday_text"
         android:inputType="date"
-        android:gravity="center"
         app:layout_constraintBottom_toTopOf="@+id/memberinfo_layout_editText_gender"
         app:layout_constraintTop_toBottomOf="@+id/memberinfo_layout_editText_name"
         tools:ignore="MissingConstraints"
@@ -83,7 +107,7 @@
         android:gravity="center"
         android:hint="@string/member_info_layout_monthBudget_text"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton2"
+        app:layout_constraintBottom_toTopOf="@+id/guideline14"
         app:layout_constraintTop_toBottomOf="@+id/memberinfo_layout_editText_job"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="45dp" />
@@ -92,10 +116,11 @@
         android:id="@+id/imageButton2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toTopOf="@+id/guideline14"
         app:srcCompat="@drawable/join_layout_register_button"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="506dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline10"
@@ -109,13 +134,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="92dp" />
+        app:layout_constraintGuide_begin="119dp" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="506dp" />
+        app:layout_constraintGuide_begin="556dp" />
 
 </android.support.constraint.ConstraintLayout>

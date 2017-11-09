@@ -6,7 +6,22 @@
     android:layout_height="match_parent"
     tools:context="com.peac.cock.peacock_project.MainActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
+        <ImageView
+            android:id="@+id/tv_header_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/common_layout_logo" />
+    </android.support.v7.widget.Toolbar>
 
     <include layout="@layout/content_main" />
 
@@ -22,14 +37,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#000000"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:srcCompat="@drawable/main_layout_plus_button" />
         
 
     </android.support.design.widget.AppBarLayout>
