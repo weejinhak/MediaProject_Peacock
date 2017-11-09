@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="#888888">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/my_toolbar"
+        android:id="@+id/asset_layout_my_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -15,13 +16,13 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
         <TextView
+            android:id="@+id/asset_layouy_toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="@string/asset_layout_toolbar_text"
             android:textColor="#000000"
-            android:textSize="30dp"
-            android:layout_gravity="center"
-            android:id="@+id/toolbar_title" />
+            android:textSize="30dp" />
 
     </android.support.v7.widget.Toolbar>
 
@@ -30,10 +31,222 @@
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/my_toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/asset_layout_my_toolbar" />
+
+    <TextView
+        android:id="@+id/aseet_layout_textView_asset_textView"
+        android:layout_width="200dp"
+        android:layout_height="80dp"
+        android:text="자산"
+        android:gravity=""
+        android:textSize="15sp"
+        android:textColor="@color/colorPrimary"
+        android:background="#FFFFFF"
+        app:layout_constraintEnd_toStartOf="@+id/asset_layout_textView_assetMoney_textView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline4" />
+
+
+    <TextView
+        android:id="@+id/asset_layout_textView_assetMoney_textView"
+        android:layout_width="200dp"
+        android:layout_height="80dp"
+        android:text="돈돈돈"
+        android:textSize="15dp"
+        android:gravity="center"
+        android:background="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/aseet_layout_textView_asset_textView"
+        app:layout_constraintTop_toTopOf="@+id/aseet_layout_textView_asset_textView" />
+
+    <ListView
+        android:id="@+id/asset_layout_listView"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:background="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/guideline21"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline15"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="MissingConstraints" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="147dp"
+        android:layout_marginTop="4dp"
+        android:background="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline21">
+
+
+        <TextView
+            android:id="@+id/asset_layout_textView_summary_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="요약"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintBottom_toTopOf="@+id/asset_layout_textView_summaryAsset_textView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/asset_layout_textView_summaryAsset_textView"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="자산"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintBottom_toTopOf="@+id/asset_layout_textView_summaryCreditCard_textView"
+            app:layout_constraintStart_toStartOf="@+id/asset_layout_textView_summary_textview"
+            app:layout_constraintTop_toBottomOf="@+id/asset_layout_textView_summary_textview" />
+
+        <TextView
+            android:id="@+id/asset_layout_textView_summaryCreditCard_textView"
+            android:layout_width="200dp"
+            android:layout_height="16dp"
+            android:text="신용카"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintBottom_toTopOf="@+id/asset_layout_summaryDebt_textView"
+            app:layout_constraintStart_toStartOf="@+id/asset_layout_textView_summaryAsset_textView"
+            app:layout_constraintTop_toBottomOf="@+id/asset_layout_textView_summaryAsset_textView" />
+
+        <TextView
+            android:id="@+id/asset_layout_summaryDebt_textView"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="부채"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintBottom_toTopOf="@+id/asset_layout_textView_netAsset_textView"
+            app:layout_constraintStart_toStartOf="@+id/asset_layout_textView_summaryCreditCard_textView"
+            app:layout_constraintTop_toBottomOf="@+id/asset_layout_textView_summaryCreditCard_textView" />
+
+        <TextView
+            android:id="@+id/asset_layout_textView_summaryAssetMoney_textView"
+            android:layout_width="150dp"
+            android:layout_height="17dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:gravity="center"
+            android:text="돈돈돈"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.384"
+            app:layout_constraintStart_toEndOf="@+id/asset_layout_textView_summaryAsset_textView"
+            app:layout_constraintTop_toTopOf="@+id/asset_layout_textView_summaryAsset_textView" />
+
+        <TextView
+            android:id="@+id/asset_layout_textView_summaryCreditCardMoney_textView"
+            android:layout_width="150dp"
+            android:layout_height="15dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:gravity="center"
+            android:text="돈돈돈"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.384"
+            app:layout_constraintStart_toEndOf="@+id/asset_layout_textView_summaryCreditCard_textView"
+            app:layout_constraintTop_toTopOf="@+id/asset_layout_textView_summaryCreditCard_textView" />
+
+        <TextView
+            android:id="@+id/asset_layout_summaryDebtMoney_textView"
+            android:layout_width="150dp"
+            android:layout_height="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:gravity="center"
+            android:text="돈돈돈"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/asset_layout_summaryDebt_textView"
+            app:layout_constraintTop_toTopOf="@+id/asset_layout_summaryDebt_textView" />
+
+        <TextView
+            android:id="@+id/asset_layout_textView_netAsset_textView"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="순자산"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/asset_layout_summaryDebt_textView" />
+
+        <TextView
+            android:id="@+id/asset_layout_textView_netAssetMoney_textView"
+            android:layout_width="150dp"
+            android:layout_height="18dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="12dp"
+            android:gravity="center"
+            android:text="돈돈돈"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/asset_layout_textView_netAsset_textView"
+            app:layout_constraintTop_toTopOf="@+id/asset_layout_textView_netAsset_textView" />
+
+    </android.support.constraint.ConstraintLayout>
+
+
+    <Button
+        android:id="@+id/asset_layout_button_assetAdd_button"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:text="자산추가하기"
+        android:background="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline23" />
+
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="84dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="168dp" />
+
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="205dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="435dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="603dp" />
+
 
 </android.support.constraint.ConstraintLayout>

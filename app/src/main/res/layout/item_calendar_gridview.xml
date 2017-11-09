@@ -6,7 +6,7 @@
     <?xml version="1.0" encoding="utf-8"?>
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/my_toolbar"
+        android:id="@+id/asset_layout_my_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
