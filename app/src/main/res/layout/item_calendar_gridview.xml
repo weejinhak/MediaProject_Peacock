@@ -3,10 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <?xml version="1.0" encoding="utf-8"?>
 
+<<<<<<< HEAD
     <android.support.v7.widget.Toolbar
         android:id="@+id/asset_layout_my_toolbar"
+=======
+   <!-- <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+>>>>>>> 77ec122d8edc97e7f676ee0f84f0938773652ce9
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -20,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:src="@drawable/common_layout_logo" />
-    </android.support.v7.widget.Toolbar>
+    </android.support.v7.widget.Toolbar>-->
 
 
         <TextView
@@ -29,7 +33,7 @@
             android:id="@+id/tv_item_gridview"
             android:layout_width="wrap_content"
             android:layout_height="80dp"
-            android:textSize="20sp"
+            android:textSize="13sp"
             />
 
 

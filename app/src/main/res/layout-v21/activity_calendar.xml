@@ -5,13 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<<<<<<< HEAD
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/asset_layout_my_toolbar"
-=======
     <!--  <android.support.v7.widget.Toolbar
         android:id="@+id/my_toolbar"
->>>>>>> 77ec122d8edc97e7f676ee0f84f0938773652ce9
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -86,12 +81,13 @@
         tools:layout_editor_absoluteY="94dp" />
 
 
-   <GridView
+    <GridView
 
         android:id="@+id/gridview"
         android:layout_width="match_parent"
         android:layout_height="447dp"
         android:layout_weight="match_parent"
+        android:listSelector="transparent"
         android:numColumns="7"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteY="120dp">
