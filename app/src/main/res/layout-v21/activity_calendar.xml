@@ -86,8 +86,8 @@
         android:id="@+id/gridview"
         android:layout_width="match_parent"
         android:layout_height="447dp"
-        android:layout_weight="match_parent"
-        android:listSelector="transparent"
+        android:layout_weight="1"
+        android:listSelector="#000000"
         android:numColumns="7"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteY="120dp">
