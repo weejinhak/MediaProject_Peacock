@@ -99,7 +99,7 @@
     <ImageButton
         android:id="@+id/login_layout_loginOk_imgButton"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/login_layout_loginok_click_change"
         app:layout_constraintBottom_toTopOf="@+id/login_layout_googleLogin_imgButton"
@@ -140,7 +140,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="371dp" />
+        app:layout_constraintGuide_begin="412dp" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline5"
@@ -154,7 +154,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="484dp" />
+        app:layout_constraintGuide_begin="526dp" />
 
     <!--Guideline end-->
 

@@ -86,9 +86,10 @@
     <ImageButton
         android:id="@+id/join_layout_imageButton_joinOk_button"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="60dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/join_layout_nextbutton_change"
+        app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintBottom_toTopOf="@+id/sign_in_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -176,7 +177,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="487dp" />
+        app:layout_constraintGuide_begin="538dp" />
     <!--GuideEnd-->
 
 
