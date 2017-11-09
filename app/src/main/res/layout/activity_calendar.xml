@@ -5,29 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<<<<<<< HEAD
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/asset_layout_my_toolbar"
-=======
-    <!--  <android.support.v7.widget.Toolbar
-        android:id="@+id/my_toolbar"
->>>>>>> 77ec122d8edc97e7f676ee0f84f0938773652ce9
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:background="?attr/colorPrimary"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="69dp">
 
-        <ImageView
+        <!--<ImageView
             android:id="@+id/tv_header_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:src="@drawable/common_layout_logo" />
-    </android.support.v7.widget.Toolbar>-->
 
 
 
@@ -191,6 +175,6 @@
         app:srcCompat="@drawable/rightarrow"
         tools:layout_editor_absoluteX="288dp"
         tools:layout_editor_absoluteY="2dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints" />-->
 
 </android.support.constraint.ConstraintLayout>
