@@ -5,14 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.Toolbar
+    <!--  <android.support.v7.widget.Toolbar
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:background="?attr/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="69dp">
 
         <ImageView
             android:id="@+id/tv_header_title"
@@ -20,34 +22,105 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:src="@drawable/common_layout_logo" />
-    </android.support.v7.widget.Toolbar>
+    </android.support.v7.widget.Toolbar>-->
 
 
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline10"
+    <ImageView
+        android:id="@+id/imageView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="6dp" />
+        app:srcCompat="@drawable/expense"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="87dp"
+        tools:layout_editor_absoluteY="79dp" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/transfer"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="258dp"
+        tools:layout_editor_absoluteY="79dp" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/importimg"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="172dp"
+        tools:layout_editor_absoluteY="78dp" />
+
+    <TextView
+        android:id="@+id/textView_expense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="79dp"
+        tools:layout_editor_absoluteY="94dp" />
+
+    <TextView
+        android:id="@+id/textView_import"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="163dp"
+        tools:layout_editor_absoluteY="94dp" />
+
+    <TextView
+        android:id="@+id/textView_transfer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="251dp"
+        tools:layout_editor_absoluteY="94dp" />
+
+
+    <GridView
+
+        android:id="@+id/gridview"
+        android:layout_width="match_parent"
+        android:layout_height="447dp"
+        android:layout_weight="match_parent"
+        android:listSelector="transparent"
+        android:numColumns="7"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="120dp">
+
+    </GridView>
+
+    <ProgressBar
+        android:id="@+id/progressBar3"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="396dp"
+        android:layout_height="14dp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="35dp" />
 
     <TabHost
-        android:layout_width="385dip"
-        android:layout_height="30dip"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="4dp"
-        tools:ignore="MissingConstraints">
+        android:layout_width="368dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="49dp">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:orientation="vertical">
 
             <TabWidget
                 android:id="@android:id/tabs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            </TabWidget>
+                android:layout_width="190dp"
+                android:layout_height="30dp" />
 
             <FrameLayout
                 android:id="@android:id/tabcontent"
@@ -57,7 +130,7 @@
                 <LinearLayout
                     android:id="@+id/리스트"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                 </LinearLayout>
@@ -74,74 +147,67 @@
         </LinearLayout>
     </TabHost>
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/expense"
-        tools:layout_editor_absoluteX="75dp"
-        tools:layout_editor_absoluteY="35dp"
-        tools:ignore="MissingConstraints" />
-
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/transfer"
-        tools:layout_editor_absoluteX="268dp"
-        tools:layout_editor_absoluteY="35dp"
-        tools:ignore="MissingConstraints" />
-
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/importimg"
+    <TextView
+        android:id="@+id/textView_month"
+        android:layout_width="35dp"
+        android:layout_height="25dp"
+        android:text="11월"
+        android:textSize="@dimen/font_size"
+        tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="175dp"
-        tools:layout_editor_absoluteY="35dp"
-        tools:ignore="MissingConstraints" />
+        tools:layout_editor_absoluteY="10dp" />
 
-    <TextViews
-        android:id="@+id/textView_expense"
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="64dp"
-        tools:layout_editor_absoluteY="50dp"
-        tools:ignore="MissingConstraints" />
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp" />
 
-    <TextView
-        android:id="@+id/textView_import"
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="162dp"
-        tools:layout_editor_absoluteY="50dp"
-        tools:ignore="MissingConstraints" />
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="49dp" />
 
-    <TextView
-        android:id="@+id/textView_transfer"
+    <ImageButton
+        android:id="@+id/imageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="258dp"
-        tools:layout_editor_absoluteY="50dp"
-        tools:ignore="MissingConstraints" />
+        app:srcCompat="@drawable/leftarrow"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="53dp"
+        tools:layout_editor_absoluteY="0dp" />
 
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/rightarrow"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="288dp"
+        tools:layout_editor_absoluteY="2dp" />
 
-    <GridView
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="309dp" />
 
-        android:id="@+id/gridview"
-        android:layout_marginTop="80dp"
-        android:layout_weight="match_parent"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:numColumns="7"
-        android:listSelector="transparent"
-        >
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="288dp" />
 
-    </GridView>
-
-
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="95dp" />
 
 </android.support.constraint.ConstraintLayout>
