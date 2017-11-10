@@ -48,6 +48,7 @@ public class MemberInfoActivitiy extends AppCompatActivity {
                 userDto.setGender(mGender.getText().toString());
                 userDto.setJob(mJob.getText().toString());
                 userDto.setBudget(mMonthBudget.getText().toString());
+                System.out.println("******************"+userDto.getName().toString());
                 Toast.makeText(getApplicationContext(),"정보입력완료",Toast.LENGTH_SHORT).show();
                 Intent intent= new Intent(getApplicationContext(),MainActivity.class);
                 intent.putExtra("userInfo", userDto);
