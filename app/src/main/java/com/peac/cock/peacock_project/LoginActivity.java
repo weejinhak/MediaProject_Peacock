@@ -17,6 +17,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -60,7 +61,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         ImageButton loginOkButton = findViewById(R.id.login_layout_loginOk_imgButton);
         login_EditTextEmail = findViewById(R.id.login_layout_editText_email);
         login_EditTextPassword = findViewById(R.id.login_layout_editText_passWord);
-        ImageButton googleLoginButton = findViewById(R.id.login_layout_googleLogin_imgButton);
+        SignInButton googleLoginButton = findViewById(R.id.login_layout_googleLogin_imgButton);
 
 
         // Configure Google Sign In

@@ -25,7 +25,9 @@
             android:theme="@style/AppTheme.NoActionBar"/>
 
         <activity android:name=".LoginActivity"/>
+<!--
         <activity android:name=".AnalysisActivity"/>
+-->
 
 
     </application>
