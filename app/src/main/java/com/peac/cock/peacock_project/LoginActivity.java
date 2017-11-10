@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         setContentView(R.layout.activity_login);
 
         //툴바 설정
-        Toolbar toolbar = findViewById(R.id.asset_layout_my_toolbar);
+        Toolbar toolbar = findViewById(R.id.join_layout_my_toolbar);
         setSupportActionBar(toolbar);
 
 
@@ -106,6 +106,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 finish();
             }
         });
+
         /*로그인 하기 버튼 이벤트*/
         loginOkButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,22 +118,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     }
 
-    private void loginUser(final String email, final String password) {
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (!task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            loginUser(email, password);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Toast.makeText(LoginActivity.this, "로그인이성공!!", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-
-    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -152,6 +137,24 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         }
     }
 
+    //firebase 이메일 검증시 사용
+    private void loginUser(final String email, final String password) {
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (!task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            loginUser(email, password);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Toast.makeText(LoginActivity.this, "로그인이성공!!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+    }
+    //firebase 구글인증시 사용
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
@@ -186,5 +189,12 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         if (mAuthListener != null) {
             mAuth.removeAuthStateListener(mAuthListener);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mAuth.signOut();
+
     }
 }

@@ -19,6 +19,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+import com.peac.cock.peacock_project.projectDto.UserDto;
 
 import org.w3c.dom.Text;
 
@@ -27,7 +29,13 @@ public class MainActivity extends AppCompatActivity
 
     private TextView nameTextView;
     private TextView emailTextView;
+
+    //firebase Auth&&Database;
     private FirebaseAuth auth;
+    private FirebaseDatabase database;
+
+    //Dto
+    UserDto userDto;
 
 
     @Override
@@ -35,14 +43,29 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = findViewById(R.id.app_bar_layout_my_toolbar);
+        //fire base Auth && database
         auth=FirebaseAuth.getInstance();
+        database=FirebaseDatabase.getInstance();
+
+        //Toolbar setting
+        Toolbar toolbar = findViewById(R.id.app_bar_layout_my_toolbar);
         setSupportActionBar(toolbar);
+
+        //before_intent_get
+        Intent intent =getIntent();
+        userDto= (UserDto) intent.getSerializableExtra("userInfo");
 
         // get ID
         ImageButton main_drawer = findViewById(R.id.main_drawer);
         ImageButton main_search = findViewById(R.id.main_search);
         ImageButton main_filter = findViewById(R.id.main_filter);
+
+        //fire base get ID
+        String uid=auth.getCurrentUser().getUid();
+
+        //fire base_set Database
+        database.getReference().child("users").child(uid).setValue(userDto);
+
 
         // add Listener
         main_drawer.setOnClickListener(new View.OnClickListener() {
