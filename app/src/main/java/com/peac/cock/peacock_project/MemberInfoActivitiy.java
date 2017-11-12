@@ -39,16 +39,51 @@ public class MemberInfoActivitiy extends AppCompatActivity {
         final EditText mMonthBudget=findViewById(R.id.memberinfo_layout_editText_monthBudget);
         ImageButton join_ok_button=findViewById(R.id.memberinfo_layout_joinOk_imgButton);
 
+
+        //before_intent_get
+        final Intent intent =getIntent();
+        final String email= intent.getStringExtra("userEmail");
+
+
         join_ok_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                userDto.setEmail(mAuth.getCurrentUser().getEmail().toString());
+
+                //Validation Check
+                if (mName.getText().toString().length() == 0) {
+                    Toast.makeText(getApplicationContext(), "이름을 입력하세요!", Toast.LENGTH_SHORT).show();
+                    mName.requestFocus();
+                    return;
+                }
+                if (mBirthday.getText().toString().length() == 0) {
+                    Toast.makeText(getApplicationContext(), "생일을 입력하세요!", Toast.LENGTH_SHORT).show();
+                    mBirthday.requestFocus();
+                    return;
+                }
+                    if (mGender.getText().toString().length() == 0) {
+                    Toast.makeText(getApplicationContext(), "성별을 입력하세요!", Toast.LENGTH_SHORT).show();
+                    mGender.requestFocus();
+                    return;
+                }
+                    if (mJob.getText().toString().length() == 0) {
+                    Toast.makeText(getApplicationContext(), "직업을 입력하세요!", Toast.LENGTH_SHORT).show();
+                    mJob.requestFocus();
+                    return;
+                }
+                    if (mMonthBudget.getText().toString().length() == 0) {
+                    Toast.makeText(getApplicationContext(), "월예산을 입력하세요!", Toast.LENGTH_SHORT).show();
+                    mMonthBudget.requestFocus();
+                    return;
+                }
+
+                System.out.println(email);
+                userDto.setEmail(email);
                 userDto.setBirthday(mBirthday.getText().toString());
                 userDto.setName(mName.getText().toString());
                 userDto.setGender(mGender.getText().toString());
                 userDto.setJob(mJob.getText().toString());
                 userDto.setBudget(mMonthBudget.getText().toString());
-                System.out.println("******************"+userDto.getName().toString());
+                System.out.println("******************"+userDto);
                 Toast.makeText(getApplicationContext(),"정보입력완료",Toast.LENGTH_SHORT).show();
                 Intent intent= new Intent(getApplicationContext(),MainActivity.class);
                 intent.putExtra("userInfo", userDto);

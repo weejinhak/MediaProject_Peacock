@@ -79,10 +79,11 @@ public class EmailJoinActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (!task.isSuccessful()) {
-                            Toast.makeText(EmailJoinActivity.this, "회원가입실패!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EmailJoinActivity.this, "회원인실패!", Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(EmailJoinActivity.this, "회원가입성공", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EmailJoinActivity.this, "회원인증성공", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getApplicationContext(), MemberInfoActivitiy.class);
+                            intent.putExtra("userEmail",join_editTextEmail.getText().toString());
                             startActivity(intent);
                             finish();
                         }
