@@ -16,13 +16,6 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
-        <ImageButton
-            android:id="@+id/main_drawer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#000000"
-            android:src="@drawable/main_layout_more_button"/>
-
         <ImageView
             android:id="@+id/app_ber_header_title"
             android:layout_width="wrap_content"
