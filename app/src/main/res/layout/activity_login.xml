@@ -56,9 +56,11 @@
         android:gravity="center"
         android:hint="@string/login_layout_editText_email_login_text"
         android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toTopOf="@+id/login_layout_editText_passWord"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_layout_textView_emailLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/login_layout_view2" />
 
     <EditText
         android:id="@+id/login_layout_editText_passWord"
@@ -71,6 +73,8 @@
         android:gravity="center"
         android:hint="@string/login_layout_editText_password_login_text"
         android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/login_layout_textView_passWord_search"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_layout_editText_email" />
@@ -102,10 +106,10 @@
         android:layout_height="60dp"
         android:background="@drawable/login_layout_loginok_click_change"
         app:layout_constraintBottom_toTopOf="@+id/login_layout_googleLogin_imgButton"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_layout_editText_passWord"
+        app:layout_constraintTop_toBottomOf="@+id/login_layout_textView_passWord_search"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <com.google.android.gms.common.SignInButton
@@ -115,6 +119,7 @@
         android:background="#FFFFFF"
         android:gravity="bottom"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_layout_loginOk_imgButton"
