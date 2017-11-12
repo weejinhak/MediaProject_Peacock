@@ -61,8 +61,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/join_layout_imageView_email"
-        app:layout_constraintTop_toTopOf="@+id/join_layout_imageView_email"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="@+id/guideline11"
+        app:layout_constraintVertical_bias="0.952" />
 
     <EditText
         android:id="@+id/join_layout_text_password"
@@ -85,12 +85,10 @@
         android:id="@+id/join_layout_text_passwordOk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:ems="15"
         android:gravity="center"
         android:hint="@string/join_layout_editText_passwordOk_text"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toBottomOf="@+id/join_layout_imageView_passwordOk"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toEndOf="@+id/join_layout_imageView_passwordOk"
@@ -100,25 +98,21 @@
         android:id="@+id/join_layout_imageButton_joinOkNext_button"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="8dp"
         android:background="@drawable/join_layout_nextbutton_change"
         app:layout_constraintBottom_toTopOf="@+id/sign_in_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline12"
-        app:layout_constraintVertical_bias="0.139"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintVertical_chainStyle="spread" />
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/sign_in_button"
-        android:layout_width="395dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
         android:background="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/join_layout_imageButton_joinOkNext_button" />
 
@@ -144,14 +138,13 @@
         app:srcCompat="@drawable/join_layout_password_img" />
 
 
-
     <ImageView
         android:id="@+id/join_layout_imageView_passwordOk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline8"
+        app:layout_constraintBottom_toTopOf="@+id/join_layout_imageButton_joinOkNext_button"
         app:layout_constraintStart_toStartOf="@+id/join_layout_imageView_password"
         app:layout_constraintTop_toBottomOf="@+id/join_layout_imageView_password"
         app:layout_constraintVertical_bias="0.474"
@@ -164,13 +157,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="205dp" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_end="173dp" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline9"
@@ -191,7 +177,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="538dp" />
+        app:layout_constraintGuide_begin="464dp" />
 
 
 </android.support.constraint.ConstraintLayout>

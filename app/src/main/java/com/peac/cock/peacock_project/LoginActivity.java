@@ -120,6 +120,18 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         loginOkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //Validation Check
+                if (login_EditTextEmail.getText().toString().length() == 0) {
+                    Toast.makeText(getApplicationContext(), "Email을 입력하세요!", Toast.LENGTH_SHORT).show();
+                    login_EditTextEmail.requestFocus();
+                    return;
+                }
+                if (login_EditTextPassword.getText().toString().length() == 0) {
+                    Toast.makeText(getApplicationContext(), "Password를 입력하세요!", Toast.LENGTH_SHORT).show();
+                    login_EditTextPassword.requestFocus();
+                    return;
+                }
                 loginUser(login_EditTextEmail.getText().toString(), login_EditTextPassword.getText().toString());
             }
         });
