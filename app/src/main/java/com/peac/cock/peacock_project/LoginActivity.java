@@ -128,17 +128,15 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {//인증된 user 일시 보내는 화면
                     for(String s: uidList){
-                        if(user.getEmail().equals(s.toString())){
+                        if(s.equals(user.getEmail().toString())){
                             System.out.println("이메일이 디비에 입력되어있음");
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(intent);
-                            finish();
                         }else{
                             System.out.println("이메일이 디비에 없음");
                             Intent intent = new Intent(getApplicationContext(), MemberInfoActivitiy.class);
                             intent.putExtra("userEmail", user.getEmail());
                             startActivity(intent);
-                            finish();
                         }
                     }
                 } else {//비인증 유져라면 보내는 화면
@@ -208,7 +206,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         if (!task.isSuccessful()) {
                             loginUser(email, password);
                         } else {
-                            Toast.makeText(LoginActivity.this, "로그인이성공!!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "이메일 로그인이성공!!", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -227,7 +225,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             // If sign in fails, display a message to the user.
                         } else {
                             // Sign in success, update UI with the signed-in user's information
-                            Toast.makeText(LoginActivity.this, "로그인이성공!!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "구글 로그인이성공!!", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

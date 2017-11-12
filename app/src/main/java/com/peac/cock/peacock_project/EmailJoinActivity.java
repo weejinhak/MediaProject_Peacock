@@ -34,7 +34,6 @@ public class EmailJoinActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join);
-
         join_editTextEmail = findViewById(R.id.join_layout_text_email);
         join_editTextPassword = findViewById(R.id.join_layout_text_password);
         join_editTextPasswordOk = findViewById(R.id.join_layout_text_passwordOk);

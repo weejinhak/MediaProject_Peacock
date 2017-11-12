@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 import com.peac.cock.peacock_project.projectDto.UserDto;
 
@@ -20,8 +21,9 @@ import com.peac.cock.peacock_project.projectDto.UserDto;
 public class MemberInfoActivitiy extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    private UserDto userDto =new UserDto();
-
+    private UserDto userDto = new UserDto();
+    private FirebaseDatabase database;
+    private String uid;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,20 +31,22 @@ public class MemberInfoActivitiy extends AppCompatActivity {
         setContentView(R.layout.activity_memberinfo);
 
         //firebase && database
-        mAuth=FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
 
         //get button && EditText ID
-        final EditText mName=findViewById(R.id.memberinfo_layout_editText_name);
-        final EditText mBirthday=findViewById(R.id.memberinfo_layout_editText_birthday);
-        final EditText mGender=findViewById(R.id.memberinfo_layout_editText_gender);
-        final EditText mJob=findViewById(R.id.memberinfo_layout_editText_job);
-        final EditText mMonthBudget=findViewById(R.id.memberinfo_layout_editText_monthBudget);
-        ImageButton join_ok_button=findViewById(R.id.memberinfo_layout_joinOk_imgButton);
-
+        final EditText mName = findViewById(R.id.memberinfo_layout_editText_name);
+        final EditText mBirthday = findViewById(R.id.memberinfo_layout_editText_birthday);
+        final EditText mGender = findViewById(R.id.memberinfo_layout_editText_gender);
+        final EditText mJob = findViewById(R.id.memberinfo_layout_editText_job);
+        final EditText mMonthBudget = findViewById(R.id.memberinfo_layout_editText_monthBudget);
+        ImageButton join_ok_button = findViewById(R.id.memberinfo_layout_joinOk_imgButton);
+        System.out.println(mAuth.getCurrentUser().getUid());
+        uid = mAuth.getCurrentUser().getUid();
 
         //before_intent_get
-        final Intent intent =getIntent();
-        final String email= intent.getStringExtra("userEmail");
+        final Intent intent = getIntent();
+        final String email = intent.getStringExtra("userEmail");
 
 
         join_ok_button.setOnClickListener(new View.OnClickListener() {
@@ -60,17 +64,17 @@ public class MemberInfoActivitiy extends AppCompatActivity {
                     mBirthday.requestFocus();
                     return;
                 }
-                    if (mGender.getText().toString().length() == 0) {
+                if (mGender.getText().toString().length() == 0) {
                     Toast.makeText(getApplicationContext(), "성별을 입력하세요!", Toast.LENGTH_SHORT).show();
                     mGender.requestFocus();
                     return;
                 }
-                    if (mJob.getText().toString().length() == 0) {
+                if (mJob.getText().toString().length() == 0) {
                     Toast.makeText(getApplicationContext(), "직업을 입력하세요!", Toast.LENGTH_SHORT).show();
                     mJob.requestFocus();
                     return;
                 }
-                    if (mMonthBudget.getText().toString().length() == 0) {
+                if (mMonthBudget.getText().toString().length() == 0) {
                     Toast.makeText(getApplicationContext(), "월예산을 입력하세요!", Toast.LENGTH_SHORT).show();
                     mMonthBudget.requestFocus();
                     return;
@@ -83,9 +87,12 @@ public class MemberInfoActivitiy extends AppCompatActivity {
                 userDto.setGender(mGender.getText().toString());
                 userDto.setJob(mJob.getText().toString());
                 userDto.setBudget(mMonthBudget.getText().toString());
-                System.out.println("******************"+userDto);
-                Toast.makeText(getApplicationContext(),"정보입력완료",Toast.LENGTH_SHORT).show();
-                Intent intent= new Intent(getApplicationContext(),MainActivity.class);
+
+                //uid에 맞는 정보 디비 입력
+                database.getReference().child("users").child(uid).setValue(userDto);
+                
+                Toast.makeText(getApplicationContext(), "정보입력완료", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.putExtra("userInfo", userDto);
                 startActivity(intent);
                 finish();
