@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/asset_layout_my_toolbar"
+        android:id="@+id/memberinfo_layout_my_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -15,7 +15,7 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
         <ImageView
-            android:id="@+id/tv_header_title"
+            android:id="@+id/memberinfo_header_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -32,7 +32,7 @@
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/asset_layout_my_toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/join_layout_my_toolbar"
         app:srcCompat="@drawable/join_layout_title_img"
         tools:ignore="MissingConstraints" />
 
@@ -59,66 +59,77 @@
         android:id="@+id/memberinfo_layout_editText_birthday"
         android:layout_width="wrap_content"
         android:layout_height="76dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:drawableStart="@drawable/join_layout_birthday_img"
         android:ems="15"
         android:gravity="center"
         android:hint="@string/member_info_layout_birthday_text"
         android:inputType="date"
         app:layout_constraintBottom_toTopOf="@+id/memberinfo_layout_editText_gender"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/memberinfo_layout_editText_name"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="45dp" />
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/memberinfo_layout_editText_gender"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:drawableStart="@drawable/join_layout_gender_img"
         android:ems="15"
+        android:gravity="center"
         android:hint="@string/member_info_layout_gender_text"
         android:inputType="textPersonName"
-        android:gravity="center"
         app:layout_constraintBottom_toTopOf="@+id/memberinfo_layout_editText_job"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/memberinfo_layout_editText_birthday"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="45dp" />
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/memberinfo_layout_editText_job"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:drawableStart="@drawable/join_layout_job_img"
         android:ems="15"
         android:gravity="center"
         android:hint="@string/member_info_layout_job_text"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/memberinfo_layout_editText_monthBudget"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/memberinfo_layout_editText_gender"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="45dp" />
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/memberinfo_layout_editText_monthBudget"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:drawableStart="@drawable/join_layout_budget_img"
         android:ems="15"
         android:gravity="center"
         android:hint="@string/member_info_layout_monthBudget_text"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/guideline14"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/memberinfo_layout_editText_job"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="45dp" />
+        tools:ignore="MissingConstraints" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/memberinfo_layout_joinOk_imgButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         app:layout_constraintTop_toTopOf="@+id/guideline14"
-        app:srcCompat="@drawable/join_layout_register_button"
+        app:srcCompat="@drawable/join_layout_joinok_click_change"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp" />
 

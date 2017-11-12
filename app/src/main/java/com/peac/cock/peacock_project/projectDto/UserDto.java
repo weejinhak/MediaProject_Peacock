@@ -1,10 +1,12 @@
 package com.peac.cock.peacock_project.projectDto;
 
+import java.io.Serializable;
+
 /**
  * Created by wee on 2017. 11. 8..
  */
 
-public class UserDto {
+public class UserDto implements Serializable {
 
     String email;
     String name;

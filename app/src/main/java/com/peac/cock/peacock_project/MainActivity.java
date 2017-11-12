@@ -19,6 +19,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+import com.peac.cock.peacock_project.projectDto.UserDto;
 
 import org.w3c.dom.Text;
 
@@ -27,7 +29,13 @@ public class MainActivity extends AppCompatActivity
 
     private TextView nameTextView;
     private TextView emailTextView;
+
+    //firebase Auth&&Database;
     private FirebaseAuth auth;
+    private FirebaseDatabase database;
+
+    //Dto
+    UserDto userDto;
 
 
     @Override
@@ -35,14 +43,29 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //fire base Auth && database
         auth=FirebaseAuth.getInstance();
+        database=FirebaseDatabase.getInstance();
+
+        //Toolbar setting
+        Toolbar toolbar = findViewById(R.id.app_bar_layout_my_toolbar);
         setSupportActionBar(toolbar);
+
+        //before_intent_get
+        Intent intent =getIntent();
+        userDto= (UserDto) intent.getSerializableExtra("userInfo");
 
         // get ID
         ImageButton main_drawer = findViewById(R.id.main_drawer);
         ImageButton main_search = findViewById(R.id.main_search);
         ImageButton main_filter = findViewById(R.id.main_filter);
+
+        //fire base get ID
+        String uid=auth.getCurrentUser().getUid();
+
+        //fire base_set Database
+        database.getReference().child("users").child(uid).setValue(userDto);
+
 
         // add Listener
         main_drawer.setOnClickListener(new View.OnClickListener() {
@@ -54,7 +77,7 @@ public class MainActivity extends AppCompatActivity
 
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,18 +86,18 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         View view =navigationView.getHeaderView(0);
 
-        nameTextView=(TextView) view.findViewById(R.id.header_name_textView);
-        emailTextView=(TextView)view.findViewById(R.id.header_email_textView);
+        nameTextView= view.findViewById(R.id.header_name_textView);
+        emailTextView=view.findViewById(R.id.header_email_textView);
 
         nameTextView.setText(auth.getCurrentUser().getDisplayName());
         emailTextView.setText(auth.getCurrentUser().getEmail());
@@ -82,7 +105,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -118,6 +141,12 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        if(id == R.id.nav_logout){
+            auth.signOut();
+            finish();
+            Intent intent=new Intent(this,LoginActivity.class);
+            startActivity(intent);
+        }
        /* if (id == R.id.nav_camera) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
@@ -137,7 +166,7 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
         }*/
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

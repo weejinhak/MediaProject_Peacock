@@ -37,7 +37,7 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/asset_layout_my_toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/join_layout_my_toolbar" />
 
     <TextView
         android:id="@+id/aseet_layout_textView_asset_textView"

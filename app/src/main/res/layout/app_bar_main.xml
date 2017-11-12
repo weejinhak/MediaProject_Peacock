@@ -8,7 +8,7 @@
     tools:context="com.peac.cock.peacock_project.MainActivity">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/asset_layout_my_toolbar"
+        android:id="@+id/app_bar_layout_my_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -24,7 +24,7 @@
             android:src="@drawable/main_layout_more_button"/>
 
         <ImageView
-            android:id="@+id/tv_header_title"
+            android:id="@+id/app_ber_header_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

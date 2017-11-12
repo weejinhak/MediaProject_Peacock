@@ -27,7 +27,7 @@
 
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/join_layout_imageView_join_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/expense"
@@ -45,7 +45,7 @@
         tools:layout_editor_absoluteY="79dp" />
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/join_layout_imageView_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/importimg"
