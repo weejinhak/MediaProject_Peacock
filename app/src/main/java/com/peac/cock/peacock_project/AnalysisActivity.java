@@ -29,7 +29,6 @@ import java.util.ArrayList;
 public class AnalysisActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener, OnChartValueSelectedListener {
 
     private PieChart mChart;
-    private SeekBar mSeekBarX, mSeekBarY;
     private TextView tvX, tvY;
 
     @Override
@@ -39,15 +38,7 @@ public class AnalysisActivity extends AppCompatActivity implements SeekBar.OnSee
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_analysis);
 
-        tvX = (TextView) findViewById(R.id.tvXMax);
-        tvY = (TextView) findViewById(R.id.tvYMax);
-
-        mSeekBarX = (SeekBar) findViewById(R.id.seekBar1);
-        mSeekBarY = (SeekBar) findViewById(R.id.seekBar2);
-        mSeekBarX.setProgress(4);
-        mSeekBarY.setProgress(10);
-
-        mChart = (PieChart) findViewById(R.id.chart1);
+        mChart = (PieChart) findViewById(R.id.pieChart);
         mChart.setUsePercentValues(true);
    //     mChart.getDescription().setEnabled(false);
         mChart.setExtraOffsets(5, 10, 5, 5);
@@ -83,9 +74,6 @@ public class AnalysisActivity extends AppCompatActivity implements SeekBar.OnSee
 
         mChart.animateY(1400, Easing.EasingOption.EaseInOutQuad);
         // mChart.spin(2000, 0, 360);
-
-        mSeekBarX.setOnSeekBarChangeListener(this);
-        mSeekBarY.setOnSeekBarChangeListener(this);
 
     /*    Legend l = mChart.getLegend();
         l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
