@@ -13,7 +13,6 @@
         android:layout_alignParentTop="true"
         android:background="?attr/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -31,14 +30,12 @@
         android:id="@+id/login_layout_textView_emailLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline5"
+        app:layout_constraintTop_toBottomOf="@+id/login_layout_my_toolbar"
         app:srcCompat="@drawable/login_layout_title_img" />
 
     <View
@@ -46,37 +43,34 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#000000"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2" />
+        app:layout_constraintTop_toBottomOf="@+id/login_layout_textView_emailLogin" />
 
 
     <EditText
         android:id="@+id/login_layout_editText_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="8dp"
         android:drawableLeft="@drawable/login_layout_email_img"
         android:ems="15"
         android:gravity="center"
         android:hint="@string/login_layout_editText_email_login_text"
         android:inputType="textEmailAddress"
-        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline2"
-        app:layout_constraintVertical_chainStyle="spread" />
+        app:layout_constraintTop_toBottomOf="@+id/login_layout_textView_emailLogin" />
 
     <EditText
         android:id="@+id/login_layout_editText_passWord"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
         android:drawableLeft="@drawable/login_layout_password_img"
         android:drawablePadding="10dp"
         android:ems="15"
         android:gravity="center"
         android:hint="@string/login_layout_editText_password_login_text"
         android:inputType="textPassword"
-        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_layout_editText_email" />
@@ -85,15 +79,12 @@
         android:id="@+id/login_layout_textView_passWord_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:text="@string/login_layout_password_search_text"
         app:layout_constraintBottom_toTopOf="@+id/login_layout_loginOk_imgButton"
         app:layout_constraintEnd_toStartOf="@+id/login_layout_textView_join"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_layout_editText_passWord" />
 
     <TextView
@@ -123,12 +114,13 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="#FFFFFF"
+        android:gravity="bottom"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_layout_loginOk_imgButton"
-        app:srcCompat="@drawable/common_google_signin_btn_text_light_normal"
-     />
+        app:srcCompat="@drawable/common_google_signin_btn_text_light_normal" />
 
     <!--Guideline start-->
     <android.support.constraint.Guideline
@@ -137,20 +129,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="205dp" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="155dp" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_end="597dp" />
 
     <!--Guideline end-->
 

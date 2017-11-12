@@ -10,8 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_marginBottom="25dp"
         android:background="?attr/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_constraintBottom_toTopOf="@+id/memberinfo_layout_editText_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
         <ImageView
@@ -21,20 +26,6 @@
             android:layout_gravity="center"
             android:src="@drawable/common_layout_logo" />
     </android.support.v7.widget.Toolbar>
-
-
-    <ImageView
-        android:id="@+id/memberinfo_layout_imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/join_layout_my_toolbar"
-        app:srcCompat="@drawable/join_layout_title_img"
-        tools:ignore="MissingConstraints" />
 
 
     <EditText
@@ -117,7 +108,7 @@
         android:gravity="center"
         android:hint="@string/member_info_layout_monthBudget_text"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/guideline14"
+        app:layout_constraintBottom_toTopOf="@+id/memberinfo_layout_joinOk_imgButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/memberinfo_layout_editText_job"
@@ -127,11 +118,11 @@
         android:id="@+id/memberinfo_layout_joinOk_imgButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toTopOf="@+id/guideline14"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/join_layout_joinok_click_change"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp" />
+        tools:ignore="MissingConstraints" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline10"
@@ -145,13 +136,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="119dp" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="556dp" />
+        app:layout_constraintGuide_begin="62dp" />
 
 </android.support.constraint.ConstraintLayout>
