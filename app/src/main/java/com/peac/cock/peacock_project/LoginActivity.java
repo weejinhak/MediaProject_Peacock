@@ -87,11 +87,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 dataSnapshot.getValue();
-                System.out.println(dataSnapshot.getValue());
-
                 for (DataSnapshot fileSnapshot : dataSnapshot.child("users").getChildren()) {
                     String str = fileSnapshot.child("email").getValue(String.class);
-                    System.out.println(str);
+                    System.out.println(str);//이메일 파싱
+                    System.out.println(fileSnapshot.getKey());//중요 -Uid 파싱
                     uidList.add(str);
                 }
 
