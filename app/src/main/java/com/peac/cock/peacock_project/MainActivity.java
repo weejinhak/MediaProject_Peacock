@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity
         userDto= (UserDto) intent.getSerializableExtra("userInfo");
 
         // get ID
-        ImageButton main_drawer = findViewById(R.id.main_drawer);
         ImageButton main_search = findViewById(R.id.main_search);
         ImageButton main_filter = findViewById(R.id.main_filter);
 
@@ -65,16 +64,6 @@ public class MainActivity extends AppCompatActivity
 
         //fire base_set Database
         database.getReference().child("users").child(uid).setValue(userDto);
-
-
-        // add Listener
-        main_drawer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
 
 
         FloatingActionButton fab = findViewById(R.id.fab);
