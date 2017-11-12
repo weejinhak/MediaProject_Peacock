@@ -66,6 +66,7 @@ public class EmailJoinActivity extends AppCompatActivity {
                     join_editTextPassword.requestFocus();
                     return;
                 }
+                //Validation 모두 통과시 회원생성.
                 createUser(join_editTextEmail.getText().toString(), join_editTextPassword.getText().toString());
             }
         });
@@ -78,7 +79,7 @@ public class EmailJoinActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (!task.isSuccessful()) {
-                            Toast.makeText(EmailJoinActivity.this, "회원인실패!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EmailJoinActivity.this, "회원인증실패!", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(EmailJoinActivity.this, "회원인증성공", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getApplicationContext(), MemberInfoActivitiy.class);

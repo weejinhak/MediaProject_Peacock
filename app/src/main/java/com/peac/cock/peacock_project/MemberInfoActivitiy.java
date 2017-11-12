@@ -41,18 +41,16 @@ public class MemberInfoActivitiy extends AppCompatActivity {
         final EditText mJob = findViewById(R.id.memberinfo_layout_editText_job);
         final EditText mMonthBudget = findViewById(R.id.memberinfo_layout_editText_monthBudget);
         ImageButton join_ok_button = findViewById(R.id.memberinfo_layout_joinOk_imgButton);
-        System.out.println(mAuth.getCurrentUser().getUid());
         uid = mAuth.getCurrentUser().getUid();
 
         //before_intent_get
         final Intent intent = getIntent();
         final String email = intent.getStringExtra("userEmail");
 
-
+        //정보입력버튼 클릭.
         join_ok_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 //Validation Check
                 if (mName.getText().toString().length() == 0) {
                     Toast.makeText(getApplicationContext(), "이름을 입력하세요!", Toast.LENGTH_SHORT).show();
@@ -80,7 +78,6 @@ public class MemberInfoActivitiy extends AppCompatActivity {
                     return;
                 }
 
-                System.out.println(email);
                 userDto.setEmail(email);
                 userDto.setBirthday(mBirthday.getText().toString());
                 userDto.setName(mName.getText().toString());
@@ -90,7 +87,7 @@ public class MemberInfoActivitiy extends AppCompatActivity {
 
                 //uid에 맞는 정보 디비 입력
                 database.getReference().child("users").child(uid).setValue(userDto);
-                
+
                 Toast.makeText(getApplicationContext(), "정보입력완료", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.putExtra("userInfo", userDto);

@@ -127,12 +127,12 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {//인증된 user 일시 보내는 화면
-                    for(String s: uidList){
-                        if(s.equals(user.getEmail().toString())){
+                    for (String s : uidList) {
+                        if (s.equals(user.getEmail().toString())) {
                             System.out.println("이메일이 디비에 입력되어있음");
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(intent);
-                        }else{
+                        } else {
                             System.out.println("이메일이 디비에 없음");
                             Intent intent = new Intent(getApplicationContext(), MemberInfoActivitiy.class);
                             intent.putExtra("userEmail", user.getEmail());
@@ -222,9 +222,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (!task.isSuccessful()) {
-                            // If sign in fails, display a message to the user.
                         } else {
-                            // Sign in success, update UI with the signed-in user's information
                             Toast.makeText(LoginActivity.this, "구글 로그인이성공!!", Toast.LENGTH_SHORT).show();
                         }
                     }
