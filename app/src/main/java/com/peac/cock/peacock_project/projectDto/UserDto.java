@@ -15,7 +15,6 @@ public class UserDto implements Serializable {
     String job;
     String budget;
 
-
     public String getEmail() {
         return email;
     }

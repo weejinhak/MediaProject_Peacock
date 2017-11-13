@@ -13,7 +13,7 @@ public class ledgerDto {
     String time;
     String content;
     String category;
-    Pay pay;
+    Asset asset;
 
     public String getSeq() {
         return seq;
@@ -63,11 +63,11 @@ public class ledgerDto {
         this.category = category;
     }
 
-    public Pay getPay() {
-        return pay;
+    public Asset getAsset() {
+        return asset;
     }
 
-    public void setPay(Pay pay) {
-        this.pay = pay;
+    public void setAsset(Asset asset) {
+        this.asset = asset;
     }
 }

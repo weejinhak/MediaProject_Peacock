@@ -90,7 +90,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 for (DataSnapshot fileSnapshot : dataSnapshot.child("users").getChildren()) {
                     String str = fileSnapshot.child("email").getValue(String.class);
                     System.out.println(str);//이메일 파싱
-                    System.out.println(fileSnapshot.getKey());//중요 -Uid 파싱
+                    //System.out.println(fileSnapshot.getKey());//중요 -Uid 파싱
                     uidList.add(str);
                 }
 
@@ -124,19 +124,21 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                boolean isEmail = false;
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {//인증된 user 일시 보내는 화면
                     for (String s : uidList) {
-                        if (s.equals(user.getEmail().toString())) {
-                            System.out.println("이메일이 디비에 입력되어있음");
-                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                            startActivity(intent);
-                        } else {
-                            System.out.println("이메일이 디비에 없음");
-                            Intent intent = new Intent(getApplicationContext(), MemberInfoActivitiy.class);
-                            intent.putExtra("userEmail", user.getEmail());
-                            startActivity(intent);
+                        if (s.equals(user.getEmail())) {
+                            isEmail = true;
                         }
+                    }
+                    if (isEmail) {
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(getApplicationContext(), MemberInfoActivitiy.class);
+                        startActivity(intent);
+                        finish();
                     }
                 } else {//비인증 유져라면 보내는 화면
 

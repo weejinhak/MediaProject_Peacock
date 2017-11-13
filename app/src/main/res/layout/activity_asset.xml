@@ -43,15 +43,16 @@
         android:id="@+id/aseet_layout_textView_asset_textView"
         android:layout_width="200dp"
         android:layout_height="80dp"
-        android:text="자산"
-        android:gravity=""
-        android:textSize="15sp"
-        android:textColor="@color/colorPrimary"
+        android:layout_marginTop="8dp"
         android:background="#FFFFFF"
+        android:gravity=""
+        android:text="자산"
+        android:textColor="@color/colorPrimary"
+        android:textSize="15sp"
         app:layout_constraintEnd_toStartOf="@+id/asset_layout_textView_assetMoney_textView"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline4" />
+        app:layout_constraintTop_toBottomOf="@+id/asset_layout_progress_bar" />
 
 
     <TextView
