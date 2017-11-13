@@ -77,24 +77,28 @@
             android:orientation="horizontal">
 
             <ImageButton
+                android:id="@+id/main_layout_asset_go_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="#000000"
                 android:layout_weight="1"
                 android:src="@drawable/main_layout_assets_tab_button"/>
             <ImageButton
+                android:id="@+id/main_layout_breakdown_go_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="#000000"
                 android:layout_weight="1"
                 android:src="@drawable/main_layout_list_tab_button"/>
             <ImageButton
+                android:id="@+id/main_layout_analysis_go_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="#000000"
                 android:layout_weight="1"
                 android:src="@drawable/main_layout_analysis_tab_button"/>
             <ImageButton
+                android:id="@+id/main_layout_setting_go_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="#000000"

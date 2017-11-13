@@ -33,6 +33,12 @@
         <activity
             android:name=".MemberInfoActivitiy"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AssetActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CalculatorActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
     </application>
 

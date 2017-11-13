@@ -49,16 +49,24 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         // get ID
-        ImageButton main_search = findViewById(R.id.main_search);
-        ImageButton main_filter = findViewById(R.id.main_filter);
+        ImageButton assetGoButton = findViewById(R.id.main_layout_asset_go_button);
+        ImageButton plusButton = findViewById(R.id.fab);
 
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(getApplicationContext(), CalculatorActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        assetGoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), AssetActivity.class);
+                startActivity(intent);
             }
         });
 
