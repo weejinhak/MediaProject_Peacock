@@ -39,6 +39,12 @@
         <activity
             android:name=".CalculatorActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AddCashActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AddCardActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
     </application>
 

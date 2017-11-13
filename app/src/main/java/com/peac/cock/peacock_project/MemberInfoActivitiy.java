@@ -10,9 +10,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
-import com.peac.cock.peacock_project.projectDto.Asset;
 import com.peac.cock.peacock_project.projectDto.UserDto;
 
 /**
@@ -23,7 +21,6 @@ public class MemberInfoActivitiy extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private UserDto userDto = new UserDto();
-    private Asset asset=new Asset();
     private FirebaseDatabase database;
     private String uid;
 
@@ -89,7 +86,6 @@ public class MemberInfoActivitiy extends AppCompatActivity {
 
                 //uid에 맞는 정보 디비 입력
                 database.getReference().child("users").child(uid).setValue(userDto);
-                database.getReference().child("users").child(uid).child("asset").setValue(asset);
                 Toast.makeText(getApplicationContext(), "정보입력완료", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.putExtra("userInfo", userDto);
