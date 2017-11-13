@@ -63,4 +63,16 @@ public class UserDto implements Serializable {
     public void setBudget(String budget) {
         this.budget = budget;
     }
+
+    @Override
+    public String toString() {
+        return "UserDto{" +
+                "email='" + email + '\'' +
+                ", name='" + name + '\'' +
+                ", birthday='" + birthday + '\'' +
+                ", gender='" + gender + '\'' +
+                ", job='" + job + '\'' +
+                ", budget='" + budget + '\'' +
+                '}';
+    }
 }

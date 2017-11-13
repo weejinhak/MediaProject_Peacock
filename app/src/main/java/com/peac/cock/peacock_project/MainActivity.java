@@ -34,9 +34,6 @@ public class MainActivity extends AppCompatActivity
     private FirebaseAuth auth;
     private FirebaseDatabase database;
 
-    //Dto
-    UserDto userDto;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,19 +48,9 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.app_bar_layout_my_toolbar);
         setSupportActionBar(toolbar);
 
-        //before_intent_get
-        Intent intent =getIntent();
-        userDto= (UserDto) intent.getSerializableExtra("userInfo");
-
         // get ID
         ImageButton main_search = findViewById(R.id.main_search);
         ImageButton main_filter = findViewById(R.id.main_filter);
-
-        //fire base get ID
-        String uid=auth.getCurrentUser().getUid();
-
-        //fire base_set Database
-        database.getReference().child("users").child(uid).setValue(userDto);
 
 
         FloatingActionButton fab = findViewById(R.id.fab);

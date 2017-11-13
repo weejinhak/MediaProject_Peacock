@@ -38,7 +38,7 @@ public class AnalysisActivity extends AppCompatActivity implements SeekBar.OnSee
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_analysis);
 
-        mChart = (PieChart) findViewById(R.id.pieChart);
+   //     mChart = (PieChart) findViewById(R.id.pieChart);
         mChart.setUsePercentValues(true);
    //     mChart.getDescription().setEnabled(false);
         mChart.setExtraOffsets(5, 10, 5, 5);
