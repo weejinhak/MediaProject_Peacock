@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="card_add_layout_accountType_text">계좌 종류</string>
+    <string name="card_add_layout_accountType_hint">입금</string>
+
+    <string name="card_add_layout_bankList_text">은행 종류</string>
+    <string name="card_add_layout_bankList_hint">은행명 검색</string>
+
+    <string name="card_add_layout_nickName_text">별칭</string>
+    <string name="card_add_layout_nickName_hint">별칭을 입력하세요</string>
+
+    <string name="card_add_layout_balance_text">잔액</string>
+    <string name="card_add_layout_balance_hint">잔액을 입력하세요</string>
+
+    <string-array name="cardArrayItem">
+        <item>은행선택</item>
+        <item>국민은행</item>
+        <item>신한은행</item>
+    </string-array>
+
+
+</resources>
