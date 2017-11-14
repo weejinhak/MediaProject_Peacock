@@ -152,7 +152,7 @@
         android:layout_marginStart="8dp"
         android:background="@drawable/handwriting_layout_1_button"
         app:layout_constraintBottom_toTopOf="@+id/calculator_layout_0_button"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton15"
+        app:layout_constraintEnd_toStartOf="@+id/calculator_layout_2_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/calculator_layout_4_button" />
 
@@ -184,14 +184,14 @@
         android:layout_width="69dp"
         android:layout_height="50dp"
         android:background="@drawable/handwriting_layout_5_button"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton15"
+        app:layout_constraintBottom_toTopOf="@+id/calculator_layout_2_button"
         app:layout_constraintEnd_toStartOf="@+id/calculator_layout_6_button"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/calculator_layout_4_button"
         app:layout_constraintTop_toBottomOf="@+id/calculator_layout_8_button" />
 
     <ImageButton
-        android:id="@+id/imageButton15"
+        android:id="@+id/calculator_layout_2_button"
         android:layout_width="69dp"
         android:layout_height="50dp"
         android:background="@drawable/handwriting_layout_2_button"
@@ -211,7 +211,7 @@
         app:layout_constraintEnd_toStartOf="@+id/calculator_layout_000_button"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/calculator_layout_0_button"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton15" />
+        app:layout_constraintTop_toBottomOf="@+id/calculator_layout_2_button" />
 
     <ImageButton
         android:id="@+id/calculator_layout_9_button"
@@ -243,7 +243,7 @@
         app:layout_constraintBottom_toTopOf="@+id/calculator_layout_000_button"
         app:layout_constraintEnd_toStartOf="@+id/calculator_layout_plus_button"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageButton15"
+        app:layout_constraintStart_toEndOf="@+id/calculator_layout_2_button"
         app:layout_constraintTop_toBottomOf="@+id/calculator_layout_6_button" />
 
     <ImageButton
