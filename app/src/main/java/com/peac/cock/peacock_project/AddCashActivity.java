@@ -32,7 +32,7 @@ public class AddCashActivity extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance();
 
         cash = new Cash();
-        uid=mAuth.getCurrentUser().getUid();
+        uid = mAuth.getCurrentUser().getUid();
 
         final EditText editTextNickName = findViewById(R.id.cash_add_layout_editText_nickName);
         final EditText editTextBalance = findViewById(R.id.cash_add_layout_editText_balance);

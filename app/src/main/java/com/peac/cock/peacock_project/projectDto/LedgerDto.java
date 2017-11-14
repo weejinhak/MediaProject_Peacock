@@ -4,16 +4,18 @@ package com.peac.cock.peacock_project.projectDto;
  * Created by wee on 2017. 11. 8..
  */
 
-public class ledgerDto {
+public class LedgerDto {
 
     String seq;
     //String email;
-    String in_out;
+    String inOut;
     String date;
     String time;
     String content;
     String category;
+    String amount;
     Card asset;
+    String memo;
 
     public String getSeq() {
         return seq;
@@ -23,12 +25,12 @@ public class ledgerDto {
         this.seq = seq;
     }
 
-    public String getIn_out() {
-        return in_out;
+    public String getInOut() {
+        return inOut;
     }
 
-    public void setIn_out(String in_out) {
-        this.in_out = in_out;
+    public void setInOut(String inOut) {
+        this.inOut = inOut;
     }
 
     public String getDate() {
@@ -63,11 +65,27 @@ public class ledgerDto {
         this.category = category;
     }
 
+    public String getAmount() {
+        return amount;
+    }
+
+    public void setAmount(String amount) {
+        this.amount = amount;
+    }
+
     public Card getAsset() {
         return asset;
     }
 
     public void setAsset(Card asset) {
         this.asset = asset;
+    }
+
+    public String getMemo() {
+        return memo;
+    }
+
+    public void setMemo(String memo) {
+        this.memo = memo;
     }
 }

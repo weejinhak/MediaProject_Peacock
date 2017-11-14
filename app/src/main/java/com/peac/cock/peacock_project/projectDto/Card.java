@@ -16,6 +16,17 @@ public class Card {
         this.sum = "";
     }
 
+    public Card(String bank, String nickName, String sum) {
+        this.bank = bank;
+        this.nickName = nickName;
+        this.sum = sum;
+    }
+
+    public Card(String bank, String nickName) {
+        this.bank = bank;
+        this.nickName = nickName;
+    }
+
     public String getBank() {
         return bank;
     }

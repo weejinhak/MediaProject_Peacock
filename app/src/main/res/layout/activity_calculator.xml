@@ -17,7 +17,7 @@
         android:id="@+id/imageView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="수입 / 지출 입력"
+        android:text="금액 입력"
         android:textColor="#ffffff"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline8"
@@ -26,18 +26,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.488" />
-
-    <!--<ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/handwriting_layout_title_img"
-        app:layout_constraintBottom_toTopOf="@+id/guideline8"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.53"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.432" />-->
 
     <ImageButton
         android:id="@+id/calculator_layout_back_button"
@@ -53,41 +41,38 @@
         app:layout_constraintStart_toStartOf="@+id/imageView6"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.432"
-        android:scaleType="fitXY"/>
-
-    <ImageView
-        android:id="@+id/calculator_layout_won_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:background="#ffffff"
-        android:src="@drawable/handwriting_layout_won_icon"
-        app:layout_constraintBottom_toTopOf="@+id/guideline5"
-        app:layout_constraintEnd_toStartOf="@+id/calculator_layout_result_view"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline6" />
+        android:scaleType="fitXY"
+        />
 
     <TextView
         android:id="@+id/calculator_layout_result_view"
-        android:layout_width="200dp"
+        android:layout_width="230dp"
         android:layout_height="130dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline5"
-        app:layout_constraintEnd_toStartOf="@+id/calculator_layout_check_button"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/calculator_layout_won_icon"
-        app:layout_constraintTop_toTopOf="@+id/guideline6" />
+        android:layout_marginBottom="25dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="21dp"
+        android:minLines="1"
+        android:maxLines="10"
+        android:text="0"
+        android:textColor="#000000"
+        android:textSize="33dp"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/calculator_layout_outgoing_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guideline8" />
 
     <ImageButton
         android:id="@+id/calculator_layout_check_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="76dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/handwriting_layout_check_button"
         android:scaleType="fitXY"
-        app:layout_constraintBottom_toTopOf="@+id/guideline5"
+        app:layout_constraintBottom_toTopOf="@+id/calculator_layout_transfer_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/calculator_layout_result_view"
-        app:layout_constraintTop_toTopOf="@+id/guideline6" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/calculator_layout_result_view" />
 
     <ImageButton
         android:id="@+id/calculator_layout_outgoing_button"
@@ -122,136 +107,160 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/calculator_layout_incoming_button" />
 
-    <ImageButton
+    <Button
         android:id="@+id/calculator_layout_7_button"
-        android:layout_width="69dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:background="@drawable/handwriting_layout_7_button"
+        android:layout_width="60dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/calculator_layout_number_click"
+        android:text="7"
+        android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/calculator_layout_4_button"
         app:layout_constraintEnd_toStartOf="@+id/calculator_layout_8_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/calculator_layout_outgoing_button" />
 
-    <ImageButton
+    <Button
         android:id="@+id/calculator_layout_4_button"
-        android:layout_width="69dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:background="@drawable/handwriting_layout_4_button"
+        android:layout_width="60dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/calculator_layout_number_click"
         android:scaleType="centerInside"
+        android:text="4"
+        android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/calculator_layout_1_button"
         app:layout_constraintEnd_toStartOf="@+id/calculator_layout_5_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/calculator_layout_7_button" />
 
-    <ImageButton
+    <Button
         android:id="@+id/calculator_layout_1_button"
-        android:layout_width="69dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:background="@drawable/handwriting_layout_1_button"
+        android:layout_width="60dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/calculator_layout_number_click"
+        android:text="1"
+        android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/calculator_layout_0_button"
         app:layout_constraintEnd_toStartOf="@+id/calculator_layout_2_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/calculator_layout_4_button" />
 
-    <ImageButton
+    <Button
         android:id="@+id/calculator_layout_0_button"
-        android:layout_width="69dp"
-        android:layout_height="50dp"
+        android:layout_width="60dp"
+        android:layout_height="45dp"
         android:layout_marginBottom="16dp"
         android:layout_marginStart="8dp"
-        android:background="@drawable/handwriting_layout_0_button"
+        android:background="@drawable/calculator_layout_number_click"
+        android:text="0"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/calculator_layout_00_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/calculator_layout_1_button" />
 
-    <ImageButton
+    <Button
         android:id="@+id/calculator_layout_8_button"
-        android:layout_width="69dp"
-        android:layout_height="50dp"
-        android:background="@drawable/handwriting_layout_8_button"
+        android:layout_width="60dp"
+        android:layout_height="45dp"
+        android:text="8"
+        android:textSize="30sp"
+        android:background="@drawable/calculator_layout_number_click"
         app:layout_constraintBottom_toTopOf="@+id/calculator_layout_5_button"
         app:layout_constraintEnd_toStartOf="@+id/calculator_layout_9_button"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/calculator_layout_7_button"
         app:layout_constraintTop_toBottomOf="@+id/calculator_layout_outgoing_button" />
 
-    <ImageButton
+    <Button
         android:id="@+id/calculator_layout_5_button"
-        android:layout_width="69dp"
-        android:layout_height="50dp"
-        android:background="@drawable/handwriting_layout_5_button"
+        android:layout_width="60dp"
+        android:layout_height="45dp"
+        android:text="5"
+        android:textSize="30sp"
+        android:background="@drawable/calculator_layout_number_click"
         app:layout_constraintBottom_toTopOf="@+id/calculator_layout_2_button"
         app:layout_constraintEnd_toStartOf="@+id/calculator_layout_6_button"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/calculator_layout_4_button"
         app:layout_constraintTop_toBottomOf="@+id/calculator_layout_8_button" />
 
-    <ImageButton
+    <Button
         android:id="@+id/calculator_layout_2_button"
-        android:layout_width="69dp"
-        android:layout_height="50dp"
-        android:background="@drawable/handwriting_layout_2_button"
+        android:layout_width="60dp"
+        android:layout_height="45dp"
+        android:text="2"
+        android:textSize="30sp"
+        android:background="@drawable/calculator_layout_number_click"
         app:layout_constraintBottom_toTopOf="@+id/calculator_layout_00_button"
         app:layout_constraintEnd_toStartOf="@+id/calculator_layout_3_button"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/calculator_layout_1_button"
         app:layout_constraintTop_toBottomOf="@+id/calculator_layout_5_button" />
 
-    <ImageButton
+    <Button
         android:id="@+id/calculator_layout_00_button"
-        android:layout_width="69dp"
-        android:layout_height="50dp"
+        android:layout_width="60dp"
+        android:layout_height="45dp"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/handwriting_layout_00_button"
+        android:text="00"
+        android:textSize="23sp"
+        android:background="@drawable/calculator_layout_number_click"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/calculator_layout_000_button"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/calculator_layout_0_button"
         app:layout_constraintTop_toBottomOf="@+id/calculator_layout_2_button" />
 
-    <ImageButton
+    <Button
         android:id="@+id/calculator_layout_9_button"
-        android:layout_width="69dp"
-        android:layout_height="50dp"
-        android:background="@drawable/handwriting_layout_9_button"
+        android:layout_width="60dp"
+        android:layout_height="45dp"
+        android:text="9"
+        android:textSize="30sp"
+        android:background="@drawable/calculator_layout_number_click"
         app:layout_constraintBottom_toTopOf="@+id/calculator_layout_6_button"
         app:layout_constraintEnd_toStartOf="@+id/calculator_layout_erase_button"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/calculator_layout_8_button"
         app:layout_constraintTop_toBottomOf="@+id/calculator_layout_incoming_button" />
 
-    <ImageButton
+    <Button
         android:id="@+id/calculator_layout_6_button"
-        android:layout_width="69dp"
-        android:layout_height="50dp"
-        android:background="@drawable/handwriting_layout_6_button"
+        android:layout_width="60dp"
+        android:layout_height="45dp"
+        android:text="6"
+        android:textSize="30sp"
+        android:background="@drawable/calculator_layout_number_click"
         app:layout_constraintBottom_toTopOf="@+id/calculator_layout_3_button"
         app:layout_constraintEnd_toStartOf="@+id/calculator_layout_subtract_button"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/calculator_layout_5_button"
         app:layout_constraintTop_toBottomOf="@+id/calculator_layout_9_button" />
 
-    <ImageButton
+    <Button
         android:id="@+id/calculator_layout_3_button"
-        android:layout_width="69dp"
-        android:layout_height="50dp"
-        android:background="@drawable/handwriting_layout_3_button"
+        android:layout_width="60dp"
+        android:layout_height="45dp"
+        android:text="3"
+        android:textSize="30sp"
+        android:background="@drawable/calculator_layout_number_click"
         app:layout_constraintBottom_toTopOf="@+id/calculator_layout_000_button"
         app:layout_constraintEnd_toStartOf="@+id/calculator_layout_plus_button"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/calculator_layout_2_button"
         app:layout_constraintTop_toBottomOf="@+id/calculator_layout_6_button" />
 
-    <ImageButton
+    <Button
         android:id="@+id/calculator_layout_000_button"
-        android:layout_width="69dp"
-        android:layout_height="50dp"
+        android:layout_width="60dp"
+        android:layout_height="45dp"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/handwriting_layout_000_button"
+        android:text=",000"
+        android:textSize="20sp"
+        android:background="@drawable/calculator_layout_number_click"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/calculator_layout_multiple_button"
         app:layout_constraintHorizontal_bias="0.5"
@@ -260,9 +269,10 @@
 
     <ImageButton
         android:id="@+id/calculator_layout_erase_button"
-        android:layout_width="65dp"
-        android:layout_height="38dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="60dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/handwriting_layout_erase_button"
         app:layout_constraintBottom_toTopOf="@+id/calculator_layout_subtract_button"
         app:layout_constraintEnd_toEndOf="parent"
@@ -271,41 +281,45 @@
 
     <ImageButton
         android:id="@+id/calculator_layout_subtract_button"
-        android:layout_width="65dp"
-        android:layout_height="38dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="60dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="24dp"
         android:background="@drawable/handwriting_layout_subtract_button"
+        android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/calculator_layout_plus_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/calculator_layout_erase_button" />
 
     <ImageButton
         android:id="@+id/calculator_layout_plus_button"
-        android:layout_width="65dp"
-        android:layout_height="38dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="60dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="24dp"
         android:background="@drawable/handwriting_layout_plus_button"
+        android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/calculator_layout_multiple_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/calculator_layout_subtract_button" />
 
     <ImageButton
         android:id="@+id/calculator_layout_multiple_button"
-        android:layout_width="65dp"
-        android:layout_height="38dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="60dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="24dp"
         android:background="@drawable/handwriting_layout_multiple_button"
+        android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/calculator_layout_divide_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/calculator_layout_plus_button" />
 
     <ImageButton
         android:id="@+id/calculator_layout_divide_button"
-        android:layout_width="65dp"
-        android:layout_height="38dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="60dp"
+        android:layout_height="35dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="24dp"
         android:background="@drawable/handwriting_layout_divide_button"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/calculator_layout_multiple_button" />

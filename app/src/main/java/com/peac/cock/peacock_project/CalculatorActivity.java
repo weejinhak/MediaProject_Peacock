@@ -1,12 +1,10 @@
 package com.peac.cock.peacock_project;
 
-import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -14,18 +12,28 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class CalculatorActivity extends AppCompatActivity implements View.OnClickListener {
-    String state = "";
+    private String state = "";
+    private TextView result;
+    private ImageButton checkButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_calculator2);
-        state = "outgoing";
+        setContentView(R.layout.activity_calculator);
+
+        Intent intent = getIntent();
+        if(intent.getStringExtra("state") == null) {
+            state = "outgoing";
+        } else {
+            state = intent.getStringExtra("state");
+        }
 
         final ImageButton incomingButton = findViewById(R.id.calculator_layout_incoming_button);
         final ImageButton outgoingButton = findViewById(R.id.calculator_layout_outgoing_button);
         final ImageButton transferButton = findViewById(R.id.calculator_layout_transfer_button);
-        final ImageButton checkButton = findViewById(R.id.calculator_layout_check_button);
+
+        checkButton = findViewById(R.id.calculator_layout_check_button);
         final ImageButton backButton = findViewById(R.id.calculator_layout_back_button);
+
         final Button one = findViewById(R.id.calculator_layout_1_button);
         final Button two = findViewById(R.id.calculator_layout_2_button);
         final Button three = findViewById(R.id.calculator_layout_3_button);
@@ -35,11 +43,50 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
         final Button seven = findViewById(R.id.calculator_layout_7_button);
         final Button eight = findViewById(R.id.calculator_layout_8_button);
         final Button nine = findViewById(R.id.calculator_layout_9_button);
+
         final ImageButton eraseButton = findViewById(R.id.calculator_layout_erase_button);
         final ImageButton subtractButton = findViewById(R.id.calculator_layout_subtract_button);
         final ImageButton plusButton = findViewById(R.id.calculator_layout_plus_button);
         final ImageButton multipleButton = findViewById(R.id.calculator_layout_multiple_button);
         final ImageButton divideButton = findViewById(R.id.calculator_layout_divide_button);
+
+        result = findViewById(R.id.calculator_layout_result_view);
+
+        one.setOnClickListener(numberClickListener);
+        two.setOnClickListener(numberClickListener);
+        three.setOnClickListener(numberClickListener);
+        four.setOnClickListener(numberClickListener);
+        five.setOnClickListener(numberClickListener);
+        six.setOnClickListener(numberClickListener);
+        seven.setOnClickListener(numberClickListener);
+        eight.setOnClickListener(numberClickListener);
+        nine.setOnClickListener(numberClickListener);
+
+        eraseButton.setOnClickListener(this);
+        subtractButton.setOnClickListener(this);
+        plusButton.setOnClickListener(this);
+        multipleButton.setOnClickListener(this);
+        divideButton.setOnClickListener(this);
+        checkButton.setOnClickListener(this);
+        backButton.setOnClickListener(this);
+
+
+        // 초기 상태
+
+        if(state.equals("outgoing")) {
+            outgoingButton.setBackgroundResource(R.drawable.handwriting_layout_active_outgoing_button);
+            incomingButton.setBackgroundResource(R.drawable.handwriting_layout_incoming_button);
+            transferButton.setBackgroundResource(R.drawable.handwriting_layout_transfer_button);
+        } else if(state.equals("incoming")) {
+            incomingButton.setBackgroundResource(R.drawable.handwriting_layout_active_incoming_button);
+            outgoingButton.setBackgroundResource(R.drawable.handwriting_layout_outgoing_button);
+            transferButton.setBackgroundResource(R.drawable.handwriting_layout_transfer_button);
+        } else {
+            transferButton.setBackgroundResource(R.drawable.handwriting_layout_active_transfer_button);
+            incomingButton.setBackgroundResource(R.drawable.handwriting_layout_incoming_button);
+            outgoingButton.setBackgroundResource(R.drawable.handwriting_layout_outgoing_button);
+        }
+
 
 
         outgoingButton.setOnTouchListener(new View.OnTouchListener() {
@@ -80,114 +127,83 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
                 return false;
             }
         });
+    }
 
-        // 체크 버튼 클릭
-        checkButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-         //       String amount = result.
-                Intent intent = new Intent(getApplicationContext(), HandwritingActivity.class);
-                startActivity(intent);
+
+    // 숫자 버튼 누를 때
+    View.OnClickListener numberClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if(result.getText().toString().equals("0")) {
+                result.setText("");
+                checkButton.setBackgroundResource(R.drawable.handwriting_layout_active_check_button);
             }
-        });
+            result.setText(result.getText().toString() + ((Button) view).getText().toString());
+        }
+    };
 
-
-        // 뒤로가기 버튼 클릭 시 다이얼로그 창 뜨도록
-        final AlertDialog.Builder alt_bld = new AlertDialog.Builder(this);
-
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+    // 나머지 이미지 버튼 누를 때
+    @Override
+    public void onClick(View v) {
+        final TextView result = findViewById(R.id.calculator_layout_result_view);
+        switch (v.getId()) {
+            case R.id.calculator_layout_erase_button:
+                if(!result.getText().toString().equals("0")) {
+                    result.setText(result.getText().toString().substring(0,result.length()+1));
+                    if(result.getText().toString().equals("0")) {
+                        checkButton.setBackgroundResource(R.drawable.handwriting_layout_check_button);
+                    }
+                }
+                break;
+            case R.id.calculator_layout_subtract_button:
+                if(!result.getText().toString().equals("0")) {
+                    result.setText(result.getText().toString() + "-");
+                }
+                break;
+            case R.id.calculator_layout_plus_button:
+                if(!result.getText().toString().equals("0")) {
+                    result.setText(result.getText().toString() + "+");
+                }
+                break;
+            case R.id.calculator_layout_multiple_button:
+                if(!result.getText().toString().equals("0")) {
+                    result.setText(result.getText().toString() + "x");
+                }
+                break;
+            case R.id.calculator_layout_divide_button:
+                if(!result.getText().toString().equals("0")) {
+                    result.setText(result.getText().toString() + "÷");
+                }
+                break;
+            case R.id.calculator_layout_check_button:
+                Intent intent = new Intent(getApplicationContext(), HandwritingActivity.class);
+                intent.putExtra("amount", result.getText().toString());
+                intent.putExtra("state", state);
+                startActivity(intent);
+                break;
+            case R.id.calculator_layout_back_button:
+                AlertDialog.Builder alt_bld = new AlertDialog.Builder(this);
                 alt_bld.setMessage("페이지에서 나가면 작성된 정보가 사라집니다. 그래도 나가시겠습니까?")
                         .setCancelable(false)
                         .setPositiveButton("Yes",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.dismiss();
-                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                startActivity(intent);
-                            }
-                        })
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.dismiss();
+                                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                        startActivity(intent);
+                                    }
+                                })
                         .setNegativeButton("No",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.dismiss();
-                            }
-                        });
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.dismiss();
+                                    }
+                                });
                 AlertDialog alert = alt_bld.create();
-                // Title for AlertDialog
                 alert.setTitle("잠깐!");
-                // Icon for AlertDialog
                 alert.setIcon(R.drawable.calculator_layout_warning_icon);
                 alert.show();
-
-            }
-        });
-
-    }
-
-    @Override
-    public void onClick(View v) {
-        TextView result = findViewById(R.id.calculator_layout_result_view);
-        switch (v.getId()) {
-            case R.id.calculator_layout_0_button:
-
-                result.setText(result.getText().toString() + ((Button)v).getText());
+                break;
         }
     }
-
-
-    /*int temp_num = 0;
-
-    var $result_show = document.getElementById('result_show');
-
-    function cal(input) {
-        if(input == '*' || input == '/' || input == '+' || input == '-') {
-            if (result == '0') {
-                result = temp_num;
-            }
-            result += input;
-            temp_num = 0;
-        } else {
-            if(temp_num == '0') {
-                temp_num = input;
-                if(result == '0') {
-                    result = input;
-                } else {
-                    result += input;
-                }
-            } else {
-                if(result == '0') {
-                    result = input;
-                    temp_num = input;
-                } else {
-                    result += input;
-                    temp_num += input;
-                }
-            }
-            $result_show.innerHTML = temp_num;
-        }
-
-        console.log(result);
-    }
-
-    function removeAll() {
-        result = '0';
-        $result_show.innerHTML = result;
-        console.log(result);
-    }
-
-
-    public void calculate(String result) {
-        try {
-
-            result = Math.round(eval(result)*100)/100;
-            $result_show.innerHTML = result;
-            console.log(result);
-            temp_num = result;
-            result = '0';
-        }catch(e){
-            removeAll();
-        }
-    }*/
 }
