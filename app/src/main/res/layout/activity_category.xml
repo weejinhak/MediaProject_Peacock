@@ -22,13 +22,13 @@
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
             <TextView
-                android:id="@+id/setting_layouy_toolbar_title"
+                android:id="@+id/setting_layout_toolbar_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/category_layout_toolbar_text"
                 android:textColor="#FFFFFF"
-                android:textSize="30sp" />
+                android:textSize="20sp" />
 
         </android.support.v7.widget.Toolbar>
 

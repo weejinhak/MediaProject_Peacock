@@ -7,5 +7,6 @@
     <string name="setup_layout_mysetUp_text">개인 설정</string>
     <string name="setup_layout_security_text">보안 설정</string>
     <string name="setup_layout_center_text">고객 센터</string>
+    <string name="setup_layout_appVersion_text">앱 버전:1.0.0</string>
 
 </resources>
