@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -18,23 +19,24 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
         <TextView
-            android:id="@+id/setting_layouy_toolbar_title"
+            android:id="@+id/setting_layout_toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/setup_layout_toolbar_text"
             android:textColor="#000000"
-            android:textSize="30dp" />
+            android:textSize="30sp" />
 
     </android.support.v7.widget.Toolbar>
 
     <View
         android:id="@+id/setting_layout_view8"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="1dp"
         android:layout_marginBottom="27dp"
         android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/setting_layout_textView_usetId"
+        android:background="#FF909090"
+        app:layout_constraintBottom_toTopOf="@+id/setting_layout_textView_userEmail"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/setting_layout_my_toolbar" />
 
@@ -101,17 +103,31 @@
         app:layout_constraintTop_toBottomOf="@+id/view6" />
 
     <TextView
-        android:id="@+id/setting_layout_textView_usetId"
+        android:id="@+id/setting_layout_textView_userName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/setting_layout_textView_userEmail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintTop_toBottomOf="@+id/setting_layout_my_toolbar" />
+
+
+    <TextView
+        android:id="@+id/setting_layout_textView_userEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
-        android:text="TextView"
-        android:textSize="16sp"
-        app:layout_goneMarginTop="30dp"
+        android:textSize="10sp"
         app:layout_constraintBottom_toTopOf="@+id/setting_latout_textView_mybankItem_management"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/setting_layout_view8" />
+        app:layout_constraintTop_toTopOf="@+id/setting_layout_view8"
+        tools:ignore="SmallSp" />
 
     <TextView
         android:id="@+id/setting_latout_textView_mybankItem_management"
@@ -191,8 +207,8 @@
         android:layout_height="50dp"
         android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
-        android:text="TextView"
-        android:textSize="16sp"
+        android:text="@string/setup_layout_appVersion_text"
+        android:textSize="8sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view7" />
