@@ -88,7 +88,6 @@ public class MemberInfoActivitiy extends AppCompatActivity {
                 database.getReference().child("users").child(uid).setValue(userDto);
                 Toast.makeText(getApplicationContext(), "정보입력완료", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.putExtra("userInfo", userDto);
                 startActivity(intent);
                 finish();
             }
