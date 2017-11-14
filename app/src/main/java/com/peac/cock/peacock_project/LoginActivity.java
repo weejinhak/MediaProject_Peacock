@@ -1,13 +1,11 @@
 package com.peac.cock.peacock_project;
 
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -35,7 +33,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by wee on 2017. 10. 30..
@@ -63,7 +60,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         setContentView(R.layout.activity_login);
 
         //툴바 설정
-        Toolbar toolbar = findViewById(R.id.join_layout_my_toolbar);
+        Toolbar toolbar = findViewById(R.id.setting_layout_my_toolbar);
         setSupportActionBar(toolbar);
 
 

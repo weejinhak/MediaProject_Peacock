@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/join_layout_my_toolbar"
+        android:id="@+id/setting_layout_my_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -34,7 +34,7 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/join_layout_my_toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/setting_layout_my_toolbar"
         app:srcCompat="@drawable/join_layout_title_img" />
 
 
