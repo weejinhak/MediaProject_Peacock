@@ -100,8 +100,8 @@
 
     <Button
         android:id="@+id/calculator_layout_7_button"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
+        android:layout_width="60dp"
+        android:layout_height="45dp"
         android:layout_marginStart="8dp"
         android:text="7"
         android:textSize="30sp"
@@ -113,8 +113,8 @@
 
     <Button
         android:id="@+id/calculator_layout_4_button"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
+        android:layout_width="60dp"
+        android:layout_height="45dp"
         android:layout_marginStart="8dp"
         android:text="4"
         android:textSize="30sp"
@@ -127,8 +127,8 @@
 
     <Button
         android:id="@+id/calculator_layout_1_button"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
+        android:layout_width="60dp"
+        android:layout_height="45dp"
         android:layout_marginStart="8dp"
         android:text="1"
         android:textSize="30sp"
@@ -140,8 +140,8 @@
 
     <Button
         android:id="@+id/calculator_layout_0_button"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
+        android:layout_width="60dp"
+        android:layout_height="45dp"
         android:layout_marginBottom="16dp"
         android:layout_marginStart="8dp"
         android:text="0"
@@ -154,8 +154,8 @@
 
     <Button
         android:id="@+id/calculator_layout_8_button"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
+        android:layout_width="60dp"
+        android:layout_height="45dp"
         android:text="8"
         android:textSize="30sp"
         android:background="@drawable/calculator_layout_number_click"
@@ -167,8 +167,8 @@
 
     <Button
         android:id="@+id/calculator_layout_5_button"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
+        android:layout_width="60dp"
+        android:layout_height="45dp"
         android:text="5"
         android:textSize="30sp"
         android:background="@drawable/calculator_layout_number_click"
@@ -180,8 +180,8 @@
 
     <Button
         android:id="@+id/imageButton15"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
+        android:layout_width="60dp"
+        android:layout_height="45dp"
         android:text="2"
         android:textSize="30sp"
         android:background="@drawable/calculator_layout_number_click"
@@ -193,8 +193,8 @@
 
     <Button
         android:id="@+id/calculator_layout_00_button"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
+        android:layout_width="60dp"
+        android:layout_height="45dp"
         android:layout_marginBottom="16dp"
         android:text="00"
         android:textSize="23sp"
@@ -207,8 +207,8 @@
 
     <Button
         android:id="@+id/calculator_layout_9_button"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
+        android:layout_width="60dp"
+        android:layout_height="45dp"
         android:text="9"
         android:textSize="30sp"
         android:background="@drawable/calculator_layout_number_click"
@@ -220,8 +220,8 @@
 
     <Button
         android:id="@+id/calculator_layout_6_button"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
+        android:layout_width="60dp"
+        android:layout_height="45dp"
         android:text="6"
         android:textSize="30sp"
         android:background="@drawable/calculator_layout_number_click"
@@ -233,8 +233,8 @@
 
     <Button
         android:id="@+id/calculator_layout_3_button"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
+        android:layout_width="60dp"
+        android:layout_height="45dp"
         android:text="3"
         android:textSize="30sp"
         android:background="@drawable/calculator_layout_number_click"
@@ -246,8 +246,8 @@
 
     <Button
         android:id="@+id/calculator_layout_000_button"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
+        android:layout_width="60dp"
+        android:layout_height="45dp"
         android:layout_marginBottom="16dp"
         android:text=",000"
         android:textSize="20sp"
