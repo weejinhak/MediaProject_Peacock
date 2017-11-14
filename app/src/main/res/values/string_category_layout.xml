@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="category_layout_toolbar_text">새로운 카테고리 추가</string>
+    <string name="category_layout_income_text">수입</string>
+    <string name="category_layout_expense_text">지출</string>
+    <string name="category_layout_transfer_text">이체</string>
+</resources>
