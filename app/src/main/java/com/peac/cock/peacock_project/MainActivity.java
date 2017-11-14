@@ -42,8 +42,8 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         //fire base Auth && database
-        auth=FirebaseAuth.getInstance();
-        database=FirebaseDatabase.getInstance();
+        auth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
 
         //Toolbar setting
         Toolbar toolbar = findViewById(R.id.app_bar_layout_my_toolbar);
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity
 
         // get ID
         ImageButton assetGoButton = findViewById(R.id.main_layout_asset_go_button);
-        ImageButton settingGoButton=findViewById(R.id.main_layout_setting_go_button);
+        ImageButton settingGoButton = findViewById(R.id.main_layout_setting_go_button);
 
         FloatingActionButton fab = findViewById(R.id.main_layout_plus_button);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -72,9 +72,8 @@ public class MainActivity extends AppCompatActivity
         settingGoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(getApplicationContext(),SettingActivity.class);
+                Intent intent = new Intent(getApplicationContext(), SettingActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
 
@@ -86,10 +85,10 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        View view =navigationView.getHeaderView(0);
+        View view = navigationView.getHeaderView(0);
 
-        nameTextView= view.findViewById(R.id.header_name_textView);
-        emailTextView=view.findViewById(R.id.header_email_textView);
+        nameTextView = view.findViewById(R.id.header_name_textView);
+        emailTextView = view.findViewById(R.id.header_email_textView);
 
         nameTextView.setText(auth.getCurrentUser().getDisplayName());
         emailTextView.setText(auth.getCurrentUser().getEmail());
@@ -133,10 +132,10 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if(id == R.id.nav_logout){
+        if (id == R.id.nav_logout) {
             auth.signOut();
             finish();
-            Intent intent=new Intent(this,LoginActivity.class);
+            Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         }
        /* if (id == R.id.nav_camera) {
