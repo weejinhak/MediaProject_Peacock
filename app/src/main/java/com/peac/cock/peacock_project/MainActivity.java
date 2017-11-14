@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
@@ -50,10 +51,9 @@ public class MainActivity extends AppCompatActivity
 
         // get ID
         ImageButton assetGoButton = findViewById(R.id.main_layout_asset_go_button);
-        ImageButton plusButton = findViewById(R.id.fab);
 
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.main_layout_plus_button);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -154,5 +154,26 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+   /* @Override
+    public void onBackPressed() {
+        if ( pressedTime == 0 ) {
+            Toast.makeText(MainActivity.this, " 한 번 더 누르면 종료됩니다." , Toast.LENGTH_LONG).show();
+            pressedTime = System.currentTimeMillis();
+        }
+        else {
+            int seconds = (int) (System.currentTimeMillis() - pressedTime);
+
+            if ( seconds > 2000 ) {
+                Toast.makeText(MainActivity.this, " 한 번 더 누르면 종료됩니다." , Toast.LENGTH_LONG).show();
+                pressedTime = 0 ;
+            }
+            else {
+                super.onBackPressed();
+//                finish(); // app 종료 시키기
+            }
+        }
+    }*/
+
 
 }

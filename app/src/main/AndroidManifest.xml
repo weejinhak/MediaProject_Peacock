@@ -46,6 +46,10 @@
             android:name=".AddCardActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
+        <activity
+            android:name=".HandwritingActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
     </application>
 
 </manifest>
