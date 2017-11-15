@@ -44,7 +44,7 @@ public class MemberInfoActivitiy extends AppCompatActivity {
 
         //before_intent_get
         final Intent intent = getIntent();
-        final String email = intent.getStringExtra("userEmail");
+        final String email = mAuth.getCurrentUser().getEmail();
 
         //정보입력버튼 클릭.
         join_ok_button.setOnClickListener(new View.OnClickListener() {

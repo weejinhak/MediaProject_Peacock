@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/category_gridView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/category_add_layout_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_weight="1"
+            android:background="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <TextView
+                android:id="@+id/category_add_layout_toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/category_add_layout_toolbar_text"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+
+        <ImageButton
+            android:id="@+id/category_add_layout_transfer_button"
+            android:layout_width="89dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="6dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/handwriting_layout_transfer_button"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/category_add_layout_outgoing_button"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/category_add_layout_incoming_button"
+            android:layout_width="89dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="6dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/handwriting_layout_incoming_button"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/category_add_layout_outgoing_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/category_add_layout_outgoing_button"
+            android:layout_width="89dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="6dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/handwriting_layout_active_outgoing_button"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/category_add_layout_transfer_button"
+            app:layout_constraintStart_toEndOf="@+id/category_add_layout_incoming_button"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+    <GridView
+        android:id="@+id/category_add_grid_view_image_text"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:columnWidth="100dp"
+        android:gravity="center"
+        android:numColumns="3">
+    </GridView>
+
+    <Button
+        android:id="@+id/category_add_grid_view_category_add_button"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:background="#E91E63"
+        android:text="@string/category_add_layout_add_button_text"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp" />
+
+</LinearLayout>
