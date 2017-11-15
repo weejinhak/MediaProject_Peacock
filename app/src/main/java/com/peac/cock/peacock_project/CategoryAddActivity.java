@@ -67,6 +67,9 @@ public class CategoryAddActivity extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance();
         uid=mAuth.getCurrentUser().getUid();
 
+        for(Integer i: gridViewImageId){
+            System.out.print(i);
+        }
 
         //getId
         incomingButton = findViewById(R.id.category_add_layout_incoming_button);
