@@ -25,11 +25,17 @@
                 android:id="@+id/category_layout_toolbar_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_marginStart="100dp"
                 android:text="@string/category_layout_toolbar_text"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp" />
-
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/category_grid_view_category_add_button"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="40dp"
+                android:backgroundTint="#E91E63"
+                android:src="@drawable/category_layout_category_add_button" />
         </android.support.v7.widget.Toolbar>
 
         <android.support.design.widget.TabLayout
@@ -62,19 +68,12 @@
     <GridView
         android:id="@+id/category_grid_view_image_text"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="match_parent"
         android:columnWidth="100dp"
         android:gravity="center"
         android:numColumns="3">
     </GridView>
 
-    <Button
-        android:id="@+id/category_grid_view_category_add_button"
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:background="#E91E63"
-        android:text="@string/category_layout_category_add_button_text"
-        android:textColor="#FFFFFF"
-        android:textSize="15sp" />
+
 
 </LinearLayout>

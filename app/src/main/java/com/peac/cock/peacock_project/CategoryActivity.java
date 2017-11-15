@@ -3,6 +3,7 @@ package com.peac.cock.peacock_project;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,7 +18,7 @@ import android.widget.Toast;
 public class CategoryActivity extends AppCompatActivity {
 
     private GridView categoryGridView;
-    private Button addCategoryButton;
+    private FloatingActionButton addCategoryButton;
 
     private String[] gridViewString = {
             "예술", "아이", "뷰티",
@@ -65,37 +66,8 @@ public class CategoryActivity extends AppCompatActivity {
         addCategoryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-/*                AlertDialog.Builder mBuilder = new AlertDialog.Builder(CategoryActivity.this);
-                View mView = getLayoutInflater().inflate(R.layout.category_dialog_spinner, null);
-                mBuilder.setTitle("카테고리추가");
-                final Spinner mSpinner = mView.findViewById(R.id.category_dialog_spinner);
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(CategoryActivity.this, android.R.layout.simple_spinner_item,
-                        getResources().getStringArray(R.array.spinner_category_list));
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                mSpinner.setAdapter(adapter);
-
-                mBuilder.setPositiveButton("추가", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int i) {
-
-                        if (!mSpinner.getSelectedItem().toString().equalsIgnoreCase("카테고리를 고르세요")) {
-                            Toast.makeText(CategoryActivity.this, mSpinner.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
-                        }
-
-                    }
-                });
-                mBuilder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                mBuilder.setView(mView);
-                AlertDialog dialog = mBuilder.create();
-                dialog.show();*/
-                Intent intent =new Intent(getApplicationContext(),CategoryAddActivity.class);
+                Intent intent = new Intent(getApplicationContext(), CategoryAddActivity.class);
                 startActivity(intent);
-
             }
         });
 

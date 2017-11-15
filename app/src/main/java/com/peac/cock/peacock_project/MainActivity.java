@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity
 
         // get ID
         ImageButton assetGoButton = findViewById(R.id.main_layout_asset_go_button);
+        ImageButton detailGoButton = findViewById(R.id.main_layout_breakdown_go_button);
         ImageButton settingGoButton = findViewById(R.id.main_layout_setting_go_button);
 
         FloatingActionButton fab = findViewById(R.id.main_layout_plus_button);
@@ -58,6 +59,14 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), CalculatorActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        detailGoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), CalendarActivity.class);
                 startActivity(intent);
             }
         });

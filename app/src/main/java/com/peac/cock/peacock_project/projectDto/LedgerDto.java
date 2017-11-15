@@ -6,16 +6,16 @@ package com.peac.cock.peacock_project.projectDto;
 
 public class LedgerDto {
 
-    String seq;
+    private String seq;
     //String email;
-    String inOut;
-    String date;
-    String time;
-    String content;
-    String category;
-    String amount;
-    Card asset;
-    String memo;
+    private String inOut;
+    private String date;
+    private String time;
+    private String content;
+    private String category;
+    private String amount;
+    private Card asset;
+    private String memo;
 
     public String getSeq() {
         return seq;
