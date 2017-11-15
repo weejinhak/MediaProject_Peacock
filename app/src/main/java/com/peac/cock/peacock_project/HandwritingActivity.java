@@ -37,6 +37,7 @@ import java.util.Date;
 public class HandwritingActivity extends AppCompatActivity {
 
     private String state;
+    private String kState;
     private String amount;
 
     private FirebaseAuth mAuth;
@@ -98,10 +99,13 @@ public class HandwritingActivity extends AppCompatActivity {
 
         if(state.equals("outgoing")) {
             inOut.setSelection(0);
+            kState = "수입";
         } else if(state.equals("incoming")) {
             inOut.setSelection(1);
+            kState = "지출";
         } else {
             inOut.setSelection(2);
+            kState = "이체";
         }
 
         money.setText(amount);
@@ -240,8 +244,8 @@ public class HandwritingActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 dataSnapshot.getValue();
-                for (DataSnapshot fileSnapshot : dataSnapshot.child("users").child(uid).getChildren()) {
-                    String str = fileSnapshot.child("category").child(state).getValue(String.class);
+                for (DataSnapshot fileSnapshot : dataSnapshot.child("users").child(uid).child("category").child(kState).getChildren()) {
+                    String str = fileSnapshot.getValue(String.class);
                     System.out.println(str); // 카테고리 파싱
                     categoryList.add(str);
                 }
