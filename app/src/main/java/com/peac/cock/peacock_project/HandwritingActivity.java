@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -46,11 +47,11 @@ public class HandwritingActivity extends AppCompatActivity {
         final ImageButton backButton = findViewById(R.id.handwriting_layout_back_button);
         final ImageButton saveButton = findViewById(R.id.handwriting_layout_save_button);
 
-        final EditText inOut = findViewById(R.id.handwriting_layout_inout_text);
-        final EditText category = findViewById(R.id.handwriting_layout_category_text);
+        final Spinner inOut = findViewById(R.id.handwriting_layout_inout_text);
+        final Spinner category = findViewById(R.id.handwriting_layout_category_text);
         final EditText content = findViewById(R.id.handwriting_layout_content_text);
         final EditText money = findViewById(R.id.handwriting_layout_amount_text);
-        final EditText asset = findViewById(R.id.handwriting_layout_asset_text);
+        final Spinner asset = findViewById(R.id.handwriting_layout_asset_text);
         final EditText date = findViewById(R.id.handwriting_layout_date_text);
         final EditText memo = findViewById(R.id.handwriting_layout_memo_text);
 
@@ -90,11 +91,11 @@ public class HandwritingActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ledgerDto.setInOut(inOut.getText().toString());
-                ledgerDto.setCategory(category.getText().toString());
+                ledgerDto.setInOut(inOut.getSelectedItem().toString());
+                ledgerDto.setCategory(category.getSelectedItem().toString());
                 ledgerDto.setContent(content.getText().toString());
                 ledgerDto.setAmount(money.getText().toString());
-                ledgerDto.setAsset(new Card("kb", asset.getText().toString()));
+                ledgerDto.setAsset(new Card("kb", asset.getSelectedItem().toString()));
                 ledgerDto.setDate(date.getText().toString());
                 ledgerDto.setMemo(memo.getText().toString());
 
