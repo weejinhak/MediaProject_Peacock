@@ -32,6 +32,9 @@ dependencies {
     compile 'com.google.firebase:firebase-auth:11.2.0'
     compile 'com.google.android.gms:play-services-auth:11.2.0'
     compile 'com.google.firebase:firebase-database:11.2.0'
+
+    compile 'com.prolificinteractive:material-calendarview:1.4.3'
+
 }
 
 allprojects {

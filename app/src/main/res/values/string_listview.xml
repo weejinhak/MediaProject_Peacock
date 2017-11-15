@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Names -->
+    <string-array name="Member_names">
+        <item>Robert</item>
+        <item>Shanni</item>
+        <item>Rachael</item>
+        <item>Maddy</item>
+        <item>Kate</item>
+        <item>Nikhil</item>
+    </string-array>
+
+    <!-- Pictures -->
+    <array name="profile_pics">
+        <item>@drawable/baby</item>
+        <item>@drawable/beauty</item>
+        <item>@drawable/caffe</item>
+        <item>@drawable/car</item>
+        <item>@drawable/culture</item>
+        <item>@drawable/drink</item>
+    </array>
+
+    <!-- Status -->
+    <string-array name="statues">
+        <item>Blogging</item>
+        <item>Available</item>
+        <item>Busy</item>
+        <item>In a meeting</item>
+        <item>At work</item>
+        <item>At gym</item>
+    </string-array>
+
+    <!-- contact type -->
+    <string-array name="contactType">
+        <item>Mobile0</item>
+        <item>Mobile1</item>
+        <item>Mobile2</item>
+        <item>Mobile3</item>
+        <item>Mobile4</item>
+        <item>Mobile5</item>
+    </string-array>
+</resources>
