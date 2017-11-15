@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/category_layout_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:layout_weight="1"
@@ -22,7 +22,7 @@
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
             <TextView
-                android:id="@+id/setting_layout_toolbar_title"
+                android:id="@+id/category_layout_toolbar_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -33,7 +33,7 @@
         </android.support.v7.widget.Toolbar>
 
         <android.support.design.widget.TabLayout
-            android:id="@+id/tabs"
+            android:id="@+id/category_layout_tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -62,9 +62,19 @@
     <GridView
         android:id="@+id/category_grid_view_image_text"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:columnWidth="110dp"
+        android:layout_height="350dp"
+        android:columnWidth="100dp"
         android:gravity="center"
-        android:numColumns="3" />
+        android:numColumns="3">
+    </GridView>
+
+    <Button
+        android:id="@+id/category_grid_view_category_add_button"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:background="#E91E63"
+        android:text="@string/category_layout_category_add_button_text"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp" />
 
 </LinearLayout>

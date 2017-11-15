@@ -1,7 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="category_layout_toolbar_text">새로운 카테고리 추가</string>
+    <string name="category_layout_toolbar_text">나의 카테고리</string>
     <string name="category_layout_income_text">수입</string>
     <string name="category_layout_expense_text">지출</string>
     <string name="category_layout_transfer_text">이체</string>
+    <string name="category_layout_category_add_button_text">카테고리 추가하기</string>
+
+    <string name="category_add_layout_toolbar_text">카테고리를 추가해보세요</string>
+    <string name="category_add_layout_add_button_text">추가</string>
+
+
+    <string-array name="spinner_category_list">
+        <item>카테고리를 고르세요</item>
+       <item>예술</item>
+        <item>아이</item>
+        <item>뷰티</item>
+        <item>카페</item>
+        <item>차</item>
+        <item>담배</item>
+        <item>문화</item>
+        <item>다이아몬드</item>
+        <item>애완</item>
+        <item>음료</item>
+        <item>교육</item>
+        <item>음식</item>
+        <item>교양</item>
+        <item>헬스</item>
+        <item>집</item>
+        <item>법</item>
+        <item>생활</item>
+        <item>사랑</item>
+        <item>돈</item>
+        <item>휴대폰</item>
+        <item>반지</item>
+        <item>별</item>
+        <item>교통</item>
+        <item>여행</item>
+        <item>집</item>
+    </string-array>
 </resources>
