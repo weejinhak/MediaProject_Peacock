@@ -1,6 +1,7 @@
 package com.peac.cock.peacock_project;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -137,6 +138,7 @@ public class CategoryAddActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mDatabase.getReference().child("users").child(uid).child("category").child(categoryType).push().setValue(mCategory);
+                finish();
             }
         });
 

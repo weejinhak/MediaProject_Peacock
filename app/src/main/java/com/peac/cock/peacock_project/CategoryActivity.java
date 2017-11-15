@@ -109,6 +109,7 @@ public class CategoryActivity extends AppCompatActivity {
 
     }
 
+    //tab 클릭시 DB호출
     void callDatabase() {
         //getDB
         DatabaseReference databaseReference = mDatabase.getReference();
@@ -120,7 +121,6 @@ public class CategoryActivity extends AppCompatActivity {
                 getDbImageStringList = new ArrayList<>();
                 getDbImageIdList = new ArrayList<>();
 
-                System.out.println("***************************************");
                 for (DataSnapshot fileSnapshot : dataSnapshot.child("users").child(uid).child("category").child(state).getChildren()) {
                     long id = (long) fileSnapshot.child("cateImageId").getValue();
                     int imgId = (int) id;
