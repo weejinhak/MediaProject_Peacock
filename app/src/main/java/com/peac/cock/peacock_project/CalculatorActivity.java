@@ -149,29 +149,46 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
         switch (v.getId()) {
             case R.id.calculator_layout_erase_button:
                 if(!result.getText().toString().equals("0")) {
-                    result.setText(result.getText().toString().substring(0,result.length()+1));
-                    if(result.getText().toString().equals("0")) {
+                    result.setText(result.getText().toString().substring(0, result.length()-1));
+                    if(result.getText().toString().equals("")) {
+                        result.setText("0");
                         checkButton.setBackgroundResource(R.drawable.handwriting_layout_check_button);
                     }
                 }
                 break;
             case R.id.calculator_layout_subtract_button:
-                if(!result.getText().toString().equals("0")) {
+                if(!result.getText().toString().equals("0")
+                        && !result.getText().toString().substring(result.length()-1, result.length()).equals("-")
+                        && !result.getText().toString().substring(result.length()-1, result.length()).equals("+")
+                        && !result.getText().toString().substring(result.length()-1, result.length()).equals("x")
+                        && !result.getText().toString().substring(result.length()-1, result.length()).equals("÷")) {
                     result.setText(result.getText().toString() + "-");
                 }
                 break;
             case R.id.calculator_layout_plus_button:
-                if(!result.getText().toString().equals("0")) {
+                if(!result.getText().toString().equals("0")
+                        && !result.getText().toString().substring(result.length()-1, result.length()).equals("-")
+                        && !result.getText().toString().substring(result.length()-1, result.length()).equals("+")
+                        && !result.getText().toString().substring(result.length()-1, result.length()).equals("x")
+                        && !result.getText().toString().substring(result.length()-1, result.length()).equals("÷")) {
                     result.setText(result.getText().toString() + "+");
                 }
                 break;
             case R.id.calculator_layout_multiple_button:
-                if(!result.getText().toString().equals("0")) {
+                if(!result.getText().toString().equals("0")
+                        && !result.getText().toString().substring(result.length()-1, result.length()).equals("-")
+                        && !result.getText().toString().substring(result.length()-1, result.length()).equals("+")
+                        && !result.getText().toString().substring(result.length()-1, result.length()).equals("x")
+                        && !result.getText().toString().substring(result.length()-1, result.length()).equals("÷")) {
                     result.setText(result.getText().toString() + "x");
                 }
                 break;
             case R.id.calculator_layout_divide_button:
-                if(!result.getText().toString().equals("0")) {
+                if(!result.getText().toString().equals("0")
+                        && !result.getText().toString().substring(result.length()-1, result.length()).equals("-")
+                        && !result.getText().toString().substring(result.length()-1, result.length()).equals("+")
+                        && !result.getText().toString().substring(result.length()-1, result.length()).equals("x")
+                        && !result.getText().toString().substring(result.length()-1, result.length()).equals("÷")) {
                     result.setText(result.getText().toString() + "÷");
                 }
                 break;
