@@ -11,20 +11,30 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class CalculatorActivity extends AppCompatActivity implements View.OnClickListener {
-    private String state = "";
+    private String state;
     private TextView result;
     private ImageButton checkButton;
+
+    private Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculator);
 
-        Intent intent = getIntent();
+        intent = getIntent();
         if(intent.getStringExtra("state") == null) {
             state = "outgoing";
         } else {
             state = intent.getStringExtra("state");
+        }
+
+        if(intent.getStringExtra("amount") != null) {
+            result.setText(intent.getStringExtra("amount"));
         }
 
         final ImageButton incomingButton = findViewById(R.id.calculator_layout_incoming_button);
@@ -193,7 +203,7 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
                 }
                 break;
             case R.id.calculator_layout_check_button:
-                Intent intent = new Intent(getApplicationContext(), HandwritingActivity.class);
+                intent = new Intent(getApplicationContext(), HandwritingActivity.class);
                 intent.putExtra("amount", result.getText().toString());
                 intent.putExtra("state", state);
                 startActivity(intent);
