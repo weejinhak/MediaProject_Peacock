@@ -1,6 +1,8 @@
 package com.peac.cock.peacock_project;
 
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,26 +10,60 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.peac.cock.peacock_project.projectDto.Card;
 import com.peac.cock.peacock_project.projectDto.LedgerDto;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class HandwritingActivity extends AppCompatActivity {
 
     private String state;
+    private String kState;
     private String amount;
 
     private FirebaseAuth mAuth;
     private FirebaseDatabase mDatabase;
     private String uid;
 
-    LedgerDto ledgerDto = new LedgerDto();
+    private LedgerDto ledgerDto = new LedgerDto();
+
+    private Calendar dateTime = Calendar.getInstance();
+    private SimpleDateFormat dateFormat;
+    private SimpleDateFormat timeFormat;
+
+    private ImageButton backButton;
+    private ImageButton saveButton;
+
+    private Spinner inOut;
+    private Spinner category;
+    private ArrayList<String> categoryList;
+    private EditText content;
+    private EditText money;
+    private Spinner asset;
+    private Button date;
+    private Button time;
+    private EditText memo;
+
+    private Intent intent;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,22 +76,59 @@ public class HandwritingActivity extends AppCompatActivity {
         uid = mAuth.getCurrentUser().getUid();
 
         //before_intent_get
-        final Intent intent = getIntent();
+        intent = getIntent();
         amount = intent.getStringExtra("amount");
         state = intent.getStringExtra("state");
 
-        final ImageButton backButton = findViewById(R.id.handwriting_layout_back_button);
-        final ImageButton saveButton = findViewById(R.id.handwriting_layout_save_button);
+        backButton = findViewById(R.id.handwriting_layout_back_button);
+        saveButton = findViewById(R.id.handwriting_layout_save_button);
 
-        final Spinner inOut = findViewById(R.id.handwriting_layout_inout_text);
-        final Spinner category = findViewById(R.id.handwriting_layout_category_text);
-        final EditText content = findViewById(R.id.handwriting_layout_content_text);
-        final EditText money = findViewById(R.id.handwriting_layout_amount_text);
-        final Spinner asset = findViewById(R.id.handwriting_layout_asset_text);
-        final EditText date = findViewById(R.id.handwriting_layout_date_text);
-        final EditText memo = findViewById(R.id.handwriting_layout_memo_text);
+        inOut = findViewById(R.id.handwriting_layout_inout_text);
+        category = findViewById(R.id.handwriting_layout_category_text);
+        content = findViewById(R.id.handwriting_layout_content_text);
+        money = findViewById(R.id.handwriting_layout_amount_text);
+        asset = findViewById(R.id.handwriting_layout_asset_text);
+        date = findViewById(R.id.handwriting_layout_date_text);
+        time = findViewById(R.id.handwriting_layout_time_text);
+        memo = findViewById(R.id.handwriting_layout_memo_text);
+
+        // 초기 설정
+        ArrayAdapter<CharSequence> stateAdapter = ArrayAdapter.createFromResource(this, R.array.inOut, android.R.layout.simple_spinner_item);
+        stateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        inOut.setAdapter(stateAdapter);
+
+        if(state.equals("outgoing")) {
+            inOut.setSelection(0);
+            kState = "수입";
+        } else if(state.equals("incoming")) {
+            inOut.setSelection(1);
+            kState = "지출";
+        } else {
+            inOut.setSelection(2);
+            kState = "이체";
+        }
 
         money.setText(amount);
+
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        date.setText(dateFormat.format(dateTime.getTime()).toString());
+
+        timeFormat = new SimpleDateFormat("HH:mm");
+        time.setText(timeFormat.format(dateTime.getTime()).toString());
+
+        if(state.equals("outgoing")) {
+            inOut.setSelection(0);
+        } else if(state.equals("incoming")) {
+            inOut.setSelection(1);
+        } else {
+            inOut.setSelection(2);
+        }
+
+        updateCategoryList();
+
+        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categoryList);
+        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        category.setAdapter(categoryAdapter);
 
 
         final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
@@ -99,12 +172,92 @@ public class HandwritingActivity extends AppCompatActivity {
                 ledgerDto.setDate(date.getText().toString());
                 ledgerDto.setMemo(memo.getText().toString());
 
-
                 mDatabase.getReference().child("users").child(uid).child("ledger").push().setValue(ledgerDto);
                 Toast.makeText(getApplicationContext(), "저장되었습니다!", Toast.LENGTH_SHORT).show();
             }
         });
 
 
+        date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateDate();
+            }
+        });
+
+        time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateTime();
+            }
+        });
+
+        inOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateState();
+                updateCategoryList();
+            }
+        });
+    }
+
+    private void updateDate() {
+        new DatePickerDialog(this, d, dateTime.get(Calendar.YEAR), dateTime.get(Calendar.MONTH), dateTime.get(Calendar.DAY_OF_MONTH)).show();
+
+    }
+
+    private void updateTime() {
+        new TimePickerDialog(this, t, dateTime.get(Calendar.HOUR_OF_DAY), dateTime.get(Calendar.MINUTE), true).show();
+    }
+
+    DatePickerDialog.OnDateSetListener d = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+            dateTime.set(Calendar.YEAR, year);
+            dateTime.set(Calendar.MONTH, month);
+            dateTime.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            updateDateText();
+        }
+    };
+
+    TimePickerDialog.OnTimeSetListener t = new TimePickerDialog.OnTimeSetListener() {
+        @Override
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            dateTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
+            dateTime.set(Calendar.MINUTE, minute);
+            updateTimeText();
+        }
+    };
+
+    private void updateDateText() {
+        date.setText(dateFormat.format(dateTime.getTime()).toString());
+    }
+
+    private void updateTimeText() {
+        time.setText(timeFormat.format(dateTime.getTime()).toString());
+    }
+
+    private void updateCategoryList() {
+        DatabaseReference databaseReference = mDatabase.getReference();
+        //database get email && add ArrayList
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                dataSnapshot.getValue();
+                for (DataSnapshot fileSnapshot : dataSnapshot.child("users").child(uid).child("category").child(kState).getChildren()) {
+                    String str = fileSnapshot.getValue(String.class);
+                    System.out.println(str); // 카테고리 파싱
+                    categoryList.add(str);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) { }
+        });
+    }
+
+    private void updateState() {
+        state = inOut.getSelectedItem().toString();
     }
 }
