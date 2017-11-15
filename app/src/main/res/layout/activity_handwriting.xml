@@ -22,7 +22,7 @@
         android:foregroundGravity="left"
         android:scaleType="fitXY"
         android:src="@drawable/handwriting_layout_back_button"
-        app:layout_constraintBottom_toTopOf="@+id/guideline12"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toStartOf="@+id/handwriting_layout_detail_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -38,7 +38,7 @@
         android:text="상세 내역 작성"
         android:textColor="#ffffff"
         android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline12"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="@+id/imageView6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView6" />
@@ -52,13 +52,13 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/handwriting_layout_save_button"
         android:scaleType="fitXY"
-        app:layout_constraintBottom_toTopOf="@+id/guideline12"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/handwriting_layout_detail_title"
         app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.constraint.Guideline
-        android:id="@+id/guideline12"
+        android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -66,37 +66,65 @@
 
     <!-- 수입/지출, 카테고리, 내용, 태그, 금액, 수단, 날짜, 시간, 반복설정, 메모 -->
 
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="25dp"
+        android:background="@drawable/handwriting_layout_inout_icon"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toTopOf="@+id/imageView5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guideline" />
+
     <TextView
         android:id="@+id/handwriting_layout_inout"
         android:layout_width="wrap_content"
         android:layout_height="29dp"
         android:layout_marginStart="8dp"
-        android:text="수입/지출"
+        android:text="분류"
         android:textColor="#000000"
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/handwriting_layout_category"
-        app:layout_constraintEnd_toStartOf="@+id/handwriting_layout_inout_text"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideline12" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline14"
+        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintTop_toBottomOf="@+id/guideline" />
 
-    <!--<android.support.v7.widget.AppCompatSpinner
-        android:id="@+id/appCompatSpinner2"
-        android:layout_width="113dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView22"
-        app:layout_constraintTop_toTopOf="@+id/textView22"></android.support.v7.widget.AppCompatSpinner>-->
-
-    <EditText
+    <android.support.v7.widget.AppCompatSpinner
         android:id="@+id/handwriting_layout_inout_text"
         android:layout_width="120dp"
-        android:layout_height="35dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:textColor="#000000"
+        android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/handwriting_layout_inout"
-        app:layout_constraintTop_toTopOf="@+id/handwriting_layout_inout"/>
+        app:layout_constraintStart_toStartOf="@+id/guideline14"
+        app:layout_constraintTop_toTopOf="@+id/handwriting_layout_inout">
+    </android.support.v7.widget.AppCompatSpinner>
+
+    <View
+        android:id="@+id/inout_category_view"
+        android:layout_width="280dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="13dp"
+        android:background="#dddddd"
+        app:layout_constraintBottom_toTopOf="@+id/category_content_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guideline" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="25dp"
+        android:background="@drawable/handwriting_layout_category_icon"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toTopOf="@+id/imageView8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
     <TextView
         android:id="@+id/handwriting_layout_category"
@@ -105,31 +133,48 @@
         android:layout_marginStart="8dp"
         android:text="카테고리"
         android:textColor="#000000"
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/handwriting_layout_content"
-        app:layout_constraintEnd_toStartOf="@+id/handwriting_layout_category_text"
+        app:layout_constraintEnd_toStartOf="@+id/guideline14"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView5"
         app:layout_constraintTop_toBottomOf="@+id/handwriting_layout_inout" />
 
-    <EditText
+    <android.support.v7.widget.AppCompatSpinner
         android:id="@+id/handwriting_layout_category_text"
         android:layout_width="120dp"
-        android:layout_height="35dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:textColor="#000000"
+        android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/handwriting_layout_category"
-        app:layout_constraintTop_toTopOf="@+id/handwriting_layout_category" />
+        app:layout_constraintStart_toStartOf="@+id/guideline14"
+        app:layout_constraintTop_toTopOf="@+id/handwriting_layout_category">
+    </android.support.v7.widget.AppCompatSpinner>
 
-    <!--<android.support.v7.widget.AppCompatSpinner
-        android:id="@+id/appCompatSpinner"
-        android:layout_width="135dp"
-        android:layout_height="wrap_content"
+    <View
+        android:id="@+id/category_content_view"
+        android:layout_width="280dp"
+        android:layout_height="1dp"
+        android:background="#dddddd"
+        app:layout_constraintBottom_toTopOf="@+id/content_amount_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView21"
-        app:layout_constraintTop_toTopOf="@+id/textView21">
-    </android.support.v7.widget.AppCompatSpinner>-->
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inout_category_view" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="25dp"
+        android:background="@drawable/handwriting_layout_content_icon"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toTopOf="@+id/imageView9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
     <TextView
         android:id="@+id/handwriting_layout_content"
@@ -138,44 +183,99 @@
         android:layout_marginStart="8dp"
         android:text="내용"
         android:textColor="#000000"
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/handwriting_layout_amount"
-        app:layout_constraintEnd_toStartOf="@+id/handwriting_layout_content_text"
+        app:layout_constraintEnd_toStartOf="@+id/guideline14"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView8"
         app:layout_constraintTop_toBottomOf="@+id/handwriting_layout_category" />
 
     <EditText
         android:id="@+id/handwriting_layout_content_text"
-        android:layout_width="120dp"
-        android:layout_height="35dp"
+        android:layout_width="130dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:background="@null"
+        android:hint="내용을 입력하세요"
+        android:textColor="#000000"
+        android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/handwriting_layout_content"
+        app:layout_constraintStart_toStartOf="@+id/guideline14"
         app:layout_constraintTop_toTopOf="@+id/handwriting_layout_content" />
+
+    <View
+        android:id="@+id/content_amount_view"
+        android:layout_width="280dp"
+        android:layout_height="1dp"
+        android:background="#dddddd"
+        app:layout_constraintBottom_toTopOf="@+id/amount_asset_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/category_content_view" />
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="25dp"
+        android:background="@drawable/handwriting_layout_amount_icon"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toTopOf="@+id/imageView10"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
 
     <TextView
         android:id="@+id/handwriting_layout_amount"
         android:layout_width="wrap_content"
         android:layout_height="29dp"
-        android:layout_marginStart="48dp"
+        android:layout_marginStart="8dp"
         android:text="금액"
         android:textColor="#000000"
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/handwriting_layout_asset"
-        app:layout_constraintEnd_toStartOf="@+id/handwriting_layout_amount_text"
+        app:layout_constraintEnd_toStartOf="@+id/guideline14"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView9"
         app:layout_constraintTop_toBottomOf="@+id/handwriting_layout_content" />
 
     <EditText
         android:id="@+id/handwriting_layout_amount_text"
-        android:layout_width="120dp"
-        android:layout_height="35dp"
+        android:layout_width="130dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:background="@null"
+        android:textColor="#000000"
+        android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/handwriting_layout_amount"
+        app:layout_constraintStart_toStartOf="@+id/guideline14"
         app:layout_constraintTop_toTopOf="@+id/handwriting_layout_amount" />
+
+    <View
+        android:id="@+id/amount_asset_view"
+        android:layout_width="280dp"
+        android:layout_height="1dp"
+        android:background="#dddddd"
+        app:layout_constraintBottom_toTopOf="@+id/asset_date_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/content_amount_view" />
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="25dp"
+        android:background="@drawable/handwriting_layout_asset_icon"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toTopOf="@+id/imageView11"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView9" />
 
     <TextView
         android:id="@+id/handwriting_layout_asset"
@@ -184,21 +284,47 @@
         android:layout_marginStart="8dp"
         android:text="결제수단"
         android:textColor="#000000"
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/handwriting_layout_date"
-        app:layout_constraintEnd_toStartOf="@+id/handwriting_layout_asset_text"
+        app:layout_constraintEnd_toStartOf="@+id/guideline14"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView10"
         app:layout_constraintTop_toBottomOf="@+id/handwriting_layout_amount" />
 
-    <EditText
+    <android.support.v7.widget.AppCompatSpinner
         android:id="@+id/handwriting_layout_asset_text"
         android:layout_width="120dp"
-        android:layout_height="35dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:textColor="#000000"
+        android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/handwriting_layout_asset"
-        app:layout_constraintTop_toTopOf="@+id/handwriting_layout_asset" />
+        app:layout_constraintStart_toStartOf="@+id/guideline14"
+        app:layout_constraintTop_toTopOf="@+id/handwriting_layout_asset"></android.support.v7.widget.AppCompatSpinner>
+
+    <View
+        android:id="@+id/asset_date_view"
+        android:layout_width="280dp"
+        android:layout_height="1dp"
+        android:background="#dddddd"
+        app:layout_constraintBottom_toTopOf="@+id/date_memo_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/amount_asset_view" />
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="25dp"
+        android:background="@drawable/handwriting_layout_date_icon"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toTopOf="@+id/imageView12"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView10" />
 
     <TextView
         android:id="@+id/handwriting_layout_date"
@@ -207,35 +333,61 @@
         android:layout_marginStart="8dp"
         android:text="일시"
         android:textColor="#000000"
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/handwriting_layout_memo"
-        app:layout_constraintEnd_toStartOf="@+id/handwriting_layout_date_text"
+        app:layout_constraintEnd_toStartOf="@+id/guideline14"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView11"
         app:layout_constraintTop_toBottomOf="@+id/handwriting_layout_asset" />
 
     <!-- 데이트 피커 -->
     <!-- 타임 피커 -->
     <EditText
         android:id="@+id/handwriting_layout_date_text"
-        android:layout_width="120dp"
-        android:layout_height="35dp"
-        app:layout_constraintEnd_toStartOf="@+id/handwriting_layout_repeat_button"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/handwriting_layout_date"
-        app:layout_constraintTop_toTopOf="@+id/handwriting_layout_date" />
-
-    <Button
-        android:id="@+id/handwriting_layout_repeat_button"
         android:layout_width="60dp"
         android:layout_height="30dp"
-        android:text="반복설정"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="16dp"
+        android:background="@null"
         android:textColor="#000000"
-        android:textSize="8sp"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toStartOf="@+id/handwriting_layout_time_text"
+        app:layout_constraintStart_toStartOf="@+id/guideline14"
+        app:layout_constraintTop_toTopOf="@+id/handwriting_layout_date" />
+
+
+    <EditText
+        android:id="@+id/handwriting_layout_time_text"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="32dp"
+        android:background="@null"
+        android:textColor="#000000"
+        android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/handwriting_layout_date_text"
-        app:layout_constraintTop_toTopOf="@+id/handwriting_layout_date_text" />
+        app:layout_constraintTop_toTopOf="@+id/handwriting_layout_date" />
+
+    <View
+        android:id="@+id/date_memo_view"
+        android:layout_width="280dp"
+        android:layout_height="1dp"
+        android:layout_marginBottom="20dp"
+        android:background="#dddddd"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/asset_date_view" />
+
+    <ImageView
+        android:id="@+id/imageView12"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="25dp"
+        android:background="@drawable/handwriting_layout_memo_icon"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView11" />
 
     <TextView
         android:id="@+id/handwriting_layout_memo"
@@ -244,21 +396,34 @@
         android:layout_marginStart="8dp"
         android:text="메모"
         android:textColor="#000000"
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/handwriting_layout_memo_text"
+        app:layout_constraintEnd_toStartOf="@+id/guideline14"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView12"
         app:layout_constraintTop_toBottomOf="@+id/handwriting_layout_date" />
 
     <EditText
         android:id="@+id/handwriting_layout_memo_text"
         android:layout_width="120dp"
-        android:layout_height="35dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:background="@null"
+        android:hint="메모를 입력하세요"
+        android:textColor="#000000"
+        android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/handwriting_layout_memo"
+        app:layout_constraintStart_toStartOf="@+id/guideline14"
         app:layout_constraintTop_toTopOf="@+id/handwriting_layout_memo" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="127dp" />
 
 
 </android.support.constraint.ConstraintLayout>
