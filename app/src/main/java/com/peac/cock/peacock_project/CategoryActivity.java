@@ -16,10 +16,10 @@ import android.widget.Toast;
 
 public class CategoryActivity extends AppCompatActivity {
 
-    GridView categoryGridView;
-    Button addCategoryButton;
+    private GridView categoryGridView;
+    private Button addCategoryButton;
 
-    String[] gridViewString = {
+    private String[] gridViewString = {
             "예술", "아이", "뷰티",
             "카페", "차", "담배",
             "문화", "다이아몬드", "애완",
@@ -29,7 +29,7 @@ public class CategoryActivity extends AppCompatActivity {
             "돈", "휴대폰", "반지",
             "별", "교통", "여행"
     };
-    int[] gridViewImageId = {
+    private int[] gridViewImageId = {
             R.drawable.category_item_art, R.drawable.category_item_baby, R.drawable.category_item_beauty,
             R.drawable.category_item_caffe, R.drawable.category_item_car, R.drawable.category_item_cigarette,
             R.drawable.category_item_culture, R.drawable.category_item_diamond, R.drawable.category_item_dog,
@@ -46,6 +46,7 @@ public class CategoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_category);
 
         CategoryGridViewActivity adapterViewCategory = new CategoryGridViewActivity(getApplicationContext(), gridViewString, gridViewImageId);
+
 
         //get Id
         categoryGridView = findViewById(R.id.category_grid_view_image_text);
