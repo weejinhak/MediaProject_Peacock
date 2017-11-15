@@ -6,9 +6,9 @@ package com.peac.cock.peacock_project.projectDto;
 
 public class Card {
 
-    String bank;
-    String nickName;
-    String sum;
+    private String bank;
+    private String nickName;
+    private String sum;
 
     public Card() {
         this.bank = "";

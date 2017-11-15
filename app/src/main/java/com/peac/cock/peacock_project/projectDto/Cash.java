@@ -5,8 +5,9 @@ package com.peac.cock.peacock_project.projectDto;
  */
 
 public class Cash {
-    String cashNickName;
-    String balance;
+
+    private String cashNickName;
+    private String balance;
 
     public String getCashNickName() {
         return cashNickName;
