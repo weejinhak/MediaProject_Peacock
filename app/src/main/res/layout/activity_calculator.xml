@@ -152,7 +152,7 @@
         android:layout_width="60dp"
         android:layout_height="45dp"
         android:layout_marginBottom="16dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         android:background="@drawable/calculator_layout_number_click"
         android:text="0"
         android:textSize="30sp"
@@ -258,7 +258,7 @@
         android:layout_width="60dp"
         android:layout_height="45dp"
         android:layout_marginBottom="16dp"
-        android:text=",000"
+        android:text="000"
         android:textSize="20sp"
         android:background="@drawable/calculator_layout_number_click"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -272,7 +272,7 @@
         android:layout_width="60dp"
         android:layout_height="35dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/handwriting_layout_erase_button"
         app:layout_constraintBottom_toTopOf="@+id/calculator_layout_subtract_button"
         app:layout_constraintEnd_toEndOf="parent"
@@ -316,7 +316,7 @@
         android:id="@+id/calculator_layout_divide_button"
         android:layout_width="60dp"
         android:layout_height="35dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="35dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/handwriting_layout_divide_button"
         android:textSize="30sp"
@@ -329,7 +329,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="298dp" />
+        app:layout_constraintGuide_begin="373dp" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline5"

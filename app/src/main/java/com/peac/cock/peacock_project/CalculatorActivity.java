@@ -53,6 +53,9 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
         final Button seven = findViewById(R.id.calculator_layout_7_button);
         final Button eight = findViewById(R.id.calculator_layout_8_button);
         final Button nine = findViewById(R.id.calculator_layout_9_button);
+        final Button zero = findViewById(R.id.calculator_layout_0_button);
+        final Button doubleZero = findViewById(R.id.calculator_layout_00_button);
+        final Button tripleZero = findViewById(R.id.calculator_layout_000_button);
 
         final ImageButton eraseButton = findViewById(R.id.calculator_layout_erase_button);
         final ImageButton subtractButton = findViewById(R.id.calculator_layout_subtract_button);
@@ -71,6 +74,9 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
         seven.setOnClickListener(numberClickListener);
         eight.setOnClickListener(numberClickListener);
         nine.setOnClickListener(numberClickListener);
+        zero.setOnClickListener(numberClickListener);
+        doubleZero.setOnClickListener(numberClickListener);
+        tripleZero.setOnClickListener(numberClickListener);
 
         eraseButton.setOnClickListener(this);
         subtractButton.setOnClickListener(this);

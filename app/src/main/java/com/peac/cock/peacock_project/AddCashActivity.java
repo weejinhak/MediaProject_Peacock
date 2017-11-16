@@ -42,7 +42,7 @@ public class AddCashActivity extends AppCompatActivity {
         addCashButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cash.setCashNickName(editTextNickName.getText().toString());
+                cash.setNickname(editTextNickName.getText().toString());
                 cash.setBalance(editTextBalance.getText().toString());
 
 
