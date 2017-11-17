@@ -62,8 +62,8 @@ public class AddCardActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 card.setBank(bankType);
-                card.setNickName(cardEditText_nickName.getText().toString());
-                card.setSum(cardEditText_balance.getText().toString());
+                card.setNickname(cardEditText_nickName.getText().toString());
+                card.setBalance(cardEditText_balance.getText().toString());
 
                 System.out.println(card);
 

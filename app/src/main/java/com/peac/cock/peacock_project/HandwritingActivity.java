@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -25,7 +26,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.peac.cock.peacock_project.projectDto.Asset;
 import com.peac.cock.peacock_project.projectDto.Card;
+import com.peac.cock.peacock_project.projectDto.Cash;
 import com.peac.cock.peacock_project.projectDto.LedgerDto;
 
 import java.text.DateFormat;
@@ -33,6 +36,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class HandwritingActivity extends AppCompatActivity {
 
@@ -43,6 +47,7 @@ public class HandwritingActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseDatabase mDatabase;
     private String uid;
+    private DatabaseReference databaseReference;
 
     private LedgerDto ledgerDto = new LedgerDto();
 
@@ -55,10 +60,11 @@ public class HandwritingActivity extends AppCompatActivity {
 
     private Spinner inOut;
     private Spinner category;
-    private ArrayList<String> categoryList;
+    private List<String> categoryList;
     private EditText content;
     private EditText money;
     private Spinner asset;
+    private List<Asset> assetList;
     private Button date;
     private Button time;
     private EditText memo;
@@ -83,11 +89,11 @@ public class HandwritingActivity extends AppCompatActivity {
         backButton = findViewById(R.id.handwriting_layout_back_button);
         saveButton = findViewById(R.id.handwriting_layout_save_button);
 
-        inOut = findViewById(R.id.handwriting_layout_inout_text);
-        category = findViewById(R.id.handwriting_layout_category_text);
+        inOut = findViewById(R.id.handwriting_layout_inout_spinner);
+        category = findViewById(R.id.handwriting_layout_category_spinner);
         content = findViewById(R.id.handwriting_layout_content_text);
         money = findViewById(R.id.handwriting_layout_amount_text);
-        asset = findViewById(R.id.handwriting_layout_asset_text);
+        asset = findViewById(R.id.handwriting_layout_asset_spinner);
         date = findViewById(R.id.handwriting_layout_date_text);
         time = findViewById(R.id.handwriting_layout_time_text);
         memo = findViewById(R.id.handwriting_layout_memo_text);
@@ -99,15 +105,23 @@ public class HandwritingActivity extends AppCompatActivity {
 
         if(state.equals("outgoing")) {
             inOut.setSelection(0);
-            kState = "수입";
+            kState = "지출";
         } else if(state.equals("incoming")) {
             inOut.setSelection(1);
-            kState = "지출";
+            kState = "수입";
         } else {
             inOut.setSelection(2);
             kState = "이체";
         }
 
+        // 자산 리스트 불러오기
+        assetList = new ArrayList<>();
+        callAssetList();
+        ArrayAdapter<Asset> assetAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, assetList);
+        assetAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        asset.setAdapter(assetAdapter);
+
+        // 전 페이지 계산한 금액 보여주기
         money.setText(amount);
 
         dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -116,20 +130,8 @@ public class HandwritingActivity extends AppCompatActivity {
         timeFormat = new SimpleDateFormat("HH:mm");
         time.setText(timeFormat.format(dateTime.getTime()).toString());
 
-        if(state.equals("outgoing")) {
-            inOut.setSelection(0);
-        } else if(state.equals("incoming")) {
-            inOut.setSelection(1);
-        } else {
-            inOut.setSelection(2);
-        }
-
+        // 분류에 맞는 카테고리 리스트 불러오기
         updateCategoryList();
-
-        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categoryList);
-        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        category.setAdapter(categoryAdapter);
-
 
         final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
 
@@ -168,7 +170,7 @@ public class HandwritingActivity extends AppCompatActivity {
                 ledgerDto.setCategory(category.getSelectedItem().toString());
                 ledgerDto.setContent(content.getText().toString());
                 ledgerDto.setAmount(money.getText().toString());
-                ledgerDto.setAsset(new Card("kb", asset.getSelectedItem().toString()));
+                ledgerDto.setAsset((Asset)asset.getSelectedItem());
                 ledgerDto.setDate(date.getText().toString());
                 ledgerDto.setMemo(memo.getText().toString());
 
@@ -192,13 +194,46 @@ public class HandwritingActivity extends AppCompatActivity {
             }
         });
 
-        inOut.setOnClickListener(new View.OnClickListener() {
+        inOut.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View view) {
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 updateState();
                 updateCategoryList();
             }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
         });
+
+        category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                category.setSelection(i);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
+        asset.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                System.out.println(i);
+                asset.setSelection(i);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                System.out.println("얍!");
+            }
+        });
+
     }
 
     private void updateDate() {
@@ -238,26 +273,59 @@ public class HandwritingActivity extends AppCompatActivity {
     }
 
     private void updateCategoryList() {
-        DatabaseReference databaseReference = mDatabase.getReference();
-        //database get email && add ArrayList
+        categoryList = new ArrayList<>();
+        categoryList.add("미분류");
+
+        databaseReference = mDatabase.getReference();
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 dataSnapshot.getValue();
-                for (DataSnapshot fileSnapshot : dataSnapshot.child("users").child(uid).child("category").child(kState).getChildren()) {
-                    String str = fileSnapshot.getValue(String.class);
+                for(DataSnapshot fileSnapshot : dataSnapshot.child("users").child(uid).child("category").child(kState).getChildren()) {
+                    System.out.println(fileSnapshot.getValue());
+                    String str = fileSnapshot.child("cateImageString").getValue(String.class);
                     System.out.println(str); // 카테고리 파싱
                     categoryList.add(str);
                 }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) { }
+        });
 
+        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categoryList);
+        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        category.setAdapter(categoryAdapter);
+        category.setSelection(0);
+    }
+
+    private void updateState() {
+        kState = inOut.getSelectedItem().toString();
+    }
+
+    private void callAssetList() {
+        databaseReference = mDatabase.getReference();
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                dataSnapshot.getValue();
+                for(DataSnapshot fileSnapshot : dataSnapshot.child("users").child(uid).child("asset").child("card").getChildren()) {
+                    Card card = new Card();
+                    card.setBank(fileSnapshot.child("bank").getValue(String.class));
+                    card.setNickname(fileSnapshot.child("nickname").getValue(String.class));
+                    card.setBalance(fileSnapshot.child("balance").getValue(String.class));
+                    assetList.add(card);
+                }
+                for(DataSnapshot fileSnapshot : dataSnapshot.child("users").child(uid).child("asset").child("cash").getChildren()) {
+                    Cash cash = new Cash();
+                    cash.setNickname(fileSnapshot.child("nickname").getValue(String.class));
+                    System.out.println(cash.getNickname());
+                    cash.setBalance(fileSnapshot.child("balance").getValue(String.class));
+                    assetList.add(cash);
+                }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) { }
         });
-    }
-
-    private void updateState() {
-        state = inOut.getSelectedItem().toString();
     }
 }
