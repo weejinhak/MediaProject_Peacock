@@ -146,6 +146,9 @@ public class MainActivity extends AppCompatActivity
             finish();
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
+        }else if(id == R.id.nav_setting){
+            Intent intent = new Intent(this, SettingActivity.class);
+            startActivity(intent);
         }
        /* if (id == R.id.nav_camera) {
             // Handle the camera action
