@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -36,6 +38,11 @@ public class SettingActivity extends AppCompatActivity{
         final TextView emailTextView=findViewById(R.id.setting_layout_textView_userEmail);
         final TextView userNameTextView=findViewById(R.id.setting_layout_textView_userName);
 
+        ImageButton assetGoButton= findViewById(R.id.setting_layout_asset_go_button);
+        ImageButton breakDownGoButton=findViewById(R.id.setting_layout_breakdown_go_button);
+        ImageButton analysisGoButton=findViewById(R.id.setting_layout_analysis_go_button);
+        ImageButton settingGoButton=findViewById(R.id.setting_layout_setting_go_button);
+
         //get DataBase
         DatabaseReference databaseReference = mDatabase.getReference();
         //database get email && add ArrayList
@@ -61,6 +68,36 @@ public class SettingActivity extends AppCompatActivity{
                 startActivity(intent);
             }
         });
+
+        //하단 페이지 넘기기 클릭 이벤트
+        assetGoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(getApplicationContext(),AssetActivity.class);
+                startActivity(intent);
+            }
+        });
+        breakDownGoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), CalendarActivity.class);
+                startActivity(intent);
+            }
+        });
+        analysisGoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(getApplicationContext(),AnalysisActivity.class);
+                startActivity(intent);
+            }
+        });
+        settingGoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "여기가 세팅 페이지야!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
     }
 }

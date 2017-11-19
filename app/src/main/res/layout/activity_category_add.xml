@@ -79,10 +79,11 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
+
     <GridView
         android:id="@+id/category_add_grid_view_image_text"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="500dp"
         android:columnWidth="100dp"
         android:gravity="center"
         android:numColumns="3">

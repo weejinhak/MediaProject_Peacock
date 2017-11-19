@@ -99,12 +99,10 @@ public class CategoryActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-            }
+            public void onTabUnselected(TabLayout.Tab tab) {}
 
             @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-            }
+            public void onTabReselected(TabLayout.Tab tab) {}
         });
 
     }
@@ -128,8 +126,10 @@ public class CategoryActivity extends AppCompatActivity {
                     getDbImageStringList.add(imgString);
                     getDbImageIdList.add(imgId);
                 }
+
                 gridViewString = new String[getDbImageStringList.size()];
                 gridViewImageId = new int[getDbImageIdList.size()];
+
                 for (int i = 0; i < getDbImageStringList.size(); i++) {
                     gridViewString[i] = getDbImageStringList.get(i);
                     gridViewImageId[i] = getDbImageIdList.get(i);
@@ -139,9 +139,7 @@ public class CategoryActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
+            public void onCancelled(DatabaseError databaseError) {}
         });
     }
 

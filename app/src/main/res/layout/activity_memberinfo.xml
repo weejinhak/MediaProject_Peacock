@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginBottom="25dp"
+        android:layout_marginBottom="32dp"
         android:background="?attr/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_constraintBottom_toTopOf="@+id/memberinfo_layout_editText_name"
@@ -118,9 +118,12 @@
         android:id="@+id/memberinfo_layout_joinOk_imgButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/memberinfo_layout_editText_monthBudget"
         app:srcCompat="@drawable/join_layout_joinok_click_change"
         tools:ignore="MissingConstraints" />
 
