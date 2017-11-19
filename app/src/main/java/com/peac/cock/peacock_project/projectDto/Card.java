@@ -51,6 +51,6 @@ public class Card extends Asset{
 
     @Override
     public String toString() {
-        return "[" + bank + "] " + nickname;
+        return bank + ":" + nickname;
     }
 }

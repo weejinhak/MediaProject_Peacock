@@ -9,6 +9,13 @@ public class Cash extends Asset{
     private String nickname;
     private String balance;
 
+    public Cash() {}
+
+    public Cash(String nickname, String balance) {
+        this.nickname = nickname;
+        this.balance = balance;
+    }
+
     public String getNickname() {
         return nickname;
     }
@@ -25,6 +32,6 @@ public class Cash extends Asset{
 
     @Override
     public String toString() {
-        return "[현금] " + nickname;
+        return "현금:" + nickname;
     }
 }

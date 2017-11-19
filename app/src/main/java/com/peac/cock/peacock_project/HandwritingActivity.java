@@ -31,6 +31,7 @@ import com.peac.cock.peacock_project.projectDto.Card;
 import com.peac.cock.peacock_project.projectDto.Cash;
 import com.peac.cock.peacock_project.projectDto.LedgerDto;
 
+import java.sql.SQLOutput;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -115,11 +116,7 @@ public class HandwritingActivity extends AppCompatActivity {
         }
 
         // 자산 리스트 불러오기
-        assetList = new ArrayList<>();
         callAssetList();
-        ArrayAdapter<Asset> assetAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, assetList);
-        assetAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        asset.setAdapter(assetAdapter);
 
         // 전 페이지 계산한 금액 보여주기
         money.setText(amount);
@@ -170,7 +167,12 @@ public class HandwritingActivity extends AppCompatActivity {
                 ledgerDto.setCategory(category.getSelectedItem().toString());
                 ledgerDto.setContent(content.getText().toString());
                 ledgerDto.setAmount(money.getText().toString());
-                ledgerDto.setAsset((Asset)asset.getSelectedItem());
+                String[] assetInfo = asset.getSelectedItem().toString().split("]");
+                for(Asset a : assetList) {
+                    if(a.getNickname().equals(assetInfo[1])) {
+                        ledgerDto.setAsset(a);
+                    }
+                }
                 ledgerDto.setDate(date.getText().toString());
                 ledgerDto.setMemo(memo.getText().toString());
 
@@ -220,12 +222,14 @@ public class HandwritingActivity extends AppCompatActivity {
         });
 
 
+
+
         asset.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                System.out.println(i);
+                System.out.println("눌림" + i);
                 asset.setSelection(i);
-
             }
 
             @Override
@@ -303,6 +307,9 @@ public class HandwritingActivity extends AppCompatActivity {
     }
 
     private void callAssetList() {
+        assetList = new ArrayList<>();
+        assetList.add(new Cash("기본", "0"));
+
         databaseReference = mDatabase.getReference();
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -327,5 +334,10 @@ public class HandwritingActivity extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) { }
         });
+
+        ArrayAdapter<Asset> assetAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, assetList);
+        assetAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        asset.setAdapter(assetAdapter);
+        asset.setSelection(0);
     }
 }
