@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity
     //firebase Auth&&Database;
     private FirebaseAuth auth;
     private FirebaseDatabase database;
+    private Intent intent = null;
 
 
     @Override
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity
 
         // get ID
         ImageButton assetGoButton = findViewById(R.id.main_layout_asset_go_button);
+        ImageButton analysisGoButton = findViewById(R.id.main_layout_analysis_go_button);
         ImageButton detailGoButton = findViewById(R.id.main_layout_breakdown_go_button);
         ImageButton settingGoButton = findViewById(R.id.main_layout_setting_go_button);
 
@@ -58,7 +60,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), CalculatorActivity.class);
+                intent = new Intent(getApplicationContext(), CalculatorActivity.class);
                 startActivity(intent);
             }
         });
@@ -66,7 +68,7 @@ public class MainActivity extends AppCompatActivity
         detailGoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), CalendarActivity.class);
+                intent = new Intent(getApplicationContext(), CalendarActivity.class);
                 startActivity(intent);
             }
         });
@@ -74,14 +76,21 @@ public class MainActivity extends AppCompatActivity
         assetGoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), AssetActivity.class);
+                intent = new Intent(getApplicationContext(), AssetActivity.class);
                 startActivity(intent);
             }
         });
         settingGoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SettingActivity.class);
+                intent = new Intent(getApplicationContext(), SettingActivity.class);
+                startActivity(intent);
+            }
+        });
+        analysisGoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(getApplicationContext(), AnalysisActivity.class);
                 startActivity(intent);
             }
         });
@@ -146,10 +155,10 @@ public class MainActivity extends AppCompatActivity
             finish();
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
-        }else if(id == R.id.nav_setting){
+        }/*else if(id == R.id.nav_setting){
             Intent intent = new Intent(this, SettingActivity.class);
             startActivity(intent);
-        }
+        }*/
        /* if (id == R.id.nav_camera) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
