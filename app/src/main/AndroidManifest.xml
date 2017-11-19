@@ -61,6 +61,12 @@
             android:name=".CategoryAddActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".DetailAnalysisActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".BudgetAnalysisActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".AnalysisActivity"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>

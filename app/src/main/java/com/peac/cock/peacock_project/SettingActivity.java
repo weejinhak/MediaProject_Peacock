@@ -87,7 +87,7 @@ public class SettingActivity extends AppCompatActivity{
         analysisGoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(getApplicationContext(),AnalysisActivity.class);
+                Intent intent =new Intent(getApplicationContext(),DetailAnalysisActivity.class);
                 startActivity(intent);
             }
         });
