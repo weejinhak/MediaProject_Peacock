@@ -37,7 +37,10 @@
             android:name=".AssetActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".CalendarActivity"
+        android:name=".CalendarActivity"
+        android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".DetailTabActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".CalculatorActivity"
