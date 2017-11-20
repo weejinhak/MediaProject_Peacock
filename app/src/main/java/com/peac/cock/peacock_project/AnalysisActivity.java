@@ -21,17 +21,24 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.peac.cock.peacock_project.projectDto.Asset;
 import com.peac.cock.peacock_project.projectDto.Card;
 import com.peac.cock.peacock_project.projectDto.Cash;
+import com.peac.cock.peacock_project.projectDto.LedgerDto;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AnalysisActivity extends AppCompatActivity {
     private float rainfall[] = {98.8f, 123.8f, 161.6f, 24.2f, 52f, 58.2f, 35.4f, 13.3f, 78.4f, 203.4f, 240.2f, 159.7f};
     private String monthName[] = {"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"};
     private PieChart pieChart;
     private BarChart barChart;
+
+    private ArrayList<LedgerDto> ledgers;
+    private HashMap<String, String> datas;
 
     private FirebaseAuth mAuth;
     private FirebaseDatabase mDatabase;
@@ -67,7 +74,10 @@ public class AnalysisActivity extends AppCompatActivity {
 
         pieChart = (PieChart) findViewById(R.id.pie_chart);
 
-        //   callDetailData();
+        ledgers = new ArrayList<>();
+        datas = new HashMap<>();
+
+        callDetailData();
 
         setupPieChart();
     }
@@ -130,19 +140,26 @@ public class AnalysisActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 dataSnapshot.getValue();
-                for(DataSnapshot fileSnapshot : dataSnapshot.child("users").child(uid).child("asset").child("card").getChildren()) {
-                    Card card = new Card();
-                    card.setBank(fileSnapshot.child("bank").getValue(String.class));
-                    card.setNickname(fileSnapshot.child("nickname").getValue(String.class));
-                    card.setBalance(fileSnapshot.child("balance").getValue(String.class));
-                    //        assetList.add(card);
-                }
-                for(DataSnapshot fileSnapshot : dataSnapshot.child("users").child(uid).child("asset").child("cash").getChildren()) {
-                    Cash cash = new Cash();
-                    cash.setNickname(fileSnapshot.child("nickname").getValue(String.class));
-                    System.out.println(cash.getNickname());
-                    cash.setBalance(fileSnapshot.child("balance").getValue(String.class));
-                    //      assetList.add(cash);
+                for(DataSnapshot fileSnapshot : dataSnapshot.child("users").child(uid).child("ledger").getChildren()) {
+                    LedgerDto ledger = new LedgerDto();
+               //     ledger.setSeq(fileSnapshot.child("seq").getValue(String.class));
+                    ledger.setAmount(fileSnapshot.child("amount").getValue(String.class));
+                    ledger.setAsset((Asset)fileSnapshot.child("asset").getValue());
+                    ledger.setCategory(fileSnapshot.child("category").getValue(String.class));
+                    ledger.setContent(fileSnapshot.child("content").getValue(String.class));
+                    ledger.setDate(fileSnapshot.child("date").getValue(String.class));
+               //     ledger.setTime(fileSnapshot.child("time").getValue(String.class));
+                    ledger.setInOut(fileSnapshot.child("inOut").getValue(String.class));
+                    ledger.setMemo(fileSnapshot.child("memo").getValue(String.class));
+
+                    ledgers.add(ledger);
+                    for(Map.Entry<String, String> data : datas.entrySet()) {
+                        if(data.getKey().equals(ledger.getCategory())) {
+                            data.setValue(String.valueOf(Integer.parseInt(data.getValue()) + (Integer.parseInt(ledger.getAmount()))));
+                            break;
+                        }
+                    }
+
                 }
             }
 

@@ -82,7 +82,7 @@ public class MemberInfoActivitiy extends AppCompatActivity {
                 userDto.setName(mName.getText().toString());
                 userDto.setGender(mGender.getText().toString());
                 userDto.setJob(mJob.getText().toString());
-                userDto.setBudget(mMonthBudget.getText().toString());
+                userDto.setBudget(mMonthBudget.getText().toString()+"0000");
 
                 //uid에 맞는 정보 디비 입력
                 database.getReference().child("users").child(uid).setValue(userDto);
