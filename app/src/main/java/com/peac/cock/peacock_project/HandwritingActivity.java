@@ -97,6 +97,7 @@ public class HandwritingActivity extends AppCompatActivity {
         asset = findViewById(R.id.handwriting_layout_asset_spinner);
         date = findViewById(R.id.handwriting_layout_date_text);
         time = findViewById(R.id.handwriting_layout_time_text);
+        time = findViewById(R.id.handwriting_layout_time_text);
         memo = findViewById(R.id.handwriting_layout_memo_text);
 
         // 초기 설정
@@ -167,17 +168,16 @@ public class HandwritingActivity extends AppCompatActivity {
                 ledgerDto.setCategory(category.getSelectedItem().toString());
                 ledgerDto.setContent(content.getText().toString());
                 ledgerDto.setAmount(money.getText().toString());
-                String[] assetInfo = asset.getSelectedItem().toString().split("]");
-                for(Asset a : assetList) {
-                    if(a.getNickname().equals(assetInfo[1])) {
-                        ledgerDto.setAsset(a);
-                    }
-                }
+                ledgerDto.setAsset((Asset)asset.getSelectedItem());
                 ledgerDto.setDate(date.getText().toString());
+                ledgerDto.setTime(time.getText().toString());
                 ledgerDto.setMemo(memo.getText().toString());
 
                 mDatabase.getReference().child("users").child(uid).child("ledger").push().setValue(ledgerDto);
                 Toast.makeText(getApplicationContext(), "저장되었습니다!", Toast.LENGTH_SHORT).show();
+
+                intent = new Intent(getApplicationContext(), DetailTabActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -221,14 +221,10 @@ public class HandwritingActivity extends AppCompatActivity {
             }
         });
 
-
-
-
         asset.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                System.out.println("눌림" + i);
                 asset.setSelection(i);
             }
 

@@ -6,7 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.TabHost;
 
 import com.github.mikephil.charting.animation.Easing;
+import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
@@ -27,6 +31,7 @@ public class AnalysisActivity extends AppCompatActivity {
     private float rainfall[] = {98.8f, 123.8f, 161.6f, 24.2f, 52f, 58.2f, 35.4f, 13.3f, 78.4f, 203.4f, 240.2f, 159.7f};
     private String monthName[] = {"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"};
     private PieChart pieChart;
+    private BarChart barChart;
 
     private FirebaseAuth mAuth;
     private FirebaseDatabase mDatabase;
@@ -41,6 +46,9 @@ public class AnalysisActivity extends AppCompatActivity {
 
         final TabHost host = (TabHost) findViewById(R.id.tab_host);
         host.setup();
+
+        barChart = (BarChart) findViewById(R.id.bar_chart);
+        setupBarChart(12, 50);
 
         TabHost.TabSpec page1 = host.newTabSpec("분석");
         page1.setContent(R.id.analysis);
@@ -92,6 +100,26 @@ public class AnalysisActivity extends AppCompatActivity {
         pieChart.setData(data);
         pieChart.animateY(1000, Easing.EasingOption.EaseInOutCubic);
         pieChart.invalidate();
+    }
+
+    private void setupBarChart(int count, int range) {
+        ArrayList<BarEntry> yVals = new ArrayList<>();
+        float barWidth = 9f;
+        float spaceForBar = 10f;
+
+        for(int i = 0 ; i < count ; i++) {
+            float val = (float) (Math.random() * range);
+            yVals.add(new BarEntry(i * spaceForBar, val));
+        }
+
+        BarDataSet set1;
+
+        set1 = new BarDataSet(yVals, "Data Set1");
+
+        BarData data = new BarData(set1);
+        data.setBarWidth(barWidth);
+
+        barChart.setData(data);
     }
 
     private void callDetailData() {
