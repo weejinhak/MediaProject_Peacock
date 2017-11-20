@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Names -->
-    <string-array name="Member_names">
-        <item>Robert</item>
-        <item>Shanni</item>
-        <item>Rachael</item>
-        <item>Maddy</item>
-        <item>Kate</item>
-        <item>Nikhil</item>
+    <string-array name="place_name">
+        <item>올리브영</item>
+        <item>어처구니</item>
+        <item>할리스</item>
+        <item>탐탐</item>
+        <item>식당</item>
+        <item>부대찌개</item>
     </string-array>
 
     <!-- Pictures -->
-    <array name="profile_pics">
+    <array name="category_pic_id">
         <item>@drawable/baby</item>
         <item>@drawable/beauty</item>
         <item>@drawable/caffe</item>
@@ -21,7 +21,7 @@
     </array>
 
     <!-- Status -->
-    <string-array name="statues">
+    <string-array name="purchase">
         <item>Blogging</item>
         <item>Available</item>
         <item>Busy</item>
@@ -31,7 +31,7 @@
     </string-array>
 
     <!-- contact type -->
-    <string-array name="contactType">
+    <string-array name="accountType">
         <item>Mobile0</item>
         <item>Mobile1</item>
         <item>Mobile2</item>
