@@ -1,15 +1,23 @@
 package com.peac.cock.peacock_project;
 
+import android.*;
+import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
+
+import com.peac.cock.peacock_project.projectSms.PermissionRequester;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +32,16 @@ public class AssetActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_asset);
+        //사용자 SMS권한 얻기
+        PermissionRequester.Builder requester = new PermissionRequester.Builder(this);
+        requester.create().request(android.Manifest.permission.RECEIVE_SMS, 10000, new PermissionRequester.OnClickDenyButtonListener() {
+            @Override
+            public void onClick(Activity activity) {
+                Toast.makeText(getApplicationContext(), "권한을 얻지 못했습니다.", Toast.LENGTH_SHORT).show();
+            }
+        });
 
+        //Get Id
         Button assetAddButton = findViewById(R.id.asset_layout_button_assetAdd_button);
         ImageButton assetGoButton = findViewById(R.id.asset_layout_asset_go_button);
         ImageButton breakDownGoButton = findViewById(R.id.asset_layout_breakdown_go_button);
@@ -36,7 +53,6 @@ public class AssetActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "여기가 자산 페이지야!", Toast.LENGTH_SHORT).show();
-
             }
         });
         breakDownGoButton.setOnClickListener(new View.OnClickListener() {
@@ -65,6 +81,7 @@ public class AssetActivity extends AppCompatActivity {
         assetAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                readSMSMessage();
                 show();
             }
         });
@@ -96,4 +113,59 @@ public class AssetActivity extends AppCompatActivity {
         builder.show();
 
     }
+
+
+    //Read_SMS_Phone
+    public int readSMSMessage() {
+        Uri allMessage = Uri.parse("content://sms");
+        ContentResolver cr = getContentResolver();
+        Cursor c = cr.query(allMessage, new String[]{"_id", "thread_id", "address", "person", "date", "body"}, null, null, "date DESC");
+
+        String string = "";
+        int count = 0;
+        while (c.moveToNext()) {
+            long messageId = c.getLong(0);
+            long threadId = c.getLong(1);
+            String address = c.getString(2);
+            long contactId = c.getLong(3);
+            String contactId_string = String.valueOf(contactId);
+            long timestamp = c.getLong(4);
+            String body = c.getString(5);
+
+            string = String.format("msgid:%d, threadid:%d, address:%s, " + "contactid:%d, contackstring:%s, timestamp:%d, body:%s", messageId, threadId, address, contactId,
+                    contactId_string, timestamp, body);
+
+            String message;
+            String[] messageToken;
+            String smsCardName = "";
+            String smsDate = "";
+            int smsPrice = 0;
+            String smsPlace = "";
+
+
+            //국민은행 parsing
+            if (address.equals("15881688") || address.equals("15881788")) {
+                message = body;
+                messageToken = message.split("\n");
+                if (messageToken.length == 6) {
+                    Log.d("***log", ++count + ":" + String.valueOf(messageToken.length));
+                    Log.d("messageTokenTotal", messageToken[0] + "\n" + messageToken[1] + "\n" + messageToken[2] +
+                            "\n" + messageToken[3] + "\n" + messageToken[4] + "\n" + messageToken[5]);
+                    smsCardName = messageToken[1];
+                    smsDate = messageToken[3];
+                    String price = messageToken[4];
+                    String[] priceToken = price.split("원");
+
+                    smsPrice = Integer.parseInt(priceToken[0].replaceAll("\\,", ""));
+                    smsPlace = messageToken[5];
+                    System.out.println(smsCardName + "\n" + smsDate + "\n" + smsPrice + "\n" + smsPlace);
+                }
+            }
+
+
+        }
+        return 0;
+    }
+
+
 }
