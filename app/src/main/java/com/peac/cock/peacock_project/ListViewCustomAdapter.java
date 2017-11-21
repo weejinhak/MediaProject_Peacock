@@ -42,10 +42,10 @@ public class ListViewCustomAdapter extends BaseAdapter {
 
     /* private view holder class */
     private class ViewHolder {
-        ImageView profile_pic;
-        TextView member_name;
-        TextView status;
-        TextView contactType;
+        ImageView category_pic;
+        TextView placeName;
+        TextView purchase;
+        TextView accountType;
     }
 
     @Override
@@ -59,20 +59,20 @@ public class ListViewCustomAdapter extends BaseAdapter {
             convertView = mInflater.inflate(R.layout.activity_itemview, null);
             holder = new ViewHolder();
 
-            holder.member_name = (TextView) convertView
-                    .findViewById(R.id.member_name);
-            holder.profile_pic = (ImageView) convertView
-                    .findViewById(R.id.profile_pic);
-            holder.status = (TextView) convertView.findViewById(R.id.status);
-            holder.contactType = (TextView) convertView
-                    .findViewById(R.id.contact_type);
+            holder.placeName = (TextView) convertView
+                    .findViewById(R.id.place_name);
+            holder.category_pic = (ImageView) convertView
+                    .findViewById(R.id.category_pic);
+            holder.purchase = (TextView) convertView.findViewById(R.id.purchase);
+            holder.accountType = (TextView) convertView
+                    .findViewById(R.id.account_type);
 
             ListViewRowItem row_pos = listViewRowItems.get(position);
 
-            holder.profile_pic.setImageResource(row_pos.getProfile_pic_id());
-            holder.member_name.setText(row_pos.getMember_name());
-            holder.status.setText(row_pos.getStatus());
-            holder.contactType.setText(row_pos.getContactType());
+            holder.category_pic.setImageResource(row_pos.getCategoryPicId());
+            holder.placeName.setText(row_pos.getPlaceName());
+            holder.purchase.setText(row_pos.getPurchase());
+            holder.accountType.setText(row_pos.getAccountType());
 
             convertView.setTag(holder);
         } else {

@@ -56,8 +56,8 @@ public class ListViewActivity extends Activity implements AdapterView.OnItemClic
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        String member_name = rowItems.get(position).getMember_name();
-        Toast.makeText(getApplicationContext(), "" + member_name, Toast.LENGTH_SHORT).show();
+        String placeName = rowItems.get(position).getPlaceName();
+        Toast.makeText(getApplicationContext(), "" + placeName, Toast.LENGTH_SHORT).show();
     }
 
 }

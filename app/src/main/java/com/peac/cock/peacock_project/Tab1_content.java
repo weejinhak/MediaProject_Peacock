@@ -1,5 +1,6 @@
 package com.peac.cock.peacock_project;
 
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -66,7 +67,6 @@ public class Tab1_content extends Fragment implements AdapterView.OnItemClickLis
         mylistview = (ListView) rootView.findViewById(R.id.List);
         ListViewCustomAdapter adapter = new ListViewCustomAdapter(getContext(), rowItems);
         mylistview.setAdapter(adapter);
-
         mylistview.setOnItemClickListener(this);
 
         //fireBase Auth & Database
@@ -82,8 +82,11 @@ public class Tab1_content extends Fragment implements AdapterView.OnItemClickLis
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent(getContext(), CategoryAddActivity.class);
+        startActivity(intent);
         String placeName = rowItems.get(position).getPlaceName();
         Toast.makeText(getContext(), "" + placeName, Toast.LENGTH_SHORT).show();
     }
+
 
 }
