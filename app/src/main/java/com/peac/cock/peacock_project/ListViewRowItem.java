@@ -6,41 +6,41 @@ package com.peac.cock.peacock_project;
 
 public class ListViewRowItem {
 
-    private String member_name;
-    private int profile_pic_id;
-    private String status;
-    private String contactType;
+    private String placeName;
+    private int categoryPicId;
+    private String purchase;
+    private String accountType;
 
-    public ListViewRowItem(String member_name, int profile_pic_id, String status,
-                           String contactType) {
+    public ListViewRowItem(String placeName, int categoryPicId, String purchase,
+                           String accountType) {
 
-        this.member_name = member_name;
-        this.profile_pic_id = profile_pic_id;
-        this.status = status;
-        this.contactType = contactType;
+        this.placeName = placeName;
+        this.categoryPicId = categoryPicId;
+        this.purchase = purchase;
+        this.accountType = accountType;
     }
 
-    public String getMember_name() { return member_name; }
+    public String getPlaceName() { return placeName; }
 
-    public void setMember_name(String member_name) { this.member_name = member_name; }
+    public void setPlaceName(String placeName) { this.placeName = placeName; }
 
-    public int getProfile_pic_id() { return profile_pic_id;}
+    public int getCategoryPicId() { return categoryPicId;}
 
-    public void setProfile_pic_id(int profile_pic_id) { this.profile_pic_id = profile_pic_id; }
+    public void setCategoryPicId(int categoryPicId) { this.categoryPicId = categoryPicId; }
 
-    public String getStatus() {
-        return status;
+    public String getPurchase() {
+        return purchase;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setPurchase(String purchase) {
+        this.purchase = purchase;
     }
 
-    public String getContactType() {
-        return contactType;
+    public String getAccountType() {
+        return accountType;
     }
 
-    public void setContactType(String contactType) {
-        this.contactType = contactType;
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
     }
 }

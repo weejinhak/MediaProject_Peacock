@@ -13,6 +13,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="@id/tabs"
-        tools:ignore="UnknownId" />
+        tools:ignore="MissingConstraints,UnknownId"
+        tools:layout_editor_absoluteX="0dp" />
 
 </android.support.constraint.ConstraintLayout>
