@@ -84,11 +84,12 @@ public class AnalysisActivity extends AppCompatActivity {
 
     private void setupPieChart() {
         List<PieEntry> pieEntries = new ArrayList<>();
-        for(int i = 0 ; i <rainfall.length ; i++) {
-            pieEntries.add(new PieEntry(rainfall[i], monthName[i]));
+
+        for(Map.Entry<String, String> data : datas.entrySet()) {
+            pieEntries.add(new PieEntry(Integer.parseInt(data.getValue()), data.getKey()));
         }
 
-        PieDataSet dataSet = new PieDataSet(pieEntries, "Rainfall for Vancouver");
+        PieDataSet dataSet = new PieDataSet(pieEntries, "Outgoing Pattern");
         dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
         dataSet.setSelectionShift(5f);
         dataSet.setSliceSpace(3f);
@@ -153,11 +154,18 @@ public class AnalysisActivity extends AppCompatActivity {
                     ledger.setMemo(fileSnapshot.child("memo").getValue(String.class));
 
                     ledgers.add(ledger);
+
+                    boolean check = false;
                     for(Map.Entry<String, String> data : datas.entrySet()) {
                         if(data.getKey().equals(ledger.getCategory())) {
                             data.setValue(String.valueOf(Integer.parseInt(data.getValue()) + (Integer.parseInt(ledger.getAmount()))));
+                            check = true;
                             break;
                         }
+                    }
+
+                    if(!check) {
+                        datas.put(ledger.getCategory(), ledger.getAmount());
                     }
 
                 }
