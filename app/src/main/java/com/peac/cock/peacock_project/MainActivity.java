@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity
         detailGoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent = new Intent(getApplicationContext(), CalendarActivity.class);
+                intent = new Intent(getApplicationContext(), DetailTabActivity.class);
                 startActivity(intent);
             }
         });
