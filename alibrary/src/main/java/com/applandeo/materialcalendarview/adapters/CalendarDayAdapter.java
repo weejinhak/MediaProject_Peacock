@@ -107,7 +107,7 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
                     R.color.nextMonthDayColor), Typeface.NORMAL, R.drawable.background_transparent);
         }
         if (newdate.equals("20171120")) {
-            daystring1.setText("aaa");
+            daystring1.setText("50000");
             daystring2.setText("bbb");
         }
         dayLabel.setText(String.valueOf(day.get(Calendar.DAY_OF_MONTH)));
