@@ -79,7 +79,7 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
         uid = mAuth.getCurrentUser().getUid();
         TextView dayLabel = (TextView) view.findViewById(R.id.dayLabel);
 
-        TextView daystring1 = (TextView) view.findViewById(R.id.daystring);
+        TextView daystring1 = (TextView) view.findViewById(R.id.daystring1);
         TextView daystring2 = (TextView) view.findViewById(R.id.daystring2);
         // Fri Dec 01 00:00:00 GMT+00:00 2017
         SimpleDateFormat a = new SimpleDateFormat("yyyyMMdd");
