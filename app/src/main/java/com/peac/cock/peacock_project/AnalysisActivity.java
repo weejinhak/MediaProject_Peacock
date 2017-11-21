@@ -26,6 +26,7 @@ import com.peac.cock.peacock_project.projectDto.Card;
 import com.peac.cock.peacock_project.projectDto.Cash;
 import com.peac.cock.peacock_project.projectDto.LedgerDto;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -82,11 +83,66 @@ public class AnalysisActivity extends AppCompatActivity {
         setupPieChart();
     }
 
+    private void callDetailData() {
+
+        databaseReference = mDatabase.getReference();
+        databaseReference.addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                dataSnapshot.getValue();
+                for(DataSnapshot fileSnapshot : dataSnapshot.child("users").child(uid).child("ledger").getChildren()) {
+                    LedgerDto ledger = fileSnapshot.getValue(LedgerDto.class);
+                    /*ledger.setSeq(fileSnapshot.child("seq").getValue(String.class));
+                    ledger.setAmount(fileSnapshot.child("amount").getValue(String.class));
+                    ledger.setAsset(fileSnapshot.child("asset").getValue(Asset.class));
+                    ledger.setCategory(fileSnapshot.child("category").getValue(String.class));
+                    ledger.setContent(fileSnapshot.child("content").getValue(String.class));
+                    ledger.setDate(fileSnapshot.child("date").getValue(String.class));
+                    ledger.setTime(fileSnapshot.child("time").getValue(String.class));
+                    ledger.setInOut(fileSnapshot.child("inOut").getValue(String.class));
+                    ledger.setMemo(fileSnapshot.child("memo").getValue(String.class));*/
+                    System.out.println(ledger);
+
+                    ledgers.add(ledger);
+
+                    boolean check = false;
+
+                    if(ledger.getInOut().equals("지출") && datas != null) {
+                        for (Map.Entry<String, String> data : datas.entrySet()) {
+                            if (data.getKey().equals(ledger.getCategory())) {
+                                data.setValue(String.valueOf(Integer.parseInt(data.getValue())+(Integer.parseInt(ledger.getAmount()))));
+                                check = true;
+                                break;
+                            }
+                        }
+
+                        if (!check) {
+                            datas.put(ledger.getCategory(), ledger.getAmount());
+                        }
+                    }
+
+                    System.out.println(datas);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) { }
+        });
+    }
+
     private void setupPieChart() {
+        System.out.println("들어옴");
         List<PieEntry> pieEntries = new ArrayList<>();
 
-        for(Map.Entry<String, String> data : datas.entrySet()) {
-            pieEntries.add(new PieEntry(Integer.parseInt(data.getValue()), data.getKey()));
+        if(datas != null) {
+            for (Map.Entry<String, String> data : datas.entrySet()) {
+                System.out.println("value : " + data.getValue() + "key :" + data.getKey());
+                pieEntries.add(new PieEntry(Integer.parseInt(data.getValue()), data.getKey()));
+                System.out.println(pieEntries);
+            }
+        } else {
+            System.out.println("데이터 없음");
         }
 
         PieDataSet dataSet = new PieDataSet(pieEntries, "Outgoing Pattern");
@@ -131,49 +187,6 @@ public class AnalysisActivity extends AppCompatActivity {
         data.setBarWidth(barWidth);
 
         barChart.setData(data);
-    }
-
-    private void callDetailData() {
-
-        databaseReference = mDatabase.getReference();
-        databaseReference.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                dataSnapshot.getValue();
-                for(DataSnapshot fileSnapshot : dataSnapshot.child("users").child(uid).child("ledger").getChildren()) {
-                    LedgerDto ledger = new LedgerDto();
-               //     ledger.setSeq(fileSnapshot.child("seq").getValue(String.class));
-                    ledger.setAmount(fileSnapshot.child("amount").getValue(String.class));
-                    ledger.setAsset((Asset)fileSnapshot.child("asset").getValue());
-                    ledger.setCategory(fileSnapshot.child("category").getValue(String.class));
-                    ledger.setContent(fileSnapshot.child("content").getValue(String.class));
-                    ledger.setDate(fileSnapshot.child("date").getValue(String.class));
-               //     ledger.setTime(fileSnapshot.child("time").getValue(String.class));
-                    ledger.setInOut(fileSnapshot.child("inOut").getValue(String.class));
-                    ledger.setMemo(fileSnapshot.child("memo").getValue(String.class));
-
-                    ledgers.add(ledger);
-
-                    boolean check = false;
-                    for(Map.Entry<String, String> data : datas.entrySet()) {
-                        if(data.getKey().equals(ledger.getCategory())) {
-                            data.setValue(String.valueOf(Integer.parseInt(data.getValue()) + (Integer.parseInt(ledger.getAmount()))));
-                            check = true;
-                            break;
-                        }
-                    }
-
-                    if(!check) {
-                        datas.put(ledger.getCategory(), ledger.getAmount());
-                    }
-
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) { }
-        });
     }
 
 }

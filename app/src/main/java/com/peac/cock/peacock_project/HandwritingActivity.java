@@ -176,7 +176,7 @@ public class HandwritingActivity extends AppCompatActivity {
                 mDatabase.getReference().child("users").child(uid).child("ledger").push().setValue(ledgerDto);
                 Toast.makeText(getApplicationContext(), "저장되었습니다!", Toast.LENGTH_SHORT).show();
 
-                intent = new Intent(getApplicationContext(), DetailTabActivity.class);
+                intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -284,7 +284,7 @@ public class HandwritingActivity extends AppCompatActivity {
                 for(DataSnapshot fileSnapshot : dataSnapshot.child("users").child(uid).child("category").child(kState).getChildren()) {
                     System.out.println(fileSnapshot.getValue());
                     String str = fileSnapshot.child("cateImageString").getValue(String.class);
-                    System.out.println(str); // 카테고리 파싱
+                    System.out.println(str);
                     categoryList.add(str);
                 }
             }
