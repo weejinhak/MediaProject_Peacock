@@ -88,4 +88,19 @@ public class LedgerDto {
     public void setMemo(String memo) {
         this.memo = memo;
     }
+
+    @Override
+    public String toString() {
+        return "LedgerDto{" +
+                "seq='" + seq + '\'' +
+                ", inOut='" + inOut + '\'' +
+                ", date='" + date + '\'' +
+                ", time='" + time + '\'' +
+                ", content='" + content + '\'' +
+                ", category='" + category + '\'' +
+                ", amount='" + amount + '\'' +
+                ", asset=" + asset +
+                ", memo='" + memo + '\'' +
+                '}';
+    }
 }

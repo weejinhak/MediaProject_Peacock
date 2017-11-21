@@ -55,47 +55,6 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textView6" />
 
-    <TextView
-        android:id="@+id/budget_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="120dp"
-        android:text="45"
-        android:textColor="#E91E63"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/textView8"
-        app:layout_constraintEnd_toStartOf="@+id/textView8"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="45dp"
-        android:layout_marginTop="76dp"
-        android:text="만원"
-        android:textColor="#000000"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/bar_chart"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton5"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/budget_text"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
-
-    <ImageButton
-        android:id="@+id/imageButton5"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginEnd="120dp"
-        android:background="@drawable/analysis_layout_setting_button"
-        app:layout_constraintBottom_toBottomOf="@+id/textView8"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView8" />
-
 
     <com.github.mikephil.charting.charts.HorizontalBarChart
         android:id="@+id/bar_chart"
@@ -108,65 +67,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"></com.github.mikephil.charting.charts.HorizontalBarChart>
 
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:text="을 효율적으로 쓰려면 하루에"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="370dp" />
-
-    <TextView
-        android:id="@+id/left_budget_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="45000"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        tools:layout_editor_absoluteX="108dp"
-        tools:layout_editor_absoluteY="502dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="원 씩 사용하세요!"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        tools:layout_editor_absoluteX="212dp"
-        tools:layout_editor_absoluteY="419dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="이 달 지출은"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        tools:layout_editor_absoluteX="154dp"
-        tools:layout_editor_absoluteY="462dp" />
-
-    <TextView
-        android:id="@+id/used_budget_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="45000"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        tools:layout_editor_absoluteX="108dp"
-        tools:layout_editor_absoluteY="406dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="원으로 예상되네요!"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        tools:layout_editor_absoluteX="212dp"
-        tools:layout_editor_absoluteY="501dp" />
 
 </android.support.constraint.ConstraintLayout>
