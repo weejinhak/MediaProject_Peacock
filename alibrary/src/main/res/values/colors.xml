@@ -5,5 +5,5 @@
     <color name="nextMonthDayColor">#1F000000</color>
     <color name="disabledDialogButtonColor">#1F000000</color>
 
-    <color name="defaultColor">#2962FF</color>
+    <color name="defaultColor">#E91E63 </color>
 </resources>
