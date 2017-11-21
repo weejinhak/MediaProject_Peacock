@@ -31,7 +31,7 @@
     </string-array>
 
     <!-- contact type -->
-    <string-array name="accountType">
+    <string-array name="account_type">
         <item>Mobile0</item>
         <item>Mobile1</item>
         <item>Mobile2</item>

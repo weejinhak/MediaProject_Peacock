@@ -17,34 +17,33 @@ import java.util.List;
 
 public class ListViewActivity extends Activity implements AdapterView.OnItemClickListener {
 
-        String[] member_names;
-        TypedArray profile_pics;
-        String[] statues;
-        String[] contactType;
+    String[] placeName;
+    TypedArray categoryPicId;
+    String[] purchase;
+    String[] accountType;
 
-        List<ListViewRowItem> rowItems;
-        ListView mylistview;
+    List<ListViewRowItem> rowItems;
+    ListView mylistview;
 
-@Override
-protected void onCreate(Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listview);
 
         rowItems = new ArrayList<ListViewRowItem>();
 
-        member_names = getResources().getStringArray(R.array.Member_names);
+        placeName = getResources().getStringArray(R.array.place_name);
 
-        profile_pics = getResources().obtainTypedArray(R.array.profile_pics);
+        categoryPicId = getResources().obtainTypedArray(R.array.category_pic_id);
 
-        statues = getResources().getStringArray(R.array.contactType);
+        purchase = getResources().getStringArray(R.array.purchase);
 
-        contactType = getResources().getStringArray(R.array.contactType);
+        accountType = getResources().getStringArray(R.array.account_type);
 
-        for(int i =0; i< member_names.length; i++){
-        ListViewRowItem item = new ListViewRowItem(member_names[i],
-        profile_pics.getResourceId(i, -1), statues[i],
-        contactType[i]);
-        rowItems.add(item);
+        for (int i = 0; i < placeName.length; i++) {
+            ListViewRowItem item = new ListViewRowItem(placeName[i],
+                    categoryPicId.getResourceId(i, -1), purchase[i], accountType[i]);
+            rowItems.add(item);
         }
 
         mylistview = (ListView) findViewById(R.id.List);
@@ -53,14 +52,12 @@ protected void onCreate(Bundle savedInstanceState) {
 
         mylistview.setOnItemClickListener(this);
 
-        }
+    }
 
-@Override
-public  void onItemClick(AdapterView<?> parent, View view, int position,
-                         long id) {
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         String member_name = rowItems.get(position).getMember_name();
-        Toast.makeText(getApplicationContext(), "" + member_name,
-        Toast.LENGTH_SHORT).show();
-        }
+        Toast.makeText(getApplicationContext(), "" + member_name, Toast.LENGTH_SHORT).show();
+    }
 
-        }
+}
