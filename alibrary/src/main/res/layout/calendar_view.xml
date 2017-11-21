@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
@@ -47,6 +48,91 @@
 
     </android.support.constraint.ConstraintLayout>
 
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp">
+
+        <ImageView
+            android:id="@+id/join_layout_imageView_join_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:layout_marginRight="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/textView_expense"
+            app:layout_constraintEnd_toStartOf="@+id/join_layout_imageView_email"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/expense"
+            tools:ignore="MissingConstraints" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            app:layout_constraintBottom_toTopOf="@+id/textView_transfer"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/join_layout_imageView_email"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/transfer"
+            tools:ignore="MissingConstraints" />
+
+        <ImageView
+            android:id="@+id/join_layout_imageView_email"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            app:layout_constraintBottom_toTopOf="@+id/textView_import"
+            app:layout_constraintEnd_toStartOf="@+id/imageView4"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/join_layout_imageView_join_logo"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/importimg"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/textView_expense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="5dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/textView_import"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/join_layout_imageView_join_logo"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/textView_import"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/textView_transfer"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textView_expense"
+            app:layout_constraintTop_toBottomOf="@+id/join_layout_imageView_email"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/textView_transfer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="8dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textView_import"
+            app:layout_constraintTop_toBottomOf="@+id/imageView4"
+            tools:ignore="MissingConstraints" />
+
+    </android.support.constraint.ConstraintLayout>
     <!-- eventDays header -->
     <LinearLayout
         android:id="@+id/calendar_header"
