@@ -130,7 +130,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         }
                     }
                     if (isEmail) {
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), AssetActivity.class);
                         startActivity(intent);
                     } else {
                         Intent intent = new Intent(getApplicationContext(), MemberInfoActivitiy.class);
