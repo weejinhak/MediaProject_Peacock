@@ -19,6 +19,10 @@ public class Asset {
         this.balance = balance;
     }
 
+    public Asset(String nickname){
+        this.nickname=nickname;
+    }
+
     public String getNickname() {
         return nickname;
     }

@@ -17,6 +17,11 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.peac.cock.peacock_project.projectDto.Asset;
+import com.peac.cock.peacock_project.projectDto.LedgerDto;
 import com.peac.cock.peacock_project.projectSms.PermissionRequester;
 
 import java.util.ArrayList;
@@ -28,12 +33,25 @@ import java.util.List;
 
 public class AssetActivity extends AppCompatActivity {
 
+    private FirebaseAuth mAuth;
+    private FirebaseDatabase mDatabase;
+    private String uid;
+    private DatabaseReference databaseReference;
+    private LedgerDto ledgerDto = new LedgerDto();
+    private PermissionRequester.Builder requester;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_asset);
+
+        //firebase get auth& database;
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance();
+        uid = mAuth.getCurrentUser().getUid();
+
         //사용자 SMS권한 얻기
-        PermissionRequester.Builder requester = new PermissionRequester.Builder(this);
+        requester = new PermissionRequester.Builder(this);
         requester.create().request(android.Manifest.permission.RECEIVE_SMS, 10000, new PermissionRequester.OnClickDenyButtonListener() {
             @Override
             public void onClick(Activity activity) {
@@ -58,7 +76,7 @@ public class AssetActivity extends AppCompatActivity {
         breakDownGoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), CalendarActivity.class);
+                Intent intent = new Intent(getApplicationContext(), DetailTabActivity.class);
                 startActivity(intent);
             }
         });
@@ -131,7 +149,6 @@ public class AssetActivity extends AppCompatActivity {
             String contactId_string = String.valueOf(contactId);
             long timestamp = c.getLong(4);
             String body = c.getString(5);
-
             string = String.format("msgid:%d, threadid:%d, address:%s, " + "contactid:%d, contackstring:%s, timestamp:%d, body:%s", messageId, threadId, address, contactId,
                     contactId_string, timestamp, body);
 
@@ -139,7 +156,8 @@ public class AssetActivity extends AppCompatActivity {
             String[] messageToken;
             String smsCardName = "";
             String smsDate = "";
-            int smsPrice = 0;
+            String smsTime = "";
+            String smsPrice = "";
             String smsPlace = "";
 
 
@@ -152,17 +170,33 @@ public class AssetActivity extends AppCompatActivity {
                     Log.d("messageTokenTotal", messageToken[0] + "\n" + messageToken[1] + "\n" + messageToken[2] +
                             "\n" + messageToken[3] + "\n" + messageToken[4] + "\n" + messageToken[5]);
                     smsCardName = messageToken[1];
-                    smsDate = messageToken[3];
+
+                    String date = messageToken[3];
+                    String[] dateToken = date.split("\\s");
+                    smsDate = dateToken[0];
+                    System.out.println("smdate"+smsDate);
+                    smsTime = dateToken[1];
+
                     String price = messageToken[4];
                     String[] priceToken = price.split("원");
+                    smsPrice = priceToken[0].replaceAll("\\,", "");
 
-                    smsPrice = Integer.parseInt(priceToken[0].replaceAll("\\,", ""));
                     smsPlace = messageToken[5];
-                    System.out.println(smsCardName + "\n" + smsDate + "\n" + smsPrice + "\n" + smsPlace);
+
+
+                    System.out.println(smsCardName + "\n" + smsDate + "\n" + smsTime + "\n" + smsPrice + "\n" + smsPlace);
+
+                    ledgerDto.setInOut("지출");
+                    ledgerDto.setDate(smsDate);
+                    ledgerDto.setTime(smsTime);
+                    ledgerDto.setAmount(smsPrice);
+                    ledgerDto.setContent(smsPlace);
+                    ledgerDto.setAsset(new Asset(smsCardName));
+
+                    //mDatabase.getReference().child("users").child(uid).child("ledger").push().setValue(ledgerDto);
+
                 }
             }
-
-
         }
         return 0;
     }
