@@ -51,8 +51,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     private FirebaseDatabase mDatabase;
 
-    private ArrayList<String> uidList;
+    private ArrayList<String> uidList = new ArrayList<>();
 
+    private Intent intent;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,8 +69,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance();
 
+        //before_intent_get
+        intent = getIntent();
+        uidList = intent.getStringArrayListExtra("uidList");
 
-        uidList = new ArrayList<>();
         //button 및 사용할 아이템
         TextView joinTextView = findViewById(R.id.login_layout_textView_join);
         ImageButton loginOkButton = findViewById(R.id.login_layout_loginOk_imgButton);
@@ -77,27 +80,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         login_EditTextPassword = findViewById(R.id.login_layout_editText_passWord);
         SignInButton googleLoginButton = findViewById(R.id.login_layout_googleLogin_imgButton);
 
-
-        DatabaseReference databaseReference = mDatabase.getReference();
-        //database get email && add ArrayList
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                dataSnapshot.getValue();
-                for (DataSnapshot fileSnapshot : dataSnapshot.child("users").getChildren()) {
-                    String str = fileSnapshot.child("email").getValue(String.class);
-                    System.out.println(str);//이메일 파싱
-                    //System.out.println(fileSnapshot.getKey());//중요 -Uid 파싱
-                    uidList.add(str);
-                }
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
 
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -236,7 +218,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     protected void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
-        mAuth.signOut();
     }
 
     @Override
@@ -250,7 +231,5 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mAuth.signOut();
-
     }
 }
