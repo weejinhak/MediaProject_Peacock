@@ -4,23 +4,57 @@
     android:layout_height="match_parent"
     android:padding="2dp">
 
+   <!-- <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout">
+
+        <TextView
+            android:id="@+id/date_itemlist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:text="날짜"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/income_itemlist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="130dp"
+            android:text="5000원"
+            android:textSize="17sp"
+            />
+
+        <TextView
+            android:id="@+id/outgoing_itemlist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:text="5000원"
+            android:textSize="17sp"
+            />
+
+    </LinearLayout>-->
+
+ <!--   android:layout_below="@+id/linearLayout"-->
     <ImageView
         android:id="@+id/category_pic"
         android:layout_width="80dp"
         android:layout_height="80dp"
+        android:layout_alignParentStart="true"
         android:contentDescription="desc"
         android:paddingLeft="10dp"
-        android:paddingRight="10dp"/>
+        android:paddingRight="10dp" />
 
     <TextView
         android:id="@+id/place_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_toRightOf="@+id/category_pic"
+        android:layout_toEndOf="@+id/category_pic"
         android:paddingBottom="10dp"
         android:text="txt"
-        android:textSize="20sp"/>
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/purchase"
