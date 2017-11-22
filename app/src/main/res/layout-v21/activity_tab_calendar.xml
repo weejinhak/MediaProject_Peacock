@@ -6,12 +6,14 @@
     android:layout_height="match_parent"
     tools:context="com.peac.cock.peacock_project.DetailTabActivity">
 
+
     <include
         android:id="@+id/calendarView"
         layout="@layout/activity_calendar"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="@id/tabs"
-        tools:ignore="UnknownId" />
+        tools:ignore="MissingConstraints,UnknownId"
+        tools:layout_editor_absoluteX="0dp" />
 
 </android.support.constraint.ConstraintLayout>

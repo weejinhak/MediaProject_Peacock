@@ -12,17 +12,22 @@
         android:textSize="14sp" />
 
     <TextView
-        android:id="@+id/daystring"
-        android:layout_width="16dp"
-        android:layout_height="28dp"
+        android:id="@+id/daystring1"
+        android:layout_width="35dp"
+        android:layout_height="15dp"
         android:layout_gravity="center_horizontal"
-        android:scaleType="centerInside" />
+        android:scaleType="centerInside"
+        android:textColor="@color/defaultColor"
+        android:textSize="11sp"/>
+
     <TextView
         android:id="@+id/daystring2"
-        android:layout_width="16dp"
-        android:layout_height="28dp"
+        android:layout_width="35dp"
+        android:layout_height="15dp"
         android:layout_gravity="center_horizontal"
-        android:scaleType="centerInside" />
+        android:scaleType="centerInside"
+        android:textColor="#3F51B5"
+        android:textSize="11sp"/>
 
     <View
         android:id="@+id/divider"

@@ -79,7 +79,7 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
         uid = mAuth.getCurrentUser().getUid();
         TextView dayLabel = (TextView) view.findViewById(R.id.dayLabel);
 
-        TextView daystring1 = (TextView) view.findViewById(R.id.daystring);
+        TextView daystring1 = (TextView) view.findViewById(R.id.daystring1);
         TextView daystring2 = (TextView) view.findViewById(R.id.daystring2);
         // Fri Dec 01 00:00:00 GMT+00:00 2017
         SimpleDateFormat a = new SimpleDateFormat("yyyyMMdd");
@@ -107,7 +107,7 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
                     R.color.nextMonthDayColor), Typeface.NORMAL, R.drawable.background_transparent);
         }
         if (newdate.equals("20171120")) {
-            daystring1.setText("aaa");
+            daystring1.setText("50000");
             daystring2.setText("bbb");
         }
         dayLabel.setText(String.valueOf(day.get(Calendar.DAY_OF_MONTH)));
