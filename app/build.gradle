@@ -40,6 +40,7 @@ dependencies {
     compile 'com.google.firebase:firebase-storage:11.2.0'
     compile 'com.prolificinteractive:material-calendarview:1.4.3'
     compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'org.mozilla:rhino:1.7R4'
     compile project(path: ':alibrary')
 }
 

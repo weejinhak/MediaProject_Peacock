@@ -1,5 +1,6 @@
 package com.peac.cock.peacock_project;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -26,24 +27,24 @@ import com.peac.cock.peacock_project.projectDto.Card;
 import com.peac.cock.peacock_project.projectDto.Cash;
 import com.peac.cock.peacock_project.projectDto.LedgerDto;
 
+import java.io.Serializable;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class AnalysisActivity extends AppCompatActivity {
+import javax.xml.transform.sax.SAXSource;
+
+public class AnalysisActivity extends AppCompatActivity{
     private float rainfall[] = {98.8f, 123.8f, 161.6f, 24.2f, 52f, 58.2f, 35.4f, 13.3f, 78.4f, 203.4f, 240.2f, 159.7f};
     private String monthName[] = {"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"};
     private PieChart pieChart;
     private BarChart barChart;
 
     private ArrayList<LedgerDto> ledgers;
-    private HashMap<String, String> datas;
+    private HashMap<String, String> data = new HashMap<>();
 
-    private FirebaseAuth mAuth;
-    private FirebaseDatabase mDatabase;
-    private String uid;
     private DatabaseReference databaseReference;
 
 
@@ -52,11 +53,16 @@ public class AnalysisActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_analysis);
 
-        final TabHost host = (TabHost) findViewById(R.id.tab_host);
-        host.setup();
+    //    data = (HashMap<String,String>) intent.getSerializableExtra("data");
+        Intent intent = getIntent();
+        System.out.println(intent.getExtras());
+        ArrayList<String> categoryList = intent.getStringArrayListExtra("categoryList");
+        ArrayList<Integer> amountList = intent.getIntegerArrayListExtra("amountList");
+        System.out.println("받아온 값 / categoryList : " + categoryList);
+        System.out.println("받아온 값 / amountList : " + amountList);
 
-        barChart = (BarChart) findViewById(R.id.bar_chart);
-        setupBarChart(12, 50);
+        final TabHost host = findViewById(R.id.tab_host);
+        host.setup();
 
         TabHost.TabSpec page1 = host.newTabSpec("분석");
         page1.setContent(R.id.analysis);
@@ -69,46 +75,39 @@ public class AnalysisActivity extends AppCompatActivity {
         host.addTab(page2);
 
         //firebase get auth & database;
-        mAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance();
-        uid = mAuth.getCurrentUser().getUid();
-
-        pieChart = (PieChart) findViewById(R.id.pie_chart);
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+        String uid = mAuth.getCurrentUser().getUid();
 
         ledgers = new ArrayList<>();
-        datas = new HashMap<>();
 
-        callDetailData();
 
-        setupPieChart();
+     //   callDetailData();
+
+        pieChart = findViewById(R.id.pie_chart);
+        barChart = findViewById(R.id.bar_chart);
+        setupBarChart(12, 50);
+
+     //   setupPieChart();
+
     }
 
-    private void callDetailData() {
+    /*protected void callDetailData() {
 
         databaseReference = mDatabase.getReference();
-        databaseReference.addValueEventListener(new ValueEventListener() {
 
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 dataSnapshot.getValue();
                 for(DataSnapshot fileSnapshot : dataSnapshot.child("users").child(uid).child("ledger").getChildren()) {
                     LedgerDto ledger = fileSnapshot.getValue(LedgerDto.class);
-                    /*ledger.setSeq(fileSnapshot.child("seq").getValue(String.class));
-                    ledger.setAmount(fileSnapshot.child("amount").getValue(String.class));
-                    ledger.setAsset(fileSnapshot.child("asset").getValue(Asset.class));
-                    ledger.setCategory(fileSnapshot.child("category").getValue(String.class));
-                    ledger.setContent(fileSnapshot.child("content").getValue(String.class));
-                    ledger.setDate(fileSnapshot.child("date").getValue(String.class));
-                    ledger.setTime(fileSnapshot.child("time").getValue(String.class));
-                    ledger.setInOut(fileSnapshot.child("inOut").getValue(String.class));
-                    ledger.setMemo(fileSnapshot.child("memo").getValue(String.class));*/
-                    System.out.println(ledger);
 
                     ledgers.add(ledger);
 
                     boolean check = false;
 
-                    if(ledger.getInOut().equals("지출") && datas != null) {
+                    if(ledger.getInOut().equals("지출")) {
                         for (Map.Entry<String, String> data : datas.entrySet()) {
                             if (data.getKey().equals(ledger.getCategory())) {
                                 data.setValue(String.valueOf(Integer.parseInt(data.getValue())+(Integer.parseInt(ledger.getAmount()))));
@@ -121,29 +120,32 @@ public class AnalysisActivity extends AppCompatActivity {
                             datas.put(ledger.getCategory(), ledger.getAmount());
                         }
                     }
-
-                    System.out.println(datas);
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) { }
         });
-    }
+    }*/
 
-    private void setupPieChart() {
-        System.out.println("들어옴");
+    protected void setupPieChart() {
         List<PieEntry> pieEntries = new ArrayList<>();
 
-        if(datas != null) {
-            for (Map.Entry<String, String> data : datas.entrySet()) {
-                System.out.println("value : " + data.getValue() + "key :" + data.getKey());
-                pieEntries.add(new PieEntry(Integer.parseInt(data.getValue()), data.getKey()));
+       /*if(data.size() != 0) {
+            for (Map.Entry<String, String> d : data.entrySet()) {
+                System.out.println("value : " + d.getValue() + "key :" + d.getKey());
+                pieEntries.add(new PieEntry(Integer.parseInt(d.getValue()), d.getKey()));
                 System.out.println(pieEntries);
             }
         } else {
             System.out.println("데이터 없음");
+        }*/
+
+        for(int i = 0 ; i < rainfall.length ; i++) {
+            pieEntries.add(new PieEntry(rainfall[i], monthName[i]));
+            System.out.println(pieEntries);
         }
+
 
         PieDataSet dataSet = new PieDataSet(pieEntries, "Outgoing Pattern");
         dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
@@ -169,7 +171,7 @@ public class AnalysisActivity extends AppCompatActivity {
         pieChart.invalidate();
     }
 
-    private void setupBarChart(int count, int range) {
+    protected void setupBarChart(int count, int range) {
         ArrayList<BarEntry> yVals = new ArrayList<>();
         float barWidth = 9f;
         float spaceForBar = 10f;
@@ -188,5 +190,4 @@ public class AnalysisActivity extends AppCompatActivity {
 
         barChart.setData(data);
     }
-
 }
