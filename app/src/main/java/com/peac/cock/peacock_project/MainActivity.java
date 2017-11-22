@@ -16,7 +16,17 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.peac.cock.peacock_project.projectDto.LedgerDto;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -30,6 +40,12 @@ public class MainActivity extends AppCompatActivity
     private Intent intent = null;
 
 
+    private ArrayList<LedgerDto> ledgers = new ArrayList<>();
+
+    private String uid;
+    private DatabaseReference databaseReference;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +54,7 @@ public class MainActivity extends AppCompatActivity
         //fire base Auth && database
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
+        uid = auth.getCurrentUser().getUid();
 
         //Toolbar setting
         Toolbar toolbar = findViewById(R.id.app_bar_layout_my_toolbar);
@@ -50,6 +67,7 @@ public class MainActivity extends AppCompatActivity
         ImageButton settingGoButton = findViewById(R.id.main_layout_setting_go_button);
 
         FloatingActionButton fab = findViewById(R.id.main_layout_plus_button);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,7 +101,11 @@ public class MainActivity extends AppCompatActivity
         analysisGoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 intent = new Intent(getApplicationContext(), AnalysisActivity.class);
+
+                callDetailData();
+
                 startActivity(intent);
             }
         });
@@ -103,6 +125,69 @@ public class MainActivity extends AppCompatActivity
 
         nameTextView.setText(auth.getCurrentUser().getDisplayName());
         emailTextView.setText(auth.getCurrentUser().getEmail());
+    }
+
+    public void callDetailData() {
+        databaseReference = database.getReference();
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<String> cList = new ArrayList<>();
+                ArrayList<Integer> aList = new ArrayList<>();
+
+                cList.add("미분류");
+                aList.add(0);
+
+                LedgerDto ledger;
+                dataSnapshot.getValue();
+                for(DataSnapshot fileSnapshot : dataSnapshot.child("users").child(uid).child("ledger").getChildren()) {
+                    ledger = fileSnapshot.getValue(LedgerDto.class);
+
+                    ledgers.add(ledger);
+
+                    boolean check = true;
+
+                    if(ledger.getInOut().equals("지출")) {
+                        if(cList.size() > 0) {
+                            for(int i = 0 ; i < cList.size() ; i++) {
+                                String category = cList.get(i);
+                                if(category.equals(ledger.getCategory())) {
+                                    aList.set(i, aList.get(i) + Integer.parseInt(ledger.getAmount()));
+                                    check = false;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if(check) {
+                            cList.add(ledger.getCategory());
+                            aList.add(Integer.parseInt(ledger.getAmount()));
+                        }
+                    }
+                    System.out.println("함수 안 : " + cList + "/" + aList);
+                }
+                // sendArrayList(cList, aList);
+                System.out.println(intent);
+                intent.putExtra("hi", "hi");
+                intent.putStringArrayListExtra("categoryList", cList);
+                intent.putIntegerArrayListExtra("amountList", aList);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) { }
+        });
+    }
+
+    public void sendArrayList(ArrayList<String> array1, ArrayList<Integer> array2) {
+        ArrayList<String> categoryList = new ArrayList<>();
+        categoryList.addAll(array1);
+        ArrayList<Integer> amountList = new ArrayList<>();
+        amountList.addAll(array2);
+
+        intent.putStringArrayListExtra("categoryList", categoryList);
+        intent.putIntegerArrayListExtra("amountList", amountList);
+
+        System.out.println("sendArray 함수 : " + categoryList + " / " + amountList);
     }
 
     @Override
@@ -194,6 +279,46 @@ public class MainActivity extends AppCompatActivity
 //                finish(); // app 종료 시키기
             }
         }
+    }*/
+
+    /*public void callDetailData() {
+
+        databaseReference = database.getReference();
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                LedgerDto ledger;
+                dataSnapshot.getValue();
+                for(DataSnapshot fileSnapshot : dataSnapshot.child("users").child(uid).child("ledger").getChildren()) {
+                    ledger = fileSnapshot.getValue(LedgerDto.class);
+
+                    ledgers.add(ledger);
+
+                    boolean check = true;
+
+                    if(ledger.getInOut().equals("지출")) {
+                        if(data != null) {
+                            for (Map.Entry<String, String> d : data.entrySet()) {
+                                if (d.getKey().equals(ledger.getCategory())) {
+                                    d.setValue(String.valueOf(Integer.parseInt(d.getValue()) + (Integer.parseInt(ledger.getAmount()))));
+                                    check = false;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (check) {
+                            data.put(ledger.getCategory(), ledger.getAmount());
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
     }*/
 
 

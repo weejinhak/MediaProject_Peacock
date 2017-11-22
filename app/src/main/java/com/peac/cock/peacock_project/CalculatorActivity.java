@@ -14,9 +14,17 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.mozilla.javascript.Context;
+import org.mozilla.javascript.ScriptableObject;
+
 public class CalculatorActivity extends AppCompatActivity implements View.OnClickListener {
     private String state;
-    private TextView result;
+    private TextView resultView;
+
+    private Context rhino;
+    private String result;
+    private String evaluation;
+
     private ImageButton checkButton;
 
     private Intent intent;
@@ -26,6 +34,10 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculator);
 
+        rhino = Context.enter();
+        // turn off optimization to work with android
+        rhino.setOptimizationLevel(-1);
+
         intent = getIntent();
         if(intent.getStringExtra("state") == null) {
             state = "outgoing";
@@ -34,7 +46,8 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
         }
 
         if(intent.getStringExtra("amount") != null) {
-            result.setText(intent.getStringExtra("amount"));
+            resultView.setText(intent.getStringExtra("amount"));
+            result = intent.getStringExtra("amount");
         }
 
         final ImageButton incomingButton = findViewById(R.id.calculator_layout_incoming_button);
@@ -63,7 +76,7 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
         final ImageButton multipleButton = findViewById(R.id.calculator_layout_multiple_button);
         final ImageButton divideButton = findViewById(R.id.calculator_layout_divide_button);
 
-        result = findViewById(R.id.calculator_layout_result_view);
+        resultView = findViewById(R.id.calculator_layout_result_view);
 
         one.setOnClickListener(numberClickListener);
         two.setOnClickListener(numberClickListener);
@@ -150,67 +163,82 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
     View.OnClickListener numberClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            if(result.getText().toString().equals("0")) {
-                result.setText("");
+            if(resultView.getText().toString().equals("0")) {
+                resultView.setText("");
+                result = "0";
                 checkButton.setBackgroundResource(R.drawable.handwriting_layout_active_check_button);
             }
-            result.setText(result.getText().toString() + ((Button) view).getText().toString());
+            resultView.setText(resultView.getText().toString() + ((Button) view).getText().toString());
+            result += ((Button) view).getText().toString();
         }
     };
 
     // 나머지 이미지 버튼 누를 때
     @Override
     public void onClick(View v) {
-        final TextView result = findViewById(R.id.calculator_layout_result_view);
         switch (v.getId()) {
             case R.id.calculator_layout_erase_button:
-                if(!result.getText().toString().equals("0")) {
-                    result.setText(result.getText().toString().substring(0, result.length()-1));
-                    if(result.getText().toString().equals("")) {
-                        result.setText("0");
+                if(!resultView.getText().toString().equals("0")) {
+                    resultView.setText(resultView.getText().toString().substring(0, resultView.length()-1));
+                    result = result.substring(0, result.length()-1);
+                    if(resultView.getText().toString().equals("")) {
+                        resultView.setText("0");
                         checkButton.setBackgroundResource(R.drawable.handwriting_layout_check_button);
                     }
                 }
                 break;
             case R.id.calculator_layout_subtract_button:
-                if(!result.getText().toString().equals("0")
-                        && !result.getText().toString().substring(result.length()-1, result.length()).equals("-")
-                        && !result.getText().toString().substring(result.length()-1, result.length()).equals("+")
-                        && !result.getText().toString().substring(result.length()-1, result.length()).equals("x")
-                        && !result.getText().toString().substring(result.length()-1, result.length()).equals("÷")) {
-                    result.setText(result.getText().toString() + "-");
+                if(!resultView.getText().toString().equals("0")
+                        && !resultView.getText().toString().substring(resultView.length()-1, resultView.length()).equals("-")
+                        && !resultView.getText().toString().substring(resultView.length()-1, resultView.length()).equals("+")
+                        && !resultView.getText().toString().substring(resultView.length()-1, resultView.length()).equals("x")
+                        && !resultView.getText().toString().substring(resultView.length()-1, resultView.length()).equals("÷")) {
+                    resultView.setText(resultView.getText().toString() + "-");
+                    result += "-";
                 }
                 break;
             case R.id.calculator_layout_plus_button:
-                if(!result.getText().toString().equals("0")
-                        && !result.getText().toString().substring(result.length()-1, result.length()).equals("-")
-                        && !result.getText().toString().substring(result.length()-1, result.length()).equals("+")
-                        && !result.getText().toString().substring(result.length()-1, result.length()).equals("x")
-                        && !result.getText().toString().substring(result.length()-1, result.length()).equals("÷")) {
-                    result.setText(result.getText().toString() + "+");
+                if(!resultView.getText().toString().equals("0")
+                        && !resultView.getText().toString().substring(resultView.length()-1, resultView.length()).equals("-")
+                        && !resultView.getText().toString().substring(resultView.length()-1, resultView.length()).equals("+")
+                        && !resultView.getText().toString().substring(resultView.length()-1, resultView.length()).equals("x")
+                        && !resultView.getText().toString().substring(resultView.length()-1, resultView.length()).equals("÷")) {
+                    resultView.setText(resultView.getText().toString() + "+");
+                    result += "+";
                 }
                 break;
             case R.id.calculator_layout_multiple_button:
-                if(!result.getText().toString().equals("0")
-                        && !result.getText().toString().substring(result.length()-1, result.length()).equals("-")
-                        && !result.getText().toString().substring(result.length()-1, result.length()).equals("+")
-                        && !result.getText().toString().substring(result.length()-1, result.length()).equals("x")
-                        && !result.getText().toString().substring(result.length()-1, result.length()).equals("÷")) {
-                    result.setText(result.getText().toString() + "x");
+                if(!resultView.getText().toString().equals("0")
+                        && !resultView.getText().toString().substring(resultView.length()-1, resultView.length()).equals("-")
+                        && !resultView.getText().toString().substring(resultView.length()-1, resultView.length()).equals("+")
+                        && !resultView.getText().toString().substring(resultView.length()-1, resultView.length()).equals("x")
+                        && !resultView.getText().toString().substring(resultView.length()-1, resultView.length()).equals("÷")) {
+                    resultView.setText(resultView.getText().toString() + "x");
+                    result += "*";
                 }
                 break;
             case R.id.calculator_layout_divide_button:
-                if(!result.getText().toString().equals("0")
-                        && !result.getText().toString().substring(result.length()-1, result.length()).equals("-")
-                        && !result.getText().toString().substring(result.length()-1, result.length()).equals("+")
-                        && !result.getText().toString().substring(result.length()-1, result.length()).equals("x")
-                        && !result.getText().toString().substring(result.length()-1, result.length()).equals("÷")) {
-                    result.setText(result.getText().toString() + "÷");
+                if(!resultView.getText().toString().equals("0")
+                        && !resultView.getText().toString().substring(resultView.length()-1, resultView.length()).equals("-")
+                        && !resultView.getText().toString().substring(resultView.length()-1, resultView.length()).equals("+")
+                        && !resultView.getText().toString().substring(resultView.length()-1, resultView.length()).equals("x")
+                        && !resultView.getText().toString().substring(resultView.length()-1, resultView.length()).equals("÷")) {
+                    resultView.setText(resultView.getText().toString() + "÷");
+                    result += "/";
                 }
                 break;
             case R.id.calculator_layout_check_button:
                 intent = new Intent(getApplicationContext(), HandwritingActivity.class);
-                intent.putExtra("amount", result.getText().toString());
+
+                try {
+                    ScriptableObject scope = rhino.initStandardObjects();
+                    evaluation = rhino.evaluateString(scope, result, "JavaScript", 1, null).toString();
+                    evaluation = String.valueOf(Math.round(Float.parseFloat(evaluation)));
+                } finally {
+                    Context.exit();
+                }
+
+                intent.putExtra("amount", evaluation);
                 intent.putExtra("state", state);
                 startActivity(intent);
                 break;

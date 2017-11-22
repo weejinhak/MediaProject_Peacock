@@ -1,6 +1,7 @@
 package com.peac.cock.peacock_project;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,7 @@ public class LodingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+      //  getWindow().setStatusBarColor(Color.parseColor("#000000"));
         setContentView(R.layout.activity_loding);
 
         startLoading();
