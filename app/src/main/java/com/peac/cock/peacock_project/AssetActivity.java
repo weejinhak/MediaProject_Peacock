@@ -223,33 +223,12 @@ public class AssetActivity extends AppCompatActivity {
         return 0;
     }
 
+    public void cvcFileWrite(){
+        String enc=new java.io.OutputStreamWriter(System.out).getEncoding();
+        System.out.println("현재 인코딩 :" + enc);
+    }
 
-/*
-    //하나씩검사
-    //mDatabase.getReference().child("users").child(uid).child("ledger").push().setValue(ledgerDto);
-    DatabaseReference databaseReference = mDatabase.getReference().child("users").child(uid).child("ledger");
-                    databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-        @Override
-        public void onDataChange(DataSnapshot dataSnapshot) {
-            Iterator<DataSnapshot> child = dataSnapshot.getChildren().iterator();
-            //System.out.println(countDb+":"+child);
-            //users의 모든 자식들의 key값과 value 값들을 iterator로 참조.
-            while(child.hasNext())
-            {
-                //찾고자 하는 ID값은 key로 존재하는 값
-                if(child.next().getKey().equals(ledgerDto))
-                {
-                    System.out.println("일치하는 값 있음");
-                    return;
-                }else System.out.println("일치하는 값 없음");
-            }
-        }
 
-        @Override
-        public void onCancelled(DatabaseError databaseError) {
-
-        }
-    });*/
 }
 
 
