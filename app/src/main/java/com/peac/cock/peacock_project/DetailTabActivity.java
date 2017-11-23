@@ -1,6 +1,8 @@
 package com.peac.cock.peacock_project;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,12 +11,15 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 /**
  * Created by dmsru on 2017-11-15.
  */
 
 public class DetailTabActivity extends AppCompatActivity {
+
+    protected Intent intent;
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -43,9 +48,18 @@ public class DetailTabActivity extends AppCompatActivity {
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        FloatingActionButton fab = findViewById(R.id.main_layout_plus_button);
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(getApplicationContext(), CalculatorActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

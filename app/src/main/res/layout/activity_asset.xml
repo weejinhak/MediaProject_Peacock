@@ -13,7 +13,9 @@
         android:layout_alignParentTop="true"
         android:background="#FFFFFF"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="63dp">
 
         <TextView
             android:id="@+id/setting_layout_toolbar_title"
@@ -31,11 +33,12 @@
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="24dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/setting_layout_my_toolbar" />
 
@@ -43,7 +46,7 @@
         android:id="@+id/aseet_layout_textView_asset_textView"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="80dp"
         android:background="#FFFFFF"
         android:gravity=""
         android:text="자산"
@@ -59,10 +62,10 @@
         android:id="@+id/asset_layout_textView_assetMoney_textView"
         android:layout_width="150dp"
         android:layout_height="50dp"
+        android:background="#FFFFFF"
+        android:gravity="center"
         android:text="돈돈돈"
         android:textSize="15dp"
-        android:gravity="center"
-        android:background="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/aseet_layout_textView_asset_textView"
@@ -72,7 +75,7 @@
         android:id="@+id/asset_layout_listView"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:background="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -84,7 +87,7 @@
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:background="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -143,7 +146,7 @@
             android:gravity="center"
             android:text="돈돈돈"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.384"
+            app:layout_constraintHorizontal_bias="0.378"
             app:layout_constraintStart_toEndOf="@+id/asset_layout_textView_summaryAsset_textView"
             app:layout_constraintTop_toTopOf="@+id/asset_layout_textView_summaryAsset_textView" />
 
@@ -227,57 +230,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_end="206dp" />
-
-    <ImageButton
-        android:id="@+id/asset_layout_asset_go_button"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:background="#000000"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/asset_layout_breakdown_go_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/asset_layout_breakdown_go_button"
-        app:srcCompat="@drawable/main_layout_assets_tab_button" />
-
-    <ImageButton
-        android:id="@+id/asset_layout_breakdown_go_button"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="35dp"
-        android:background="#000000"
-        android:scaleType="fitCenter"
-        android:src="@drawable/main_layout_list_tab_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/asset_layout_analysis_go_button"
-        app:layout_constraintStart_toEndOf="@+id/asset_layout_asset_go_button"
-        app:layout_constraintTop_toBottomOf="@+id/asset_layout_button_assetAdd_button" />
-
-    <ImageButton
-        android:id="@+id/asset_layout_analysis_go_button"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="35dp"
-        android:background="#000000"
-        android:scaleType="fitCenter"
-        android:src="@drawable/main_layout_analysis_tab_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/asset_layout_setting_go_button"
-        app:layout_constraintStart_toEndOf="@+id/asset_layout_breakdown_go_button"
-        app:layout_constraintTop_toBottomOf="@+id/asset_layout_button_assetAdd_button" />
-
-    <ImageButton
-        android:id="@+id/asset_layout_setting_go_button"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:background="#000000"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/asset_layout_analysis_go_button"
-        app:layout_constraintTop_toTopOf="@+id/asset_layout_analysis_go_button"
-        app:srcCompat="@drawable/main_layout_setting_tab_button" />
-
 
 
 </android.support.constraint.ConstraintLayout>
