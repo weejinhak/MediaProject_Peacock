@@ -69,39 +69,6 @@ public class AssetActivity extends AppCompatActivity {
 
         //Get Id
         Button assetAddButton = findViewById(R.id.asset_layout_button_assetAdd_button);
-        ImageButton assetGoButton = findViewById(R.id.asset_layout_asset_go_button);
-        ImageButton breakDownGoButton = findViewById(R.id.asset_layout_breakdown_go_button);
-        ImageButton analysisGoButton = findViewById(R.id.asset_layout_analysis_go_button);
-        ImageButton settingGoButton = findViewById(R.id.asset_layout_setting_go_button);
-
-        //하단 페이지 넘기기 클릭 이벤트
-        assetGoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "여기가 자산 페이지야!", Toast.LENGTH_SHORT).show();
-            }
-        });
-        breakDownGoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), DetailTabActivity.class);
-                startActivity(intent);
-            }
-        });
-        analysisGoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), AnalysisActivity.class);
-                startActivity(intent);
-            }
-        });
-        settingGoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SettingActivity.class);
-                startActivity(intent);
-            }
-        });
 
 
         //asset Add call method event
@@ -223,33 +190,12 @@ public class AssetActivity extends AppCompatActivity {
         return 0;
     }
 
+    public void cvcFileWrite(){
+        String enc=new java.io.OutputStreamWriter(System.out).getEncoding();
+        System.out.println("현재 인코딩 :" + enc);
+    }
 
-/*
-    //하나씩검사
-    //mDatabase.getReference().child("users").child(uid).child("ledger").push().setValue(ledgerDto);
-    DatabaseReference databaseReference = mDatabase.getReference().child("users").child(uid).child("ledger");
-                    databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-        @Override
-        public void onDataChange(DataSnapshot dataSnapshot) {
-            Iterator<DataSnapshot> child = dataSnapshot.getChildren().iterator();
-            //System.out.println(countDb+":"+child);
-            //users의 모든 자식들의 key값과 value 값들을 iterator로 참조.
-            while(child.hasNext())
-            {
-                //찾고자 하는 ID값은 key로 존재하는 값
-                if(child.next().getKey().equals(ledgerDto))
-                {
-                    System.out.println("일치하는 값 있음");
-                    return;
-                }else System.out.println("일치하는 값 없음");
-            }
-        }
 
-        @Override
-        public void onCancelled(DatabaseError databaseError) {
-
-        }
-    });*/
 }
 
 
