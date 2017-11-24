@@ -40,6 +40,9 @@ public class Tab1_content extends Fragment implements AdapterView.OnItemClickLis
     String[] purchase;
     String[] accountType;
 
+    TextView textView;
+    ImageButton button1;
+    ImageButton button2;
 
     List<ListViewRowItem> rowItems;
     ListView mylistview;
@@ -65,10 +68,6 @@ public class Tab1_content extends Fragment implements AdapterView.OnItemClickLis
         purchase = getResources().getStringArray(R.array.purchase);
         accountType = getResources().getStringArray(R.array.account_type);
         final View header = getLayoutInflater().inflate(R.layout.activity_header_itemview,null,false);
-
-        TextView textView;
-        ImageButton button1;
-        ImageButton button2;
 
         textView = (TextView) rootView.findViewById(R.id.currentDateLabel) ;
         button1 = (ImageButton) rootView.findViewById(R.id.previousButton);
@@ -126,7 +125,7 @@ public class Tab1_content extends Fragment implements AdapterView.OnItemClickLis
     public  void addOneMonth()
     {
         if(date2==12){
-
+            //button2.setVisibility(View.INVISIBLE);
         }else{
             date2=date2+1;
         }
