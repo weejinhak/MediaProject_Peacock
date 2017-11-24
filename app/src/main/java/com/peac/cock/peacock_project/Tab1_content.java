@@ -57,12 +57,14 @@ public class Tab1_content extends Fragment implements AdapterView.OnItemClickLis
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        // listview, header 참조 획득.
         View rootView = inflater.inflate(R.layout.activity_tab_list, container, false);
         rowItems = new ArrayList<ListViewRowItem>();
         placeName = getResources().getStringArray(R.array.place_name);
         categoryPicId = getResources().obtainTypedArray(R.array.category_pic_id);
         purchase = getResources().getStringArray(R.array.purchase);
         accountType = getResources().getStringArray(R.array.account_type);
+        final View header = getLayoutInflater().inflate(R.layout.activity_header_itemview,null,false);
 
         TextView textView;
         ImageButton button1;
@@ -84,6 +86,9 @@ public class Tab1_content extends Fragment implements AdapterView.OnItemClickLis
         ListViewCustomAdapter adapter = new ListViewCustomAdapter(getContext(), rowItems);
         mylistview.setAdapter(adapter);
         mylistview.setOnItemClickListener(this);
+
+        // listview에 header 추가.
+        mylistview.addHeaderView(header);
 
         //fireBase Auth & Database
         mAuth = FirebaseAuth.getInstance();
@@ -124,10 +129,9 @@ public class Tab1_content extends Fragment implements AdapterView.OnItemClickLis
 
         }else{
             date2=date2+1;
-}
-
-
+        }
     }
+
     public void minusOneMonth()
     {
 
@@ -136,6 +140,5 @@ public class Tab1_content extends Fragment implements AdapterView.OnItemClickLis
        }else{
            date2=date2-1;
        }
-
     }
 }
