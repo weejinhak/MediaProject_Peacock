@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity
         analysisGoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent.setClass(getApplicationContext(), SettingActivity.class);
+                intent.setClass(getApplicationContext(), AnalysisActivity.class);
                 startActivity(intent);
             }
         });
