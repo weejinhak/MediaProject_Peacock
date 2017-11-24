@@ -7,14 +7,14 @@ package com.peac.cock.peacock_project.projectDto;
 public class Asset {
 
     private String nickname;
-    private String balance;
+    private int balance;
 
     public Asset() {
         this.nickname = "";
-        this.balance = "";
+        this.balance = 0;
     }
 
-    public Asset(String nickname, String balance) {
+    public Asset(String nickname, int balance) {
         this.nickname = nickname;
         this.balance = balance;
     }
@@ -31,9 +31,9 @@ public class Asset {
         this.nickname = nickname;
     }
 
-    public String getBalance() { return balance;  }
+    public int getBalance() { return balance;  }
 
-    public void setBalance(String balance) {
+    public void setBalance(int balance) {
         this.balance = balance;
     }
 

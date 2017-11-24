@@ -4,14 +4,15 @@ package com.peac.cock.peacock_project.projectDto;
  * Created by wee on 2017. 11. 13..
  */
 
-public class Cash extends Asset{
+public class Cash extends Asset {
 
     private String nickname;
-    private String balance;
+    private int balance;
 
-    public Cash() {}
+    public Cash() {
+    }
 
-    public Cash(String nickname, String balance) {
+    public Cash(String nickname, int balance) {
         this.nickname = nickname;
         this.balance = balance;
     }
@@ -24,9 +25,11 @@ public class Cash extends Asset{
         this.nickname = nickname;
     }
 
-    public String getBalance() { return balance;  }
+    public int getBalance() {
+        return balance;
+    }
 
-    public void setBalance(String balance) {
+    public void setBalance(int balance) {
         this.balance = balance;
     }
 

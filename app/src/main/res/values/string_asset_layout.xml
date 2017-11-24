@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="asset_layout_toolbar_text">자산 현황</string>
+    <string name="asset_layout_cardTextView_text">카드</string>
+    <string name="asset_layout_cashTextView_text">현금</string>
+    <string name="aseet_layout_textView_assetTotal_text">나의 총 자산</string>
 </resources>

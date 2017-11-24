@@ -1,6 +1,5 @@
 package com.peac.cock.peacock_project;
 
-import android.*;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
@@ -8,42 +7,53 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.peac.cock.peacock_project.projectAdapter.AssetAdapter;
+import com.peac.cock.peacock_project.projectAdapter.AssetCardAdapter;
+import com.peac.cock.peacock_project.projectAdapter.AssetCashAdapter;
 import com.peac.cock.peacock_project.projectDto.Asset;
+import com.peac.cock.peacock_project.projectDto.AssetItem;
+import com.peac.cock.peacock_project.projectDto.Card;
+import com.peac.cock.peacock_project.projectDto.Cash;
 import com.peac.cock.peacock_project.projectDto.LedgerDto;
 import com.peac.cock.peacock_project.projectSms.PermissionRequester;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
  * Created by dahye on 2017-11-13.
  */
 
-public class AssetActivity extends AppCompatActivity {
+public class AssetActivity extends AppCompatActivity implements ValueEventListener {
 
     private FirebaseAuth mAuth;
     private FirebaseDatabase mDatabase;
     private String uid;
-    private DatabaseReference databaseReference;
     private LedgerDto ledgerDto = new LedgerDto();
     private PermissionRequester.Builder requester;
     private boolean isSmsList;
+    private ArrayList<LedgerDto> arrayLedgerDto;
+    private ArrayList<Card> cardItems;
+    private ArrayList<Cash> cashItems;
+    private int totalBalance;
+    private TextView totalBalanceTextView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,12 +74,21 @@ public class AssetActivity extends AppCompatActivity {
             }
         });
 
-        //사용자의 DB에 smsList가 있는지 확인
-        isSmsRead();
+        arrayLedgerDto = new ArrayList<>();
+        cardItems = new ArrayList<>();
+        cashItems = new ArrayList<>();
 
         //Get Id
         Button assetAddButton = findViewById(R.id.asset_layout_button_assetAdd_button);
+        totalBalanceTextView = findViewById(R.id.asset_layout_textView_assetMoney_textView);
+        ListView cardListView = findViewById(R.id.asset_layout_card_listView);
+        ListView cashListView = findViewById(R.id.aseet_layout_cash_listView);
 
+        //list View Adapter
+        AssetCardAdapter cardAdapter = new AssetCardAdapter(this, R.layout.activity_asset_card_item, cardItems);
+        AssetCashAdapter cashAdapter = new AssetCashAdapter(this, R.layout.activity_asset_cash_item, cashItems);
+        cardListView.setAdapter(cardAdapter);
+        cashListView.setAdapter(cashAdapter);
 
         //asset Add call method event
         assetAddButton.setOnClickListener(new View.OnClickListener() {
@@ -81,9 +100,9 @@ public class AssetActivity extends AppCompatActivity {
                 show();
             }
         });
-
     }
 
+    //Dialog Show Method
     void show() {
         final List<String> ListItems = new ArrayList<>();
         ListItems.add("현금");
@@ -109,25 +128,6 @@ public class AssetActivity extends AppCompatActivity {
         builder.show();
 
     }
-
-    public void isSmsRead() {
-        //smsRead했는지 확인
-        databaseReference = mDatabase.getReference();
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                dataSnapshot.getValue();
-                String str = (String) dataSnapshot.child("users").child(uid).child("isSMS").getValue();
-                isSmsList = Boolean.parseBoolean(str);
-                System.out.println(isSmsList);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-    }
-
 
     //Read_SMS_Phone
     public int readSMSMessage() {
@@ -190,11 +190,54 @@ public class AssetActivity extends AppCompatActivity {
         return 0;
     }
 
-    public void cvcFileWrite(){
-        String enc=new java.io.OutputStreamWriter(System.out).getEncoding();
-        System.out.println("현재 인코딩 :" + enc);
+    @Override
+    public void onDataChange(DataSnapshot dataSnapshot) {
+        dataSnapshot.getValue();
+        String str = (String) dataSnapshot.child("users").child(uid).child("isSMS").getValue();
+        isSmsList = Boolean.parseBoolean(str);
+        for (DataSnapshot fileSnapshot : dataSnapshot.child("users").child(getUid()).child("ledger").getChildren()) {
+            LedgerDto ledger = fileSnapshot.getValue(LedgerDto.class);
+            arrayLedgerDto.add(ledger);
+        }
+        for (DataSnapshot fileSnapshot : dataSnapshot.child("users").child(getUid()).child("asset").child("card").getChildren()) {
+            Card card = fileSnapshot.getValue(Card.class);
+            Card cardItem = new Card(card.getBank(), card.getNickname(), card.getBalance());
+            cardItems.add(cardItem);
+            totalBalance += card.getBalance();
+        }
+        for (DataSnapshot fileSnapshot : dataSnapshot.child("users").child(getUid()).child("asset").child("cash").getChildren()) {
+            Cash cash = fileSnapshot.getValue(Cash.class);
+            Cash cashItem = new Cash(cash.getNickname(), cash.getBalance());
+            cashItems.add(cashItem);
+            totalBalance += cash.getBalance();
+        }
+        //전체 자산금액 setTextView
+        totalBalanceTextView.setText(String.valueOf(totalBalance) + "원");
+
     }
 
+    @Override
+    public void onCancelled(DatabaseError databaseError) {
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseDatabase.getInstance().getReference().addValueEventListener(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        FirebaseDatabase.getInstance().getReference().removeEventListener(this);
+    }
+
+    @NonNull
+    private String getUid() {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        return currentUser.getUid();
+    }
 
 }
 

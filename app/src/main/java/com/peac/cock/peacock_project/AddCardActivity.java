@@ -37,13 +37,13 @@ public class AddCardActivity extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance();
 
         card = new Card();
-        uid=mAuth.getCurrentUser().getUid();
+        uid = mAuth.getCurrentUser().getUid();
 
         //get Id
         Spinner cardArraySpiner = findViewById(R.id.add_card_layout_spinner_cardArrayItem);
         final EditText cardEditText_nickName = findViewById(R.id.card_add_layout_editText_nickName);
         final EditText cardEditText_balance = findViewById(R.id.card_add_layout_editText_balance);
-        Button cardAddButton=findViewById(R.id.card_add_layout_add_button);
+        Button cardAddButton = findViewById(R.id.card_add_layout_add_button);
 
         cardArraySpiner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -63,16 +63,13 @@ public class AddCardActivity extends AppCompatActivity {
             public void onClick(View v) {
                 card.setBank(bankType);
                 card.setNickname(cardEditText_nickName.getText().toString());
-                card.setBalance(cardEditText_balance.getText().toString());
-
-                System.out.println(card);
+                card.setBalance(Integer.parseInt(cardEditText_balance.getText().toString()));
 
                 //uid에 맞는 정보 디비 입력
                 mDatabase.getReference().child("users").child(uid).child("asset").child("card").push().setValue(card);
 
             }
         });
-
 
 
     }
