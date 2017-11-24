@@ -43,8 +43,7 @@ public class AddCashActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 cash.setNickname(editTextNickName.getText().toString());
-                cash.setBalance(editTextBalance.getText().toString());
-
+                cash.setBalance(Integer.parseInt(editTextBalance.getText().toString()));
 
                 //uid에 맞는 정보 디비 입력
                 mDatabase.getReference().child("users").child(uid).child("asset").child("cash").push().setValue(cash);

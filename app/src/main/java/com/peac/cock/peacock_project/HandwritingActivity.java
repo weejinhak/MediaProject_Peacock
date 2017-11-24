@@ -304,7 +304,7 @@ public class HandwritingActivity extends AppCompatActivity {
 
     private void callAssetList() {
         assetList = new ArrayList<>();
-        assetList.add(new Cash("기본", "0"));
+        assetList.add(new Cash("기본", 0));
 
         databaseReference = mDatabase.getReference();
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -315,14 +315,14 @@ public class HandwritingActivity extends AppCompatActivity {
                     Card card = new Card();
                     card.setBank(fileSnapshot.child("bank").getValue(String.class));
                     card.setNickname(fileSnapshot.child("nickname").getValue(String.class));
-                    card.setBalance(fileSnapshot.child("balance").getValue(String.class));
+                    card.setBalance(fileSnapshot.child("balance").getValue(Integer.class));
                     assetList.add(card);
                 }
                 for(DataSnapshot fileSnapshot : dataSnapshot.child("users").child(uid).child("asset").child("cash").getChildren()) {
                     Cash cash = new Cash();
                     cash.setNickname(fileSnapshot.child("nickname").getValue(String.class));
                     System.out.println(cash.getNickname());
-                    cash.setBalance(fileSnapshot.child("balance").getValue(String.class));
+                    cash.setBalance(fileSnapshot.child("balance").getValue(Integer.class));
                     assetList.add(cash);
                 }
             }
