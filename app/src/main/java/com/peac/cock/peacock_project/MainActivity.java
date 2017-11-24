@@ -34,16 +34,9 @@ public class MainActivity extends AppCompatActivity
     private TextView nameTextView;
     private TextView emailTextView;
 
-    //firebase Auth&&Database;
     private FirebaseAuth auth;
-    private FirebaseDatabase database;
-    private Intent intent = null;
 
-
-    private ArrayList<LedgerDto> ledgers = new ArrayList<>();
-
-    private String uid;
-    private DatabaseReference databaseReference;
+    private Intent intent;
 
 
     @Override
@@ -51,10 +44,12 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        intent = new Intent();
+
         //fire base Auth && database
         auth = FirebaseAuth.getInstance();
-        database = FirebaseDatabase.getInstance();
-        uid = auth.getCurrentUser().getUid();
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final String uid = auth.getCurrentUser().getUid();
 
         //Toolbar setting
         Toolbar toolbar = findViewById(R.id.app_bar_layout_my_toolbar);
@@ -71,7 +66,7 @@ public class MainActivity extends AppCompatActivity
         detailGoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent = new Intent(getApplicationContext(), DetailTabActivity.class);
+                intent.setClass(getApplicationContext(), DetailTabActivity.class);
                 startActivity(intent);
             }
         });
@@ -79,25 +74,21 @@ public class MainActivity extends AppCompatActivity
         assetGoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent = new Intent(getApplicationContext(), AssetActivity.class);
+                intent.setClass(getApplicationContext(), AssetActivity.class);
                 startActivity(intent);
             }
         });
         settingGoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(getApplicationContext(), SettingActivity.class);
+                intent.setClass(getApplicationContext(), SettingActivity.class);
                 startActivity(intent);
             }
         });
         analysisGoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                intent = new Intent(getApplicationContext(), AnalysisActivity.class);
-
-                callDetailData();
-
+                intent.setClass(getApplicationContext(), SettingActivity.class);
                 startActivity(intent);
             }
         });
@@ -117,69 +108,6 @@ public class MainActivity extends AppCompatActivity
 
         nameTextView.setText(auth.getCurrentUser().getDisplayName());
         emailTextView.setText(auth.getCurrentUser().getEmail());
-    }
-
-    public void callDetailData() {
-        databaseReference = database.getReference();
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                ArrayList<String> cList = new ArrayList<>();
-                ArrayList<Integer> aList = new ArrayList<>();
-
-                cList.add("미분류");
-                aList.add(0);
-
-                LedgerDto ledger;
-                dataSnapshot.getValue();
-                for(DataSnapshot fileSnapshot : dataSnapshot.child("users").child(uid).child("ledger").getChildren()) {
-                    ledger = fileSnapshot.getValue(LedgerDto.class);
-
-                    ledgers.add(ledger);
-
-                    boolean check = true;
-
-                    if(ledger.getInOut().equals("지출")) {
-                        if(cList.size() > 0) {
-                            for(int i = 0 ; i < cList.size() ; i++) {
-                                String category = cList.get(i);
-                                if(category.equals(ledger.getCategory())) {
-                                    aList.set(i, aList.get(i) + Integer.parseInt(ledger.getAmount()));
-                                    check = false;
-                                    break;
-                                }
-                            }
-                        }
-
-                        if(check) {
-                            cList.add(ledger.getCategory());
-                            aList.add(Integer.parseInt(ledger.getAmount()));
-                        }
-                    }
-                    System.out.println("함수 안 : " + cList + "/" + aList);
-                }
-                // sendArrayList(cList, aList);
-                System.out.println(intent);
-                intent.putExtra("hi", "hi");
-                intent.putStringArrayListExtra("categoryList", cList);
-                intent.putIntegerArrayListExtra("amountList", aList);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) { }
-        });
-    }
-
-    public void sendArrayList(ArrayList<String> array1, ArrayList<Integer> array2) {
-        ArrayList<String> categoryList = new ArrayList<>();
-        categoryList.addAll(array1);
-        ArrayList<Integer> amountList = new ArrayList<>();
-        amountList.addAll(array2);
-
-        intent.putStringArrayListExtra("categoryList", categoryList);
-        intent.putIntegerArrayListExtra("amountList", amountList);
-
-        System.out.println("sendArray 함수 : " + categoryList + " / " + amountList);
     }
 
     @Override
