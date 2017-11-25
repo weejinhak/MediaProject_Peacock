@@ -352,5 +352,4 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="70dp" />
 
-
 </android.support.constraint.ConstraintLayout>
