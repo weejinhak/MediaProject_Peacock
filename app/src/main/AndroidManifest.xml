@@ -78,6 +78,9 @@
         <activity
             android:name=".AnalysisActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MessageCategoryAddActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

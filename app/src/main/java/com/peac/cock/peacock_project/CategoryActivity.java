@@ -1,7 +1,6 @@
 package com.peac.cock.peacock_project;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -9,7 +8,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.GridView;
 import android.widget.Toast;
 
@@ -19,6 +17,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.peac.cock.peacock_project.projectAdapter.CategoryGridViewAdapter;
 
 import java.util.ArrayList;
 
@@ -34,7 +33,7 @@ public class CategoryActivity extends AppCompatActivity {
     private ArrayList<Integer> getDbImageIdList;
     private String uid;
     private String state = "수입";
-    private CategoryGridViewActivity adapterViewCategory;
+    private CategoryGridViewAdapter categoryGridViewAdapter;
     private GridView categoryGridView;
 
     private String[] gridViewString;
@@ -134,8 +133,8 @@ public class CategoryActivity extends AppCompatActivity {
                     gridViewString[i] = getDbImageStringList.get(i);
                     gridViewImageId[i] = getDbImageIdList.get(i);
                 }
-                adapterViewCategory = new CategoryGridViewActivity(getApplicationContext(), gridViewString, gridViewImageId);
-                categoryGridView.setAdapter(adapterViewCategory);
+                categoryGridViewAdapter = new CategoryGridViewAdapter(getApplicationContext(), gridViewString, gridViewImageId);
+                categoryGridView.setAdapter(categoryGridViewAdapter);
             }
 
             @Override

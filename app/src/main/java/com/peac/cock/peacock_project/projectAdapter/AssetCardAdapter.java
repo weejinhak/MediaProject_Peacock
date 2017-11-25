@@ -8,9 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.peac.cock.peacock_project.R;
-import com.peac.cock.peacock_project.projectDto.AssetItem;
 import com.peac.cock.peacock_project.projectDto.Card;
-import com.peac.cock.peacock_project.projectDto.Cash;
 
 import java.util.ArrayList;
 

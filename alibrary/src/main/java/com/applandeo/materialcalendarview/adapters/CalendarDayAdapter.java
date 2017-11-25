@@ -55,6 +55,12 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
     private FirebaseAuth mAuth;
     private FirebaseDatabase mDatabase;
 
+    private TextView daystring1;
+    private TextView daystring2;
+
+    private SimpleDateFormat a;
+    private String newDate;
+
     CalendarDayAdapter(CalendarPageAdapter calendarPageAdapter, Context context, CalendarProperties calendarProperties,
                        ArrayList<Date> dates, int month) {
         super(context, calendarProperties.getItemLayoutResource(), dates);
@@ -77,16 +83,17 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance();
         uid = mAuth.getCurrentUser().getUid();
-        TextView dayLabel = (TextView) view.findViewById(R.id.dayLabel);
+        TextView dayLabel = view.findViewById(R.id.dayLabel);
 
-        TextView daystring1 = (TextView) view.findViewById(R.id.daystring1);
-        TextView daystring2 = (TextView) view.findViewById(R.id.daystring2);
+        daystring1 = view.findViewById(R.id.daystring1);
+        daystring2 = view.findViewById(R.id.daystring2);
+
         // Fri Dec 01 00:00:00 GMT+00:00 2017
-        SimpleDateFormat a = new SimpleDateFormat("yyyyMMdd");
-        String newdate = a.format(getItem(position));
+        a = new SimpleDateFormat("yyyyMMdd");
+        newDate = a.format(getItem(position));
+
         callDatabase();
 
-        Log.i("aa", newdate);
         Calendar day = new GregorianCalendar();
         day.setTime(getItem(position));
         //Log.i("a",String.valueOf(getItem(position)));
@@ -106,7 +113,7 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
             DayColorsUtils.setDayColors(dayLabel, ContextCompat.getColor(mContext,
                     R.color.nextMonthDayColor), Typeface.NORMAL, R.drawable.background_transparent);
         }
-        if (newdate.equals("20171120")) {
+        if (newDate.equals("20171120")) {
             daystring1.setText("50000");
             daystring2.setText("bbb");
         }
@@ -160,10 +167,9 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
 
                 for (DataSnapshot fileSnapshot : dataSnapshot.child("users").child(uid).child("ledger").getChildren()) {
                     String id = (String) fileSnapshot.child("date").getValue();
-                    System.out.println(id);
                     String imgString = fileSnapshot.child("cateImageString").getValue(String.class);
-
                 }
+
             }
 
             @Override

@@ -80,7 +80,7 @@ public class SettingActivity extends AppCompatActivity{
         breakDownGoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), CalendarActivity.class);
+                Intent intent = new Intent(getApplicationContext(), DetailTabActivity.class);
                 startActivity(intent);
             }
         });

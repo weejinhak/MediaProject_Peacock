@@ -1,6 +1,5 @@
 package com.peac.cock.peacock_project;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,16 +13,18 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.peac.cock.peacock_project.projectAdapter.CategoryGridViewAdapter;
 import com.peac.cock.peacock_project.projectDto.Category;
 
 /**
- * Created by wee on 2017. 11. 15..
+ * Created by wee on 2017. 11. 25..
  */
 
-public class CategoryAddActivity extends AppCompatActivity {
-
+public class MessageCategoryAddActivity extends AppCompatActivity {
     private GridView categoryAddGridView;
     private ImageButton incomingButton;
     private ImageButton outgoingButton;
@@ -31,8 +32,6 @@ public class CategoryAddActivity extends AppCompatActivity {
     private Category mCategory;
     private Button categoryAddButton;
     private String categoryType = "지출";
-    private String categoryImageString;
-    private int categoryImageId;
     private FirebaseAuth mAuth;
     private FirebaseDatabase mDatabase;
     private String uid;
@@ -58,31 +57,30 @@ public class CategoryAddActivity extends AppCompatActivity {
             R.drawable.category_item_star, R.drawable.category_item_traffic, R.drawable.category_item_trip
     };
 
-    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_category_add);
+        setContentView(R.layout.activity_msg_category_add);
 
         //fireBase Auth & Database
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance();
-        uid=mAuth.getCurrentUser().getUid();
+        uid = mAuth.getCurrentUser().getUid();
 
-        for(Integer i: gridViewImageId){
+        for (Integer i : gridViewImageId) {
             System.out.print(i);
         }
 
         //getId
-        incomingButton = findViewById(R.id.category_add_layout_incoming_button);
-        outgoingButton = findViewById(R.id.category_add_layout_outgoing_button);
-        transferButton = findViewById(R.id.category_add_layout_transfer_button);
-        categoryAddButton = findViewById(R.id.category_add_grid_view_category_add_button);
+        incomingButton = findViewById(R.id.msg_category_add_layout_incoming_button);
+        outgoingButton = findViewById(R.id.msg_category_add_layout_outgoing_button);
+        transferButton = findViewById(R.id.msg_category_add_layout_transfer_button);
+        categoryAddButton = findViewById(R.id.msg_category_add_grid_view_category_add_button);
 
         CategoryGridViewAdapter adapterViewCategory = new CategoryGridViewAdapter(getApplicationContext(), gridViewString, gridViewImageId);
-        mCategory=new Category();
+        mCategory = new Category();
         //get Id
-        categoryAddGridView = findViewById(R.id.category_add_grid_view_image_text);
+        categoryAddGridView = findViewById(R.id.msg_category_add_grid_view_image_text);
 
         categoryAddGridView.setAdapter(adapterViewCategory);
 
@@ -138,8 +136,8 @@ public class CategoryAddActivity extends AppCompatActivity {
         categoryAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDatabase.getReference().child("users").child(uid).child("category").child(categoryType).push().setValue(mCategory);
-                Intent intent = new Intent(getApplicationContext(),Category.class);
+                //mDatabase.getReference().child("users").child(uid).child("category").child(categoryType).push().setValue(mCategory);
+                Intent intent = new Intent(getApplicationContext(),DetailTabActivity.class);
                 startActivity(intent);
                 finish();
             }
