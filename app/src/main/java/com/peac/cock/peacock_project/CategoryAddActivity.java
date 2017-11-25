@@ -36,6 +36,7 @@ public class CategoryAddActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseDatabase mDatabase;
     private String uid;
+    private Intent intent;
 
     String[] gridViewString = {
             "예술", "아이", "뷰티",
@@ -63,6 +64,8 @@ public class CategoryAddActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_add);
+
+        intent = new Intent();
 
         //fireBase Auth & Database
         mAuth = FirebaseAuth.getInstance();
@@ -139,7 +142,7 @@ public class CategoryAddActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mDatabase.getReference().child("users").child(uid).child("category").child(categoryType).push().setValue(mCategory);
-                Intent intent = new Intent(getApplicationContext(),Category.class);
+                intent.setClass(getApplicationContext(), CategoryActivity.class);
                 startActivity(intent);
                 finish();
             }
