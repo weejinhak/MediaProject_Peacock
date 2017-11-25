@@ -67,7 +67,7 @@ public class Tab1_content extends Fragment implements ValueEventListener {
         button2 = rootView.findViewById(R.id.forwardButton);
         textView.setText(date2 + "월");
 
-        System.out.println(date2+"currentMonth");
+        System.out.println(date2 + "currentMonth");
 
         //getId
         listView = rootView.findViewById(R.id.tab_list_msgList);
@@ -125,9 +125,16 @@ public class Tab1_content extends Fragment implements ValueEventListener {
             LedgerDto ledger = fileSnapshot.getValue(LedgerDto.class);
 
             String msgContent = ledger.getContent();
-            String[] msgToken = msgContent.split("\\s");
-            MessageItem messageItem = new MessageItem(0, msgToken[0], ledger.getDate(), Integer.parseInt(ledger.getAmount()));
-            messageItems.add(messageItem);
+            String[] msgContentToken = msgContent.split("\\s");
+
+            String msgDate = ledger.getDate();
+            String[] msgDateToken = msgDate.split("/");
+
+            if(String.valueOf(date2).equals(msgDateToken[0])){
+                MessageItem messageItem = new MessageItem(0, msgContentToken[0], ledger.getDate(), Integer.parseInt(ledger.getAmount()));
+                messageItems.add(messageItem);
+            }
+            Log.d("datedate", String.valueOf(date2));
         }
         listTab1Adapter = new ListTab1Adapter(getContext(), R.layout.activity_list_msg_item, messageItems);
         listView.setAdapter(listTab1Adapter);
