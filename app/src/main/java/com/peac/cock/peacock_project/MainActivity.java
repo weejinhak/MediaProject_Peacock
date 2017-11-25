@@ -2,6 +2,8 @@ package com.peac.cock.peacock_project;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -48,6 +50,25 @@ public class MainActivity extends AppCompatActivity
 
         intent = new Intent();
 
+        BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+                = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.navigation_asset:
+                        return true;
+                    case R.id.navigation_list:
+                        return true;
+                    case R.id.navigation_analysis:
+                        return true;
+                    case R.id.navigation_setting:
+                        return true;
+                }
+                return false;
+            }
+        };
+
         //fire base Auth && database
         auth = FirebaseAuth.getInstance();
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -58,14 +79,14 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         // get ID
-        ImageButton assetGoButton = findViewById(R.id.main_layout_asset_go_button);
+        /*ImageButton assetGoButton = findViewById(R.id.main_layout_asset_go_button);
         ImageButton analysisGoButton = findViewById(R.id.main_layout_analysis_go_button);
         ImageButton detailGoButton = findViewById(R.id.main_layout_breakdown_go_button);
-        ImageButton settingGoButton = findViewById(R.id.main_layout_setting_go_button);
+        ImageButton settingGoButton = findViewById(R.id.main_layout_setting_go_button);*/
 
 
 
-        detailGoButton.setOnClickListener(new View.OnClickListener() {
+        /*detailGoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 intent.setClass(getApplicationContext(), DetailTabActivity.class);
@@ -93,7 +114,7 @@ public class MainActivity extends AppCompatActivity
                 intent.setClass(getApplicationContext(), AnalysisActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
