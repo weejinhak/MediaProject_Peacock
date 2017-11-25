@@ -2,11 +2,20 @@ package com.peac.cock.peacock_project;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Layout;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TabHost;
+import android.widget.TableRow;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
@@ -28,6 +37,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.peac.cock.peacock_project.projectDto.Asset;
 import com.peac.cock.peacock_project.projectDto.Card;
 import com.peac.cock.peacock_project.projectDto.Cash;
+import com.peac.cock.peacock_project.projectDto.CategoryBudget;
 import com.peac.cock.peacock_project.projectDto.LedgerDto;
 
 import java.io.Serializable;
@@ -40,15 +50,17 @@ import java.util.Map;
 import javax.xml.transform.sax.SAXSource;
 
 public class AnalysisActivity extends AppCompatActivity implements ValueEventListener{
-    private float rainfall[] = {98.8f, 123.8f, 161.6f, 24.2f, 52f, 58.2f, 35.4f, 13.3f, 78.4f, 203.4f, 240.2f, 159.7f};
-    private String monthName[] = {"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"};
+
     private PieChart pieChart;
-    private BarChart barChart;
 
-    private ArrayList<LedgerDto> ledgers;
-    private HashMap<String, String> datas = new HashMap<>();
+    private TextView categoryBudgetRegisterText;
+    private Button categoryBudgetRegisterButton;
 
-    private DatabaseReference databaseReference;
+    private double[] entireBudget = new double[2];
+    private HashMap<String, String> categoryBudgetSet = new HashMap<>();
+    private HashMap<String, String> categoryOutgoing = new HashMap<>();
+
+    private Intent intent;
 
 
     @Override
@@ -56,13 +68,16 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_analysis);
 
-    //    data = (HashMap<String,String>) intent.getSerializableExtra("data");
-        Intent intent = getIntent();
-        System.out.println(intent.getExtras());
-        ArrayList<String> categoryList = intent.getStringArrayListExtra("categoryList");
-        ArrayList<Integer> amountList = intent.getIntegerArrayListExtra("amountList");
-        System.out.println("받아온 값 / categoryList : " + categoryList);
-        System.out.println("받아온 값 / amountList : " + amountList);
+        intent = getIntent();
+
+        pieChart = findViewById(R.id.pie_chart);
+
+        categoryBudgetRegisterText = findViewById(R.id.category_budget_register_text);
+        categoryBudgetRegisterButton = findViewById(R.id.category_budget_register_button);
+
+        CategoryBudget cb = new CategoryBudget("뷰티", "350000");
+
+        FirebaseDatabase.getInstance().getReference().child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(cb);
 
         final TabHost host = findViewById(R.id.tab_host);
         host.setup();
@@ -77,20 +92,7 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
         page2.setIndicator("예산");
         host.addTab(page2);
 
-        //firebase get auth & database;
-        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
-
-        ledgers = new ArrayList<>();
-
-
-     //   callDetailData();
-
-        pieChart = findViewById(R.id.pie_chart);
-        barChart = findViewById(R.id.bar_chart);
-        setupBarChart(12, 50);
-
-     //   setupPieChart();
-
+        setupPieChart();
     }
 
     @NonNull
@@ -100,26 +102,30 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
     }
 
     protected void setupPieChart() {
+        pieChart.setUsePercentValues(true);
+        pieChart.getDescription().setEnabled(false);
+        pieChart.setExtraOffsets(5, 10, 5, 5);
+        pieChart.setDragDecelerationFrictionCoef(0.99f);
+        pieChart.setDrawHoleEnabled(true);
+        pieChart.setCenterTextColor(Color.BLACK);
+        pieChart.setHoleColor(Color.WHITE);
+        pieChart.setTransparentCircleRadius(60f);
+        pieChart.animateY(1000, Easing.EasingOption.EaseInOutCubic);
+    }
+
+    protected void setPieChartData() {
         List<PieEntry> pieEntries = new ArrayList<>();
 
-       if(datas.size() != 0) {
-            for (Map.Entry<String, String> d : datas.entrySet()) {
-                System.out.println("value : " + d.getValue() + "key :" + d.getKey());
-                pieEntries.add(new PieEntry(Integer.parseInt(d.getValue()), d.getKey()));
-                System.out.println(pieEntries);
+       if(categoryOutgoing.size() != 0) {
+            for (Map.Entry<String, String> c : categoryOutgoing.entrySet()) {
+                pieEntries.add(new PieEntry(Integer.parseInt(c.getValue()), c.getKey()));
             }
         } else {
             System.out.println("데이터 없음");
         }
 
-//        for(int i = 0 ; i < rainfall.length ; i++) {
-//            pieEntries.add(new PieEntry(rainfall[i], monthName[i]));
-//            System.out.println(pieEntries);
-//        }
-
-
-        PieDataSet dataSet = new PieDataSet(pieEntries, "Outgoing Pattern");
-        dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
+        PieDataSet dataSet = new PieDataSet(pieEntries, "지출 패턴");
+        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
         dataSet.setSelectionShift(5f);
         dataSet.setSliceSpace(3f);
 
@@ -127,39 +133,41 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
         data.setValueTextSize(10f);
         data.setValueTextColor(Color.YELLOW);
 
-        pieChart.setUsePercentValues(true);
-        pieChart.getDescription().setEnabled(false);
-        pieChart.setExtraOffsets(5, 10, 5, 5);
-
-        pieChart.setDragDecelerationFrictionCoef(0.99f);
-
-        pieChart.setDrawHoleEnabled(true);
-        pieChart.setHoleColor(Color.WHITE);
-        pieChart.setTransparentCircleRadius(60f);
-
         pieChart.setData(data);
-        pieChart.animateY(1000, Easing.EasingOption.EaseInOutCubic);
         pieChart.invalidate();
     }
 
-    protected void setupBarChart(int count, int range) {
-        ArrayList<BarEntry> yVals = new ArrayList<>();
-        float barWidth = 9f;
-        float spaceForBar = 10f;
+    protected void setBarChartData() {
+        LinearLayout layout = findViewById(R.id.linear_layout);
 
-        for(int i = 0 ; i < count ; i++) {
-            float val = (float) (Math.random() * range);
-            yVals.add(new BarEntry(i * spaceForBar, val));
+        int percentage = (int)(entireBudget[1]/entireBudget[0]*100);
+        if (percentage > 100) {
+            percentage = 100;
         }
 
-        BarDataSet set1;
+        ProgressBar progressBar = new ProgressBar(this, null, android.R.attr.progressBarStyleHorizontal);
+        progressBar.setProgress(percentage);
+        layout.addView(progressBar);
+        System.out.println(percentage);
 
-        set1 = new BarDataSet(yVals, "Data Set1");
-
-        BarData data = new BarData(set1);
-        data.setBarWidth(barWidth);
-
-        barChart.setData(data);
+        if(categoryBudgetSet.size()==0) {
+            categoryBudgetRegisterText.setVisibility(View.VISIBLE);
+            categoryBudgetRegisterButton.setVisibility(View.VISIBLE);
+            System.out.println("데이터 없음");
+        } else {
+            categoryBudgetRegisterText.setVisibility(View.GONE);
+            categoryBudgetRegisterButton.setVisibility(View.GONE);
+            System.out.println("데이터 있음");
+            for(Map.Entry<String, String> categoryBudget : categoryBudgetSet.entrySet()) {
+                int percent = Integer.parseInt(categoryOutgoing.get(categoryBudget.getKey()))/Integer.parseInt(categoryBudget.getValue())*100;
+                if (percent > 100) {
+                    percent = 100;
+                }
+                ProgressBar p = new ProgressBar(this, null, android.R.attr.progressBarStyleHorizontal);
+                p.setProgress(percent);
+                layout.addView(p);
+            }
+        }
     }
 
     @Override
@@ -177,31 +185,45 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
     @Override
     public void onDataChange(DataSnapshot dataSnapshot) {
         dataSnapshot.getValue();
+
+        /*entireBudget[0] = Double.parseDouble(dataSnapshot.child("users").child(getUid()).child("budget").getValue(String.class));
+        System.out.println(entireBudget[0]);*/
+        entireBudget[0] = 650000;
+        entireBudget[1] = 0;
+
+        for(DataSnapshot fileSnapshot : dataSnapshot.child("users").child(getUid()).child("categoryBudget").getChildren()) {
+            CategoryBudget categoryBudget = fileSnapshot.getValue(CategoryBudget.class);
+            categoryBudgetSet.put(categoryBudget.getCategoryName(), categoryBudget.getBudget());
+        }
+
         for(DataSnapshot fileSnapshot : dataSnapshot.child("users").child(getUid()).child("ledger").getChildren()) {
             LedgerDto ledger = fileSnapshot.getValue(LedgerDto.class);
-
-            ledgers.add(ledger);
 
             boolean check = false;
 
             if(ledger.getInOut().equals("지출")) {
                 String category = ledger.getCategory();
                 category = null == category ? "미분류" : category;
-                for (Map.Entry<String, String> data : datas.entrySet()) {
-                    if (data.getKey().equals(category)) {
-                        data.setValue(String.valueOf(Integer.parseInt(data.getValue())+(Integer.parseInt(ledger.getAmount()))));
+                for (Map.Entry<String, String> c : categoryOutgoing.entrySet()) {
+                    if (c.getKey().equals(category)) {
+                        c.setValue(String.valueOf(Integer.parseInt(c.getValue())+(Integer.parseInt(ledger.getAmount()))));
                         check = true;
                         break;
                     }
                 }
 
                 if (!check) {
-                    datas.put(category, ledger.getAmount());
+                    categoryOutgoing.put(category, ledger.getAmount());
+                }
+                if(ledger.getDate().substring(0,2).equals("11")) {
+                    entireBudget[1] += Double.parseDouble(ledger.getAmount());
                 }
             }
         }
+        System.out.println(entireBudget[1]);
 
-        setupPieChart();
+        setPieChartData();
+        setBarChartData();
     }
 
     @Override

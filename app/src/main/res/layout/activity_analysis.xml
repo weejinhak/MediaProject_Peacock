@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -27,40 +26,45 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <FrameLayout
-                android:id="@android:id/tabcontent"
+            <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <LinearLayout
-                    android:id="@+id/analysis"
+                <FrameLayout
+                    android:id="@android:id/tabcontent"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:layout_height="match_parent">
 
-                    <com.github.mikephil.charting.charts.PieChart
-                        android:id="@+id/pie_chart"
+                    <LinearLayout
+                        android:id="@+id/analysis"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
+                        android:layout_height="800dp"
+                        android:orientation="vertical">
 
-                </LinearLayout>
+                        <com.github.mikephil.charting.charts.PieChart
+                            android:id="@+id/pie_chart"
+                            android:layout_width="match_parent"
+                            android:layout_height="300dp" />
 
-                <LinearLayout
-                    android:id="@+id/budget"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    </LinearLayout>
 
-                    <include
-                        android:id="@+id/include"
-                        layout="@layout/activity_budget_analysis"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                    <LinearLayout
+                        android:id="@+id/budget"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
-                </LinearLayout>
-            </FrameLayout>
+                        <include
+                            android:id="@+id/include"
+                            layout="@layout/activity_budget_analysis"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </LinearLayout>
+                </FrameLayout>
+            </ScrollView>
         </LinearLayout>
     </TabHost>
 </android.support.constraint.ConstraintLayout>
