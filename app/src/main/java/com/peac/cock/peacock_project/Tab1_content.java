@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.content.res.TypedArray;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +21,16 @@ import android.widget.Toast;
 
 import com.applandeo.materialcalendarview.utils.DateUtils;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.peac.cock.peacock_project.projectAdapter.ListTab1Adapter;
+import com.peac.cock.peacock_project.projectDto.Card;
+import com.peac.cock.peacock_project.projectDto.Cash;
+import com.peac.cock.peacock_project.projectDto.LedgerDto;
+import com.peac.cock.peacock_project.projectDto.MessageItem;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -32,29 +43,17 @@ import java.util.List;
  * Created by dmsru on 2017-11-13.
  */
 
-public class Tab1_content extends Fragment implements AdapterView.OnItemClickListener{
+public class Tab1_content extends Fragment implements ValueEventListener {
 
-    Calendar cal = Calendar.getInstance();
-    String[] placeName;
-    TypedArray categoryPicId;
-    String[] purchase;
-    String[] accountType;
-
-    TextView textView;
-    ImageButton button1;
-    ImageButton button2;
-
-    List<ListViewRowItem> rowItems;
-    ListView mylistview;
-
-    private FirebaseAuth mAuth;
-    private FirebaseDatabase mDatabase;
-    private String uid;
-
-    Date date= new Date();
-    SimpleDateFormat sdf = new SimpleDateFormat("MM");
-    int date2=Integer.parseInt(sdf.format(date));
-    //private ImageView categoryImage;
+    private TextView textView;
+    private ImageButton button1;
+    private ImageButton button2;
+    private Date date = new Date();
+    private SimpleDateFormat sdf = new SimpleDateFormat("MM");
+    private int date2 = Integer.parseInt(sdf.format(date));
+    private ArrayList<MessageItem> messageItems = new ArrayList<>();
+    private ListView listView;
+    private ListTab1Adapter listTab1Adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,82 +61,100 @@ public class Tab1_content extends Fragment implements AdapterView.OnItemClickLis
 
         // listview, header 참조 획득.
         View rootView = inflater.inflate(R.layout.activity_tab_list, container, false);
-        rowItems = new ArrayList<ListViewRowItem>();
-        placeName = getResources().getStringArray(R.array.place_name);
-        categoryPicId = getResources().obtainTypedArray(R.array.category_pic_id);
-        purchase = getResources().getStringArray(R.array.purchase);
-        accountType = getResources().getStringArray(R.array.account_type);
-        final View header = getLayoutInflater().inflate(R.layout.activity_header_itemview,null,false);
 
-        textView = (TextView) rootView.findViewById(R.id.currentDateLabel) ;
-        button1 = (ImageButton) rootView.findViewById(R.id.previousButton);
-        button2 = (ImageButton) rootView.findViewById(R.id.forwardButton);
+        textView = rootView.findViewById(R.id.currentDateLabel);
+        button1 = rootView.findViewById(R.id.previousButton);
+        button2 = rootView.findViewById(R.id.forwardButton);
+        textView.setText(date2 + "월");
 
-        for (int i = 0; i < placeName.length; i++) {
-            ListViewRowItem item = new ListViewRowItem(placeName[i],
-                    categoryPicId.getResourceId(i, -1), purchase[i], accountType[i]);
-            rowItems.add(item);
-        }
+        System.out.println(date2+"currentMonth");
 
-        textView.setText(date2+"월");
+        //getId
+        listView = rootView.findViewById(R.id.tab_list_msgList);
 
-        mylistview = (ListView) rootView.findViewById(R.id.List);
-        ListViewCustomAdapter adapter = new ListViewCustomAdapter(getContext(), rowItems);
-        mylistview.setAdapter(adapter);
-        mylistview.setOnItemClickListener(this);
-
-        // listview에 header 추가.
-        mylistview.addHeaderView(header);
-
-        //fireBase Auth & Database
-        mAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance();
-        uid=mAuth.getCurrentUser().getUid();
-
-       // categoryImage = rootView.findViewById(R.id.category_add_layout_incoming_button);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getContext(), MessageCategoryAddActivity.class);
+                startActivity(intent);
+            }
+        });
 
         button1.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
                 minusOneMonth();
-                textView.setText(date2+"월");
+                textView.setText(date2 + "월");
             }
         });
-                button2.setOnClickListener(new View.OnClickListener() {
+        button2.setOnClickListener(new View.OnClickListener() {
 
-                    @Override
-                    public void onClick(View arg0) {
-                        addOneMonth();
-                       textView.setText(date2+"월");
-                    }
-                });
+            @Override
+            public void onClick(View arg0) {
+                addOneMonth();
+                textView.setText(date2 + "월");
+            }
+        });
         return rootView;
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent intent = new Intent(getContext(), CategoryAddActivity.class);
-        startActivity(intent);
-        String placeName = rowItems.get(position).getPlaceName();
-        Toast.makeText(getContext(), "" + placeName, Toast.LENGTH_SHORT).show();
-    }
-    public  void addOneMonth()
-    {
-        if(date2==12){
-            //button2.setVisibility(View.INVISIBLE);
-        }else{
-            date2=date2+1;
+
+    public void addOneMonth() {
+        if (date2 == 12) {
+
+        } else {
+            date2 = date2 + 1;
         }
     }
 
-    public void minusOneMonth()
-    {
+    public void minusOneMonth() {
 
-       if(date2==1){
+        if (date2 == 1) {
 
-       }else{
-           date2=date2-1;
-       }
+        } else {
+            date2 = date2 - 1;
+        }
     }
+
+    @Override
+    public void onDataChange(DataSnapshot dataSnapshot) {
+        dataSnapshot.getValue();
+
+        for (DataSnapshot fileSnapshot : dataSnapshot.child("users").child(getUid()).child("ledger").getChildren()) {
+            LedgerDto ledger = fileSnapshot.getValue(LedgerDto.class);
+
+            String msgContent = ledger.getContent();
+            String[] msgToken = msgContent.split("\\s");
+            MessageItem messageItem = new MessageItem(0, msgToken[0], ledger.getDate(), Integer.parseInt(ledger.getAmount()));
+            messageItems.add(messageItem);
+        }
+        listTab1Adapter = new ListTab1Adapter(getContext(), R.layout.activity_list_msg_item, messageItems);
+        listView.setAdapter(listTab1Adapter);
+    }
+
+    @Override
+    public void onCancelled(DatabaseError databaseError) {
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        FirebaseDatabase.getInstance().getReference().addValueEventListener(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        FirebaseDatabase.getInstance().getReference().removeEventListener(this);
+    }
+
+    @NonNull
+    private String getUid() {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        return currentUser.getUid();
+    }
+
 }
+

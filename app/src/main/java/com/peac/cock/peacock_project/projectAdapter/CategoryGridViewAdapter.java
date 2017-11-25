@@ -1,4 +1,4 @@
-package com.peac.cock.peacock_project;
+package com.peac.cock.peacock_project.projectAdapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,17 +8,19 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.peac.cock.peacock_project.R;
+
 /**
  * Created by wee on 2017. 11. 14..
  */
 
-public class CategoryGridViewActivity extends BaseAdapter {
+public class CategoryGridViewAdapter extends BaseAdapter {
 
     private Context mContext;
     private final String[] gridViewString;
     private final int[] gridViewImageId;
 
-    public CategoryGridViewActivity(Context mContext, String[] gridViewString, int[] gridViewImageId) {
+    public CategoryGridViewAdapter(Context mContext, String[] gridViewString, int[] gridViewImageId) {
         this.mContext = mContext;
         this.gridViewString = gridViewString;
         this.gridViewImageId = gridViewImageId;
