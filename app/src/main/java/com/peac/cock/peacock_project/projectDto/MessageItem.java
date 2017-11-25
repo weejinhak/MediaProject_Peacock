@@ -45,4 +45,14 @@ public class MessageItem {
     public String getMessageDate() {return messageDate;}
 
     public void setMessageDate(String messageDate) {this.messageDate = messageDate;}
+
+    @Override
+    public String toString() {
+        return "MessageItem{" +
+                "categoryId=" + categoryId +
+                ", messageContent='" + messageContent + '\'' +
+                ", messageBalance=" + messageBalance +
+                ", messageDate='" + messageDate + '\'' +
+                '}';
+    }
 }

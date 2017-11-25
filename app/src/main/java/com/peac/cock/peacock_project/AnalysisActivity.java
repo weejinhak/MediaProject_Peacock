@@ -56,7 +56,7 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
     private TextView categoryBudgetRegisterText;
     private Button categoryBudgetRegisterButton;
 
-    private double[] entireBudget = new double[2];
+    private int[] entireBudget = new int[2];
     private HashMap<String, String> categoryBudgetSet = new HashMap<>();
     private HashMap<String, String> categoryOutgoing = new HashMap<>();
 

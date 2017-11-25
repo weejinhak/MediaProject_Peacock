@@ -31,6 +31,9 @@ public class ListTab1Adapter extends BaseAdapter {
         this.layout = layout;
     }
 
+    public void setMessageItems(ArrayList<MessageItem> messageItems) {
+        this.messageItems = messageItems;
+    }
 
     @Override
     public int getCount() {

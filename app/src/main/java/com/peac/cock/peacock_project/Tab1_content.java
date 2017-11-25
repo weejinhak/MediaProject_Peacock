@@ -37,6 +37,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -49,11 +50,14 @@ public class Tab1_content extends Fragment implements ValueEventListener {
     private ImageButton button1;
     private ImageButton button2;
     private Date date = new Date();
-    private SimpleDateFormat sdf = new SimpleDateFormat("MM");
-    private int date2 = Integer.parseInt(sdf.format(date));
+  //  private SimpleDateFormat sdf = new SimpleDateFormat("MM");
+  //  private int date2 = Integer.parseInt(sdf.format(date));
+    private int date2 = 11;
     private ArrayList<MessageItem> messageItems = new ArrayList<>();
     private ListView listView;
     private ListTab1Adapter listTab1Adapter;
+
+    private HashMap<String, ArrayList<MessageItem>> msgSetPerMonth;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -66,6 +70,8 @@ public class Tab1_content extends Fragment implements ValueEventListener {
         button1 = rootView.findViewById(R.id.previousButton);
         button2 = rootView.findViewById(R.id.forwardButton);
         textView.setText(date2 + "월");
+
+        msgSetPerMonth = new HashMap<>();
 
         System.out.println(date2 + "currentMonth");
 
@@ -86,6 +92,8 @@ public class Tab1_content extends Fragment implements ValueEventListener {
             public void onClick(View arg0) {
                 minusOneMonth();
                 textView.setText(date2 + "월");
+                listTab1Adapter.setMessageItems(msgSetPerMonth.get(String.valueOf(date2)));
+                listView.setAdapter(listTab1Adapter);
             }
         });
         button2.setOnClickListener(new View.OnClickListener() {
@@ -94,6 +102,8 @@ public class Tab1_content extends Fragment implements ValueEventListener {
             public void onClick(View arg0) {
                 addOneMonth();
                 textView.setText(date2 + "월");
+                listTab1Adapter.setMessageItems(msgSetPerMonth.get(String.valueOf(date2)));
+                listView.setAdapter(listTab1Adapter);
             }
         });
         return rootView;
@@ -127,16 +137,25 @@ public class Tab1_content extends Fragment implements ValueEventListener {
             String msgContent = ledger.getContent();
             String[] msgContentToken = msgContent.split("\\s");
 
-            String msgDate = ledger.getDate();
-            String[] msgDateToken = msgDate.split("/");
+            String msgDate = ledger.getDate().substring(0,2);
+            Log.d("date", msgDate);
 
-            if(String.valueOf(date2).equals(msgDateToken[0])){
-                MessageItem messageItem = new MessageItem(0, msgContentToken[0], ledger.getDate(), Integer.parseInt(ledger.getAmount()));
-                messageItems.add(messageItem);
+            MessageItem messageItem = new MessageItem(0, msgContentToken[0], ledger.getDate(), Integer.parseInt(ledger.getAmount()));
+            messageItems.add(messageItem);
+
+            if(msgSetPerMonth.get(msgDate) == null) {
+                ArrayList<MessageItem> msgItems = new ArrayList<>();
+                msgSetPerMonth.put(msgDate, msgItems);
             }
+            msgSetPerMonth.get(msgDate).add(messageItem);
+            Log.d("msgSize", String.valueOf(msgSetPerMonth.get(msgDate).size()));
+
+
             Log.d("datedate", String.valueOf(date2));
+            Log.d("msgSet", String.valueOf(msgSetPerMonth.get(String.valueOf(date2))));
         }
-        listTab1Adapter = new ListTab1Adapter(getContext(), R.layout.activity_list_msg_item, messageItems);
+
+        listTab1Adapter = new ListTab1Adapter(getContext(), R.layout.activity_list_msg_item, msgSetPerMonth.get(String.valueOf(date2)));
         listView.setAdapter(listTab1Adapter);
     }
 
