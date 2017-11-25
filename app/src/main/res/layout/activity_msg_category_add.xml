@@ -40,42 +40,18 @@
 
 
         <ImageButton
-            android:id="@+id/msg_category_add_layout_transfer_button"
-            android:layout_width="89dp"
-            android:layout_height="50dp"
-            android:layout_marginBottom="6dp"
-            android:layout_marginTop="4dp"
-            android:background="@drawable/handwriting_layout_transfer_button"
-            android:scaleType="fitXY"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/msg_category_add_layout_outgoing_button"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageButton
-            android:id="@+id/msg_category_add_layout_incoming_button"
-            android:layout_width="89dp"
-            android:layout_height="50dp"
-            android:layout_marginBottom="6dp"
-            android:layout_marginTop="4dp"
-            android:background="@drawable/handwriting_layout_incoming_button"
-            android:scaleType="fitXY"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/msg_category_add_layout_outgoing_button"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageButton
             android:id="@+id/msg_category_add_layout_outgoing_button"
             android:layout_width="89dp"
             android:layout_height="50dp"
             android:layout_marginBottom="6dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
             android:background="@drawable/handwriting_layout_active_outgoing_button"
             android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/msg_category_add_layout_transfer_button"
-            app:layout_constraintStart_toEndOf="@+id/msg_category_add_layout_incoming_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
@@ -87,7 +63,7 @@
         android:layout_height="430dp"
         android:columnWidth="100dp"
         android:gravity="center"
-        android:numColumns="3">
+        android:numColumns="2">
     </GridView>
 
     <Button

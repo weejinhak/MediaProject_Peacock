@@ -50,8 +50,8 @@ public class Tab1_content extends Fragment implements ValueEventListener {
     private ImageButton button1;
     private ImageButton button2;
     private Date date = new Date();
-  //  private SimpleDateFormat sdf = new SimpleDateFormat("MM");
-  //  private int date2 = Integer.parseInt(sdf.format(date));
+    //  private SimpleDateFormat sdf = new SimpleDateFormat("MM");
+    //  private int date2 = Integer.parseInt(sdf.format(date));
     private int date2 = 11;
     private ArrayList<MessageItem> messageItems = new ArrayList<>();
     private ListView listView;
@@ -82,6 +82,8 @@ public class Tab1_content extends Fragment implements ValueEventListener {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getContext(), MessageCategoryAddActivity.class);
+                intent.putExtra("messageKey",messageItems.get(position).getMessageKey());
+                Toast.makeText(getContext(), "클릭!" + messageItems.get(position).getMessageKey(), Toast.LENGTH_LONG).show();
                 startActivity(intent);
             }
         });
@@ -137,20 +139,25 @@ public class Tab1_content extends Fragment implements ValueEventListener {
             String msgContent = ledger.getContent();
             String[] msgContentToken = msgContent.split("\\s");
 
-            String msgDate = ledger.getDate().substring(0,2);
+            String msgDate = ledger.getDate().substring(0, 2);
             Log.d("date", msgDate);
 
-            MessageItem messageItem = new MessageItem(0, msgContentToken[0], ledger.getDate(), Integer.parseInt(ledger.getAmount()));
+            String msgKey = fileSnapshot.getKey();
+
+            //메시지 read 해올 때 카테고리 id 초기값으로  2131230977 줘야함.
+            MessageItem messageItem = new MessageItem(2131230977, msgContentToken[0], ledger.getDate(),
+                                                            Integer.parseInt(ledger.getAmount()),msgKey);
+
             messageItems.add(messageItem);
 
-            if(msgSetPerMonth.get(msgDate) == null) {
+            if (msgSetPerMonth.get(msgDate) == null) {
                 ArrayList<MessageItem> msgItems = new ArrayList<>();
                 msgSetPerMonth.put(msgDate, msgItems);
             }
             msgSetPerMonth.get(msgDate).add(messageItem);
+
+            Log.d("getKey",fileSnapshot.getKey());
             Log.d("msgSize", String.valueOf(msgSetPerMonth.get(msgDate).size()));
-
-
             Log.d("datedate", String.valueOf(date2));
             Log.d("msgSet", String.valueOf(msgSetPerMonth.get(String.valueOf(date2))));
         }

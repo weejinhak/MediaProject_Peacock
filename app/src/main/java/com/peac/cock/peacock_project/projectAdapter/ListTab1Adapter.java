@@ -59,6 +59,7 @@ public class ListTab1Adapter extends BaseAdapter {
         MessageItem messageItem = messageItems.get(position);
 
         ImageView imageView = convertView.findViewById(R.id.list_msg_img);
+        Log.d("categoryImage", String.valueOf(R.drawable.message_category_unclassified));
         imageView.setImageResource(messageItem.getCategoryId());
 
         TextView msgContent = convertView.findViewById(R.id.list_msg_content);
