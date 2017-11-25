@@ -75,10 +75,6 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
         categoryBudgetRegisterText = findViewById(R.id.category_budget_register_text);
         categoryBudgetRegisterButton = findViewById(R.id.category_budget_register_button);
 
-        CategoryBudget cb = new CategoryBudget("뷰티", "350000");
-
-        FirebaseDatabase.getInstance().getReference().child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(cb);
-
         final TabHost host = findViewById(R.id.tab_host);
         host.setup();
 

@@ -9,6 +9,10 @@ public class CategoryBudget {
     private String categoryName;
     private String budget;
 
+    public CategoryBudget() {
+
+    }
+
     public CategoryBudget(String categoryName, String budget) {
         this.categoryName = categoryName;
         this.budget = budget;

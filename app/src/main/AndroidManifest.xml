@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".LodingActivity"
+            android:name=".LoadingActivity"
             android:label="@string/login_layout_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
