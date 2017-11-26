@@ -27,7 +27,7 @@
     <TabHost
         android:id="@+id/tab_host"
         android:layout_width="match_parent"
-        android:layout_height="537dp"
+        android:layout_height="517dp"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -57,7 +57,7 @@
                     <LinearLayout
                         android:id="@+id/analysis"
                         android:layout_width="match_parent"
-                        android:layout_height="800dp"
+                        android:layout_height="wrap_content"
                         android:orientation="vertical">
 
                         <com.github.mikephil.charting.charts.PieChart
