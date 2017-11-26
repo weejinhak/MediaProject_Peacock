@@ -1,13 +1,10 @@
 package com.peac.cock.peacock_project;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,27 +20,28 @@ import com.google.firebase.database.ValueEventListener;
  * Created by wee on 2017. 11. 14..
  */
 
-public class SettingActivity extends Fragment {
+public class SettingActivity extends AppCompatActivity{
 
     private FirebaseAuth mAuth;
     private FirebaseDatabase mDatabase;
     private String userEmail;
 
-    private TextView categoryGoTextView;
-    private TextView emailTextView;
-    private TextView userNameTextView;
-
-    public SettingActivity() { }
-
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_setting, null);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_setting);
 
-        categoryGoTextView = view.findViewById(R.id.setting_layout_textView_categoryadd);
-        emailTextView = view.findViewById(R.id.setting_layout_textView_userEmail);
-        userNameTextView = view.findViewById(R.id.setting_layout_textView_userName);
+        mAuth=FirebaseAuth.getInstance();
+        mDatabase=FirebaseDatabase.getInstance();
 
+        TextView categoryGoTextView=findViewById(R.id.setting_layout_textView_categoryadd);
+        final TextView emailTextView=findViewById(R.id.setting_layout_textView_userEmail);
+        final TextView userNameTextView=findViewById(R.id.setting_layout_textView_userName);
+
+        ImageButton assetGoButton= findViewById(R.id.setting_layout_asset_go_button);
+        ImageButton breakDownGoButton=findViewById(R.id.setting_layout_breakdown_go_button);
+        ImageButton analysisGoButton=findViewById(R.id.setting_layout_analysis_go_button);
+        ImageButton settingGoButton=findViewById(R.id.setting_layout_setting_go_button);
 
         //get DataBase
         DatabaseReference databaseReference = mDatabase.getReference();
@@ -66,20 +64,40 @@ public class SettingActivity extends Fragment {
         categoryGoTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(getActivity().getApplicationContext(),CategoryActivity.class);
+                Intent intent =new Intent(getApplicationContext(),CategoryActivity.class);
                 startActivity(intent);
             }
         });
 
-        return view;
-    }
+        //하단 페이지 넘기기 클릭 이벤트
+        assetGoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(getApplicationContext(),AssetActivity.class);
+                startActivity(intent);
+            }
+        });
+        breakDownGoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), DetailTabActivity.class);
+                startActivity(intent);
+            }
+        });
+        analysisGoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(getApplicationContext(), AnalysisActivity.class);
+                startActivity(intent);
+            }
+        });
+        settingGoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "여기가 세팅 페이지야!", Toast.LENGTH_SHORT).show();
+            }
+        });
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        mAuth=FirebaseAuth.getInstance();
-        mDatabase=FirebaseDatabase.getInstance();
 
     }
 }
