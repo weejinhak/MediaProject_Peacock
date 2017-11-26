@@ -1,9 +1,11 @@
 package com.peac.cock.peacock_project;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -29,6 +31,7 @@ public class CategoryAddActivity extends AppCompatActivity {
     private ImageButton incomingButton;
     private ImageButton outgoingButton;
     private ImageButton transferButton;
+    private ImageButton backButton;
     private Category mCategory;
     private Button categoryAddButton;
     private String categoryType;
@@ -48,12 +51,12 @@ public class CategoryAddActivity extends AppCompatActivity {
             "휴대폰", "교통", "여행"
     };
     int[] gridViewImageId = {
-            R.drawable.category_item_baby,R.drawable.category_item_beauty,R.drawable.category_item_caffe,
-            R.drawable.category_item_car,R.drawable.category_item_cigarette,R.drawable.category_item_culture,
-            R.drawable.category_item_dog,R.drawable.category_item_drink,R.drawable.category_item_education,
-            R.drawable.category_item_food,R.drawable.category_item_gyeong,R.drawable.category_item_health,
-            R.drawable.category_item_home,R.drawable.category_item_life,R.drawable.category_item_love,
-            R.drawable.category_item_phone,R.drawable.category_item_traffic,R.drawable.category_item_trip
+            R.drawable.category_item_baby, R.drawable.category_item_beauty, R.drawable.category_item_caffe,
+            R.drawable.category_item_car, R.drawable.category_item_cigarette, R.drawable.category_item_culture,
+            R.drawable.category_item_dog, R.drawable.category_item_drink, R.drawable.category_item_education,
+            R.drawable.category_item_food, R.drawable.category_item_gyeong, R.drawable.category_item_health,
+            R.drawable.category_item_home, R.drawable.category_item_life, R.drawable.category_item_love,
+            R.drawable.category_item_phone, R.drawable.category_item_traffic, R.drawable.category_item_trip
     };
 
     String[] matchGridViewString = {
@@ -61,7 +64,7 @@ public class CategoryAddActivity extends AppCompatActivity {
             "자동차", "카페/간식", "문화/여가",
             "애완", "카페/간식", "교육",
             "식사", "문화/여가", "의료/건강",
-            "주거/통신", "교통","여행/숙박"
+            "주거/통신", "교통", "여행/숙박"
     };
 
     @SuppressLint("ClickableViewAccessibility")
@@ -77,9 +80,9 @@ public class CategoryAddActivity extends AppCompatActivity {
         //fireBase Auth & Database
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance();
-        uid=mAuth.getCurrentUser().getUid();
+        uid = mAuth.getCurrentUser().getUid();
 
-        for(Integer i: gridViewImageId){
+        for (Integer i : gridViewImageId) {
             System.out.print(i);
         }
 
@@ -88,9 +91,10 @@ public class CategoryAddActivity extends AppCompatActivity {
         outgoingButton = findViewById(R.id.category_add_layout_outgoing_button);
         transferButton = findViewById(R.id.category_add_layout_transfer_button);
         categoryAddButton = findViewById(R.id.category_add_grid_view_category_add_button);
+        backButton = findViewById(R.id.category_add_back_button);
 
         CategoryGridViewAdapter adapterViewCategory = new CategoryGridViewAdapter(getApplicationContext(), gridViewString, gridViewImageId);
-        mCategory=new Category();
+        mCategory = new Category();
         //get Id
         categoryAddGridView = findViewById(R.id.category_add_grid_view_image_text);
 
@@ -105,6 +109,22 @@ public class CategoryAddActivity extends AppCompatActivity {
                 mCategory.setCateImageId(gridViewImageId[i]);
             }
         });
+
+        // 초기 상태
+        if (categoryType.equals("지출")) {
+            outgoingButton.setBackgroundResource(R.drawable.handwriting_layout_active_outgoing_button);
+            incomingButton.setBackgroundResource(R.drawable.handwriting_layout_incoming_button);
+            transferButton.setBackgroundResource(R.drawable.handwriting_layout_transfer_button);
+        } else if (categoryType.equals("수입")) {
+            incomingButton.setBackgroundResource(R.drawable.handwriting_layout_active_incoming_button);
+            outgoingButton.setBackgroundResource(R.drawable.handwriting_layout_outgoing_button);
+            transferButton.setBackgroundResource(R.drawable.handwriting_layout_transfer_button);
+        } else {
+            transferButton.setBackgroundResource(R.drawable.handwriting_layout_active_transfer_button);
+            incomingButton.setBackgroundResource(R.drawable.handwriting_layout_incoming_button);
+            outgoingButton.setBackgroundResource(R.drawable.handwriting_layout_outgoing_button);
+        }
+
 
         outgoingButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -152,7 +172,16 @@ public class CategoryAddActivity extends AppCompatActivity {
                 intent.setClass(getApplicationContext(), CategoryActivity.class);
                 intent.putExtra("categoryType", categoryType);
                 startActivity(intent);
-                finish();
+     //           finish();
+            }
+        });
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent.setClass(getApplicationContext(), CategoryActivity.class);
+                intent.putExtra("categoryType", categoryType);
+                startActivity(intent);
             }
         });
 

@@ -87,7 +87,6 @@ public class MessageCategoryAddActivity extends AppCompatActivity {
 
 
         //getId
-        outgoingButton = findViewById(R.id.msg_category_add_layout_outgoing_button);
         categoryAddButton = findViewById(R.id.msg_category_add_grid_view_category_add_button);
 
         CategoryGridViewAdapter adapterViewCategory = new CategoryGridViewAdapter(getApplicationContext(), gridViewString, gridViewImageId);

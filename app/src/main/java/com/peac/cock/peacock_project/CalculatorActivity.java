@@ -101,7 +101,6 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
 
 
         // 초기 상태
-
         if(state.equals("outgoing")) {
             outgoingButton.setBackgroundResource(R.drawable.handwriting_layout_active_outgoing_button);
             incomingButton.setBackgroundResource(R.drawable.handwriting_layout_incoming_button);
@@ -228,7 +227,7 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
                 }
                 break;
             case R.id.calculator_layout_check_button:
-                intent = new Intent(getApplicationContext(), HandwritingActivity.class);
+                intent.setClass(getApplicationContext(), HandwritingActivity.class);
 
                 try {
                     ScriptableObject scope = rhino.initStandardObjects();
@@ -250,7 +249,7 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
                                         dialog.dismiss();
-                                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                        intent.setClass(getApplicationContext(), MainActivity.class);
                                         startActivity(intent);
                                     }
                                 })

@@ -46,15 +46,16 @@
 
     <TextView
         android:id="@+id/setting_layout_textView_userName"
-        android:layout_width="200dp"
+        android:layout_width="wrap_content"
         android:layout_height="22dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="정다혜"
-        android:textSize="13sp"
+        android:textColor="#000000"
+        android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/setting_layout_textView_userEmail"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.276"
+        app:layout_constraintHorizontal_bias="0.15"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/setting_layout_toolbar_title" />
 
@@ -89,12 +90,11 @@
 
     <TextView
         android:id="@+id/setting_latout_textView_mybankItem_management"
-        android:layout_width="200dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="100dp"
         android:drawableEnd="@drawable/setting_layout_arrow_gray"
         android:text="@string/setup_layout_bankItem_management_text"
-        android:textColor="#000000"
+        android:textColor="#666666"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/view2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -114,13 +114,12 @@
 
     <TextView
         android:id="@+id/setting_layout_textView_categoryadd"
-        android:layout_width="200dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="100dp"
         android:drawableEnd="@drawable/setting_layout_arrow_gray"
         android:drawablePadding="@dimen/font_size"
         android:text="@string/setup_layout_categoryAdd_text"
-        android:textColor="#000000"
+        android:textColor="#666666"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/view4"
         app:layout_constraintEnd_toEndOf="parent"
@@ -140,12 +139,11 @@
 
     <TextView
         android:id="@+id/setting_layout_textView_mySetting"
-        android:layout_width="200dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="100dp"
         android:drawableEnd="@drawable/setting_layout_arrow_gray"
         android:text="@string/setup_layout_mysetUp_text"
-        android:textColor="#000000"
+        android:textColor="#666666"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/view5"
         app:layout_constraintEnd_toEndOf="parent"
@@ -165,12 +163,11 @@
 
     <TextView
         android:id="@+id/setting_layout_textView_security"
-        android:layout_width="200dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="100dp"
         android:drawableEnd="@drawable/setting_layout_arrow_gray"
         android:text="@string/setup_layout_security_text"
-        android:textColor="#000000"
+        android:textColor="#666666"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/view6"
         app:layout_constraintEnd_toEndOf="parent"
@@ -190,12 +187,11 @@
 
     <TextView
         android:id="@+id/setting_layout_textView_csCenter"
-        android:layout_width="200dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="100dp"
         android:drawableEnd="@drawable/setting_layout_arrow_gray"
         android:text="@string/setup_layout_center_text"
-        android:textColor="#000000"
+        android:textColor="#666666"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/view7"
         app:layout_constraintEnd_toEndOf="parent"
@@ -220,7 +216,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         android:text="@string/setup_layout_appVersion_text"
         android:textSize="8sp"
         app:layout_constraintBottom_toTopOf="@+id/main_layout_asset_go_button"

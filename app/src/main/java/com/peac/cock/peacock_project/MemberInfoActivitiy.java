@@ -1,17 +1,25 @@
 package com.peac.cock.peacock_project;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.peac.cock.peacock_project.projectDto.UserDto;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 /**
  * Created by wee on 2017. 11. 9..
@@ -24,6 +32,18 @@ public class MemberInfoActivitiy extends AppCompatActivity {
     private FirebaseDatabase database;
     private String uid;
 
+    private Calendar dateTime = Calendar.getInstance();
+    private SimpleDateFormat dateFormat;
+
+    private EditText mName;
+    private Button mBirthday;
+    private Spinner mGender;
+    private EditText mJob;
+    private EditText mMonthBudget;
+    private ImageButton join_ok_button;
+
+    private Intent intent;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,17 +54,21 @@ public class MemberInfoActivitiy extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
 
         //get button && EditText ID
-        final EditText mName = findViewById(R.id.memberinfo_layout_editText_name);
-        final EditText mBirthday = findViewById(R.id.memberinfo_layout_editText_birthday);
-        final EditText mGender = findViewById(R.id.memberinfo_layout_editText_gender);
-        final EditText mJob = findViewById(R.id.memberinfo_layout_editText_job);
-        final EditText mMonthBudget = findViewById(R.id.memberinfo_layout_editText_monthBudget);
-        ImageButton join_ok_button = findViewById(R.id.memberinfo_layout_joinOk_imgButton);
+        mName = findViewById(R.id.memberInfo_layout_editText_name);
+        mBirthday = findViewById(R.id.memberInfo_layout_button_birthday);
+        mGender = findViewById(R.id.memberInfo_layout_spinner_gender);
+        mJob = findViewById(R.id.memberInfo_layout_editText_job);
+        mMonthBudget = findViewById(R.id.memberInfo_layout_editText_monthBudget);
+        join_ok_button = findViewById(R.id.memberInfo_layout_joinOk_imgButton);
         uid = mAuth.getCurrentUser().getUid();
 
         //before_intent_get
-        final Intent intent = getIntent();
+        intent = getIntent();
         final String email = mAuth.getCurrentUser().getEmail();
+
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        mBirthday.setText(dateFormat.format(dateTime.getTime()).toString());
+
 
         //정보입력버튼 클릭.
         join_ok_button.setOnClickListener(new View.OnClickListener() {
@@ -61,7 +85,7 @@ public class MemberInfoActivitiy extends AppCompatActivity {
                     mBirthday.requestFocus();
                     return;
                 }
-                if (mGender.getText().toString().length() == 0) {
+                if (mGender.getSelectedItem().toString().length() == 0) {
                     Toast.makeText(getApplicationContext(), "성별을 입력하세요!", Toast.LENGTH_SHORT).show();
                     mGender.requestFocus();
                     return;
@@ -80,7 +104,7 @@ public class MemberInfoActivitiy extends AppCompatActivity {
                 userDto.setEmail(email);
                 userDto.setBirthday(mBirthday.getText().toString());
                 userDto.setName(mName.getText().toString());
-                userDto.setGender(mGender.getText().toString());
+                userDto.setGender(mGender.getSelectedItem().toString());
                 userDto.setJob(mJob.getText().toString());
                 userDto.setBudget(mMonthBudget.getText().toString()+"0000");
 
@@ -93,5 +117,30 @@ public class MemberInfoActivitiy extends AppCompatActivity {
             }
         });
 
+        mGender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                mGender.setSelection(i);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {}
+        });
+
+        DatePickerDialog.OnDateSetListener d = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                dateTime.set(Calendar.YEAR, year);
+                dateTime.set(Calendar.MONTH, month);
+                dateTime.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateBirthday();
+            }
+        };
+
+    }
+
+    private void updateBirthday() {
+        mBirthday.setText(dateFormat.format(dateTime.getTime()).toString());
     }
 }

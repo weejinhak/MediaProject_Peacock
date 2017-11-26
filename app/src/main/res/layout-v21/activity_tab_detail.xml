@@ -67,12 +67,16 @@
         android:id="@+id/main_layout_plus_button"
         android:layout_width="55dp"
         android:layout_height="55dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="8dp"
         android:backgroundTint="#E91E60"
         android:src="@drawable/main_layout_plus_button"
         app:layout_anchor="@+id/container"
         app:layout_anchorGravity="right|bottom"
-        tools:layout_editor_absoluteX="340dp"
-        tools:layout_editor_absoluteY="521dp" />
+        app:layout_constraintBottom_toTopOf="@+id/main_layout_setting_go_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.954"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
         android:id="@+id/main_layout_asset_go_button"

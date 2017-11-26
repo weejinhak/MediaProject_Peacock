@@ -359,7 +359,6 @@
         app:layout_constraintTop_toBottomOf="@+id/handwriting_layout_asset" />
 
     <!-- 데이트 피커 -->
-    <!-- 타임 피커 -->
     <Button
         android:id="@+id/handwriting_layout_date_text"
         android:layout_width="90dp"
@@ -373,7 +372,7 @@
         app:layout_constraintStart_toStartOf="@+id/guideline14"
         app:layout_constraintTop_toTopOf="@+id/handwriting_layout_date" />
 
-
+    <!-- 타임 피커 -->
     <Button
         android:id="@+id/handwriting_layout_time_text"
         android:layout_width="60dp"
