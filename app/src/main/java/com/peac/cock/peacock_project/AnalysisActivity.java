@@ -1,18 +1,14 @@
 package com.peac.cock.peacock_project;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Layout;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -53,7 +49,7 @@ import java.util.Map;
 
 import javax.xml.transform.sax.SAXSource;
 
-public class AnalysisActivity extends Fragment implements ValueEventListener{
+public class AnalysisActivity extends AppCompatActivity implements ValueEventListener{
 
     private PieChart pieChart;
 
@@ -66,20 +62,20 @@ public class AnalysisActivity extends Fragment implements ValueEventListener{
 
     private Intent intent;
 
-    public AnalysisActivity() { }
 
-
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_analysis, null);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_analysis);
 
-        pieChart = view.findViewById(R.id.pie_chart);
+        intent = getIntent();
 
-        categoryBudgetRegisterText = view.findViewById(R.id.category_budget_register_text);
-        categoryBudgetRegisterButton = view.findViewById(R.id.category_budget_register_button);
+        pieChart = findViewById(R.id.pie_chart);
 
-        final TabHost host = view.findViewById(R.id.tab_host);
+        categoryBudgetRegisterText = findViewById(R.id.category_budget_register_text);
+        categoryBudgetRegisterButton = findViewById(R.id.category_budget_register_button);
+
+        final TabHost host = findViewById(R.id.tab_host);
         host.setup();
 
         TabHost.TabSpec page1 = host.newTabSpec("분석");
@@ -93,15 +89,6 @@ public class AnalysisActivity extends Fragment implements ValueEventListener{
         host.addTab(page2);
 
         setupPieChart();
-
-        return view;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        intent = getActivity().getIntent();
     }
 
     @NonNull
@@ -125,7 +112,7 @@ public class AnalysisActivity extends Fragment implements ValueEventListener{
     protected void setPieChartData() {
         List<PieEntry> pieEntries = new ArrayList<>();
 
-       if(categoryOutgoing.size() != 0) {
+        if(categoryOutgoing.size() != 0) {
             for (Map.Entry<String, String> c : categoryOutgoing.entrySet()) {
                 pieEntries.add(new PieEntry(Integer.parseInt(c.getValue()), c.getKey()));
             }
@@ -147,14 +134,14 @@ public class AnalysisActivity extends Fragment implements ValueEventListener{
     }
 
     protected void setBarChartData() {
-        LinearLayout layout = getActivity().findViewById(R.id.linear_layout);
+        LinearLayout layout = findViewById(R.id.linear_layout);
 
         int percentage = (int)(entireBudget[1]/entireBudget[0]*100);
         if (percentage > 100) {
             percentage = 100;
         }
 
-        ProgressBar progressBar = new ProgressBar(getActivity(), null, android.R.attr.progressBarStyleHorizontal);
+        ProgressBar progressBar = new ProgressBar(this, null, android.R.attr.progressBarStyleHorizontal);
         progressBar.setProgress(percentage);
         layout.addView(progressBar);
         System.out.println(percentage);
@@ -172,7 +159,7 @@ public class AnalysisActivity extends Fragment implements ValueEventListener{
                 if (percent > 100) {
                     percent = 100;
                 }
-                ProgressBar p = new ProgressBar(getActivity(), null, android.R.attr.progressBarStyleHorizontal);
+                ProgressBar p = new ProgressBar(this, null, android.R.attr.progressBarStyleHorizontal);
                 p.setProgress(percent);
                 layout.addView(p);
             }
@@ -180,13 +167,13 @@ public class AnalysisActivity extends Fragment implements ValueEventListener{
     }
 
     @Override
-    public void onStart() {
+    protected void onStart() {
         super.onStart();
         FirebaseDatabase.getInstance().getReference().addValueEventListener(this);
     }
 
     @Override
-    public void onStop() {
+    protected void onStop() {
         super.onStop();
         FirebaseDatabase.getInstance().getReference().removeEventListener(this);
     }
