@@ -47,7 +47,7 @@
         android:layout_width="148dp"
         android:layout_height="41dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginStart="52dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="7dp"
         android:gravity="center"
         android:text="@string/aseet_layout_textView_assetTotal_text"
