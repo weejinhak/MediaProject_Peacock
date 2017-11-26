@@ -275,7 +275,7 @@ public class HandwritingActivity extends AppCompatActivity {
 
     private void updateCategoryList() {
         categoryList = new ArrayList<>();
-        categoryList.add(new Category("미분류",2131230981));
+        categoryList.add(new Category("미분류",2131230852));
 
         databaseReference = mDatabase.getReference();
         databaseReference.addValueEventListener(new ValueEventListener() {
