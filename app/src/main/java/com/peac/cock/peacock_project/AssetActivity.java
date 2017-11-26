@@ -1,6 +1,7 @@
 package com.peac.cock.peacock_project;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,10 +10,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -39,7 +43,7 @@ import java.util.List;
  * Created by dahye on 2017-11-13.
  */
 
-public class AssetActivity extends AppCompatActivity implements ValueEventListener {
+public class AssetActivity extends Fragment implements ValueEventListener {
 
     private FirebaseAuth mAuth;
     private FirebaseDatabase mDatabase;
@@ -51,40 +55,44 @@ public class AssetActivity extends AppCompatActivity implements ValueEventListen
     private ArrayList<Card> cardItems;
     private ArrayList<Cash> cashItems;
     private int totalBalance;
+
+    private Button assetAddButton;
     private TextView totalBalanceTextView;
+    private ListView cardListView;
+    private ListView cashListView;
+
+    private Intent intent;
+
+    public AssetActivity() { }
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_asset);
-
-        //firebase get auth& database;
-        mAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance();
-        uid = mAuth.getCurrentUser().getUid();
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_asset, null);
 
         //사용자 SMS권한 얻기
-        requester = new PermissionRequester.Builder(this);
+        requester = new PermissionRequester.Builder(getActivity());
         requester.create().request(android.Manifest.permission.RECEIVE_SMS, 10000, new PermissionRequester.OnClickDenyButtonListener() {
             @Override
             public void onClick(Activity activity) {
-                Toast.makeText(getApplicationContext(), "권한을 얻지 못했습니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity().getApplicationContext(), "권한을 얻지 못했습니다.", Toast.LENGTH_SHORT).show();
             }
         });
+
+        intent = new Intent();
 
         arrayLedgerDto = new ArrayList<>();
         cardItems = new ArrayList<>();
         cashItems = new ArrayList<>();
 
         //Get Id
-        Button assetAddButton = findViewById(R.id.asset_layout_button_assetAdd_button);
-        totalBalanceTextView = findViewById(R.id.asset_layout_textView_assetMoney_textView);
-        ListView cardListView = findViewById(R.id.asset_layout_card_listView);
-        ListView cashListView = findViewById(R.id.aseet_layout_cash_listView);
+        assetAddButton = view.findViewById(R.id.asset_layout_button_assetAdd_button);
+        totalBalanceTextView = view.findViewById(R.id.asset_layout_textView_assetMoney_textView);
+        cardListView = view.findViewById(R.id.asset_layout_card_listView);
+        cashListView = view.findViewById(R.id.aseet_layout_cash_listView);
 
         //list View Adapter
-        AssetCardAdapter cardAdapter = new AssetCardAdapter(this, R.layout.activity_asset_card_item, cardItems);
-        AssetCashAdapter cashAdapter = new AssetCashAdapter(this, R.layout.activity_asset_cash_item, cashItems);
+        AssetCardAdapter cardAdapter = new AssetCardAdapter(getActivity(), R.layout.activity_asset_card_item, cardItems);
+        AssetCashAdapter cashAdapter = new AssetCashAdapter(getActivity(), R.layout.activity_asset_cash_item, cashItems);
         cardListView.setAdapter(cardAdapter);
         cashListView.setAdapter(cashAdapter);
 
@@ -98,27 +106,42 @@ public class AssetActivity extends AppCompatActivity implements ValueEventListen
                 show();
             }
         });
+
+        return view;
+    }
+
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        //firebase get auth& database;
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance();
+        uid = mAuth.getCurrentUser().getUid();
+
     }
 
     //Dialog Show Method
-    void show() {
+    public void show() {
         final List<String> ListItems = new ArrayList<>();
         ListItems.add("현금");
         ListItems.add("카드");
 
         final CharSequence[] items = ListItems.toArray(new String[ListItems.size()]);
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("자산 유형 선택");
         builder.setItems(items, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int pos) {
                 String selectedText = items[pos].toString();
-                Toast.makeText(getApplicationContext(), selectedText, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity().getApplicationContext(), selectedText, Toast.LENGTH_SHORT).show();
                 if (selectedText.equals("현금")) {
-                    Intent intent = new Intent(getApplicationContext(), AddCashActivity.class);
+                    intent.setClass(getActivity().getApplicationContext(), AddCashActivity.class);
                     startActivity(intent);
                 } else if (selectedText.equals("카드")) {
-                    Intent intent = new Intent(getApplicationContext(), AddCardActivity.class);
+                    intent.setClass(getActivity().getApplicationContext(), AddCardActivity.class);
                     startActivity(intent);
                 }
             }
@@ -131,7 +154,7 @@ public class AssetActivity extends AppCompatActivity implements ValueEventListen
     public int readSMSMessage() {
         mDatabase.getReference().child("users").child(uid).child("isSMS").setValue("true");
         Uri allMessage = Uri.parse("content://sms");
-        ContentResolver cr = getContentResolver();
+        ContentResolver cr = getActivity().getContentResolver();
         Cursor c = cr.query(allMessage, new String[]{"_id", "thread_id", "address", "person", "date", "body"}, null, null, "date DESC");
 
         String string = "";
@@ -220,13 +243,13 @@ public class AssetActivity extends AppCompatActivity implements ValueEventListen
     }
 
     @Override
-    protected void onStart() {
+    public void onStart() {
         super.onStart();
         FirebaseDatabase.getInstance().getReference().addValueEventListener(this);
     }
 
     @Override
-    protected void onStop() {
+    public void onStop() {
         super.onStop();
         FirebaseDatabase.getInstance().getReference().removeEventListener(this);
     }
