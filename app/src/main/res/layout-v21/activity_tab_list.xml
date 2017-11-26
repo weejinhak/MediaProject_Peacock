@@ -11,96 +11,152 @@
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="85dp"
         android:layout_height="50dp"
+        android:layout_marginBottom="8dp"
         android:background="#E91E63"
-        android:src="@drawable/ic_arrow_left" />
+        android:src="@drawable/ic_arrow_left"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toStartOf="@+id/currentDateLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/forwardButton"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="85dp"
         android:layout_height="50dp"
+        android:layout_marginBottom="8dp"
         android:background="#E91E63"
         android:src="@drawable/ic_arrow_right"
-        tools:layout_editor_absoluteX="326dp" />
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/currentDateLabel"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/currentDateLabel"
         android:layout_width="241dp"
         android:layout_height="50dp"
+        android:layout_marginBottom="8dp"
         android:background="#E91E63"
         android:gravity="center"
         android:textColor="@android:color/white"
         android:textSize="18sp"
-        tools:layout_editor_absoluteX="85dp" />
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toStartOf="@+id/forwardButton"
+        app:layout_constraintStart_toEndOf="@+id/previousButton" />
 
     <ImageView
         android:id="@+id/join_layout_imageView_join_logo"
         android:layout_width="wrap_content"
         android:layout_height="18dp"
+        app:layout_constraintEnd_toStartOf="@+id/join_layout_imageView_email"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
         app:srcCompat="@drawable/expense"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="74dp"
-        tools:layout_editor_absoluteY="69dp" />
+        tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="wrap_content"
         android:layout_height="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/join_layout_imageView_email"
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
         app:srcCompat="@drawable/transfer"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="299dp"
-        tools:layout_editor_absoluteY="69dp" />
+        tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/join_layout_imageView_email"
         android:layout_width="wrap_content"
         android:layout_height="18dp"
+        app:layout_constraintEnd_toStartOf="@+id/imageView4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/join_layout_imageView_join_logo"
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
         app:srcCompat="@drawable/importimg"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="192dp"
-        tools:layout_editor_absoluteY="69dp" />
+        tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/textView_expense"
+        android:id="@+id/list_layout_category_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="132dp" />
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="9dp"
+        android:text="카테고리"
+        app:layout_constraintBottom_toTopOf="@+id/guideline4"
+        app:layout_constraintEnd_toStartOf="@+id/list_layout_content"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/join_layout_imageView_join_logo"
+        tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/textView_import"
+        android:id="@+id/list_layout_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="101dp"
-        tools:layout_editor_absoluteY="132dp" />
+        android:layout_marginEnd="40dp"
+        android:layout_marginStart="16dp"
+        android:text="내역"
+        app:layout_constraintBottom_toBottomOf="@+id/list_layout_category_img"
+        app:layout_constraintEnd_toStartOf="@+id/list_layout_date"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/list_layout_category_img"
+        app:layout_constraintTop_toTopOf="@+id/list_layout_category_img"
+        tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/textView_transfer"
+        android:id="@+id/list_layout_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="205dp"
-        tools:layout_editor_absoluteY="132dp" />
+        android:layout_marginStart="8dp"
+        android:text="날짜"
+        app:layout_constraintBottom_toBottomOf="@+id/list_layout_content"
+        app:layout_constraintEnd_toStartOf="@+id/list_layout_amount"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/list_layout_content"
+        app:layout_constraintTop_toTopOf="@+id/list_layout_content"
+        tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/textView_transfer"
+        android:id="@+id/list_layout_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="299dp"
-        tools:layout_editor_absoluteY="132dp" />
+        android:layout_marginStart="24dp"
+        android:text="금액"
+        app:layout_constraintBottom_toBottomOf="@+id/list_layout_date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/list_layout_date"
+        app:layout_constraintTop_toTopOf="@+id/list_layout_date"
+        tools:ignore="MissingConstraints" />
 
     <ListView
         android:id="@+id/tab_list_msgList"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="539dp"
+        android:layout_marginTop="150dp"
         android:scrollbars="vertical"
-        tools:layout_editor_absoluteY="162dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline4" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="58dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="112dp" />
 
 </android.support.constraint.ConstraintLayout>
