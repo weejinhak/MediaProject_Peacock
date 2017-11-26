@@ -180,9 +180,95 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
 
     //날짜 때려박는 함수
     void dateInsertMethod(String date, TextView textView, TextView textView1){
-        if (newDate.equals("20171120")) {
-            daystring1.setText("50000");
-            daystring2.setText("bbb");
+        if (newDate.equals("20171101")) {
+            daystring1.setText("+50000");
+            daystring2.setText("-3000");
+        }
+        if (newDate.equals("20171102")) {
+            daystring1.setText("+50000");
+            daystring2.setText("-3000");
+        }
+        if (newDate.equals("20171102")) {
+            daystring1.setText("+50000");
+            daystring2.setText("-3000");
+        }if (newDate.equals("20171102")) {
+            daystring1.setText("+50000");
+            daystring2.setText("-3000");
+        }if (newDate.equals("20171102")) {
+            daystring1.setText("+50000");
+            daystring2.setText("-3000");
+        }if (newDate.equals("20171102")) {
+            daystring1.setText("+50000");
+            daystring2.setText("-3000");
+        }if (newDate.equals("20171102")) {
+            daystring1.setText("+50000");
+            daystring2.setText("-3000");
+        }if (newDate.equals("20171102")) {
+            daystring1.setText("+50000");
+            daystring2.setText("-3000");
+        }if (newDate.equals("20171102")) {
+            daystring1.setText("+50000");
+            daystring2.setText("-3000");
+        }if (newDate.equals("20171102")) {
+            daystring1.setText("+50000");
+            daystring2.setText("-3000");
+        }if (newDate.equals("20171102")) {
+            daystring1.setText("+50000");
+            daystring2.setText("-3000");
+        }if (newDate.equals("20171102")) {
+            daystring1.setText("+50000");
+            daystring2.setText("-3000");
+        }if (newDate.equals("20171102")) {
+            daystring1.setText("+50000");
+            daystring2.setText("-3000");
+        }if (newDate.equals("20171102")) {
+            daystring1.setText("+50000");
+            daystring2.setText("-3000");
+        }if (newDate.equals("20171102")) {
+            daystring1.setText("+50000");
+            daystring2.setText("-3000");
+        }if (newDate.equals("20171102")) {
+            daystring1.setText("+50000");
+            daystring2.setText("-3000");
+        }if (newDate.equals("20171102")) {
+            daystring1.setText("+50000");
+            daystring2.setText("-3000");
+        }if (newDate.equals("20171102")) {
+            daystring1.setText("+50000");
+            daystring2.setText("-3000");
+        }if (newDate.equals("20171102")) {
+            daystring1.setText("+50000");
+            daystring2.setText("-3000");
+        }if (newDate.equals("20171102")) {
+            daystring1.setText("+50000");
+            daystring2.setText("-3000");
+        }if (newDate.equals("20171102")) {
+            daystring1.setText("+50000");
+            daystring2.setText("-3000");
+        }if (newDate.equals("20171102")) {
+            daystring1.setText("+50000");
+            daystring2.setText("-3000");
+        }if (newDate.equals("20171102")) {
+            daystring1.setText("+50000");
+            daystring2.setText("-3000");
+        }if (newDate.equals("20171102")) {
+            daystring1.setText("+50000");
+            daystring2.setText("-3000");
+        }if (newDate.equals("20171102")) {
+            daystring1.setText("+50000");
+            daystring2.setText("-3000");
+        }if (newDate.equals("20171102")) {
+            daystring1.setText("+50000");
+            daystring2.setText("-3000");
+        }if (newDate.equals("20171102")) {
+            daystring1.setText("+50000");
+            daystring2.setText("-3000");
+        }if (newDate.equals("20171102")) {
+            daystring1.setText("+50000");
+            daystring2.setText("-3000");
+        }if (newDate.equals("20171102")) {
+            daystring1.setText("+50000");
+            daystring2.setText("-3000");
         }
     }
 }
