@@ -113,10 +113,9 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
             DayColorsUtils.setDayColors(dayLabel, ContextCompat.getColor(mContext,
                     R.color.nextMonthDayColor), Typeface.NORMAL, R.drawable.background_transparent);
         }
-        if (newDate.equals("20171120")) {
-            daystring1.setText("50000");
-            daystring2.setText("bbb");
-        }
+
+        dateInsertMethod(newDate,daystring1,daystring2);
+
         dayLabel.setText(String.valueOf(day.get(Calendar.DAY_OF_MONTH)));
         //equals.등록날짜
 
@@ -177,5 +176,13 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
 
             }
         });
+    }
+
+    //날짜 때려박는 함수
+    void dateInsertMethod(String date, TextView textView, TextView textView1){
+        if (newDate.equals("20171120")) {
+            daystring1.setText("50000");
+            daystring2.setText("bbb");
+        }
     }
 }
