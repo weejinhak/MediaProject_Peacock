@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
+import android.view.KeyEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,6 +16,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +48,8 @@ public class MainActivity extends AppCompatActivity
 
     private Intent intent;
 
+    private WebView mWebView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +74,12 @@ public class MainActivity extends AppCompatActivity
         ImageButton detailGoButton = findViewById(R.id.main_layout_breakdown_go_button);
         ImageButton settingGoButton = findViewById(R.id.main_layout_setting_go_button);
 
+        //webView
+        mWebView=findViewById(R.id.main_webView);
+        mWebView.getSettings().setJavaScriptEnabled(true);
+        mWebView.loadUrl("http://www.podbbang.com/ch/14295");
+        mWebView.setWebViewClient(new WebViewClientClass());
+        mWebView.setVerticalScrollBarEnabled(true);
 
         detailGoButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -199,5 +211,20 @@ public class MainActivity extends AppCompatActivity
             }
         }
     }
+    private class WebViewClientClass extends WebViewClient{
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            view.loadUrl(url);
+            return true;
+        }
+    }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if((keyCode==KeyEvent.KEYCODE_BACK)&&mWebView.canGoBack()){
+            mWebView.goBack();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }
