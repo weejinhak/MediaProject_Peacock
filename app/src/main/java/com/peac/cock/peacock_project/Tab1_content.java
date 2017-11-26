@@ -160,6 +160,7 @@ public class Tab1_content extends Fragment implements ValueEventListener {
             Log.d("msgSize", String.valueOf(msgSetPerMonth.get(msgDate).size()));
             Log.d("datedate", String.valueOf(date2));
             Log.d("msgSet", String.valueOf(msgSetPerMonth.get(String.valueOf(date2))));
+            Log.d("getImageId", String.valueOf(ledger.getCategory().getCateImageId()));
         }
 
         listTab1Adapter = new ListTab1Adapter(getContext(), R.layout.activity_list_msg_item, msgSetPerMonth.get(String.valueOf(date2)));
