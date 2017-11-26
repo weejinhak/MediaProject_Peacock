@@ -81,6 +81,12 @@
         <activity
             android:name=".MessageCategoryAddActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CardRecommendedActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".RecommendationActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
