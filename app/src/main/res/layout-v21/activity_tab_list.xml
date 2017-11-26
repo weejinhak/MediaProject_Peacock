@@ -1,155 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:layout_editor_absoluteY="25dp">
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/calendarHeader"
-        android:layout_width="match_parent"
+    <ImageButton
+        android:id="@+id/previousButton"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="85dp"
+        android:layout_height="50dp"
+        android:background="#E91E63"
+        android:src="@drawable/ic_arrow_left" />
+
+    <ImageButton
+        android:id="@+id/forwardButton"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="85dp"
+        android:layout_height="50dp"
+        android:background="#E91E63"
+        android:src="@drawable/ic_arrow_right"
+        tools:layout_editor_absoluteX="326dp" />
+
+    <TextView
+        android:id="@+id/currentDateLabel"
+        android:layout_width="241dp"
+        android:layout_height="50dp"
+        android:background="#E91E63"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="85dp" />
+
+    <ImageView
+        android:id="@+id/join_layout_imageView_join_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        app:srcCompat="@drawable/expense"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="74dp"
+        tools:layout_editor_absoluteY="69dp" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        app:srcCompat="@drawable/transfer"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="299dp"
+        tools:layout_editor_absoluteY="69dp" />
+
+    <ImageView
+        android:id="@+id/join_layout_imageView_email"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        app:srcCompat="@drawable/importimg"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="192dp"
+        tools:layout_editor_absoluteY="69dp" />
+
+    <TextView
+        android:id="@+id/textView_expense"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/defaultColor">
+        android:text="TextView"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="132dp" />
 
-        <ImageButton
-            android:id="@+id/previousButton"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="85dp"
-            android:layout_height="0dp"
-            android:src="@drawable/ic_arrow_left"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/currentDateLabel"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageButton
-            android:id="@+id/forwardButton"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="85dp"
-            android:layout_height="0dp"
-            android:src="@drawable/ic_arrow_right"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/currentDateLabel"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/currentDateLabel"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:gravity="center"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/previousButton"
-            app:layout_constraintRight_toLeftOf="@id/forwardButton"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-    </android.support.constraint.ConstraintLayout>
-
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/Text_context"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/textView_import"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="65dp"
-        app:layout_constraintBottom_toTopOf="@+id/tab_list_msgList"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:text="TextView"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="101dp"
+        tools:layout_editor_absoluteY="132dp" />
 
-        <ImageView
-            android:id="@+id/join_layout_imageView_join_logo"
-            android:layout_width="wrap_content"
-            android:layout_height="18dp"
-            android:layout_marginRight="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/textView_expense"
-            app:layout_constraintEnd_toStartOf="@+id/join_layout_imageView_email"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/expense"
-            tools:ignore="MissingConstraints" />
+    <TextView
+        android:id="@+id/textView_transfer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="205dp"
+        tools:layout_editor_absoluteY="132dp" />
 
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="wrap_content"
-            android:layout_height="18dp"
-            app:layout_constraintBottom_toTopOf="@+id/textView_transfer"
-            app:layout_constraintEnd_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/join_layout_imageView_email"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/transfer"
-            tools:ignore="MissingConstraints" />
-
-        <ImageView
-            android:id="@+id/join_layout_imageView_email"
-            android:layout_width="wrap_content"
-            android:layout_height="18dp"
-            app:layout_constraintBottom_toTopOf="@+id/textView_import"
-            app:layout_constraintEnd_toStartOf="@+id/imageView4"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/join_layout_imageView_join_logo"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/importimg"
-            tools:ignore="MissingConstraints" />
-
-        <TextView
-            android:id="@+id/textView_expense"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="5dp"
-            android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/textView_import"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/join_layout_imageView_join_logo"
-            tools:ignore="MissingConstraints" />
-
-        <TextView
-            android:id="@+id/textView_import"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/textView_transfer"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/textView_expense"
-            app:layout_constraintTop_toBottomOf="@+id/join_layout_imageView_email"
-            tools:ignore="MissingConstraints" />
-
-        <TextView
-            android:id="@+id/textView_transfer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="5dp"
-            android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/textView_import"
-            app:layout_constraintTop_toBottomOf="@+id/imageView4"
-            tools:ignore="MissingConstraints" />
-
-    </android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/textView_transfer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="299dp"
+        tools:layout_editor_absoluteY="132dp" />
 
     <ListView
         android:id="@+id/tab_list_msgList"
         android:layout_width="match_parent"
-        android:layout_height="498dp"
-        android:layout_marginTop="165dp"
+        android:layout_height="500dp"
         android:scrollbars="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        tools:layout_editor_absoluteY="162dp" />
 
 </android.support.constraint.ConstraintLayout>

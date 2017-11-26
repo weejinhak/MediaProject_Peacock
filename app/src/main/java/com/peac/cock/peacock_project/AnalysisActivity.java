@@ -25,9 +25,12 @@ import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -149,6 +152,7 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
         pieChart.setHoleColor(Color.WHITE);
         pieChart.setTransparentCircleRadius(60f);
         pieChart.animateY(1000, Easing.EasingOption.EaseInOutCubic);
+        pieChart.setCenterText("총 지출\n"+entireBudget[1]);
     }
 
     protected void setPieChartData() {
@@ -170,6 +174,8 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
         PieData data = new PieData(dataSet);
         data.setValueTextSize(10f);
         data.setValueTextColor(Color.YELLOW);
+
+
 
         pieChart.setData(data);
         pieChart.invalidate();

@@ -204,7 +204,8 @@ public class AssetActivity extends AppCompatActivity implements ValueEventListen
             String smsPlace = "";
 
             //국민은행 parsing 후 DB 추가
-            if (address.equals("15881688") || address.equals("15881788")) {
+            //|| address.equals("15881788")
+            if (address.equals("15881688")) {
                 message = body;
                 messageToken = message.split("\n");
                 if (messageToken.length == 6) {
