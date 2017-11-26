@@ -1,5 +1,8 @@
 package com.peac.cock.peacock_project;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -31,8 +34,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private TextView nameTextView;
     private TextView emailTextView;
@@ -40,6 +42,8 @@ public class MainActivity extends AppCompatActivity
     private FirebaseAuth auth;
 
     private Intent intent;
+
+    private FragmentTransaction fragmentTransaction;
 
 
     @Override
@@ -65,11 +69,12 @@ public class MainActivity extends AppCompatActivity
         ImageButton detailGoButton = findViewById(R.id.main_layout_breakdown_go_button);
         ImageButton settingGoButton = findViewById(R.id.main_layout_setting_go_button);
 
-
+        fragmentTransaction = getFragmentManager().beginTransaction();
 
         detailGoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+             //   fragmentTransaction.replace(R.id.main_layout_content, new DetailTabActivity());
                 intent.setClass(getApplicationContext(), DetailTabActivity.class);
                 startActivity(intent);
             }
@@ -78,24 +83,25 @@ public class MainActivity extends AppCompatActivity
         assetGoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent.setClass(getApplicationContext(), AssetActivity.class);
-                startActivity(intent);
+                fragmentTransaction.replace(R.id.main_layout_content, new AssetActivity());
+                fragmentTransaction.commit();
             }
         });
         settingGoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent.setClass(getApplicationContext(), SettingActivity.class);
-                startActivity(intent);
+                fragmentTransaction.replace(R.id.main_layout_content, new SettingActivity());
+                fragmentTransaction.commit();
             }
         });
         analysisGoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent.setClass(getApplicationContext(), AnalysisActivity.class);
-                startActivity(intent);
+                fragmentTransaction.replace(R.id.main_layout_content, new AnalysisActivity());
+                fragmentTransaction.commit();
             }
         });
+
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
