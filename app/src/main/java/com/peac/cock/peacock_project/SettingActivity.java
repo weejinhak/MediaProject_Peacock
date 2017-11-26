@@ -16,6 +16,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.peac.cock.peacock_project.projectAdapter.BackPressCloseHandler;
 
 /**
  * Created by wee on 2017. 11. 14..
@@ -32,11 +33,14 @@ public class SettingActivity extends AppCompatActivity implements ValueEventList
 
     private Intent intent;
 
+    private BackPressCloseHandler backPressCloseHandler;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_setting);
+        backPressCloseHandler = new BackPressCloseHandler(this);
 
         intent = new Intent();
 
@@ -106,5 +110,10 @@ public class SettingActivity extends AppCompatActivity implements ValueEventList
     @Override
     public void onCancelled(DatabaseError databaseError) {
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        backPressCloseHandler.onBackPressed();
     }
 }

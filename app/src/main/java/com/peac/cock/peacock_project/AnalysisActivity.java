@@ -36,6 +36,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.peac.cock.peacock_project.projectAdapter.BackPressCloseHandler;
 import com.peac.cock.peacock_project.projectDto.Asset;
 import com.peac.cock.peacock_project.projectDto.Card;
 import com.peac.cock.peacock_project.projectDto.Cash;
@@ -64,12 +65,15 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
 
     private Intent intent;
 
+    private BackPressCloseHandler backPressCloseHandler;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_analysis);
+        backPressCloseHandler = new BackPressCloseHandler(this);
 
         intent = getIntent();
 
@@ -263,5 +267,10 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
     @Override
     public void onCancelled(DatabaseError databaseError) {
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        backPressCloseHandler.onBackPressed();
     }
 }

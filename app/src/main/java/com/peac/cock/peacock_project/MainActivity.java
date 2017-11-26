@@ -201,10 +201,6 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public void onBackPressed() {
-        backPressCloseHandler.onBackPressed();
-    }
 
     private class WebViewClientClass extends WebViewClient {
         @Override
@@ -222,4 +218,10 @@ public class MainActivity extends AppCompatActivity
         }
         return super.onKeyDown(keyCode, event);
     }
+
+    @Override
+    public void onBackPressed() {
+        backPressCloseHandler.onBackPressed();
+    }
+
 }

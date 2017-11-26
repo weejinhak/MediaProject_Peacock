@@ -31,6 +31,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.peac.cock.peacock_project.projectAdapter.BackPressCloseHandler;
 
 import java.util.ArrayList;
 
@@ -55,10 +56,13 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     private Intent intent;
 
+    private BackPressCloseHandler backPressCloseHandler;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        backPressCloseHandler= new BackPressCloseHandler(this);
 
 
         //firebase Auth정보 get
@@ -227,5 +231,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    @Override
+    public void onBackPressed() {
+        backPressCloseHandler.onBackPressed();
     }
 }
