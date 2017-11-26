@@ -39,6 +39,8 @@ public class CategoryActivity extends AppCompatActivity {
     private int state;
     private CategoryGridViewAdapter categoryGridViewAdapter;
     private GridView categoryGridView;
+    private ImageButton addCategoryButton;
+    private ImageButton backButton;
 
     private String[] gridViewString;
     private int[] gridViewImageId;
@@ -78,7 +80,8 @@ public class CategoryActivity extends AppCompatActivity {
 
         //get Id
         categoryGridView = findViewById(R.id.category_grid_view_image_text);
-        ImageButton addCategoryButton = findViewById(R.id.category_grid_view_category_add_button);
+        addCategoryButton = findViewById(R.id.category_grid_view_category_add_button);
+        backButton = findViewById(R.id.category_layout_back_button);
         TabLayout tabLayout = findViewById(R.id.category_layout_tabs);
 
         TabLayout.Tab tab = tabLayout.getTabAt(state);
@@ -102,7 +105,13 @@ public class CategoryActivity extends AppCompatActivity {
             }
         });
 
-
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent.setClass(getApplicationContext(), SettingActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
 

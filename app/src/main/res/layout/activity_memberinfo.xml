@@ -3,142 +3,181 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:layout_editor_absoluteY="25dp">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/memberinfo_layout_my_toolbar"
+    <View
+        android:id="@+id/view8"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginBottom="32dp"
-        android:background="@color/colorPrimary"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:layout_constraintBottom_toTopOf="@+id/memberinfo_layout_editText_name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+        android:layout_height="match_parent"
+        android:background="#000000" />
 
-        <ImageView
-            android:id="@+id/memberinfo_header_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/common_layout_logo" />
-    </android.support.v7.widget.Toolbar>
-
-
-    <EditText
-        android:id="@+id/memberinfo_layout_editText_name"
+    <ImageView
+        android:id="@+id/memberInfo_header_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:drawableStart="@drawable/join_layout_name_tag_img"
+        android:src="@drawable/common_layout_logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.036" />
+
+    <ImageView
+        android:id="@+id/memberInfo_layout_name_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="128dp"
+        android:background="@drawable/join_layout_name_tag_img"
+        app:layout_constraintEnd_toStartOf="@+id/memberInfo_layout_editText_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <EditText
+        android:id="@+id/memberInfo_layout_editText_name"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginStart="16dp"
+        android:background="#FFFFFF"
         android:ems="15"
         android:gravity="center"
         android:hint="@string/member_info_layout_name_text"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/memberinfo_layout_editText_birthday"
+        app:layout_constraintBottom_toTopOf="@+id/memberInfo_layout_button_birthday"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline13"
+        app:layout_constraintStart_toEndOf="@+id/memberInfo_layout_name_img"
+        app:layout_constraintTop_toBottomOf="@+id/memberInfo_header_title"
         tools:ignore="MissingConstraints" />
 
-    <EditText
-        android:id="@+id/memberinfo_layout_editText_birthday"
+    <ImageView
+        android:id="@+id/memberInfo_layout_birthday_img"
         android:layout_width="wrap_content"
-        android:layout_height="76dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:drawableStart="@drawable/join_layout_birthday_img"
-        android:ems="15"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="38dp"
+        android:background="@drawable/join_layout_birthday_img"
+        app:layout_constraintEnd_toStartOf="@+id/memberInfo_layout_button_birthday"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/memberInfo_layout_name_img" />
+
+    <Button
+        android:id="@+id/memberInfo_layout_button_birthday"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginStart="16dp"
+        android:background="#FFFFFF"
         android:gravity="center"
         android:hint="@string/member_info_layout_birthday_text"
-        android:inputType="date"
-        app:layout_constraintBottom_toTopOf="@+id/memberinfo_layout_editText_gender"
+        app:layout_constraintBottom_toTopOf="@+id/memberInfo_layout_spinner_gender"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/memberinfo_layout_editText_name"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintStart_toEndOf="@+id/memberInfo_layout_birthday_img"
+        app:layout_constraintTop_toBottomOf="@+id/memberInfo_layout_editText_name" />
 
-    <EditText
-        android:id="@+id/memberinfo_layout_editText_gender"
-        android:layout_width="wrap_content"
+    <ImageView
+        android:id="@+id/memberInfo_layout_gender_img"
+        android:layout_width="51dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:drawableStart="@drawable/join_layout_gender_img"
-        android:ems="15"
-        android:gravity="center"
-        android:hint="@string/member_info_layout_gender_text"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/memberinfo_layout_editText_job"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="60dp"
+        android:background="@drawable/join_layout_gender_img"
+        app:layout_constraintEnd_toStartOf="@+id/memberInfo_layout_spinner_gender"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/memberinfo_layout_editText_birthday"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@+id/memberInfo_layout_birthday_img"
+        app:layout_constraintBottom_toTopOf="@+id/memberInfo_layout_job_img" />
 
-    <EditText
-        android:id="@+id/memberinfo_layout_editText_job"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:drawableStart="@drawable/join_layout_job_img"
-        android:ems="15"
-        android:gravity="center"
-        android:hint="@string/member_info_layout_job_text"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/memberinfo_layout_editText_monthBudget"
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/memberInfo_layout_spinner_gender"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginStart="16dp"
+        android:background="#FFFFFF"
+        android:entries="@array/gender"
+        app:layout_constraintBottom_toTopOf="@+id/memberInfo_layout_editText_job"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/memberinfo_layout_editText_gender"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintStart_toEndOf="@+id/memberInfo_layout_gender_img"
+        app:layout_constraintTop_toBottomOf="@+id/memberInfo_layout_button_birthday">
+    </android.support.v7.widget.AppCompatSpinner>
 
-    <EditText
-        android:id="@+id/memberinfo_layout_editText_monthBudget"
+
+    <ImageView
+        android:id="@+id/memberInfo_layout_job_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:drawableStart="@drawable/join_layout_budget_img"
-        android:ems="15"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/join_layout_job_img"
+        app:layout_constraintBottom_toTopOf="@+id/memberInfo_layout_budget_img"
+        app:layout_constraintEnd_toStartOf="@+id/memberInfo_layout_editText_job"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/memberInfo_layout_gender_img" />
+
+    <EditText
+        android:id="@+id/memberInfo_layout_editText_job"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginStart="16dp"
+        android:background="#FFFFFF"
+        android:gravity="center"
+        android:hint="@string/member_info_layout_job_text"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/memberInfo_layout_editText_monthBudget"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/memberInfo_layout_job_img"
+        app:layout_constraintTop_toBottomOf="@+id/memberInfo_layout_spinner_gender"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/memberInfo_layout_budget_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="36dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="60dp"
+        android:background="@drawable/join_layout_budget_img"
+        app:layout_constraintBottom_toTopOf="@+id/memberInfo_layout_joinOk_imgButton"
+        app:layout_constraintEnd_toStartOf="@+id/memberInfo_layout_editText_monthBudget"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/memberInfo_layout_editText_monthBudget"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginStart="16dp"
+        android:background="#FFFFFF"
         android:gravity="center"
         android:hint="월 예산 (단위: 만원)"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/memberinfo_layout_joinOk_imgButton"
+        app:layout_constraintBottom_toTopOf="@+id/memberInfo_layout_joinOk_imgButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/memberinfo_layout_editText_job"
+        app:layout_constraintStart_toEndOf="@+id/memberInfo_layout_budget_img"
+        app:layout_constraintTop_toBottomOf="@+id/memberInfo_layout_editText_job"
         tools:ignore="MissingConstraints" />
 
     <ImageButton
-        android:id="@+id/memberinfo_layout_joinOk_imgButton"
+        android:id="@+id/memberInfo_layout_joinOk_imgButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_height="70dp"
         android:background="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/memberinfo_layout_editText_monthBudget"
         app:srcCompat="@drawable/join_layout_joinok_click_change"
         tools:ignore="MissingConstraints" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="206dp" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="62dp" />
 
 </android.support.constraint.ConstraintLayout>

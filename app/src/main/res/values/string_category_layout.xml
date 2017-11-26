@@ -6,8 +6,10 @@
     <string name="category_layout_transfer_text">이체</string>
     <string name="category_layout_category_add_button_text">카테고리 변경하기</string>
 
-    <string name="category_add_layout_toolbar_text">카테고리 추가</string>
+    <string name="category_add_layout_toolbar_title">카테고리 추가</string>
+    <string name="msg_category_add_layout_toolbar_title">카테고리 변경</string>
     <string name="category_add_layout_add_button_text">추가</string>
+    <string name="msg_category_add_layout_add_button_text">변경</string>
 
 
     <string-array name="spinner_category_list">
