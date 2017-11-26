@@ -71,6 +71,21 @@ public class AssetActivity extends Fragment implements ValueEventListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_asset, null);
 
+
+        return view;
+    }
+
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        //firebase get auth& database;
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance();
+        uid = mAuth.getCurrentUser().getUid();
+
         //사용자 SMS권한 얻기
         requester = new PermissionRequester.Builder(getActivity());
         requester.create().request(android.Manifest.permission.RECEIVE_SMS, 10000, new PermissionRequester.OnClickDenyButtonListener() {
@@ -88,10 +103,10 @@ public class AssetActivity extends Fragment implements ValueEventListener {
         cashItems = new ArrayList<>();
 
         //Get Id
-        assetAddButton = view.findViewById(R.id.asset_layout_button_assetAdd_button);
-        totalBalanceTextView = view.findViewById(R.id.asset_layout_textView_assetMoney_textView);
-        cardListView = view.findViewById(R.id.asset_layout_card_listView);
-        cashListView = view.findViewById(R.id.aseet_layout_cash_listView);
+        assetAddButton = getActivity().findViewById(R.id.asset_layout_button_assetAdd_button);
+        totalBalanceTextView = getActivity().findViewById(R.id.asset_layout_textView_assetMoney_textView);
+        cardListView = getActivity().findViewById(R.id.asset_layout_card_listView);
+        cashListView = getActivity().findViewById(R.id.aseet_layout_cash_listView);
 
         //list View Adapter
         AssetCardAdapter cardAdapter = new AssetCardAdapter(getActivity(), R.layout.activity_asset_card_item, cardItems);
@@ -109,20 +124,6 @@ public class AssetActivity extends Fragment implements ValueEventListener {
                 show();
             }
         });
-
-        return view;
-    }
-
-
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        //firebase get auth& database;
-        mAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance();
-        uid = mAuth.getCurrentUser().getUid();
 
     }
 

@@ -46,7 +46,7 @@ public class AppBarActivity extends Fragment{
         View view = inflater.inflate(R.layout.app_bar_main, null);
 
 
-        return inflater.inflate(R.layout.app_bar_main, container, false);
+        return view;
     }
 
     @Override

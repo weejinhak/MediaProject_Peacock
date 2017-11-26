@@ -84,21 +84,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View view) {
                 fragmentTransaction.replace(R.id.main_layout_content, new AssetActivity());
+                fragmentTransaction.commit();
             }
         });
         settingGoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 fragmentTransaction.replace(R.id.main_layout_content, new SettingActivity());
+                fragmentTransaction.commit();
             }
         });
         analysisGoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 fragmentTransaction.replace(R.id.main_layout_content, new AnalysisActivity());
+                fragmentTransaction.commit();
             }
         });
-        fragmentTransaction.commit();
+
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
