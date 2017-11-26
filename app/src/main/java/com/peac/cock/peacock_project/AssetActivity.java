@@ -29,6 +29,7 @@ import com.peac.cock.peacock_project.projectAdapter.AssetCashAdapter;
 import com.peac.cock.peacock_project.projectDto.Asset;
 import com.peac.cock.peacock_project.projectDto.Card;
 import com.peac.cock.peacock_project.projectDto.Cash;
+import com.peac.cock.peacock_project.projectDto.Category;
 import com.peac.cock.peacock_project.projectDto.LedgerDto;
 import com.peac.cock.peacock_project.projectSms.PermissionRequester;
 
@@ -45,6 +46,7 @@ public class AssetActivity extends AppCompatActivity implements ValueEventListen
     private FirebaseDatabase mDatabase;
     private String uid;
     private LedgerDto ledgerDto = new LedgerDto();
+    private Category category= new Category();
     private PermissionRequester.Builder requester;
     private boolean isSmsList;
     private ArrayList<LedgerDto> arrayLedgerDto;
@@ -73,6 +75,7 @@ public class AssetActivity extends AppCompatActivity implements ValueEventListen
         });
 
         arrayLedgerDto = new ArrayList<>();
+        category = new Category();
         cardItems = new ArrayList<>();
         cashItems = new ArrayList<>();
 
@@ -175,12 +178,15 @@ public class AssetActivity extends AppCompatActivity implements ValueEventListen
                     smsPrice = priceToken[0].replaceAll("\\,", "");
                     smsPlace = messageToken[5];
 
+                    category.setCateImageString("미분류");
+                    category.setCateImageId(2131230981);
                     ledgerDto.setInOut("지출");
                     ledgerDto.setDate(smsDate);
                     ledgerDto.setTime(smsTime);
                     ledgerDto.setAmount(smsPrice);
                     ledgerDto.setContent(smsPlace);
                     ledgerDto.setAsset(new Asset(smsCardName));
+                    ledgerDto.setCategory(category);
                     mDatabase.getReference().child("users").child(uid).child("ledger").push().setValue(ledgerDto);
                 }
             }

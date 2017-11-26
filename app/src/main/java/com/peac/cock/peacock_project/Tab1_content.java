@@ -145,7 +145,7 @@ public class Tab1_content extends Fragment implements ValueEventListener {
             String msgKey = fileSnapshot.getKey();
 
             //메시지 read 해올 때 카테고리 id 초기값으로  2131230977 줘야함.
-            MessageItem messageItem = new MessageItem(2131230977, msgContentToken[0], ledger.getDate(),
+            MessageItem messageItem = new MessageItem(ledger.getCategory().getCateImageId(), msgContentToken[0], ledger.getDate(),
                                                             Integer.parseInt(ledger.getAmount()),msgKey);
 
             messageItems.add(messageItem);
@@ -160,6 +160,7 @@ public class Tab1_content extends Fragment implements ValueEventListener {
             Log.d("msgSize", String.valueOf(msgSetPerMonth.get(msgDate).size()));
             Log.d("datedate", String.valueOf(date2));
             Log.d("msgSet", String.valueOf(msgSetPerMonth.get(String.valueOf(date2))));
+            Log.d("getImageId", String.valueOf(ledger.getCategory().getCateImageId()));
         }
 
         listTab1Adapter = new ListTab1Adapter(getContext(), R.layout.activity_list_msg_item, msgSetPerMonth.get(String.valueOf(date2)));

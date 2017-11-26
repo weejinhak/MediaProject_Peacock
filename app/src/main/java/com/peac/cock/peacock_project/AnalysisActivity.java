@@ -198,7 +198,7 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
             boolean check = false;
 
             if(ledger.getInOut().equals("지출")) {
-                String category = ledger.getCategory();
+                String category = ledger.getCategory().getCateImageString();
                 category = null == category ? "미분류" : category;
                 for (Map.Entry<String, String> c : categoryOutgoing.entrySet()) {
                     if (c.getKey().equals(category)) {
