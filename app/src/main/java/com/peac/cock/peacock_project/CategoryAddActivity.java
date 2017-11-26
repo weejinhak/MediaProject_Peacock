@@ -55,6 +55,15 @@ public class CategoryAddActivity extends AppCompatActivity {
             R.drawable.category_item_phone, R.drawable.category_item_traffic, R.drawable.category_item_trip
     };
 
+    String[] matchGridViewString = {
+            "육아", "의복/미용", "카페/간식",
+            "자동차", "카페/간식", "문화/여가",
+            "애완", "카페/간식", "교육",
+            "식사", "문화/여가", "의료/건강",
+            "주거/통신", "생활","사랑",
+            "주거/통신", "교통","여행/숙박"
+    };
+
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -88,9 +97,9 @@ public class CategoryAddActivity extends AppCompatActivity {
         categoryAddGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
-                Toast.makeText(getApplicationContext(), "String" + gridViewString[i] + "ID" + gridViewImageId[i], Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "String" + matchGridViewString[i] + "ID" + gridViewImageId[i], Toast.LENGTH_LONG).show();
                 System.out.println(categoryType);
-                mCategory.setCateImageString(gridViewString[i]);
+                mCategory.setCateImageString(matchGridViewString[i]);
                 mCategory.setCateImageId(gridViewImageId[i]);
             }
         });
