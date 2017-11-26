@@ -9,6 +9,14 @@ public class Category {
     private String cateImageString;
     private int  cateImageId;
 
+    public Category() {
+    }
+
+    public Category(String cateImageString, int cateImageId) {
+        this.cateImageString = cateImageString;
+        this.cateImageId = cateImageId;
+    }
+
     public String getCateImageString() {
         return cateImageString;
     }
@@ -23,5 +31,10 @@ public class Category {
 
     public void setCateImageId(int cateImageId) {
         this.cateImageId = cateImageId;
+    }
+
+    @Override
+    public String toString() {
+        return cateImageString;
     }
 }

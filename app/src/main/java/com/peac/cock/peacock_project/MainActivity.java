@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View view) {
                 intent.setClass(getApplicationContext(), AssetActivity.class);
                 startActivity(intent);
+                // 안녕안녕아녀녕
             }
         });
         settingGoButton.setOnClickListener(new View.OnClickListener() {
