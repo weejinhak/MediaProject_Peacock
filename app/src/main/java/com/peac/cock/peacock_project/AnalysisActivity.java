@@ -9,7 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Layout;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -66,6 +68,7 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_analysis);
 
         intent = getIntent();
@@ -74,6 +77,41 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
 
         categoryBudgetRegisterText = findViewById(R.id.category_budget_register_text);
         categoryBudgetRegisterButton = findViewById(R.id.category_budget_register_button);
+
+        final ImageButton assetGoButton = findViewById(R.id.main_layout_asset_go_button);
+        final ImageButton analysisGoButton = findViewById(R.id.main_layout_analysis_go_button);
+        final ImageButton detailGoButton = findViewById(R.id.main_layout_breakdown_go_button);
+        final ImageButton settingGoButton = findViewById(R.id.main_layout_setting_go_button);
+
+        detailGoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent.setClass(getApplicationContext(), DetailTabActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        assetGoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent.setClass(getApplicationContext(), AssetActivity.class);
+                startActivity(intent);
+            }
+        });
+        settingGoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent.setClass(getApplicationContext(), SettingActivity.class);
+                startActivity(intent);
+            }
+        });
+        analysisGoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent.setClass(getApplicationContext(), AnalysisActivity.class);
+                startActivity(intent);
+            }
+        });
 
         final TabHost host = findViewById(R.id.tab_host);
         host.setup();

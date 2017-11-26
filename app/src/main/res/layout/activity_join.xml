@@ -9,9 +9,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#000000"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="89dp" />
+        android:background="#000000"/>
 
     <ImageView
         android:id="@+id/join_layout_header_title"

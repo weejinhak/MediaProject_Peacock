@@ -13,7 +13,9 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -55,15 +57,55 @@ public class AssetActivity extends AppCompatActivity implements ValueEventListen
     private TextView totalBalanceTextView;
     private Category category;
 
+    private Intent intent;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_asset);
 
         //firebase get auth& database;
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance();
         uid = mAuth.getCurrentUser().getUid();
+
+        intent = new Intent();
+
+        final ImageButton assetGoButton = findViewById(R.id.main_layout_asset_go_button);
+        final ImageButton analysisGoButton = findViewById(R.id.main_layout_analysis_go_button);
+        final ImageButton detailGoButton = findViewById(R.id.main_layout_breakdown_go_button);
+        final ImageButton settingGoButton = findViewById(R.id.main_layout_setting_go_button);
+
+        detailGoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent.setClass(getApplicationContext(), DetailTabActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        assetGoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent.setClass(getApplicationContext(), AssetActivity.class);
+                startActivity(intent);
+            }
+        });
+        settingGoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent.setClass(getApplicationContext(), SettingActivity.class);
+                startActivity(intent);
+            }
+        });
+        analysisGoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent.setClass(getApplicationContext(), AnalysisActivity.class);
+                startActivity(intent);
+            }
+        });
 
         //사용자 SMS권한 얻기
         requester = new PermissionRequester.Builder(this);

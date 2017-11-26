@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -36,6 +37,8 @@ public class MainActivity extends AppCompatActivity
 
     private TextView nameTextView;
     private TextView emailTextView;
+
+    private long pressedTime = 0;
 
     private FirebaseAuth auth;
 
@@ -64,7 +67,6 @@ public class MainActivity extends AppCompatActivity
         ImageButton analysisGoButton = findViewById(R.id.main_layout_analysis_go_button);
         ImageButton detailGoButton = findViewById(R.id.main_layout_breakdown_go_button);
         ImageButton settingGoButton = findViewById(R.id.main_layout_setting_go_button);
-
 
 
         detailGoButton.setOnClickListener(new View.OnClickListener() {
@@ -113,16 +115,6 @@ public class MainActivity extends AppCompatActivity
 
         nameTextView.setText(auth.getCurrentUser().getDisplayName());
         emailTextView.setText(auth.getCurrentUser().getEmail());
-    }
-
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
     }
 
     @Override
@@ -186,65 +178,22 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-   /* @Override
+    @Override
     public void onBackPressed() {
-        if ( pressedTime == 0 ) {
-            Toast.makeText(MainActivity.this, " 한 번 더 누르면 종료됩니다." , Toast.LENGTH_LONG).show();
+        if(pressedTime == 0) {
+            Toast.makeText(MainActivity.this, "\'뒤로\'버튼을 한번 더 누르시면 종료됩니다." , Toast.LENGTH_LONG).show();
             pressedTime = System.currentTimeMillis();
-        }
-        else {
+        } else {
             int seconds = (int) (System.currentTimeMillis() - pressedTime);
 
             if ( seconds > 2000 ) {
-                Toast.makeText(MainActivity.this, " 한 번 더 누르면 종료됩니다." , Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "\'뒤로\'버튼을 한번 더 누르시면 종료됩니다." , Toast.LENGTH_LONG).show();
                 pressedTime = 0 ;
-            }
-            else {
+            } else {
                 super.onBackPressed();
-//                finish(); // app 종료 시키기
+                finish();
             }
         }
-    }*/
-
-    /*public void callDetailData() {
-
-        databaseReference = database.getReference();
-
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                LedgerDto ledger;
-                dataSnapshot.getValue();
-                for(DataSnapshot fileSnapshot : dataSnapshot.child("users").child(uid).child("ledger").getChildren()) {
-                    ledger = fileSnapshot.getValue(LedgerDto.class);
-
-                    ledgers.add(ledger);
-
-                    boolean check = true;
-
-                    if(ledger.getInOut().equals("지출")) {
-                        if(data != null) {
-                            for (Map.Entry<String, String> d : data.entrySet()) {
-                                if (d.getKey().equals(ledger.getCategory())) {
-                                    d.setValue(String.valueOf(Integer.parseInt(d.getValue()) + (Integer.parseInt(ledger.getAmount()))));
-                                    check = false;
-                                    break;
-                                }
-                            }
-                        }
-
-                        if (check) {
-                            data.put(ledger.getCategory(), ledger.getAmount());
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-    }*/
-
+    }
 
 }

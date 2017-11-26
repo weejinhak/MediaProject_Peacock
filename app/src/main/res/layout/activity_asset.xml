@@ -4,42 +4,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5"
+    android:background="#FFFFFF"
     android:scrollbarAlwaysDrawVerticalTrack="true"
     tools:layout_editor_absoluteY="25dp">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/asset_layout_my_toolbar"
+        android:id="@+id/app_bar_layout_my_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="8dp"
-        android:background="#FFFFFF"
+        android:background="@color/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/asset_layout_progress_bar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
-        <TextView
-            android:id="@+id/setting_layout_toolbar_title"
-            android:layout_width="wrap_content"
+        <ImageView
+            android:id="@+id/app_ber_header_title"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/asset_layout_toolbar_text"
-            android:textColor="#000000"
-            android:textSize="30dp" />
+            android:src="@drawable/main_layout_logo_img" />
 
     </android.support.v7.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/setting_layout_toolbar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="7dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/asset_layout_toolbar_text"
+        android:textColor="#000000"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/aseet_layout_textView_asset_textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/asset_layout_progress_bar" />
 
     <ProgressBar
         android:id="@+id/asset_layout_progress_bar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/asset_layout_my_toolbar"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="74dp"
+        app:layout_constraintBottom_toTopOf="@+id/setting_layout_toolbar_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -48,89 +57,88 @@
         android:id="@+id/aseet_layout_textView_asset_textView"
         android:layout_width="148dp"
         android:layout_height="41dp"
-        android:layout_marginBottom="18dp"
-        android:layout_marginTop="16dp"
-        android:background="#FFFFFF"
+        android:layout_marginBottom="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="7dp"
         android:gravity="center"
         android:text="@string/aseet_layout_textView_assetTotal_text"
-        android:textColor="@color/colorPrimary"
+        android:textColor="#E91E63"
         android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintEnd_toStartOf="@+id/asset_layout_textView_assetMoney_textView"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/asset_layout_my_toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/setting_layout_toolbar_title" />
 
 
     <TextView
         android:id="@+id/asset_layout_textView_assetMoney_textView"
         android:layout_width="149dp"
         android:layout_height="41dp"
-        android:layout_marginBottom="8dp"
-        android:background="#FFFFFF"
+        android:layout_marginBottom="39dp"
+        android:layout_marginEnd="61dp"
+        android:layout_marginStart="53dp"
+        android:layout_marginTop="7dp"
         android:gravity="center"
-        android:textSize="20sp"
         android:textColor="#E91E63"
-        app:layout_constraintBottom_toBottomOf="@+id/aseet_layout_textView_asset_textView"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/asset_layout_card_listView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/aseet_layout_textView_asset_textView"
-        app:layout_constraintTop_toTopOf="@+id/aseet_layout_textView_asset_textView"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/setting_layout_toolbar_title" />
 
     <ListView
         android:id="@+id/asset_layout_card_listView"
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:layout_marginBottom="6dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="350dp"
+        android:layout_height="120dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
-        android:background="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        android:background="#F5F5F5"
+        app:layout_constraintBottom_toTopOf="@+id/aseet_layout_cash_listView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/asset_layout_my_toolbar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.907"
         tools:ignore="MissingConstraints" />
 
     <ListView
         android:id="@+id/aseet_layout_cash_listView"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:background="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/asset_layout_button_assetAdd_button"
+        android:layout_width="350dp"
+        android:layout_height="120dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:background="#F5F5F5"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/asset_layout_card_listView"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.722" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
-        android:layout_height="26dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="355dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="19dp"
         android:text="@string/asset_layout_cardTextView_text"
+        android:textColor="#000000"
         app:layout_constraintBottom_toTopOf="@+id/asset_layout_card_listView"
-        app:layout_constraintEnd_toStartOf="@+id/guideline19"
-        app:layout_constraintHorizontal_bias="0.574"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/aseet_layout_textView_asset_textView"
-        app:layout_constraintVertical_bias="0.607" />
+        app:layout_constraintTop_toBottomOf="@+id/aseet_layout_textView_asset_textView" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="2dp"
-        android:layout_marginEnd="130dp"
+        android:layout_marginEnd="355dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="12dp"
         android:text="@string/asset_layout_cashTextView_text"
+        android:textColor="#000000"
         app:layout_constraintBottom_toTopOf="@+id/aseet_layout_cash_listView"
-        app:layout_constraintEnd_toStartOf="@+id/guideline19"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/asset_layout_card_listView" />
 
@@ -139,20 +147,69 @@
         android:id="@+id/asset_layout_button_assetAdd_button"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:background="#FFFFFF"
+        android:layout_marginBottom="84dp"
+        android:layout_marginTop="21dp"
+        android:background="#E91E63"
         android:text="자산추가하기"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/aseet_layout_cash_listView" />
 
+    <ImageButton
+        android:id="@+id/main_layout_asset_go_button"
+        android:layout_width="0dp"
+        android:layout_height="65dp"
+        android:layout_weight="1"
+        android:background="#E91E63"
+        android:scaleType="fitCenter"
+        android:src="@drawable/main_layout_active_assets_tab_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/main_layout_breakdown_go_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline19"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="192dp" />
+    <ImageButton
+        android:id="@+id/main_layout_breakdown_go_button"
+        android:layout_width="0dp"
+        android:layout_height="65dp"
+        android:layout_weight="1"
+        android:background="#000000"
+        android:scaleType="fitCenter"
+        android:src="@drawable/main_layout_list_tab_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/main_layout_analysis_go_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/main_layout_asset_go_button" />
+
+    <ImageButton
+        android:id="@+id/main_layout_analysis_go_button"
+        android:layout_width="0dp"
+        android:layout_height="65dp"
+        android:layout_weight="1"
+        android:background="#000000"
+        android:scaleType="fitCenter"
+        android:src="@drawable/main_layout_analysis_tab_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/main_layout_setting_go_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/main_layout_breakdown_go_button" />
+
+    <ImageButton
+        android:id="@+id/main_layout_setting_go_button"
+        android:layout_width="0dp"
+        android:layout_height="65dp"
+        android:layout_weight="1"
+        android:background="#000000"
+        android:scaleType="fitCenter"
+        android:src="@drawable/main_layout_setting_tab_button"
+        app:layout_anchorGravity="right|bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/main_layout_analysis_go_button" />
 
 
 </android.support.constraint.ConstraintLayout>

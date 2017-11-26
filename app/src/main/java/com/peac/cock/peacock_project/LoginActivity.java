@@ -60,10 +60,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        //툴바 설정
-        Toolbar toolbar = findViewById(R.id.setting_layout_my_toolbar);
-        setSupportActionBar(toolbar);
-
 
         //firebase Auth정보 get
         mAuth = FirebaseAuth.getInstance();

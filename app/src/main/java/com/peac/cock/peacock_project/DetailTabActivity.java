@@ -12,6 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.ImageButton;
 
 /**
  * Created by dmsru on 2017-11-15.
@@ -39,7 +41,10 @@ public class DetailTabActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_tab_detail);
+
+        intent = new Intent();
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
@@ -56,7 +61,42 @@ public class DetailTabActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent = new Intent(getApplicationContext(), CalculatorActivity.class);
+                intent.setClass(getApplicationContext(), CalculatorActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        final ImageButton assetGoButton = findViewById(R.id.main_layout_asset_go_button);
+        final ImageButton analysisGoButton = findViewById(R.id.main_layout_analysis_go_button);
+        final ImageButton detailGoButton = findViewById(R.id.main_layout_breakdown_go_button);
+        final ImageButton settingGoButton = findViewById(R.id.main_layout_setting_go_button);
+
+        detailGoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent.setClass(getApplicationContext(), DetailTabActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        assetGoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent.setClass(getApplicationContext(), AssetActivity.class);
+                startActivity(intent);
+            }
+        });
+        settingGoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent.setClass(getApplicationContext(), SettingActivity.class);
+                startActivity(intent);
+            }
+        });
+        analysisGoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent.setClass(getApplicationContext(), AnalysisActivity.class);
                 startActivity(intent);
             }
         });

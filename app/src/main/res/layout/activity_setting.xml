@@ -3,267 +3,283 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:layout_editor_absoluteY="25dp">
 
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/setting_layout_my_toolbar"
+        android:id="@+id/app_bar_layout_my_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="59dp"
+        android:layout_height="60dp"
         android:layout_alignParentTop="true"
-        android:background="#FFFFFF"
+        android:layout_marginBottom="25dp"
+        android:background="@color/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_constraintBottom_toTopOf="@+id/setting_layout_toolbar_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
-        <TextView
-            android:id="@+id/setting_layout_toolbar_title"
-            android:layout_width="wrap_content"
+        <ImageView
+            android:id="@+id/app_ber_header_title"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/setup_layout_toolbar_text"
-            android:textColor="#000000"
-            android:textSize="30sp" />
+            android:src="@drawable/main_layout_logo_img" />
 
     </android.support.v7.widget.Toolbar>
 
-    <View
-        android:id="@+id/setting_layout_view8"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginBottom="27dp"
+    <TextView
+        android:id="@+id/setting_layout_toolbar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginStart="8dp"
-        android:background="#FF909090"
-        app:layout_constraintBottom_toTopOf="@+id/setting_layout_textView_userEmail"
+        android:layout_marginTop="25dp"
+        android:text="@string/setup_layout_toolbar_text"
+        android:textColor="#000000"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toTopOf="@+id/setting_layout_textView_userName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/setting_layout_my_toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/app_bar_layout_my_toolbar" />
+
+    <TextView
+        android:id="@+id/setting_layout_textView_userName"
+        android:layout_width="200dp"
+        android:layout_height="22dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="정다혜"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/setting_layout_textView_userEmail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.276"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/setting_layout_toolbar_title" />
+
+
+    <TextView
+        android:id="@+id/setting_layout_textView_userEmail"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="9dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="ekgp840@naver.com"
+        android:textColor="#E91E63"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toTopOf="@+id/view3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.276"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/setting_layout_textView_userName"
+        tools:ignore="SmallSp" />
 
     <View
         android:id="@+id/view3"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="90dp"
         android:background="#FF909090"
-        app:layout_constraintBottom_toTopOf="@+id/view2"
+        app:layout_constraintBottom_toTopOf="@+id/setting_latout_textView_mybankItem_management"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/setting_layout_view8" />
+        app:layout_constraintTop_toBottomOf="@+id/app_bar_layout_my_toolbar" />
+
+    <TextView
+        android:id="@+id/setting_latout_textView_mybankItem_management"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="100dp"
+        android:drawableEnd="@drawable/setting_layout_arrow_gray"
+        android:text="@string/setup_layout_bankItem_management_text"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/view2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.557"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view3" />
 
     <View
         android:id="@+id/view2"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginStart="8dp"
         android:background="#FF909090"
-        app:layout_constraintBottom_toTopOf="@+id/view4"
+        app:layout_constraintBottom_toTopOf="@+id/setting_layout_textView_categoryadd"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view3" />
+        app:layout_constraintTop_toBottomOf="@+id/setting_latout_textView_mybankItem_management" />
+
+    <TextView
+        android:id="@+id/setting_layout_textView_categoryadd"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="100dp"
+        android:drawableEnd="@drawable/setting_layout_arrow_gray"
+        android:drawablePadding="@dimen/font_size"
+        android:text="@string/setup_layout_categoryAdd_text"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/view4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.557"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view2" />
 
     <View
         android:id="@+id/view4"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginStart="8dp"
         android:background="#FF909090"
-        app:layout_constraintBottom_toTopOf="@+id/view5"
+        app:layout_constraintBottom_toTopOf="@+id/setting_layout_textView_mySetting"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view2" />
+        app:layout_constraintTop_toBottomOf="@+id/setting_layout_textView_categoryadd" />
+
+    <TextView
+        android:id="@+id/setting_layout_textView_mySetting"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="100dp"
+        android:drawableEnd="@drawable/setting_layout_arrow_gray"
+        android:text="@string/setup_layout_mysetUp_text"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/view5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.557"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view4" />
 
     <View
         android:id="@+id/view5"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginStart="8dp"
         android:background="#FF909090"
-        app:layout_constraintBottom_toTopOf="@+id/view6"
+        app:layout_constraintBottom_toTopOf="@+id/setting_layout_textView_security"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view4" />
+        app:layout_constraintTop_toBottomOf="@+id/setting_layout_textView_mySetting" />
+
+    <TextView
+        android:id="@+id/setting_layout_textView_security"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="100dp"
+        android:drawableEnd="@drawable/setting_layout_arrow_gray"
+        android:text="@string/setup_layout_security_text"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/view6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.557"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view5" />
 
     <View
         android:id="@+id/view6"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginStart="8dp"
         android:background="#FF909090"
-        app:layout_constraintBottom_toTopOf="@+id/view7"
+        app:layout_constraintBottom_toTopOf="@+id/setting_layout_textView_csCenter"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view5" />
+        app:layout_constraintTop_toBottomOf="@+id/setting_layout_textView_security" />
+
+    <TextView
+        android:id="@+id/setting_layout_textView_csCenter"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="100dp"
+        android:drawableEnd="@drawable/setting_layout_arrow_gray"
+        android:text="@string/setup_layout_center_text"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/view7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view6" />
 
     <View
         android:id="@+id/view7"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginBottom="80dp"
         android:background="#FF909090"
-        app:layout_constraintBottom_toTopOf="@+id/setting_layout_asset_go_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view6" />
-
-    <TextView
-        android:id="@+id/setting_layout_textView_userName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="10dp"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/setting_layout_textView_userEmail"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"
-        app:layout_constraintTop_toBottomOf="@+id/setting_layout_my_toolbar" />
-
-
-    <TextView
-        android:id="@+id/setting_layout_textView_userEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="10dp"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toTopOf="@+id/setting_latout_textView_mybankItem_management"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/setting_layout_view8"
-        tools:ignore="SmallSp" />
-
-    <TextView
-        android:id="@+id/setting_latout_textView_mybankItem_management"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:text="@string/setup_layout_bankItem_management_text"
-        android:textSize="16sp"
-        android:drawableEnd="@drawable/setting_layout_arrow_gray"
-        app:layout_constraintBottom_toTopOf="@+id/view2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view3" />
-
-    <TextView
-        android:id="@+id/setting_layout_textView_categoryadd"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="10dp"
-        android:text="@string/setup_layout_categoryAdd_text"
-        android:textSize="16sp"
-        android:drawableEnd="@drawable/setting_layout_arrow_gray"
-        android:drawablePadding="@dimen/font_size"
-        app:layout_constraintBottom_toTopOf="@+id/setting_layout_textView_mySetting"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view2" />
-
-    <TextView
-        android:id="@+id/setting_layout_textView_mySetting"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:text="@string/setup_layout_mysetUp_text"
-        android:textSize="16sp"
-        android:drawableEnd="@drawable/setting_layout_arrow_gray"
-        app:layout_constraintBottom_toTopOf="@+id/view5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view4" />
-
-    <TextView
-        android:id="@+id/setting_layout_textView_security"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginStart="10dp"
-        android:text="@string/setup_layout_security_text"
-        android:textSize="16sp"
-        android:drawableEnd="@drawable/setting_layout_arrow_gray"
-        app:layout_constraintBottom_toTopOf="@+id/view6"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view5" />
-
-    <TextView
-        android:id="@+id/setting_layout_textView_csCenter"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:text="@string/setup_layout_center_text"
-        android:textSize="16sp"
-        android:drawableEnd="@drawable/setting_layout_arrow_gray"
-        app:layout_constraintBottom_toTopOf="@+id/view7"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view6" />
+        app:layout_constraintTop_toBottomOf="@+id/setting_layout_textView_csCenter" />
 
     <TextView
         android:id="@+id/textView7"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:text="@string/setup_layout_appVersion_text"
         android:textSize="8sp"
-        app:layout_constraintBottom_toTopOf="@+id/setting_layout_asset_go_button"
+        app:layout_constraintBottom_toTopOf="@+id/main_layout_asset_go_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view7" />
+        app:layout_constraintHorizontal_bias="0.136"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
-        android:id="@+id/setting_layout_asset_go_button"
+        android:id="@+id/main_layout_asset_go_button"
         android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="24dp"
+        android:layout_height="65dp"
+        android:layout_weight="1"
         android:background="#000000"
         android:scaleType="fitCenter"
+        android:src="@drawable/main_layout_assets_tab_button"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/setting_layout_breakdown_go_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7"
-        app:srcCompat="@drawable/main_layout_assets_tab_button" />
+        app:layout_constraintEnd_toStartOf="@+id/main_layout_breakdown_go_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
-        android:id="@+id/setting_layout_breakdown_go_button"
+        android:id="@+id/main_layout_breakdown_go_button"
         android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="24dp"
+        android:layout_height="65dp"
+        android:layout_weight="1"
         android:background="#000000"
         android:scaleType="fitCenter"
         android:src="@drawable/main_layout_list_tab_button"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/setting_layout_analysis_go_button"
-        app:layout_constraintStart_toEndOf="@+id/setting_layout_asset_go_button"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+        app:layout_constraintEnd_toStartOf="@+id/main_layout_analysis_go_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/main_layout_asset_go_button" />
 
     <ImageButton
-        android:id="@+id/setting_layout_analysis_go_button"
+        android:id="@+id/main_layout_analysis_go_button"
         android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="24dp"
+        android:layout_height="65dp"
+        android:layout_weight="1"
         android:background="#000000"
         android:scaleType="fitCenter"
         android:src="@drawable/main_layout_analysis_tab_button"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/setting_layout_setting_go_button"
-        app:layout_constraintStart_toEndOf="@+id/setting_layout_breakdown_go_button"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+        app:layout_constraintEnd_toStartOf="@+id/main_layout_setting_go_button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/main_layout_breakdown_go_button" />
 
     <ImageButton
-        android:id="@+id/setting_layout_setting_go_button"
+        android:id="@+id/main_layout_setting_go_button"
         android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="24dp"
-        android:background="#000000"
+        android:layout_height="65dp"
+        android:layout_weight="1"
+        android:background="#E91E63"
         android:scaleType="fitCenter"
+        android:src="@drawable/main_layout_active_setting_tab_button"
+        app:layout_anchorGravity="right|bottom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/setting_layout_analysis_go_button"
-        app:layout_constraintTop_toBottomOf="@+id/textView7"
-        app:srcCompat="@drawable/main_layout_setting_tab_button" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/main_layout_analysis_go_button" />
 
 </android.support.constraint.ConstraintLayout>
