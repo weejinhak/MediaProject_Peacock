@@ -8,15 +8,10 @@
     tools:context="com.peac.cock.peacock_project.MainActivity"
     tools:layout_editor_absoluteY="25dp">
 
-    <include
-        android:id="@+id/include_asset"
-        layout="@layout/activity_asset"
-        tools:layout_editor_absoluteX="0dp" />
-
     <android.support.v7.widget.Toolbar
         android:id="@+id/app_bar_layout_my_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_alignParentTop="true"
         android:background="@color/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
@@ -30,7 +25,6 @@
             android:src="@drawable/main_layout_logo_img" />
 
     </android.support.v7.widget.Toolbar>
-
 
     <ImageButton
         android:id="@+id/main_layout_asset_go_button"
@@ -79,19 +73,11 @@
         android:background="#000000"
         android:scaleType="fitCenter"
         android:src="@drawable/main_layout_setting_tab_button"
-        app:layout_anchor="@+id/include"
         app:layout_anchorGravity="right|bottom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/main_layout_analysis_go_button" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="59dp" />
 
 
 </android.support.constraint.ConstraintLayout>

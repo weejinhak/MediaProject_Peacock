@@ -1,14 +1,18 @@
 package com.peac.cock.peacock_project;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Layout;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -49,7 +53,7 @@ import java.util.Map;
 
 import javax.xml.transform.sax.SAXSource;
 
-public class AnalysisActivity extends AppCompatActivity implements ValueEventListener{
+public class AnalysisActivity extends Fragment implements ValueEventListener{
 
     private PieChart pieChart;
 
@@ -62,20 +66,20 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
 
     private Intent intent;
 
+    public AnalysisActivity() { }
 
+
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_analysis);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_analysis, null);
 
-        intent = getIntent();
+        pieChart = view.findViewById(R.id.pie_chart);
 
-        pieChart = findViewById(R.id.pie_chart);
+        categoryBudgetRegisterText = view.findViewById(R.id.category_budget_register_text);
+        categoryBudgetRegisterButton = view.findViewById(R.id.category_budget_register_button);
 
-        categoryBudgetRegisterText = findViewById(R.id.category_budget_register_text);
-        categoryBudgetRegisterButton = findViewById(R.id.category_budget_register_button);
-
-        final TabHost host = findViewById(R.id.tab_host);
+        final TabHost host = view.findViewById(R.id.tab_host);
         host.setup();
 
         TabHost.TabSpec page1 = host.newTabSpec("분석");
@@ -89,6 +93,15 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
         host.addTab(page2);
 
         setupPieChart();
+
+        return view;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        intent = getActivity().getIntent();
     }
 
     @NonNull
@@ -134,14 +147,14 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
     }
 
     protected void setBarChartData() {
-        LinearLayout layout = findViewById(R.id.linear_layout);
+        LinearLayout layout = getActivity().findViewById(R.id.linear_layout);
 
         int percentage = (int)(entireBudget[1]/entireBudget[0]*100);
         if (percentage > 100) {
             percentage = 100;
         }
 
-        ProgressBar progressBar = new ProgressBar(this, null, android.R.attr.progressBarStyleHorizontal);
+        ProgressBar progressBar = new ProgressBar(getActivity(), null, android.R.attr.progressBarStyleHorizontal);
         progressBar.setProgress(percentage);
         layout.addView(progressBar);
         System.out.println(percentage);
@@ -159,7 +172,7 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
                 if (percent > 100) {
                     percent = 100;
                 }
-                ProgressBar p = new ProgressBar(this, null, android.R.attr.progressBarStyleHorizontal);
+                ProgressBar p = new ProgressBar(getActivity(), null, android.R.attr.progressBarStyleHorizontal);
                 p.setProgress(percent);
                 layout.addView(p);
             }
@@ -167,13 +180,13 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
     }
 
     @Override
-    protected void onStart() {
+    public void onStart() {
         super.onStart();
         FirebaseDatabase.getInstance().getReference().addValueEventListener(this);
     }
 
     @Override
-    protected void onStop() {
+    public void onStop() {
         super.onStop();
         FirebaseDatabase.getInstance().getReference().removeEventListener(this);
     }
@@ -198,7 +211,7 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
             boolean check = false;
 
             if(ledger.getInOut().equals("지출")) {
-                String category = ledger.getCategory();
+                String category = ledger.getCategory().getCateImageString();
                 category = null == category ? "미분류" : category;
                 for (Map.Entry<String, String> c : categoryOutgoing.entrySet()) {
                     if (c.getKey().equals(category)) {
