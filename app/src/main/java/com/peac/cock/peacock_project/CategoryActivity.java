@@ -8,8 +8,10 @@ import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,17 +35,37 @@ public class CategoryActivity extends AppCompatActivity {
     private ArrayList<String> getDbImageStringList;
     private ArrayList<Integer> getDbImageIdList;
     private String uid;
-    private String state = "수입";
+    private String categoryType;
+    private int state;
     private CategoryGridViewAdapter categoryGridViewAdapter;
     private GridView categoryGridView;
 
     private String[] gridViewString;
     private int[] gridViewImageId;
 
+    private Intent intent;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_my_category);
+
+        intent = getIntent();
+
+        if(intent.getStringExtra("categoryType") != null) {
+            categoryType = intent.getStringExtra("categoryType");
+        } else {
+            categoryType = "수입";
+        }
+
+        if(categoryType.equals("수입")) {
+            state = 0;
+        } else if(categoryType.equals("지출")) {
+            state = 1;
+        } else {
+            state = 2;
+        }
 
 
         //firebase Auth정보 get
@@ -56,8 +78,11 @@ public class CategoryActivity extends AppCompatActivity {
 
         //get Id
         categoryGridView = findViewById(R.id.category_grid_view_image_text);
-        FloatingActionButton addCategoryButton = findViewById(R.id.category_grid_view_category_add_button);
+        ImageButton addCategoryButton = findViewById(R.id.category_grid_view_category_add_button);
         TabLayout tabLayout = findViewById(R.id.category_layout_tabs);
+
+        TabLayout.Tab tab = tabLayout.getTabAt(state);
+        tab.select();
 
         callDatabase();
 
@@ -71,10 +96,14 @@ public class CategoryActivity extends AppCompatActivity {
         addCategoryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), CategoryAddActivity.class);
+                intent.setClass(getApplicationContext(), CategoryAddActivity.class);
+                intent.putExtra("categoryType", categoryType);
                 startActivity(intent);
             }
         });
+
+
+
 
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -83,18 +112,17 @@ public class CategoryActivity extends AppCompatActivity {
                 System.out.println(tab.getPosition());
                 switch (tab.getPosition()) {
                     case 0:
-                        state = "수입";
+                        categoryType = "수입";
                         callDatabase();
                         break;
                     case 1:
-                        state = "지출";
+                        categoryType = "지출";
                         callDatabase();
                         break;
                     case 2:
-                        state = "이체";
+                        categoryType = "이체";
                         callDatabase();
                         break;
-
                 }
             }
 
@@ -119,7 +147,7 @@ public class CategoryActivity extends AppCompatActivity {
                 getDbImageStringList = new ArrayList<>();
                 getDbImageIdList = new ArrayList<>();
 
-                for (DataSnapshot fileSnapshot : dataSnapshot.child("users").child(uid).child("category").child(state).getChildren()) {
+                for (DataSnapshot fileSnapshot : dataSnapshot.child("users").child(uid).child("category").child(categoryType).getChildren()) {
 
                     Log.d("fileSnapShot", String.valueOf(fileSnapshot));
 

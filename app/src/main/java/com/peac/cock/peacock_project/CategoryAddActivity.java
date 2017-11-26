@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
@@ -30,7 +31,7 @@ public class CategoryAddActivity extends AppCompatActivity {
     private ImageButton transferButton;
     private Category mCategory;
     private Button categoryAddButton;
-    private String categoryType = "지출";
+    private String categoryType;
     private String categoryImageString;
     private int categoryImageId;
     private FirebaseAuth mAuth;
@@ -67,9 +68,11 @@ public class CategoryAddActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_category_add);
 
-        intent = new Intent();
+        intent = getIntent();
+        categoryType = intent.getStringExtra("categoryType");
 
         //fireBase Auth & Database
         mAuth = FirebaseAuth.getInstance();
@@ -147,6 +150,7 @@ public class CategoryAddActivity extends AppCompatActivity {
             public void onClick(View v) {
                 mDatabase.getReference().child("users").child(uid).child("category").child(categoryType).push().setValue(mCategory);
                 intent.setClass(getApplicationContext(), CategoryActivity.class);
+                intent.putExtra("categoryType", categoryType);
                 startActivity(intent);
                 finish();
             }

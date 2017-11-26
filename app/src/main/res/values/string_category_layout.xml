@@ -6,8 +6,8 @@
     <string name="category_layout_transfer_text">이체</string>
     <string name="category_layout_category_add_button_text">카테고리 변경하기</string>
 
-    <string name="category_add_layout_toolbar_text">카테고리를 변경해보세요</string>
-    <string name="category_add_layout_add_button_text">변경</string>
+    <string name="category_add_layout_toolbar_text">카테고리 추가</string>
+    <string name="category_add_layout_add_button_text">추가</string>
 
 
     <string-array name="spinner_category_list">
@@ -19,7 +19,6 @@
         <item>차</item>
         <item>담배</item>
         <item>문화</item>
-        <item>다이아몬드</item>
         <item>애완</item>
         <item>음료</item>
         <item>교육</item>
@@ -27,13 +26,10 @@
         <item>교양</item>
         <item>헬스</item>
         <item>집</item>
-        <item>법</item>
         <item>생활</item>
         <item>사랑</item>
         <item>돈</item>
         <item>휴대폰</item>
-        <item>반지</item>
-        <item>별</item>
         <item>교통</item>
         <item>여행</item>
         <item>집</item>
