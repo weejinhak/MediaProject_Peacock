@@ -251,7 +251,7 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
                                         dialog.dismiss();
-                                        intent.setClass(getApplicationContext(), MainActivity.class);
+                                        intent.setClass(getApplicationContext(), DetailTabActivity.class);
                                         startActivity(intent);
                                     }
                                 })

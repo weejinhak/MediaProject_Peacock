@@ -4,7 +4,8 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.peac.cock.peacock_project.DetailTabActivity">
+    tools:context="com.peac.cock.peacock_project.DetailTabActivity"
+    android:background="#FFFFFF">
 
 
     <include

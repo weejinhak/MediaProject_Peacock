@@ -40,7 +40,7 @@
             android:id="@+id/list_msg_balance"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="10dp"
             android:gravity="center"
             android:text="txt"
             android:textSize="15sp" />
