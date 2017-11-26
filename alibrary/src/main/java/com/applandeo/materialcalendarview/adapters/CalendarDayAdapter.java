@@ -180,6 +180,55 @@ class CalendarDayAdapter extends ArrayAdapter<Date> {
 
     //날짜 때려박는 함수
     void dateInsertMethod(String date, TextView textView, TextView textView1) {
+
+        //10월 16일부터 31일까지
+        if (newDate.equals("20171016")) {
+            daystring1.setText("+4,000");
+            daystring2.setText("-103,514");
+        }
+        if (newDate.equals("20171017")) {
+            daystring2.setText("-30,200");
+        }
+        if (newDate.equals("20171018")) {
+            daystring2.setText("-30,700");
+        }
+        if (newDate.equals("20171019")) {
+            daystring2.setText("-6,900");
+        }
+        if (newDate.equals("20171020")) {
+            daystring2.setText("-7,000");
+        }
+        if (newDate.equals("20171021")) {
+            daystring2.setText("-59,976");
+        }
+        if (newDate.equals("20171022")) {
+            daystring2.setText("-16,000");
+        }
+        if (newDate.equals("20171023")) {
+            daystring2.setText("-37,900");
+        }
+        if (newDate.equals("20171024")) {
+            daystring2.setText("-6,900");
+        }
+        if (newDate.equals("20171025")) {
+            daystring2.setText("-16,800");
+        }
+        if (newDate.equals("20171026")) {
+            daystring1.setText("+4,100");
+            daystring2.setText("-18,200");
+        }
+        if (newDate.equals("20171027")) {
+            daystring2.setText("-28,400");
+        }
+        if (newDate.equals("20171030")) {
+            daystring1.setText("+415,140");
+            daystring2.setText("-58,900");
+        }
+        if (newDate.equals("20171031")) {
+            daystring2.setText("-14,500");
+        }
+
+        //11월 1일부터 26일 까지
         if (newDate.equals("20171101")) {
             daystring2.setText("-46,000");
         }
