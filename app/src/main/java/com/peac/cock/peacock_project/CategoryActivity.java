@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -119,6 +120,9 @@ public class CategoryActivity extends AppCompatActivity {
                 getDbImageIdList = new ArrayList<>();
 
                 for (DataSnapshot fileSnapshot : dataSnapshot.child("users").child(uid).child("category").child(state).getChildren()) {
+
+                    Log.d("fileSnapShot", String.valueOf(fileSnapshot));
+
                     long id = (long) fileSnapshot.child("cateImageId").getValue();
                     int imgId = (int) id;
                     String imgString = fileSnapshot.child("cateImageString").getValue(String.class);

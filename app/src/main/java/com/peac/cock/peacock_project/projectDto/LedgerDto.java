@@ -12,7 +12,7 @@ public class LedgerDto {
     private String date;
     private String time;
     private String content;
-    private String category;
+    private Category category;
     private String amount;
     private Asset asset;
     private String memo;
@@ -57,11 +57,11 @@ public class LedgerDto {
         this.content = content;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 

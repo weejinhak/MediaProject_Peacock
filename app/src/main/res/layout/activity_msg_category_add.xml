@@ -63,7 +63,7 @@
         android:layout_height="430dp"
         android:columnWidth="100dp"
         android:gravity="center"
-        android:numColumns="2">
+        android:numColumns="3">
     </GridView>
 
     <Button

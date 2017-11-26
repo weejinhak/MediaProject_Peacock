@@ -2,6 +2,7 @@ package com.peac.cock.peacock_project;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -9,15 +10,17 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 
 /**
  * Created by dmsru on 2017-11-15.
  */
 
-public class DetailTabActivity extends AppCompatActivity {
+public class DetailTabActivity extends Fragment {
 
     protected Intent intent;
 
@@ -36,19 +39,27 @@ public class DetailTabActivity extends AppCompatActivity {
      */
     private ViewPager mViewPager;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tab_detail);
+    public DetailTabActivity() {}
 
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_tab_detail, null);
+        return view;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getActivity().getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager = getActivity().findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        FloatingActionButton fab = findViewById(R.id.main_layout_plus_button);
+        TabLayout tabLayout = getActivity().findViewById(R.id.tabs);
+        FloatingActionButton fab = getActivity().findViewById(R.id.main_layout_plus_button);
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
@@ -56,7 +67,7 @@ public class DetailTabActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent = new Intent(getApplicationContext(), CalculatorActivity.class);
+                intent = new Intent(getActivity().getApplicationContext(), CalculatorActivity.class);
                 startActivity(intent);
             }
         });
