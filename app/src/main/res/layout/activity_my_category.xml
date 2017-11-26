@@ -20,22 +20,25 @@
             android:background="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay">
-
+            <ImageButton
+                android:layout_width="30dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/handwriting_layout_back_button"/>
             <TextView
                 android:id="@+id/category_layout_toolbar_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="100dp"
+                android:layout_marginStart="90dp"
                 android:text="@string/category_layout_toolbar_text"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp" />
-            <android.support.design.widget.FloatingActionButton
+            <ImageButton
                 android:id="@+id/category_grid_view_category_add_button"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginStart="40dp"
-                android:backgroundTint="#E91E63"
-                android:src="@drawable/category_layout_category_add_button" />
+                android:layout_marginStart="75dp"
+                android:background="@drawable/main_layout_plus_button" />
         </android.support.v7.widget.Toolbar>
 
         <android.support.design.widget.TabLayout
