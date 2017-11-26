@@ -37,18 +37,36 @@ public class MessageCategoryAddActivity extends AppCompatActivity {
     private String messageKey;
 
     String[] gridViewString = {
-            "육아", "의복/미용", "카페/간식",
-            "자동차", "문화", "술/유흥",
-            "교육", "식사", "경조사",
-            "의료/건강", "주거/통신", "생활",
-            "교통", "여행/숙박"
+            "아이", "뷰티", "카페",
+            "차", "담배", "문화",
+            "애완", "음료", "교육",
+            "음식", "교양", "헬스",
+            "집", "생활", "사랑",
+            "휴대폰", "교통", "여행"
     };
     int[] gridViewImageId = {
-            R.drawable.baby,R.drawable.beauty,R.drawable.caffe,
-            R.drawable.car,R.drawable.culture,R.drawable.drink,
-            R.drawable.education,R.drawable.food,R.drawable.gyeong,
-            R.drawable.health,R.drawable.home,R.drawable.life,
-            R.drawable.traffic,R.drawable.trip
+           R.drawable.category_item_baby,R.drawable.category_item_beauty,R.drawable.category_item_caffe,
+            R.drawable.category_item_car,R.drawable.category_item_cigarette,R.drawable.category_item_culture,
+            R.drawable.category_item_dog,R.drawable.category_item_drink,R.drawable.category_item_education,
+            R.drawable.category_item_food,R.drawable.category_item_gyeong,R.drawable.category_item_health,
+            R.drawable.category_item_home,R.drawable.category_item_life,R.drawable.category_item_love,
+            R.drawable.category_item_phone,R.drawable.category_item_traffic,R.drawable.category_item_trip
+    };
+
+
+    String[] matchGridViewString = {
+            "육아", "의복/미용", "카페/간식",
+            "자동차", "카페/간식", "문화/여가",
+            "애완", "카페/간식", "교육",
+            "식사", "문화/여가", "의료/건강",
+            "주거/통신", "교통","여행/숙박"
+    };
+    int[] matchGridViewImageId = {
+          R.drawable.baby,R.drawable.beauty,R.drawable.caffe,
+            R.drawable.car,R.drawable.caffe,R.drawable.culture,
+            R.drawable.category_animal,R.drawable.caffe,R.drawable.education,
+            R.drawable.food,R.drawable.culture,R.drawable.health,
+            R.drawable.home,R.drawable.traffic,R.drawable.trip
     };
 
 
@@ -82,17 +100,17 @@ public class MessageCategoryAddActivity extends AppCompatActivity {
         categoryAddGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
-                Toast.makeText(getApplicationContext(), "String" + gridViewString[i] + "ID" + gridViewImageId[i], Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "String" + matchGridViewString[i] + "ID" + matchGridViewImageId[i], Toast.LENGTH_LONG).show();
                 System.out.println(categoryType);
-                mCategory.setCateImageString(gridViewString[i]);
-                mCategory.setCateImageId(gridViewImageId[i]);
+                mCategory.setCateImageString(matchGridViewString[i]);
+                mCategory.setCateImageId(matchGridViewImageId[i]);
             }
         });
 
         categoryAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDatabase.getReference().child("users").child(uid).child("ledger").child(messageKey).setValue(mCategory);
+                mDatabase.getReference().child("users").child(uid).child("ledger").child(messageKey).child("category").setValue(mCategory);
                 Intent intent = new Intent(getApplicationContext(),DetailTabActivity.class);
                 startActivity(intent);
                 finish();

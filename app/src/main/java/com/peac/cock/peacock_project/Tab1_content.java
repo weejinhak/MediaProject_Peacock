@@ -145,7 +145,7 @@ public class Tab1_content extends Fragment implements ValueEventListener {
             String msgKey = fileSnapshot.getKey();
 
             //메시지 read 해올 때 카테고리 id 초기값으로  2131230977 줘야함.
-            MessageItem messageItem = new MessageItem(2131230977, msgContentToken[0], ledger.getDate(),
+            MessageItem messageItem = new MessageItem(ledger.getCategory().getCateImageId(), msgContentToken[0], ledger.getDate(),
                                                             Integer.parseInt(ledger.getAmount()),msgKey);
 
             messageItems.add(messageItem);

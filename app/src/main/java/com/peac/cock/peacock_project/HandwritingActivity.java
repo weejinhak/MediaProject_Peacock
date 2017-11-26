@@ -29,6 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.peac.cock.peacock_project.projectDto.Asset;
 import com.peac.cock.peacock_project.projectDto.Card;
 import com.peac.cock.peacock_project.projectDto.Cash;
+import com.peac.cock.peacock_project.projectDto.Category;
 import com.peac.cock.peacock_project.projectDto.LedgerDto;
 
 import java.sql.SQLOutput;
@@ -61,7 +62,7 @@ public class HandwritingActivity extends AppCompatActivity {
 
     private Spinner inOut;
     private Spinner category;
-    private List<String> categoryList;
+    private List<Category> categoryList;
     private EditText content;
     private EditText money;
     private Spinner asset;
@@ -165,7 +166,7 @@ public class HandwritingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ledgerDto.setInOut(inOut.getSelectedItem().toString());
-                ledgerDto.setCategory(category.getSelectedItem().toString());
+                ledgerDto.setCategory((Category) category.getSelectedItem());
                 ledgerDto.setContent(content.getText().toString());
                 ledgerDto.setAmount(money.getText().toString());
                 ledgerDto.setAsset((Asset)asset.getSelectedItem());
@@ -274,7 +275,7 @@ public class HandwritingActivity extends AppCompatActivity {
 
     private void updateCategoryList() {
         categoryList = new ArrayList<>();
-        categoryList.add("미분류");
+        categoryList.add(new Category("미분류",2131230981));
 
         databaseReference = mDatabase.getReference();
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -283,16 +284,16 @@ public class HandwritingActivity extends AppCompatActivity {
                 dataSnapshot.getValue();
                 for(DataSnapshot fileSnapshot : dataSnapshot.child("users").child(uid).child("category").child(kState).getChildren()) {
                     System.out.println(fileSnapshot.getValue());
-                    String str = fileSnapshot.child("cateImageString").getValue(String.class);
-                    System.out.println(str);
-                    categoryList.add(str);
+                    Category c = fileSnapshot.child("cateImageString").getValue(Category.class);
+                    System.out.println(c);
+                    categoryList.add(c);
                 }
             }
             @Override
             public void onCancelled(DatabaseError databaseError) { }
         });
 
-        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categoryList);
+        ArrayAdapter<Category> categoryAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categoryList);
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         category.setAdapter(categoryAdapter);
         category.setSelection(0);
