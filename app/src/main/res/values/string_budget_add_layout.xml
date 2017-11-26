@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string name="budget_add_layout_nickName_text">예산</string>
+    <string name="budget_add_layout_nickName_hint">예산을 입력하세요</string>
+
+    <string name="budget_add_layout_balance_text">잔액</string>
+    <string name="budget_add_layout_balance_hint">잔액을 입력하세요</string>
+
+    <string name="budget_add_layout_add_button_text">추가하기</string>
+
+
+</resources>
