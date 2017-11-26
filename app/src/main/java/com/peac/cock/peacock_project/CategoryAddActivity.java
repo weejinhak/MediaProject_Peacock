@@ -32,14 +32,12 @@ public class CategoryAddActivity extends AppCompatActivity {
     private Category mCategory;
     private Button categoryAddButton;
     private String categoryType;
-    private String categoryImageString;
-    private int categoryImageId;
     private FirebaseAuth mAuth;
     private FirebaseDatabase mDatabase;
     private String uid;
     private Intent intent;
 
-    String[] gridViewString = {
+    private String[] gridViewString = {
             "아이", "뷰티", "카페",
             "차", "담배", "문화",
             "애완", "음료", "교육",
@@ -47,22 +45,48 @@ public class CategoryAddActivity extends AppCompatActivity {
             "집", "생활", "사랑",
             "휴대폰", "교통", "여행"
     };
-    int[] gridViewImageId = {
-            R.drawable.category_item_baby,R.drawable.category_item_beauty,R.drawable.category_item_caffe,
-            R.drawable.category_item_car,R.drawable.category_item_cigarette,R.drawable.category_item_culture,
-            R.drawable.category_item_dog,R.drawable.category_item_drink,R.drawable.category_item_education,
-            R.drawable.category_item_food,R.drawable.category_item_gyeong,R.drawable.category_item_health,
-            R.drawable.category_item_home,R.drawable.category_item_life,R.drawable.category_item_love,
-            R.drawable.category_item_phone,R.drawable.category_item_traffic,R.drawable.category_item_trip
+    private int[] gridViewImageId = {
+            R.drawable.category_item_baby, R.drawable.category_item_beauty, R.drawable.category_item_caffe,
+            R.drawable.category_item_car, R.drawable.category_item_cigarette, R.drawable.category_item_culture,
+            R.drawable.category_item_dog, R.drawable.category_item_drink, R.drawable.category_item_education,
+            R.drawable.category_item_food, R.drawable.category_item_gyeong, R.drawable.category_item_health,
+            R.drawable.category_item_home, R.drawable.category_item_life, R.drawable.category_item_love,
+            R.drawable.category_item_phone, R.drawable.category_item_traffic, R.drawable.category_item_trip
     };
 
-    String[] matchGridViewString = {
+    private String[] matchGridViewString = {
             "육아", "의복/미용", "카페/간식",
             "자동차", "카페/간식", "문화/여가",
             "애완", "카페/간식", "교육",
             "식사", "문화/여가", "의료/건강",
-            "주거/통신", "교통","여행/숙박"
+            "주거/통신", "교통", "여행/숙박"
     };
+
+    private String[] incomingGridViewString = {
+            "급여", "용돈", "사업수입", "금융수입", "돈받음"
+    };
+    private int[] incomingGridViewImageId = {
+            R.drawable.category_item_incomming,
+            R.drawable.category_item_incomming,
+            R.drawable.category_item_incomming,
+            R.drawable.category_item_incomming,
+            R.drawable.category_item_incomming,
+    };
+    private String[] transferGridViewString = {
+            "이체", "카드대금", "저축", "현금", "투자",
+            "보험", "대출"
+    };
+    private int[] transferGridViewImageId = {
+            R.drawable.category_item_transfer,
+            R.drawable.category_item_transfer,
+            R.drawable.category_item_transfer,
+            R.drawable.category_item_transfer,
+            R.drawable.category_item_transfer,
+            R.drawable.category_item_transfer,
+            R.drawable.category_item_transfer,
+    };
+
+    private CategoryGridViewAdapter adapterViewCategory;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -77,11 +101,7 @@ public class CategoryAddActivity extends AppCompatActivity {
         //fireBase Auth & Database
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance();
-        uid=mAuth.getCurrentUser().getUid();
-
-        for(Integer i: gridViewImageId){
-            System.out.print(i);
-        }
+        uid = mAuth.getCurrentUser().getUid();
 
         //getId
         incomingButton = findViewById(R.id.category_add_layout_incoming_button);
@@ -89,20 +109,40 @@ public class CategoryAddActivity extends AppCompatActivity {
         transferButton = findViewById(R.id.category_add_layout_transfer_button);
         categoryAddButton = findViewById(R.id.category_add_grid_view_category_add_button);
 
-        CategoryGridViewAdapter adapterViewCategory = new CategoryGridViewAdapter(getApplicationContext(), gridViewString, gridViewImageId);
-        mCategory=new Category();
-        //get Id
-        categoryAddGridView = findViewById(R.id.category_add_grid_view_image_text);
+        mCategory = new Category();
 
+        if (categoryType.equals("지출")) {
+            adapterViewCategory = new CategoryGridViewAdapter(getApplicationContext(), gridViewString, gridViewImageId);
+        }
+        if (categoryType.equals("수입")) {
+            adapterViewCategory = new CategoryGridViewAdapter(getApplicationContext(), incomingGridViewString, incomingGridViewImageId);
+        }
+        if (categoryType.equals("이체")) {
+            adapterViewCategory = new CategoryGridViewAdapter(getApplicationContext(), transferGridViewString, transferGridViewImageId);
+        }
+
+        categoryAddGridView = findViewById(R.id.category_add_grid_view_image_text);
         categoryAddGridView.setAdapter(adapterViewCategory);
 
         categoryAddGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
-                Toast.makeText(getApplicationContext(), "String" + matchGridViewString[i] + "ID" + gridViewImageId[i], Toast.LENGTH_LONG).show();
                 System.out.println(categoryType);
-                mCategory.setCateImageString(matchGridViewString[i]);
-                mCategory.setCateImageId(gridViewImageId[i]);
+                if (categoryType.equals("지출")) {
+                    mCategory.setCateImageString(matchGridViewString[i]);
+                    mCategory.setCateImageId(gridViewImageId[i]);
+                    Toast.makeText(getApplicationContext(), "String" + matchGridViewString[i] + "ID" + gridViewImageId[i], Toast.LENGTH_LONG).show();
+                }
+                if (categoryType.equals("수입")) {
+                    mCategory.setCateImageString(incomingGridViewString[i]);
+                    mCategory.setCateImageId(incomingGridViewImageId[i]);
+                    Toast.makeText(getApplicationContext(), "String" + incomingGridViewString[i] + "ID" + incomingGridViewImageId[i], Toast.LENGTH_LONG).show();
+                }
+                if (categoryType.equals("이체")) {
+                    mCategory.setCateImageString(transferGridViewString[i]);
+                    mCategory.setCateImageId(transferGridViewImageId[i]);
+                    Toast.makeText(getApplicationContext(), "String" + transferGridViewString[i] + "ID" + transferGridViewImageId[i], Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -110,6 +150,9 @@ public class CategoryAddActivity extends AppCompatActivity {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 categoryType = "지출";
+                adapterViewCategory = new CategoryGridViewAdapter(getApplicationContext(), gridViewString, gridViewImageId);
+                categoryAddGridView.setAdapter(adapterViewCategory);
+
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     outgoingButton.setBackgroundResource(R.drawable.handwriting_layout_active_outgoing_button);
                     incomingButton.setBackgroundResource(R.drawable.handwriting_layout_incoming_button);
@@ -123,6 +166,8 @@ public class CategoryAddActivity extends AppCompatActivity {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 categoryType = "수입";
+                adapterViewCategory = new CategoryGridViewAdapter(getApplicationContext(), incomingGridViewString, incomingGridViewImageId);
+                categoryAddGridView.setAdapter(adapterViewCategory);
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     incomingButton.setBackgroundResource(R.drawable.handwriting_layout_active_incoming_button);
                     outgoingButton.setBackgroundResource(R.drawable.handwriting_layout_outgoing_button);
@@ -136,6 +181,8 @@ public class CategoryAddActivity extends AppCompatActivity {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 categoryType = "이체";
+                adapterViewCategory = new CategoryGridViewAdapter(getApplicationContext(), transferGridViewString, transferGridViewImageId);
+                categoryAddGridView.setAdapter(adapterViewCategory);
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     transferButton.setBackgroundResource(R.drawable.handwriting_layout_active_transfer_button);
                     incomingButton.setBackgroundResource(R.drawable.handwriting_layout_incoming_button);
