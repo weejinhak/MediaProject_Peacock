@@ -29,6 +29,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.peac.cock.peacock_project.projectAdapter.BackPressCloseHandler;
 import com.peac.cock.peacock_project.projectDto.LedgerDto;
 
 import java.io.Serializable;
@@ -41,14 +42,10 @@ public class MainActivity extends AppCompatActivity
 
     private TextView nameTextView;
     private TextView emailTextView;
-
-    private long pressedTime = 0;
-
     private FirebaseAuth auth;
-
     private Intent intent;
-
     private WebView mWebView;
+    private BackPressCloseHandler backPressCloseHandler;
 
 
     @Override
@@ -56,6 +53,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
+        backPressCloseHandler = new BackPressCloseHandler(this);
 
         intent = new Intent();
 
@@ -75,7 +73,7 @@ public class MainActivity extends AppCompatActivity
         ImageButton settingGoButton = findViewById(R.id.main_layout_setting_go_button);
 
         //webView
-        mWebView=findViewById(R.id.main_webView);
+        mWebView = findViewById(R.id.main_webView);
         mWebView.getSettings().setJavaScriptEnabled(true);
         mWebView.loadUrl("http://www.podbbang.com/ch/14295");
         mWebView.setWebViewClient(new WebViewClientClass());
@@ -86,6 +84,7 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View view) {
                 intent.setClass(getApplicationContext(), DetailTabActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -94,7 +93,7 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View view) {
                 intent.setClass(getApplicationContext(), AssetActivity.class);
                 startActivity(intent);
-                // 안녕안녕아녀녕
+                finish();
             }
         });
         settingGoButton.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +101,7 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View v) {
                 intent.setClass(getApplicationContext(), SettingActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
         analysisGoButton.setOnClickListener(new View.OnClickListener() {
@@ -109,6 +109,7 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View v) {
                 intent.setClass(getApplicationContext(), AnalysisActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -162,6 +163,7 @@ public class MainActivity extends AppCompatActivity
             finish();
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
+            finish();
         }/*else if(id == R.id.nav_setting){
             Intent intent = new Intent(this, SettingActivity.class);
             startActivity(intent);
@@ -170,22 +172,27 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_asset) {
             Intent intent = new Intent(this, AssetActivity.class);
             startActivity(intent);
+            finish();
         } else if (id == R.id.nav_list) {
             Intent intent = new Intent(this, DetailTabActivity.class);
             startActivity(intent);
+            finish();
         } else if (id == R.id.nav_analysis) {
             Intent intent = new Intent(this, AnalysisActivity.class);
             startActivity(intent);
+            finish();
         } else if (id == R.id.nav_recommed) {
             Intent intent = new Intent(this, RecommendationActivity.class);
             startActivity(intent);
+            finish();
         } else if (id == R.id.nav_setting) {
             Intent intent = new Intent(this, SettingActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_logout){
+            finish();
+        } else if (id == R.id.nav_logout) {
             auth.signOut();
             finish();
-            Intent intent=new Intent(this,LoginActivity.class);
+            Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         }
 
@@ -196,22 +203,10 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        if(pressedTime == 0) {
-            Toast.makeText(MainActivity.this, "\'뒤로\'버튼을 한번 더 누르시면 종료됩니다." , Toast.LENGTH_LONG).show();
-            pressedTime = System.currentTimeMillis();
-        } else {
-            int seconds = (int) (System.currentTimeMillis() - pressedTime);
-
-            if ( seconds > 2000 ) {
-                Toast.makeText(MainActivity.this, "\'뒤로\'버튼을 한번 더 누르시면 종료됩니다." , Toast.LENGTH_LONG).show();
-                pressedTime = 0 ;
-            } else {
-                super.onBackPressed();
-                finish();
-            }
-        }
+        backPressCloseHandler.onBackPressed();
     }
-    private class WebViewClientClass extends WebViewClient{
+
+    private class WebViewClientClass extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             view.loadUrl(url);
@@ -221,7 +216,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if((keyCode==KeyEvent.KEYCODE_BACK)&&mWebView.canGoBack()){
+        if ((keyCode == KeyEvent.KEYCODE_BACK) && mWebView.canGoBack()) {
             mWebView.goBack();
             return true;
         }

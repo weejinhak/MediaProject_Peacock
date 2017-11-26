@@ -28,6 +28,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.peac.cock.peacock_project.projectAdapter.AssetCardAdapter;
 import com.peac.cock.peacock_project.projectAdapter.AssetCashAdapter;
+import com.peac.cock.peacock_project.projectAdapter.BackPressCloseHandler;
 import com.peac.cock.peacock_project.projectDto.Asset;
 import com.peac.cock.peacock_project.projectDto.Card;
 import com.peac.cock.peacock_project.projectDto.Cash;
@@ -56,14 +57,16 @@ public class AssetActivity extends AppCompatActivity implements ValueEventListen
     private int totalBalance;
     private TextView totalBalanceTextView;
     private Category category;
-
     private Intent intent;
+    private BackPressCloseHandler backPressCloseHandler;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_asset);
+        backPressCloseHandler=new BackPressCloseHandler(this);
 
         //firebase get auth& database;
         mAuth = FirebaseAuth.getInstance();
@@ -285,6 +288,10 @@ public class AssetActivity extends AppCompatActivity implements ValueEventListen
         return currentUser.getUid();
     }
 
+    @Override
+    public void onBackPressed() {
+        backPressCloseHandler.onBackPressed();
+    }
 }
 
 
