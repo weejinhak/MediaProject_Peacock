@@ -125,7 +125,7 @@ public class HandwritingActivity extends AppCompatActivity {
         // 전 페이지 계산한 금액 보여주기
         money.setText(amount);
 
-        dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormat = new SimpleDateFormat("MM/dd");
         date.setText(dateFormat.format(dateTime.getTime()).toString());
 
         timeFormat = new SimpleDateFormat("HH:mm");
@@ -286,7 +286,7 @@ public class HandwritingActivity extends AppCompatActivity {
                 dataSnapshot.getValue();
                 for(DataSnapshot fileSnapshot : dataSnapshot.child("users").child(uid).child("category").child(kState).getChildren()) {
                     System.out.println(fileSnapshot.getValue());
-                    Category c = fileSnapshot.child("cateImageString").getValue(Category.class);
+                    Category c = fileSnapshot.getValue(Category.class);
                     System.out.println(c);
                     categoryList.add(c);
                 }

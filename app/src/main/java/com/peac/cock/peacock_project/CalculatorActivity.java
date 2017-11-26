@@ -7,6 +7,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -32,6 +33,7 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_calculator);
 
         rhino = Context.enter();
@@ -162,7 +164,7 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
     View.OnClickListener numberClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            if(resultView.getText().toString().equals("0")) {
+            if(resultView.getText().toString().equals("0")||resultView.getText().toString().equals("00")||resultView.getText().toString().equals("000")) {
                 resultView.setText("");
                 result = "0";
                 checkButton.setBackgroundResource(R.drawable.handwriting_layout_active_check_button);

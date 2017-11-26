@@ -3,7 +3,7 @@
 
     <string name="setup_layout_toolbar_text">설정</string>
     <string name="setup_layout_bankItem_management_text">내 금융상품 관리</string>
-    <string name="setup_layout_categoryAdd_text">카테고리 추가 수정</string>
+    <string name="setup_layout_categoryAdd_text">카테고리 추가/수정</string>
     <string name="setup_layout_mysetUp_text">개인 설정</string>
     <string name="setup_layout_security_text">보안 설정</string>
     <string name="setup_layout_center_text">고객 센터</string>
