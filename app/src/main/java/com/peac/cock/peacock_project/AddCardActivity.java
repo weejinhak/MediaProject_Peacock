@@ -11,7 +11,6 @@ import android.widget.Spinner;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
-import com.peac.cock.peacock_project.projectAdapter.BackPressCloseHandler;
 import com.peac.cock.peacock_project.projectDto.Card;
 
 /**
@@ -28,13 +27,10 @@ public class AddCardActivity extends AppCompatActivity {
     private Card card;
     private String bankType;
 
-    private BackPressCloseHandler backPressCloseHandler;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_add);
-        backPressCloseHandler = new BackPressCloseHandler(this);
 
         //fireBase Auth & Database
         mAuth = FirebaseAuth.getInstance();
@@ -74,10 +70,7 @@ public class AddCardActivity extends AppCompatActivity {
 
             }
         });
-    }
 
-    @Override
-    public void onBackPressed() {
-        backPressCloseHandler.onBackPressed();
+
     }
 }

@@ -15,6 +15,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 
+import com.peac.cock.peacock_project.projectAdapter.BackPressCloseHandler;
+
 /**
  * Created by dmsru on 2017-11-15.
  */
@@ -22,6 +24,7 @@ import android.widget.ImageButton;
 public class DetailTabActivity extends AppCompatActivity {
 
     protected Intent intent;
+    private BackPressCloseHandler backPressCloseHandler;
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -43,6 +46,7 @@ public class DetailTabActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_tab_detail);
+        backPressCloseHandler=new BackPressCloseHandler(this);
 
         intent = new Intent();
 
@@ -163,5 +167,10 @@ public class DetailTabActivity extends AppCompatActivity {
             }
             return null;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        backPressCloseHandler.onBackPressed();
     }
 }

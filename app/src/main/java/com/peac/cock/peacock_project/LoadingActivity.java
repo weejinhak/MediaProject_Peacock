@@ -66,7 +66,6 @@ public class LoadingActivity extends AppCompatActivity {
                 Intent intent = new Intent(getBaseContext(), LoginActivity.class);
                 intent.putStringArrayListExtra("uidList",uidList);
                 startActivity(intent);
-                finish();
             }
         }, 2000);
     }
