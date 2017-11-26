@@ -154,24 +154,28 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(this, SettingActivity.class);
             startActivity(intent);
         }*/
-       /* if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        //navigation 수정하기
+        if (id == R.id.nav_asset) {
+            Intent intent = new Intent(this, AssetActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_list) {
+            Intent intent = new Intent(this, DetailTabActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_analysis) {
+            Intent intent = new Intent(this, AnalysisActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_recommed) {
+            Intent intent = new Intent(this, RecommendationActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_setting) {
+            Intent intent = new Intent(this, SettingActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_logout){
             auth.signOut();
             finish();
             Intent intent=new Intent(this,LoginActivity.class);
             startActivity(intent);
-        }*/
+        }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
