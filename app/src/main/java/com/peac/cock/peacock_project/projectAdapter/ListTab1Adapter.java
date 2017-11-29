@@ -37,7 +37,11 @@ public class ListTab1Adapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return messageItems.size();
+        if(messageItems != null) {
+            return messageItems.size();
+        } else {
+            return 0;
+        }
     }
 
     @Override

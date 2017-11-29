@@ -72,6 +72,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         //before_intent_get
         intent = getIntent();
         uidList = intent.getStringArrayListExtra("uidList");
+        for(String s: uidList){
+            System.out.println("Login"+s);
+        }
 
         //button 및 사용할 아이템
         TextView joinTextView = findViewById(R.id.login_layout_textView_join);

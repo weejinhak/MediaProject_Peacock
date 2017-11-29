@@ -88,13 +88,13 @@
         android:id="@+id/cash_add_layout_add_button"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:layout_marginEnd="100dp"
+        android:layout_marginStart="8dp"
         android:background="#E91E63"
         android:text="@string/cash_add_layout_add_button_text"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cash_add_layout_editText_balance" />
 
     <android.support.constraint.Guideline

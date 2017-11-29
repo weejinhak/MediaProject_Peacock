@@ -51,4 +51,15 @@ public class MessageItem {
     public String getMessageKey() {return messageKey;}
 
     public void setMessageKey(String messageKey) {this.messageKey = messageKey;}
+
+    @Override
+    public String toString() {
+        return "MessageItem{" +
+                "categoryId=" + categoryId +
+                ", messageContent='" + messageContent + '\'' +
+                ", messageBalance=" + messageBalance +
+                ", messageDate='" + messageDate + '\'' +
+                ", messageKey='" + messageKey + '\'' +
+                '}';
+    }
 }

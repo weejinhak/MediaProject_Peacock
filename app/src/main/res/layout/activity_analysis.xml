@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -51,12 +50,12 @@
                 <FrameLayout
                     android:id="@android:id/tabcontent"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content">
 
                     <LinearLayout
                         android:id="@+id/analysis"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:orientation="vertical">
 
                         <com.github.mikephil.charting.charts.PieChart
@@ -64,7 +63,49 @@
                             android:layout_width="match_parent"
                             android:layout_height="300dp" />
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/analysis_layout_category_img_view"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="25dp"
+                                android:text="카테고리" />
+
+                            <TextView
+                                android:id="@+id/analysis_layout_content_view"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="70dp"
+                                android:text="내역" />
+
+                            <TextView
+                                android:id="@+id/analysis_layout_date_view"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="65dp"
+                                android:text="날짜" />
+
+                            <TextView
+                                android:id="@+id/analysis_layout_amount_view"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="45dp"
+                                android:text="금액" />
+                        </LinearLayout>
+
+                        <ListView
+                            android:id="@+id/analysis_layout_detail_list"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:scrollbars="vertical" />
+
                     </LinearLayout>
+
 
                     <LinearLayout
                         android:id="@+id/budget"
@@ -83,6 +124,7 @@
                     </LinearLayout>
                 </FrameLayout>
             </ScrollView>
+
         </LinearLayout>
     </TabHost>
 
