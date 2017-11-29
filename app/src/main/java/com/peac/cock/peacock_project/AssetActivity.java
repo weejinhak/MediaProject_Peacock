@@ -295,4 +295,3 @@ public class AssetActivity extends AppCompatActivity implements ValueEventListen
     }
 }
 
-

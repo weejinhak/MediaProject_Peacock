@@ -119,4 +119,10 @@ public class MessageCategoryAddActivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        
+    }
 }
