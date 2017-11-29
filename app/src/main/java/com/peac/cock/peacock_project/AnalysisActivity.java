@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -56,6 +57,8 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
     private ListView ledgerListViewPerCategory;
     private ListTab1Adapter analysisListAdapter;
 
+    private LinearLayout analysisLayout;
+
     private Date date = new Date();
     private SimpleDateFormat sdf = new SimpleDateFormat("MM");
     private int selectedDate = Integer.parseInt(sdf.format(date));
@@ -85,6 +88,8 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
 
         categoryBudgetRegisterText = findViewById(R.id.category_budget_register_text);
         categoryBudgetRegisterButton = findViewById(R.id.category_budget_register_button);
+
+        analysisLayout = findViewById(R.id.analysis);
 
         ledgerLists = new HashMap<>();
         ledgerListViewPerCategory = findViewById(R.id.analysis_layout_detail_list);
@@ -148,7 +153,6 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
                 if (e == null)
                     return;
 
-                Toast.makeText(AnalysisActivity.this, categoryOutgoing.keySet().toArray()[(int)h.getX()].toString() , Toast.LENGTH_SHORT).show();
                 if(analysisListAdapter == null) {
                     analysisListAdapter = new ListTab1Adapter(AnalysisActivity.this.getApplicationContext(), R.layout.activity_analysis_list_item, ledgerLists.get(categoryOutgoing.keySet().toArray()[(int)h.getX()].toString()));
                 } else {
@@ -182,7 +186,7 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
         pieChart.setHoleColor(Color.WHITE);
         pieChart.setTransparentCircleRadius(60f);
         pieChart.animateY(1000, Easing.EasingOption.EaseInOutCubic);
-        pieChart.setCenterText("총 지출\n"+entireBudget[1]);
+        pieChart.setCenterText("총 지출\n"+String.valueOf(entireBudget[1]));
     }
 
     protected void setPieChartData() {
@@ -213,7 +217,7 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
     protected void setBarChartData() {
         LinearLayout layout = findViewById(R.id.linear_layout);
 
-        int percentage = (int)(entireBudget[1]/entireBudget[0]*100);
+        int percentage = entireBudget[1]/entireBudget[0]*100;
         if (percentage > 100) {
             percentage = 100;
         }
@@ -237,6 +241,7 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
                     percent = 100;
                 }
                 ProgressBar p = new ProgressBar(this, null, android.R.attr.progressBarStyleHorizontal);
+                p.setProgressDrawable(getResources().getDrawable(R.drawable.analysis_layout_progressbar_style));
                 p.setProgress(percent);
                 layout.addView(p);
             }
@@ -292,7 +297,7 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
                 if(ledger.getDate().substring(0,2).equals(String.valueOf(selectedDate))) {
                     System.out.println(ledger.getAmount());
                     entireBudget[1] += Double.parseDouble(ledger.getAmount());
-                    Log.d("entire", String.valueOf(entireBudget[1]));
+                    System.out.println("entireBudget : " + entireBudget[1]);
 
                     String msgContent = ledger.getContent();
                     String[] msgContentToken = msgContent.split("\\s");
@@ -306,7 +311,6 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
                             Integer.parseInt(ledger.getAmount()), msgKey);
 
                     if (ledgerLists.get(categoryName) == null) {
-                        System.out.println(categoryName);
                         ArrayList<MessageItem> msgItems = new ArrayList<>();
                         ledgerLists.put(categoryName, msgItems);
                     }
