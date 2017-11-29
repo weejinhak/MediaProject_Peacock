@@ -243,7 +243,8 @@ public class AssetActivity extends AppCompatActivity implements ValueEventListen
     @Override
     public void onDataChange(DataSnapshot dataSnapshot) {
         dataSnapshot.getValue();
-w        isSmsList = Boolean.parseBoolean(str);
+        String str = (String) dataSnapshot.child("users").child(uid).child("isSMS").getValue();
+        isSmsList = Boolean.parseBoolean(str);
         for (DataSnapshot fileSnapshot : dataSnapshot.child("users").child(getUid()).child("ledger").getChildren()) {
             LedgerDto ledger = fileSnapshot.getValue(LedgerDto.class);
             arrayLedgerDto.add(ledger);
@@ -293,5 +294,4 @@ w        isSmsList = Boolean.parseBoolean(str);
         backPressCloseHandler.onBackPressed();
     }
 }
-
 
