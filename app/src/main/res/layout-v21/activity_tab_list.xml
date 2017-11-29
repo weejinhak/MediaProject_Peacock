@@ -117,8 +117,7 @@
         app:layout_constraintEnd_toStartOf="@+id/list_layout_amount"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/list_layout_content"
-        app:layout_constraintTop_toTopOf="@+id/list_layout_content"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toTopOf="@+id/list_layout_content" />
 
     <TextView
         android:id="@+id/list_layout_amount"
@@ -136,7 +135,7 @@
     <ListView
         android:id="@+id/tab_list_msgList"
         android:layout_width="match_parent"
-        android:layout_height="539dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"

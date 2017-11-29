@@ -10,7 +10,9 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
+import com.peac.cock.peacock_project.R;
 import com.peac.cock.peacock_project.projectDto.Asset;
+import com.peac.cock.peacock_project.projectDto.Category;
 import com.peac.cock.peacock_project.projectDto.LedgerDto;
 
 /**
@@ -23,6 +25,7 @@ public class MySmsReceiver extends BroadcastReceiver {
     private FirebaseAuth auth;
     private FirebaseDatabase mDatabase;
     private String uid;
+    private Category category;
 
     public MySmsReceiver() {
 
@@ -36,6 +39,7 @@ public class MySmsReceiver extends BroadcastReceiver {
         String body="";
 
         ledgerDto= new LedgerDto();
+        category = new Category();
         auth=FirebaseAuth.getInstance();
         mDatabase=FirebaseDatabase.getInstance();
         uid=auth.getCurrentUser().getUid();
@@ -80,12 +84,16 @@ public class MySmsReceiver extends BroadcastReceiver {
                     smsPrice = priceToken[0].replaceAll("\\,", "");
                     smsPlace = messageToken[5];
 
+
+                    category.setCateImageId(R.drawable.category_unclassified);
+                    category.setCateImageString("미분류");
                     ledgerDto.setInOut("지출");
                     ledgerDto.setDate(smsDate);
                     ledgerDto.setTime(smsTime);
                     ledgerDto.setAmount(smsPrice);
                     ledgerDto.setContent(smsPlace);
                     ledgerDto.setAsset(new Asset(smsCardName));
+                    ledgerDto.setCategory(category);
                     mDatabase.getReference().child("users").child(uid).child("ledger").push().setValue(ledgerDto);
                 }
 

@@ -224,7 +224,7 @@ public class AssetActivity extends AppCompatActivity implements ValueEventListen
                     smsPrice = priceToken[0].replaceAll("\\,", "");
                     smsPlace = messageToken[5];
 
-                    category.setCateImageId(2131230852);
+                    category.setCateImageId(R.drawable.category_unclassified);
                     category.setCateImageString("미분류");
                     ledgerDto.setInOut("지출");
                     ledgerDto.setDate(smsDate);

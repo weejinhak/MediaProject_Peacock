@@ -1,25 +1,19 @@
 package com.peac.cock.peacock_project;
 
 import android.content.Intent;
-import android.content.res.TypedArray;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.applandeo.materialcalendarview.utils.DateUtils;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -27,18 +21,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.peac.cock.peacock_project.projectAdapter.ListTab1Adapter;
-import com.peac.cock.peacock_project.projectDto.Card;
-import com.peac.cock.peacock_project.projectDto.Cash;
 import com.peac.cock.peacock_project.projectDto.LedgerDto;
 import com.peac.cock.peacock_project.projectDto.MessageItem;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * Created by dmsru on 2017-11-13.
@@ -50,9 +39,8 @@ public class Tab1_content extends Fragment implements ValueEventListener {
     private ImageButton button1;
     private ImageButton button2;
     private Date date = new Date();
-    //  private SimpleDateFormat sdf = new SimpleDateFormat("MM");
-    //  private int date2 = Integer.parseInt(sdf.format(date));
-    private int date2 = 11;
+    private SimpleDateFormat sdf = new SimpleDateFormat("MM");
+    private int selectedDate = Integer.parseInt(sdf.format(date));
     private ArrayList<MessageItem> messageItems = new ArrayList<>();
     private ListView listView;
     private ListTab1Adapter listTab1Adapter;
@@ -69,21 +57,20 @@ public class Tab1_content extends Fragment implements ValueEventListener {
         textView = rootView.findViewById(R.id.currentDateLabel);
         button1 = rootView.findViewById(R.id.previousButton);
         button2 = rootView.findViewById(R.id.forwardButton);
-        textView.setText(date2 + "월");
+        textView.setText(selectedDate + "월");
 
         msgSetPerMonth = new HashMap<>();
 
-        System.out.println(date2 + "currentMonth");
-
         //getId
         listView = rootView.findViewById(R.id.tab_list_msgList);
+
+        listTab1Adapter = new ListTab1Adapter(getContext(), R.layout.activity_list_msg_item, msgSetPerMonth.get(String.valueOf(selectedDate)));
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getContext(), MessageCategoryAddActivity.class);
                 intent.putExtra("messageKey",messageItems.get(position).getMessageKey());
-                Toast.makeText(getContext(), "클릭!" + messageItems.get(position).getMessageKey(), Toast.LENGTH_LONG).show();
                 startActivity(intent);
             }
         });
@@ -93,8 +80,8 @@ public class Tab1_content extends Fragment implements ValueEventListener {
             @Override
             public void onClick(View arg0) {
                 minusOneMonth();
-                textView.setText(date2 + "월");
-                listTab1Adapter.setMessageItems(msgSetPerMonth.get(String.valueOf(date2)));
+                textView.setText(selectedDate + "월");
+                listTab1Adapter.setMessageItems(msgSetPerMonth.get(String.valueOf(selectedDate)));
                 listView.setAdapter(listTab1Adapter);
             }
         });
@@ -103,36 +90,37 @@ public class Tab1_content extends Fragment implements ValueEventListener {
             @Override
             public void onClick(View arg0) {
                 addOneMonth();
-                textView.setText(date2 + "월");
-                listTab1Adapter.setMessageItems(msgSetPerMonth.get(String.valueOf(date2)));
+                textView.setText(selectedDate + "월");
+                listTab1Adapter.setMessageItems(msgSetPerMonth.get(String.valueOf(selectedDate)));
                 listView.setAdapter(listTab1Adapter);
             }
         });
+
         return rootView;
     }
 
 
     public void addOneMonth() {
-        if (date2 == 12) {
+        if (selectedDate == 12) {
 
         } else {
-            date2 = date2 + 1;
+            selectedDate = selectedDate + 1;
         }
     }
 
     public void minusOneMonth() {
 
-        if (date2 == 1) {
+        if (selectedDate == 1) {
 
         } else {
-            date2 = date2 - 1;
+            selectedDate = selectedDate - 1;
         }
     }
 
     @Override
     public void onDataChange(DataSnapshot dataSnapshot) {
         dataSnapshot.getValue();
-
+        System.out.println("데이터 온 체인지 ");
         for (DataSnapshot fileSnapshot : dataSnapshot.child("users").child(getUid()).child("ledger").getChildren()) {
             LedgerDto ledger = fileSnapshot.getValue(LedgerDto.class);
 
@@ -144,27 +132,22 @@ public class Tab1_content extends Fragment implements ValueEventListener {
 
             String msgKey = fileSnapshot.getKey();
 
-            //메시지 read 해올 때 카테고리 id 초기값으로  2131230977 줘야함.
+            //메시지 read 해올 때 카테고리 id 초기값으로  줘야함.
             MessageItem messageItem = new MessageItem(ledger.getCategory().getCateImageId(), msgContentToken[0], ledger.getDate(),
                                                             Integer.parseInt(ledger.getAmount()),msgKey);
 
             messageItems.add(messageItem);
-
             if (msgSetPerMonth.get(msgDate) == null) {
                 ArrayList<MessageItem> msgItems = new ArrayList<>();
                 msgSetPerMonth.put(msgDate, msgItems);
             }
             msgSetPerMonth.get(msgDate).add(messageItem);
-
-            Log.d("getKey",fileSnapshot.getKey());
-            Log.d("msgSize", String.valueOf(msgSetPerMonth.get(msgDate).size()));
-            Log.d("datedate", String.valueOf(date2));
-            Log.d("msgSet", String.valueOf(msgSetPerMonth.get(String.valueOf(date2))));
-            Log.d("getImageId", String.valueOf(ledger.getCategory().getCateImageId()));
         }
 
-        listTab1Adapter = new ListTab1Adapter(getContext(), R.layout.activity_list_msg_item, msgSetPerMonth.get(String.valueOf(date2)));
+
+        listTab1Adapter.setMessageItems(msgSetPerMonth.get(String.valueOf(selectedDate)));
         listView.setAdapter(listTab1Adapter);
+
     }
 
     @Override

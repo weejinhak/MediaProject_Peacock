@@ -177,7 +177,6 @@ public class HandwritingActivity extends AppCompatActivity {
                 ledgerDto.setMemo(memo.getText().toString());
 
                 mDatabase.getReference().child("users").child(uid).child("ledger").push().setValue(ledgerDto);
-                Toast.makeText(getApplicationContext(), "저장되었습니다!", Toast.LENGTH_SHORT).show();
 
                 intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
@@ -233,7 +232,7 @@ public class HandwritingActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                System.out.println("얍!");
+
             }
         });
 
@@ -277,7 +276,7 @@ public class HandwritingActivity extends AppCompatActivity {
 
     private void updateCategoryList() {
         categoryList = new ArrayList<>();
-        categoryList.add(new Category("미분류",2131230852));
+        categoryList.add(new Category("미분류",R.drawable.category_unclassified));
 
         databaseReference = mDatabase.getReference();
         databaseReference.addValueEventListener(new ValueEventListener() {

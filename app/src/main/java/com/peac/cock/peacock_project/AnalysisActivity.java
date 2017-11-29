@@ -2,11 +2,9 @@ package com.peac.cock.peacock_project;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -16,19 +14,16 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TabHost;
-import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.animation.Easing;
-import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
@@ -36,24 +31,20 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.peac.cock.peacock_project.projectAdapter.BackPressCloseHandler;
-import com.peac.cock.peacock_project.projectDto.Asset;
-import com.peac.cock.peacock_project.projectDto.Card;
-import com.peac.cock.peacock_project.projectDto.Cash;
+import com.peac.cock.peacock_project.projectAdapter.ListTab1Adapter;
 import com.peac.cock.peacock_project.projectDto.CategoryBudget;
 import com.peac.cock.peacock_project.projectDto.LedgerDto;
+import com.peac.cock.peacock_project.projectDto.MessageItem;
 
-import java.io.Serializable;
-import java.sql.SQLOutput;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.xml.transform.sax.SAXSource;
 
 public class AnalysisActivity extends AppCompatActivity implements ValueEventListener{
 
@@ -62,9 +53,18 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
     private TextView categoryBudgetRegisterText;
     private Button categoryBudgetRegisterButton;
 
+    private ListView ledgerListViewPerCategory;
+    private ListTab1Adapter analysisListAdapter;
+
+    private Date date = new Date();
+    private SimpleDateFormat sdf = new SimpleDateFormat("MM");
+    private int selectedDate = Integer.parseInt(sdf.format(date));
+
     private int[] entireBudget = new int[2];
     private HashMap<String, String> categoryBudgetSet = new HashMap<>();
     private HashMap<String, String> categoryOutgoing = new HashMap<>();
+
+    private HashMap<String, ArrayList<MessageItem>> ledgerLists; // 카테고리, 해당 카테고리 내역 리스트
 
     private Intent intent;
 
@@ -80,10 +80,14 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
 
         intent = getIntent();
 
+
         pieChart = findViewById(R.id.pie_chart);
 
         categoryBudgetRegisterText = findViewById(R.id.category_budget_register_text);
         categoryBudgetRegisterButton = findViewById(R.id.category_budget_register_button);
+
+        ledgerLists = new HashMap<>();
+        ledgerListViewPerCategory = findViewById(R.id.analysis_layout_detail_list);
 
         final ImageButton assetGoButton = findViewById(R.id.main_layout_asset_go_button);
         final ImageButton analysisGoButton = findViewById(R.id.main_layout_analysis_go_button);
@@ -134,6 +138,32 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
         host.addTab(page2);
 
         setupPieChart();
+
+        // set a chart value selected listener
+        pieChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+
+            @Override
+            public void onValueSelected(Entry e, Highlight h) {
+                // display msg when value selected
+                if (e == null)
+                    return;
+
+                Toast.makeText(AnalysisActivity.this, categoryOutgoing.keySet().toArray()[(int)h.getX()].toString() , Toast.LENGTH_SHORT).show();
+                if(analysisListAdapter == null) {
+                    analysisListAdapter = new ListTab1Adapter(AnalysisActivity.this.getApplicationContext(), R.layout.activity_analysis_list_item, ledgerLists.get(categoryOutgoing.keySet().toArray()[(int)h.getX()].toString()));
+                } else {
+                    analysisListAdapter.setMessageItems(ledgerLists.get(categoryOutgoing.keySet().toArray()[(int)h.getX()].toString()));
+                }
+                ledgerListViewPerCategory.setAdapter(analysisListAdapter);
+
+            }
+
+            @Override
+            public void onNothingSelected() {
+                //categoryOutgoing.get(e) + " = " + e.getData() + "%"
+
+            }
+        });
     }
 
     @NonNull
@@ -169,13 +199,12 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
         PieDataSet dataSet = new PieDataSet(pieEntries, "지출 패턴");
         dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
         dataSet.setSelectionShift(5f);
-        dataSet.setSliceSpace(3f);
+        dataSet.setSliceSpace(2f);
 
         PieData data = new PieData(dataSet);
+        data.setValueFormatter(new PercentFormatter());
         data.setValueTextSize(10f);
         data.setValueTextColor(Color.YELLOW);
-
-
 
         pieChart.setData(data);
         pieChart.invalidate();
@@ -214,6 +243,8 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
         }
     }
 
+
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -230,9 +261,7 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
     public void onDataChange(DataSnapshot dataSnapshot) {
         dataSnapshot.getValue();
 
-        /*entireBudget[0] = Double.parseDouble(dataSnapshot.child("users").child(getUid()).child("budget").getValue(String.class));
-        System.out.println(entireBudget[0]);*/
-        entireBudget[0] = 650000;
+        entireBudget[0] = Integer.parseInt(dataSnapshot.child("users").child(getUid()).child("budget").getValue(String.class));
         entireBudget[1] = 0;
 
         for(DataSnapshot fileSnapshot : dataSnapshot.child("users").child(getUid()).child("categoryBudget").getChildren()) {
@@ -259,12 +288,35 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
                 if (!check) {
                     categoryOutgoing.put(category, ledger.getAmount());
                 }
-                if(ledger.getDate().substring(0,2).equals("11")) {
+
+                if(ledger.getDate().substring(0,2).equals(String.valueOf(selectedDate))) {
+                    System.out.println(ledger.getAmount());
                     entireBudget[1] += Double.parseDouble(ledger.getAmount());
+                    Log.d("entire", String.valueOf(entireBudget[1]));
+
+                    String msgContent = ledger.getContent();
+                    String[] msgContentToken = msgContent.split("\\s");
+
+                    String categoryName = ledger.getCategory().getCateImageString();
+
+                    String msgKey = fileSnapshot.getKey();
+
+                    //메시지 read 해올 때 카테고리 id 초기값으로  2131230977 줘야함.
+                    MessageItem messageItem = new MessageItem(ledger.getCategory().getCateImageId(), msgContentToken[0], ledger.getDate(),
+                            Integer.parseInt(ledger.getAmount()), msgKey);
+
+                    if (ledgerLists.get(categoryName) == null) {
+                        System.out.println(categoryName);
+                        ArrayList<MessageItem> msgItems = new ArrayList<>();
+                        ledgerLists.put(categoryName, msgItems);
+                    }
+                    ledgerLists.get(categoryName).add(messageItem);
+
                 }
             }
+
+
         }
-        System.out.println(entireBudget[1]);
 
         setPieChartData();
         setBarChartData();
