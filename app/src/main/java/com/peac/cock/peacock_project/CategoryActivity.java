@@ -92,7 +92,6 @@ public class CategoryActivity extends AppCompatActivity {
         categoryGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
-                Toast.makeText(getApplicationContext(), "클릭!" + gridViewString[i], Toast.LENGTH_LONG).show();
             }
         });
 

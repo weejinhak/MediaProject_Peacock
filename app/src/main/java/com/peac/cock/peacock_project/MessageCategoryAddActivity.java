@@ -103,8 +103,6 @@ public class MessageCategoryAddActivity extends AppCompatActivity {
         categoryAddGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
-                Toast.makeText(getApplicationContext(), "String" + matchGridViewString[i] + "ID" + matchGridViewImageId[i], Toast.LENGTH_LONG).show();
-                System.out.println(categoryType);
                 mCategory.setCateImageString(matchGridViewString[i]);
                 mCategory.setCateImageId(matchGridViewImageId[i]);
             }
@@ -124,7 +122,8 @@ public class MessageCategoryAddActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-
+        Intent intent = new Intent(getApplicationContext(),DetailTabActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
