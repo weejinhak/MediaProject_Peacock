@@ -88,7 +88,7 @@
             android:name=".RecommendationActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".AnalysisBudgetRegisterActivity"
+            android:name=".CategoryBudgetRegisterActivity"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 

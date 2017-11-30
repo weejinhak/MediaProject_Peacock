@@ -125,7 +125,7 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/join_layout_nextbutton_change"
+        android:background="@drawable/join_layout_activie_next_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

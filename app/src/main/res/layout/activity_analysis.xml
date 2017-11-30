@@ -42,7 +42,7 @@
             <TabWidget
                 android:id="@android:id/tabs"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:background="#ffffff" />
 
 
@@ -54,7 +54,7 @@
                 <LinearLayout
                     android:id="@+id/analysis"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="480dp"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -76,6 +76,7 @@
                             android:layout_marginBottom="8dp"
                             android:background="#E91E63"
                             android:gravity="center"
+                            android:text="11 월"
                             android:textColor="@android:color/white"
                             android:textSize="18sp"/>
 
@@ -98,7 +99,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
+                        android:layout_marginTop="10dp"
                         android:orientation="horizontal">
 
                         <TextView

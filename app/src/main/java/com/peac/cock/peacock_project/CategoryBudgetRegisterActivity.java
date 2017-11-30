@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -28,7 +29,7 @@ import java.util.List;
  * Created by wee on 2017. 11. 14..
  */
 
-public class AnalysisBudgetRegisterActivity extends AppCompatActivity implements ValueEventListener {
+public class CategoryBudgetRegisterActivity extends AppCompatActivity implements ValueEventListener {
 
 
     private FirebaseAuth mAuth;
@@ -100,8 +101,9 @@ public class AnalysisBudgetRegisterActivity extends AppCompatActivity implements
     @Override
     public void onDataChange(DataSnapshot dataSnapshot) {
         dataSnapshot.getValue();
+        categoryList.add(new Category("미분류", R.drawable.category_unclassified));
 
-        for(DataSnapshot fileSnapshot : dataSnapshot.child("users").child(uid).child("category").getChildren()) {
+        for(DataSnapshot fileSnapshot : dataSnapshot.child("users").child(uid).child("category").child("지출").getChildren()) {
             Category category = fileSnapshot.getValue(Category.class);
             categoryList.add(category);
         }
