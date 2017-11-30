@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
@@ -35,6 +36,7 @@ import com.peac.cock.peacock_project.projectAdapter.BackPressCloseHandler;
 import com.peac.cock.peacock_project.projectAdapter.BudgetAdapter;
 import com.peac.cock.peacock_project.projectAdapter.ListTab1Adapter;
 import com.peac.cock.peacock_project.projectDto.CategoryBudget;
+import com.peac.cock.peacock_project.projectDto.CategoryBudgetChart;
 import com.peac.cock.peacock_project.projectDto.LedgerDto;
 import com.peac.cock.peacock_project.projectDto.MessageItem;
 
@@ -62,6 +64,7 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
     private BudgetAdapter budgetListAdapter;
 
     private Button categoryBudgetRegisterButton;
+    private FloatingActionButton categoryBudgetRegisterFloatingButton;
 
     private ImageButton assetGoButton;
     private ImageButton analysisGoButton;
@@ -75,6 +78,8 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
     private TextView budgetPercentage;
     private TextView budgetResultText;
 
+    private DecimalFormat df = new DecimalFormat("#,###");
+    private Calendar today = Calendar.getInstance();
 
     private Date date = new Date();
     private SimpleDateFormat sdf = new SimpleDateFormat("MM");
@@ -82,8 +87,9 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
     private int selectedDate = 11;
 
     private int[] entireBudget = new int[2];
-    private HashMap<String, String> categoryBudgetSet = new HashMap<>();
-    private HashMap<String, String> categoryOutgoing = new HashMap<>();
+
+    private List<CategoryBudgetChart> categoryBudgetSet;
+    private HashMap<String, String> categoryOutgoing;
 
     private HashMap<String, ArrayList<MessageItem>> ledgerLists; // 카테고리, 해당 카테고리 내역 리스트
 
@@ -112,13 +118,17 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
         categoryBudgetRegisterText = findViewById(R.id.category_budget_register_text);
 
         categoryBudgetRegisterButton = findViewById(R.id.category_budget_register_button);
+        categoryBudgetRegisterFloatingButton = findViewById(R.id.category_budget_register_floating_button);
 
         ledgerLists = new HashMap<>();
         ledgerListViewPerCategory = findViewById(R.id.analysis_layout_detail_list);
 
         budgetListViewPerCategory = findViewById(R.id.budget_layout_budget_list);
 
-    //    budgetListAdapter = new BudgetAdapter(this, R.layout.activity_analysis_category_budget_item, msgSetPerMonth.get(String.valueOf(selectedDate)));
+        categoryBudgetSet = new ArrayList<>();
+        categoryOutgoing = new HashMap<>();
+
+        budgetListAdapter = new BudgetAdapter(this, R.layout.activity_analysis_category_budget_item, categoryBudgetSet);
 
         assetGoButton = findViewById(R.id.main_layout_asset_go_button);
         analysisGoButton = findViewById(R.id.main_layout_analysis_go_button);
@@ -131,6 +141,15 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
         budgetProgressbar = findViewById(R.id.budget_layout_progressbar);
         budgetPercentage = findViewById(R.id.budget_layout_percentage);
         budgetResultText = findViewById(R.id.budget_layout_budget_result_text);
+
+        categoryBudgetRegisterFloatingButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                intent.setClass(getApplicationContext(), CategoryBudgetRegisterActivity.class);
+                startActivity(intent);
+            }
+        });
 
         categoryBudgetRegisterButton.setOnClickListener(new View.OnClickListener() {
 
@@ -271,7 +290,6 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
         budgetPercentage.setText(percentageString);
 
 
-        DecimalFormat df = new DecimalFormat("#,###");
         String text;
         int delta = entireBudget[0] - entireBudget[1];
         if(delta >= 0) {
@@ -282,7 +300,6 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
         budgetMonthExtraAmount.setText(text);
 
 
-        Calendar today = Calendar.getInstance();
         int maxDay = today.getActualMaximum(Calendar.DATE);
     //    int remainDay = maxDay - today.get(Calendar.DATE) + 1;
         int remainDay = 10;
@@ -301,20 +318,13 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
         if(categoryBudgetSet.size()==0) {
             categoryBudgetRegisterText.setVisibility(View.VISIBLE);
             categoryBudgetRegisterButton.setVisibility(View.VISIBLE);
+            categoryBudgetRegisterFloatingButton.setVisibility(View.GONE);
             System.out.println("데이터 없음");
         } else {
             categoryBudgetRegisterText.setVisibility(View.GONE);
             categoryBudgetRegisterButton.setVisibility(View.GONE);
+            categoryBudgetRegisterFloatingButton.setVisibility(View.VISIBLE);
             System.out.println("데이터 있음");
-            for(Map.Entry<String, String> categoryBudget : categoryBudgetSet.entrySet()) {
-                int percent = Integer.parseInt(categoryOutgoing.get(categoryBudget.getKey()))/Integer.parseInt(categoryBudget.getValue())*100;
-
-                ProgressBar p = new ProgressBar(this, null, android.R.attr.progressBarStyleHorizontal);
-                p.setLayoutParams(new ConstraintLayout.LayoutParams(330, 30));
-                p.setProgressDrawable(getResources().getDrawable(R.drawable.analysis_layout_progressbar_style));
-                p.setProgress(percent);
-
-            }
         }
     }
 
@@ -338,11 +348,6 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
 
         entireBudget[0] = Integer.parseInt(dataSnapshot.child("users").child(getUid()).child("budget").getValue(String.class));
         entireBudget[1] = 0;
-
-        for(DataSnapshot fileSnapshot : dataSnapshot.child("users").child(getUid()).child("categoryBudget").getChildren()) {
-            CategoryBudget categoryBudget = fileSnapshot.getValue(CategoryBudget.class);
-            categoryBudgetSet.put(categoryBudget.getCategory().getCateImageString(), categoryBudget.getBudget());
-        }
 
         for(DataSnapshot fileSnapshot : dataSnapshot.child("users").child(getUid()).child("ledger").getChildren()) {
             LedgerDto ledger = fileSnapshot.getValue(LedgerDto.class);
@@ -388,8 +393,42 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
             }
         }
 
-    /*    budgetListAdapter.setMessageItems(msgSetPerMonth.get(String.valueOf(selectedDate)));
-        budgetListViewPerCategory.setAdapter(budgetListAdapter);*/
+        for(DataSnapshot fileSnapshot : dataSnapshot.child("users").child(getUid()).child("categoryBudget").getChildren()) {
+            CategoryBudget categoryBudget = fileSnapshot.getValue(CategoryBudget.class);
+            String text;
+            CategoryBudgetChart categoryBudgetChart = new CategoryBudgetChart();
+
+
+            System.out.println("please : " + categoryBudget.toString());
+            System.out.println("please : " + categoryBudget.getCategory().getCateImageString());
+            System.out.println("please : " + categoryOutgoing.get("의복/미용"));
+            int outgoing = Integer.parseInt(categoryOutgoing.get(categoryBudget.getCategory().getCateImageString()));
+            int budget = Integer.parseInt(categoryBudget.getBudget());
+            int percentage = outgoing*100/budget;
+
+
+            categoryBudgetChart.setCategoryName(categoryBudget.getCategory().getCateImageString());
+            categoryBudgetChart.setPercentage(percentage);
+
+            int delta = budget - outgoing;
+            if(delta >= 0) {
+                text = df.format(delta) + "원 남음";
+            } else {
+                text = df.format(-delta) + "원 초과";
+            }
+            categoryBudgetChart.setExtraAmount(text);
+
+
+            text = "예산 : " + df.format(budget) + "원\n지출 : " + df.format(outgoing) + "원";
+            categoryBudgetChart.setBudgetNOutgoing(text);
+
+            categoryBudgetSet.add(categoryBudgetChart);
+            System.out.println("please : " + categoryBudgetChart);
+            System.out.println("please : " + categoryBudgetSet);
+        }
+
+        budgetListAdapter.setCategoryBudgetCharts(categoryBudgetSet);
+        budgetListViewPerCategory.setAdapter(budgetListAdapter);
 
         setPieChartData();
         setBarChartData();

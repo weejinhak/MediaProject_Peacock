@@ -56,7 +56,7 @@ public class CategoryBudgetRegisterActivity extends AppCompatActivity implements
         //fireBase Auth & Database
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance();
-        uid = mAuth.getCurrentUser().toString();
+        uid = mAuth.getCurrentUser().getUid();
 
         categoryBudget = new CategoryBudget();
 
@@ -103,7 +103,6 @@ public class CategoryBudgetRegisterActivity extends AppCompatActivity implements
     @Override
     public void onDataChange(DataSnapshot dataSnapshot) {
         dataSnapshot.getValue();
-        categoryList.add(new Category("미분류", R.drawable.category_unclassified));
 
         for(DataSnapshot fileSnapshot : dataSnapshot.child("users").child(getUid()).child("category").child("지출").getChildren()) {
             Category category = fileSnapshot.getValue(Category.class);

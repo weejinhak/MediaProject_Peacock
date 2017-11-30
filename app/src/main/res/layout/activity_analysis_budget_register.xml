@@ -29,27 +29,23 @@
         android:id="@+id/budget_register_layout_category_spinner"
         android:layout_width="150dp"
         android:layout_height="40dp"
-        android:layout_marginEnd="100dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toTopOf="@+id/budget_register_layout_budget_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintStart_toEndOf="@+id/budget_register_layout_category_title"
         app:layout_constraintTop_toBottomOf="@+id/budget_add_layout_my_toolbar" />
 
     <EditText
         android:id="@+id/budget_register_layout_budget_text"
-        android:layout_width="wrap_content"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="100dp"
         android:ems="10"
         android:gravity="center"
         android:hint="해당 카테고리 예산"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/budget_register_layout_register_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintStart_toEndOf="@+id/budget_register_layout_budget_title"
         app:layout_constraintTop_toBottomOf="@+id/budget_register_layout_category_spinner" />
 
     <TextView
@@ -57,8 +53,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="카테고리"
         android:textColor="#000000"
@@ -72,8 +66,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
         android:text="예산"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="@+id/budget_register_layout_budget_text"
@@ -85,21 +77,14 @@
         android:id="@+id/budget_register_layout_register_button"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:layout_marginEnd="100dp"
+        android:layout_marginStart="8dp"
         android:background="#E91E63"
         android:text="@string/budget_add_layout_add_button_text"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/budget_register_layout_budget_text" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="270dp" />
 
 
 </android.support.constraint.ConstraintLayout>

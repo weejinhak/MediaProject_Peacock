@@ -9,17 +9,15 @@ public class CategoryBudgetChart {
     String categoryName;
     String extraAmount;
     int percentage;
-    String budget;
-    String outgoing;
+    String budgetNOutgoing;
 
     public CategoryBudgetChart() {   }
 
-    public CategoryBudgetChart(String categoryName, String extraAmount, int percentage, String budget, String outgoing) {
+    public CategoryBudgetChart(String categoryName, String extraAmount, int percentage, String budgetNOutgoing) {
         this.categoryName = categoryName;
         this.extraAmount = extraAmount;
         this.percentage = percentage;
-        this.budget = budget;
-        this.outgoing = outgoing;
+        this.budgetNOutgoing = budgetNOutgoing;
     }
 
     public String getCategoryName() {
@@ -46,20 +44,12 @@ public class CategoryBudgetChart {
         this.percentage = percentage;
     }
 
-    public String getBudget() {
-        return budget;
+    public String getBudgetNOutgoing() {
+        return budgetNOutgoing;
     }
 
-    public void setBudget(String budget) {
-        this.budget = budget;
-    }
-
-    public String getOutgoing() {
-        return outgoing;
-    }
-
-    public void setOutgoing(String outgoing) {
-        this.outgoing = outgoing;
+    public void setBudgetNOutgoing(String budgetNOutgoing) {
+        this.budgetNOutgoing = budgetNOutgoing;
     }
 
     @Override
@@ -68,8 +58,7 @@ public class CategoryBudgetChart {
                 "categoryName='" + categoryName + '\'' +
                 ", extraAmount='" + extraAmount + '\'' +
                 ", percentage=" + percentage +
-                ", budget='" + budget + '\'' +
-                ", outgoing='" + outgoing + '\'' +
+                ", budgetNOutgoing='" + budgetNOutgoing + '\'' +
                 '}';
     }
 }

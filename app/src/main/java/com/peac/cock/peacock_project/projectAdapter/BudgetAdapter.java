@@ -11,9 +11,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.peac.cock.peacock_project.R;
+import com.peac.cock.peacock_project.projectDto.CategoryBudgetChart;
 import com.peac.cock.peacock_project.projectDto.MessageItem;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by dahye on 2017-11-30.
@@ -21,24 +23,26 @@ import java.util.ArrayList;
 
 public class BudgetAdapter extends BaseAdapter{
     private LayoutInflater inflater;
-    private ArrayList<MessageItem> messageItems;
+    private List<CategoryBudgetChart> categoryBudgetCharts;
     private int layout;
 
 
-    public BudgetAdapter(Context context, int layout, ArrayList<MessageItem> messageItems) {
+    public BudgetAdapter(Context context, int layout, List<CategoryBudgetChart> categoryBudgetCharts) {
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.messageItems = messageItems;
+        this.categoryBudgetCharts = categoryBudgetCharts;
         this.layout = layout;
     }
 
-    public void setMessageItems(ArrayList<MessageItem> messageItems) {
-        this.messageItems = messageItems;
+    public void setCategoryBudgetCharts(List<CategoryBudgetChart> categoryBudgetCharts) {
+        if(categoryBudgetCharts != null) {
+            this.categoryBudgetCharts = categoryBudgetCharts;
+        }
     }
 
     @Override
     public int getCount() {
-        if(messageItems != null) {
-            return messageItems.size();
+        if(categoryBudgetCharts != null) {
+            return categoryBudgetCharts.size();
         } else {
             return 0;
         }
@@ -46,7 +50,7 @@ public class BudgetAdapter extends BaseAdapter{
 
     @Override
     public Object getItem(int position) {
-        return messageItems.get(position).getMessageContent();
+        return categoryBudgetCharts.get(position);
     }
 
     @Override
@@ -60,26 +64,23 @@ public class BudgetAdapter extends BaseAdapter{
             convertView = inflater.inflate(layout, parent, false);
         }
 
+        CategoryBudgetChart categoryBudgetChart = categoryBudgetCharts.get(position);
 
-        TextView budgetMonthExtraAmount = convertView.findViewById(R.id.budget_layout_month_extra_amount);
-        TextView budgetMonthInfoAmount = convertView.findViewById(R.id.budget_layout_month_info_amount1);
-        ProgressBar budgetProgressbar = convertView.findViewById(R.id.budget_layout_progressbar);
-        TextView budgetPercentage = convertView.findViewById(R.id.budget_layout_percentage);
-        TextView budgetResultText = convertView.findViewById(R.id.budget_layout_budget_result_text);
+        TextView category = convertView.findViewById(R.id.category_budget_layout_category_text);
+        category.setText(categoryBudgetChart.getCategoryName());
 
-        MessageItem messageItem = messageItems.get(position);
+        TextView categoryMonthExtraAmount = convertView.findViewById(R.id.category_budget_layout_month_extra_amount);
+        categoryMonthExtraAmount.setText(categoryBudgetChart.getExtraAmount());
 
-        ImageView imageView = convertView.findViewById(R.id.list_msg_img);
-        imageView.setImageResource(messageItem.getCategoryId());
+        ProgressBar categoryProgressbar = convertView.findViewById(R.id.category_budget_layout_progressbar);
+        categoryProgressbar.setProgress(categoryBudgetChart.getPercentage());
 
-        TextView msgContent = convertView.findViewById(R.id.list_msg_content);
-        msgContent.setText(messageItem.getMessageContent());
+        TextView categoryPBudgetPercentage = convertView.findViewById(R.id.category_budget_layout_percentage);
+        String text = categoryBudgetChart.getPercentage() + "%";
+        categoryPBudgetPercentage.setText(text);
 
-        TextView msgDate= convertView.findViewById(R.id.list_msg_date);
-        msgDate.setText(messageItem.getMessageDate());
-
-        TextView msgBalance = convertView.findViewById(R.id.list_msg_balance);
-        msgBalance.setText(String.valueOf(messageItem.getMessageBalance()));
+        TextView categoryBudgetResultText = convertView.findViewById(R.id.category_budget_layout_budget_result_text);
+        categoryBudgetResultText.setText(categoryBudgetChart.getBudgetNOutgoing());
 
         return convertView;
     }

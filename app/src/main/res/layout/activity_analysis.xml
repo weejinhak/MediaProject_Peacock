@@ -26,13 +26,15 @@
     <TabHost
         android:id="@+id/tab_host"
         android:layout_width="match_parent"
-        android:layout_height="541dp"
+        android:layout_height="525dp"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.372">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -61,6 +63,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
+
                         <ImageButton
                             android:id="@+id/previousButton"
                             style="@style/Widget.AppCompat.Button.Borderless.Colored"
@@ -69,6 +72,7 @@
                             android:layout_marginBottom="8dp"
                             android:background="#E91E63"
                             android:src="@drawable/ic_arrow_left" />
+
                         <TextView
                             android:id="@+id/currentDateLabel"
                             android:layout_width="241dp"
@@ -78,7 +82,7 @@
                             android:gravity="center"
                             android:text="11 월"
                             android:textColor="@android:color/white"
-                            android:textSize="18sp"/>
+                            android:textSize="18sp" />
 
                         <ImageButton
                             android:id="@+id/forwardButton"
@@ -87,7 +91,7 @@
                             android:layout_height="50dp"
                             android:layout_marginBottom="8dp"
                             android:background="#E91E63"
-                            android:src="@drawable/ic_arrow_right"/>
+                            android:src="@drawable/ic_arrow_right" />
 
                     </LinearLayout>
 
@@ -147,8 +151,7 @@
                 <LinearLayout
                     android:id="@+id/budget"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:layout_height="match_parent">
 
                     <include
                         android:id="@+id/include"

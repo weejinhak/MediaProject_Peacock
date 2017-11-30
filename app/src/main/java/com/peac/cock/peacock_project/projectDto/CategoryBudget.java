@@ -33,4 +33,12 @@ public class CategoryBudget {
     public void setBudget(String budget) {
         this.budget = budget;
     }
+
+    @Override
+    public String toString() {
+        return "CategoryBudget{" +
+                "category=" + category +
+                ", budget='" + budget + '\'' +
+                '}';
+    }
 }
