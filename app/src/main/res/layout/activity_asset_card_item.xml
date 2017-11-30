@@ -12,7 +12,7 @@
 
         <TextView
             android:id="@+id/asset_item_bankName"
-            android:layout_width="wrap_content"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_gravity="left|center"
             android:layout_marginLeft="15dp"
@@ -22,7 +22,7 @@
 
         <TextView
             android:id="@+id/asset_item_cardName"
-            android:layout_width="wrap_content"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_gravity="left|center"
             android:layout_marginLeft="5dp"

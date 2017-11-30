@@ -53,14 +53,13 @@
                     <LinearLayout
                         android:id="@+id/analysis"
                         android:layout_width="match_parent"
-                        android:layout_height="600dp"
-                        android:orientation="vertical"
-                        android:scrollbars="vertical">
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
                         <com.github.mikephil.charting.charts.PieChart
                             android:id="@+id/pie_chart"
                             android:layout_width="match_parent"
-                            android:layout_height="300dp" />
+                            android:layout_height="280dp" />
 
                         <LinearLayout
                             android:layout_width="match_parent"

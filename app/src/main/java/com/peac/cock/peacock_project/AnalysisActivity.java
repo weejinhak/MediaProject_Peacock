@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -52,12 +53,17 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
     private PieChart pieChart;
 
     private TextView categoryBudgetRegisterText;
-    private Button categoryBudgetRegisterButton;
 
     private ListView ledgerListViewPerCategory;
     private ListTab1Adapter analysisListAdapter;
 
-    private LinearLayout analysisLayout;
+    private Button categoryBudgetRegisterButton;
+
+    private ImageButton assetGoButton;
+    private ImageButton analysisGoButton;
+    private ImageButton detailGoButton;
+    private ImageButton settingGoButton;
+
 
     private Date date = new Date();
     private SimpleDateFormat sdf = new SimpleDateFormat("MM");
@@ -71,6 +77,8 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
 
     private Intent intent;
 
+    private String currentTab = "analysis";
+
     private BackPressCloseHandler backPressCloseHandler;
 
 
@@ -83,21 +91,32 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
 
         intent = getIntent();
 
+        if(intent.getStringExtra("budgetRegister") != null) {
+            currentTab = "budget";
+        }
 
         pieChart = findViewById(R.id.pie_chart);
 
         categoryBudgetRegisterText = findViewById(R.id.category_budget_register_text);
-        categoryBudgetRegisterButton = findViewById(R.id.category_budget_register_button);
 
-        analysisLayout = findViewById(R.id.analysis);
+        categoryBudgetRegisterButton = findViewById(R.id.category_budget_register_button);
 
         ledgerLists = new HashMap<>();
         ledgerListViewPerCategory = findViewById(R.id.analysis_layout_detail_list);
 
-        final ImageButton assetGoButton = findViewById(R.id.main_layout_asset_go_button);
-        final ImageButton analysisGoButton = findViewById(R.id.main_layout_analysis_go_button);
-        final ImageButton detailGoButton = findViewById(R.id.main_layout_breakdown_go_button);
-        final ImageButton settingGoButton = findViewById(R.id.main_layout_setting_go_button);
+        assetGoButton = findViewById(R.id.main_layout_asset_go_button);
+        analysisGoButton = findViewById(R.id.main_layout_analysis_go_button);
+        detailGoButton = findViewById(R.id.main_layout_breakdown_go_button);
+        settingGoButton = findViewById(R.id.main_layout_setting_go_button);
+
+        categoryBudgetRegisterButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                intent.setClass(getApplicationContext(), AnalysisBudgetRegisterActivity.class);
+                startActivity(intent);
+            }
+        });
 
         detailGoButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,6 +160,12 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
         page2.setContent(R.id.budget);
         page2.setIndicator("예산");
         host.addTab(page2);
+
+        if(currentTab.equals("analysis")) {
+            host.setCurrentTab(0);
+        } else {
+            host.setCurrentTab(1);
+        }
 
         setupPieChart();
 
@@ -186,7 +211,6 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
         pieChart.setHoleColor(Color.WHITE);
         pieChart.setTransparentCircleRadius(60f);
         pieChart.animateY(1000, Easing.EasingOption.EaseInOutCubic);
-        pieChart.setCenterText("총 지출\n"+String.valueOf(entireBudget[1]));
     }
 
     protected void setPieChartData() {
@@ -210,6 +234,8 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
         data.setValueTextSize(10f);
         data.setValueTextColor(Color.YELLOW);
 
+        pieChart.setCenterText("총 지출\n"+String.valueOf(entireBudget[1]));
+        pieChart.setCenterTextSize(20);
         pieChart.setData(data);
         pieChart.invalidate();
     }
@@ -217,15 +243,24 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
     protected void setBarChartData() {
         LinearLayout layout = findViewById(R.id.linear_layout);
 
-        int percentage = entireBudget[1]/entireBudget[0]*100;
-        if (percentage > 100) {
+        System.out.println("bar entireBudget[0] : " + entireBudget[0]);
+        System.out.println("bar entireBudget[1] : " + entireBudget[1]);
+
+        int percentage = entireBudget[1]*100/entireBudget[0];
+
+        if(percentage > 100) {
             percentage = 100;
         }
 
-        ProgressBar progressBar = new ProgressBar(this, null, android.R.attr.progressBarStyleHorizontal);
-        progressBar.setProgress(percentage);
-        layout.addView(progressBar);
-        System.out.println(percentage);
+        System.out.println("percentage :" + percentage);
+
+        TextView entireBudgetTV = new TextView(this);
+
+
+        ProgressBar entireBudgetPB = new ProgressBar(this, null, android.R.attr.progressBarStyleHorizontal);
+        entireBudgetPB.setProgress(percentage);
+        entireBudgetPB.setProgressDrawable(getResources().getDrawable(R.drawable.analysis_layout_progressbar_style));
+        layout.addView(entireBudgetPB);
 
         if(categoryBudgetSet.size()==0) {
             categoryBudgetRegisterText.setVisibility(View.VISIBLE);
@@ -241,6 +276,7 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
                     percent = 100;
                 }
                 ProgressBar p = new ProgressBar(this, null, android.R.attr.progressBarStyleHorizontal);
+                p.setLayoutParams(new ConstraintLayout.LayoutParams(330, 30));
                 p.setProgressDrawable(getResources().getDrawable(R.drawable.analysis_layout_progressbar_style));
                 p.setProgress(percent);
                 layout.addView(p);
@@ -265,6 +301,8 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
     @Override
     public void onDataChange(DataSnapshot dataSnapshot) {
         dataSnapshot.getValue();
+
+        ledgerListViewPerCategory.setAdapter(null);
 
         entireBudget[0] = Integer.parseInt(dataSnapshot.child("users").child(getUid()).child("budget").getValue(String.class));
         entireBudget[1] = 0;
@@ -295,9 +333,7 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
                 }
 
                 if(ledger.getDate().substring(0,2).equals(String.valueOf(selectedDate))) {
-                    System.out.println(ledger.getAmount());
                     entireBudget[1] += Double.parseDouble(ledger.getAmount());
-                    System.out.println("entireBudget : " + entireBudget[1]);
 
                     String msgContent = ledger.getContent();
                     String[] msgContentToken = msgContent.split("\\s");
@@ -318,8 +354,6 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
 
                 }
             }
-
-
         }
 
         setPieChartData();
