@@ -4,8 +4,7 @@
     <item
         android:id="@android:id/background"
         android:width="300dp"
-        android:height="20dp"
-        android:layout_gravity="center">
+        android:height="20dp">
         <shape>
             <corners
                 android:radius="5dip" />
@@ -21,8 +20,7 @@
 
     <item
         android:id="@android:id/progress"
-        android:height="20dp"
-        android:layout_gravity="center">
+        android:height="20dp">
         <clip>
             <shape>
                 <corners

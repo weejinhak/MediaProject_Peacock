@@ -166,7 +166,7 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
         public void onClick(View view) {
             if(resultView.getText().toString().equals("0")||resultView.getText().toString().equals("00")||resultView.getText().toString().equals("000")) {
                 resultView.setText("");
-                result = "0";
+                result = "";
                 checkButton.setBackgroundResource(R.drawable.handwriting_layout_active_check_button);
             }
             resultView.setText(resultView.getText().toString() + ((Button) view).getText().toString());
@@ -233,8 +233,11 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
 
                 try {
                     ScriptableObject scope = rhino.initStandardObjects();
+                    System.out.println("result : " + result);
                     evaluation = rhino.evaluateString(scope, result, "JavaScript", 1, null).toString();
+                    System.out.println("evaluation : " + evaluation);
                     evaluation = String.valueOf(Math.round(Float.parseFloat(evaluation)));
+                    System.out.println("evaluation : " + evaluation);
                 } finally {
                     Context.exit();
                 }

@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -15,6 +16,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.peac.cock.peacock_project.projectDto.Asset;
 import com.peac.cock.peacock_project.projectDto.Card;
 import com.peac.cock.peacock_project.projectDto.Category;
 import com.peac.cock.peacock_project.projectDto.CategoryBudget;
@@ -39,7 +41,9 @@ public class AnalysisBudgetRegisterActivity extends AppCompatActivity implements
 
     private CategoryBudget categoryBudget;
 
-    private List<String> categoryList;
+    private List<Category> categoryList;
+
+    private ArrayAdapter<Category> categoryAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,6 +58,9 @@ public class AnalysisBudgetRegisterActivity extends AppCompatActivity implements
         categoryBudget = new CategoryBudget();
 
         categoryList = new ArrayList<>();
+
+        categoryAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categoryList);
+        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         //get Id
         budgetRegisterCategorySpinner = findViewById(R.id.budget_register_layout_category_spinner);
@@ -80,7 +87,7 @@ public class AnalysisBudgetRegisterActivity extends AppCompatActivity implements
                 Intent intent = new Intent(getApplicationContext(), AnalysisActivity.class);
                 intent.putExtra("budgetRegister", "true");
 
-                categoryBudget.setCategoryName(budgetRegisterCategorySpinner.getSelectedItem().toString());
+                categoryBudget.setCategory((Category)budgetRegisterCategorySpinner.getSelectedItem());
                 categoryBudget.setBudget(budgetRegisterBudgetText.getText().toString());
 
                 mDatabase.getReference().child("users").child(uid).child("categoryBudget").push().setValue(categoryBudget);
@@ -93,10 +100,13 @@ public class AnalysisBudgetRegisterActivity extends AppCompatActivity implements
     @Override
     public void onDataChange(DataSnapshot dataSnapshot) {
         dataSnapshot.getValue();
+
         for(DataSnapshot fileSnapshot : dataSnapshot.child("users").child(uid).child("category").getChildren()) {
             Category category = fileSnapshot.getValue(Category.class);
-            categoryList.add(category.getCateImageString().toString());
+            categoryList.add(category);
         }
+        budgetRegisterCategorySpinner.setAdapter(categoryAdapter);
+        budgetRegisterCategorySpinner.setSelection(0);
     }
 
     @Override

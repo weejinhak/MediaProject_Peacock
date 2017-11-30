@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -25,7 +26,7 @@
     <TabHost
         android:id="@+id/tab_host"
         android:layout_width="match_parent"
-        android:layout_height="517dp"
+        android:layout_height="541dp"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -41,90 +42,123 @@
             <TabWidget
                 android:id="@android:id/tabs"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:background="#ffffff" />
 
 
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-                <FrameLayout
-                    android:id="@android:id/tabcontent"
+                <LinearLayout
+                    android:id="@+id/analysis"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
                     <LinearLayout
-                        android:id="@+id/analysis"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <ImageButton
+                            android:id="@+id/previousButton"
+                            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                            android:layout_width="85dp"
+                            android:layout_height="50dp"
+                            android:layout_marginBottom="8dp"
+                            android:background="#E91E63"
+                            android:src="@drawable/ic_arrow_left" />
+                        <TextView
+                            android:id="@+id/currentDateLabel"
+                            android:layout_width="241dp"
+                            android:layout_height="50dp"
+                            android:layout_marginBottom="8dp"
+                            android:background="#E91E63"
+                            android:gravity="center"
+                            android:textColor="@android:color/white"
+                            android:textSize="18sp"/>
 
-                        <com.github.mikephil.charting.charts.PieChart
-                            android:id="@+id/pie_chart"
-                            android:layout_width="match_parent"
-                            android:layout_height="280dp" />
+                        <ImageButton
+                            android:id="@+id/forwardButton"
+                            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                            android:layout_width="85dp"
+                            android:layout_height="50dp"
+                            android:layout_marginBottom="8dp"
+                            android:background="#E91E63"
+                            android:src="@drawable/ic_arrow_right"/>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                    </LinearLayout>
+
+                    <com.github.mikephil.charting.charts.PieChart
+                        android:id="@+id/pie_chart"
+                        android:layout_width="match_parent"
+                        android:layout_height="280dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/analysis_layout_category_img_view"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            android:orientation="horizontal">
+                            android:layout_marginLeft="25dp"
+                            android:text="카테고리"
+                            android:textColor="#E91E63" />
 
-                            <TextView
-                                android:id="@+id/analysis_layout_category_img_view"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="#E91E63"
-                                android:layout_marginLeft="25dp"
-                                android:text="카테고리" />
+                        <TextView
+                            android:id="@+id/analysis_layout_content_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="70dp"
+                            android:text="내역"
+                            android:textColor="#E91E63" />
 
-                            <TextView
-                                android:id="@+id/analysis_layout_content_view"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="#E91E63"
-                                android:layout_marginLeft="70dp"
-                                android:text="내역" />
+                        <TextView
+                            android:id="@+id/analysis_layout_date_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="65dp"
+                            android:text="날짜"
+                            android:textColor="#E91E63" />
 
-                            <TextView
-                                android:id="@+id/analysis_layout_date_view"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="#E91E63"
-                                android:layout_marginLeft="65dp"
-                                android:text="날짜" />
-
-                            <TextView
-                                android:id="@+id/analysis_layout_amount_view"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="#E91E63"
-                                android:layout_marginLeft="45dp"
-                                android:text="금액" />
-                        </LinearLayout>
-
-                        <ListView
-                            android:id="@+id/analysis_layout_detail_list"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:scrollbars="vertical" />
-
+                        <TextView
+                            android:id="@+id/analysis_layout_amount_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="45dp"
+                            android:text="금액"
+                            android:textColor="#E91E63" />
                     </LinearLayout>
 
-
-                    <LinearLayout
-                        android:id="@+id/budget"
+                    <ListView
+                        android:id="@+id/analysis_layout_detail_list"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical">
+                        android:scrollbars="vertical" />
 
-                        <include
-                            android:id="@+id/include"
-                            layout="@layout/activity_analysis_budget"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                </LinearLayout>
 
-                    </LinearLayout>
-                </FrameLayout>
+
+                <LinearLayout
+                    android:id="@+id/budget"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <include
+                        android:id="@+id/include"
+                        layout="@layout/activity_analysis_budget"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </LinearLayout>
+            </FrameLayout>
 
         </LinearLayout>
     </TabHost>

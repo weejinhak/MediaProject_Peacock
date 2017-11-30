@@ -71,7 +71,7 @@ public class AssetActivity extends AppCompatActivity implements ValueEventListen
         //firebase get auth& database;
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance();
-        uid = mAuth.getCurrentUser().getUid();
+        uid = getUid();
 
         intent = new Intent();
 

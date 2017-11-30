@@ -6,24 +6,24 @@ package com.peac.cock.peacock_project.projectDto;
 
 public class CategoryBudget {
 
-    private String categoryName;
+    private Category category;
     private String budget;
 
     public CategoryBudget() {
 
     }
 
-    public CategoryBudget(String categoryName, String budget) {
-        this.categoryName = categoryName;
+    public CategoryBudget(Category category, String budget) {
+        this.category = category;
         this.budget = budget;
     }
 
-    public String getCategoryName() {
-        return categoryName;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public String getBudget() {

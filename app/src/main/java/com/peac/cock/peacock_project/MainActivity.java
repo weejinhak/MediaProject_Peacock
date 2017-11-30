@@ -60,7 +60,6 @@ public class MainActivity extends AppCompatActivity
         //fire base Auth && database
         auth = FirebaseAuth.getInstance();
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final String uid = auth.getCurrentUser().getUid();
 
         //Toolbar setting
         Toolbar toolbar = findViewById(R.id.app_bar_layout_my_toolbar);

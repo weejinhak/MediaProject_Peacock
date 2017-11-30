@@ -41,9 +41,12 @@ import com.peac.cock.peacock_project.projectDto.CategoryBudget;
 import com.peac.cock.peacock_project.projectDto.LedgerDto;
 import com.peac.cock.peacock_project.projectDto.MessageItem;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -161,6 +164,11 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
         page2.setIndicator("예산");
         host.addTab(page2);
 
+        TextView tv = host.getTabWidget().getChildAt(0).findViewById(R.id.tabs);
+        tv.setTextColor(Color.parseColor("#ffffff"));
+
+
+
         if(currentTab.equals("analysis")) {
             host.setCurrentTab(0);
         } else {
@@ -234,14 +242,13 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
         data.setValueTextSize(10f);
         data.setValueTextColor(Color.YELLOW);
 
-        pieChart.setCenterText("총 지출\n"+String.valueOf(entireBudget[1]));
-        pieChart.setCenterTextSize(20);
+        pieChart.setCenterText("총 지출\n"+String.valueOf(entireBudget[1]+"원"));
+        pieChart.setCenterTextSize(18);
         pieChart.setData(data);
         pieChart.invalidate();
     }
 
     protected void setBarChartData() {
-        LinearLayout layout = findViewById(R.id.linear_layout);
 
         System.out.println("bar entireBudget[0] : " + entireBudget[0]);
         System.out.println("bar entireBudget[1] : " + entireBudget[1]);
@@ -254,13 +261,41 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
 
         System.out.println("percentage :" + percentage);
 
-        TextView entireBudgetTV = new TextView(this);
+        DecimalFormat df = new DecimalFormat("#,###");
 
+        TextView entireBudgetTV = new TextView(this);
+        entireBudgetTV.setText("이번 달 예산");
+
+        TextView entireBudgetTV2 = new TextView(this); // 원 초과, 남음
+        String text2;
+        int delta = entireBudget[0] - entireBudget[1];
+        if(delta >= 0) {
+            text2 = df.format(delta) + "원 남음";
+        } else {
+            text2 = df.format(-delta) + "원 초과";
+        }
+        entireBudgetTV2.setText(text2);
+
+        TextView entireBudgetTV3 = new TextView(this);
+        GregorianCalendar today = new GregorianCalendar();
+        int maxDay = today.getActualMaximum(today.DAY_OF_MONTH);
+        System.out.print("maxDay : " + maxDay);
+        int remainDay = maxDay - today.DAY_OF_MONTH;
+        System.out.print("remainDay : " + remainDay);
+        int expectedOutgoing = entireBudget[1]/today.DAY_OF_MONTH*30;
+        String text3 = "예산을 맞추려면 하루에" + df.format(delta/remainDay) + "원씩 써야해요.\n"
+                + "이렇게 쓴다면 이번달 지출은 " + df.format(expectedOutgoing) + "원으로 예상되네요.";
+        entireBudgetTV3.setText(text3);
+
+        TextView entireBudgetTV4 = new TextView(this);
+        String text4 = "예산 : " + df.format(entireBudget[0]) + "원\n지출 : " + df.format(entireBudget[1]) + "원";
+        entireBudgetTV4.setText(text4);
 
         ProgressBar entireBudgetPB = new ProgressBar(this, null, android.R.attr.progressBarStyleHorizontal);
         entireBudgetPB.setProgress(percentage);
         entireBudgetPB.setProgressDrawable(getResources().getDrawable(R.drawable.analysis_layout_progressbar_style));
-        layout.addView(entireBudgetPB);
+
+
 
         if(categoryBudgetSet.size()==0) {
             categoryBudgetRegisterText.setVisibility(View.VISIBLE);
@@ -272,14 +307,12 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
             System.out.println("데이터 있음");
             for(Map.Entry<String, String> categoryBudget : categoryBudgetSet.entrySet()) {
                 int percent = Integer.parseInt(categoryOutgoing.get(categoryBudget.getKey()))/Integer.parseInt(categoryBudget.getValue())*100;
-                if (percent > 100) {
-                    percent = 100;
-                }
+
                 ProgressBar p = new ProgressBar(this, null, android.R.attr.progressBarStyleHorizontal);
                 p.setLayoutParams(new ConstraintLayout.LayoutParams(330, 30));
                 p.setProgressDrawable(getResources().getDrawable(R.drawable.analysis_layout_progressbar_style));
                 p.setProgress(percent);
-                layout.addView(p);
+
             }
         }
     }
@@ -302,14 +335,12 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
     public void onDataChange(DataSnapshot dataSnapshot) {
         dataSnapshot.getValue();
 
-        ledgerListViewPerCategory.setAdapter(null);
-
         entireBudget[0] = Integer.parseInt(dataSnapshot.child("users").child(getUid()).child("budget").getValue(String.class));
         entireBudget[1] = 0;
 
         for(DataSnapshot fileSnapshot : dataSnapshot.child("users").child(getUid()).child("categoryBudget").getChildren()) {
             CategoryBudget categoryBudget = fileSnapshot.getValue(CategoryBudget.class);
-            categoryBudgetSet.put(categoryBudget.getCategoryName(), categoryBudget.getBudget());
+            categoryBudgetSet.put(categoryBudget.getCategory().getCateImageString(), categoryBudget.getBudget());
         }
 
         for(DataSnapshot fileSnapshot : dataSnapshot.child("users").child(getUid()).child("ledger").getChildren()) {
