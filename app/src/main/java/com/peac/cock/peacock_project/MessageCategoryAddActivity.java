@@ -60,6 +60,7 @@ public class MessageCategoryAddActivity extends AppCompatActivity {
             "자동차", "카페/간식", "문화/여가",
             "애완", "카페/간식", "교육",
             "식사", "문화/여가", "의료/건강",
+            "주거/통신","주거/통신","사랑",
             "주거/통신", "교통","여행/숙박"
     };
     int[] matchGridViewImageId = {
@@ -67,6 +68,7 @@ public class MessageCategoryAddActivity extends AppCompatActivity {
             R.drawable.car,R.drawable.caffe,R.drawable.culture,
             R.drawable.category_animal,R.drawable.caffe,R.drawable.education,
             R.drawable.food,R.drawable.culture,R.drawable.health,
+            R.drawable.home,R.drawable.home,R.drawable.category_love,
             R.drawable.home,R.drawable.traffic,R.drawable.trip
     };
 
@@ -123,6 +125,6 @@ public class MessageCategoryAddActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        
+
     }
 }
