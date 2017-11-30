@@ -121,7 +121,6 @@ public class Tab1_content extends Fragment implements ValueEventListener {
     @Override
     public void onDataChange(DataSnapshot dataSnapshot) {
         dataSnapshot.getValue();
-        System.out.println("데이터 온 체인지 ");
         for (DataSnapshot fileSnapshot : dataSnapshot.child("users").child(getUid()).child("ledger").getChildren()) {
             LedgerDto ledger = fileSnapshot.getValue(LedgerDto.class);
 
@@ -172,6 +171,5 @@ public class Tab1_content extends Fragment implements ValueEventListener {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         return currentUser.getUid();
     }
-
 }
 

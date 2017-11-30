@@ -133,17 +133,14 @@ public class CategoryAddActivity extends AppCompatActivity {
                 if (categoryType.equals("지출")) {
                     mCategory.setCateImageString(matchGridViewString[i]);
                     mCategory.setCateImageId(gridViewImageId[i]);
-                    Toast.makeText(getApplicationContext(), "String" + matchGridViewString[i] + "ID" + gridViewImageId[i], Toast.LENGTH_LONG).show();
                 }
                 if (categoryType.equals("수입")) {
                     mCategory.setCateImageString(incomingGridViewString[i]);
                     mCategory.setCateImageId(incomingGridViewImageId[i]);
-                    Toast.makeText(getApplicationContext(), "String" + incomingGridViewString[i] + "ID" + incomingGridViewImageId[i], Toast.LENGTH_LONG).show();
                 }
                 if (categoryType.equals("이체")) {
                     mCategory.setCateImageString(transferGridViewString[i]);
                     mCategory.setCateImageId(transferGridViewImageId[i]);
-                    Toast.makeText(getApplicationContext(), "String" + transferGridViewString[i] + "ID" + transferGridViewImageId[i], Toast.LENGTH_LONG).show();
                 }
             }
         });

@@ -161,7 +161,6 @@ public class AssetActivity extends AppCompatActivity implements ValueEventListen
         builder.setItems(items, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int pos) {
                 String selectedText = items[pos].toString();
-                Toast.makeText(getApplicationContext(), selectedText, Toast.LENGTH_SHORT).show();
                 if (selectedText.equals("현금")) {
                     Intent intent = new Intent(getApplicationContext(), AddCashActivity.class);
                     startActivity(intent);
