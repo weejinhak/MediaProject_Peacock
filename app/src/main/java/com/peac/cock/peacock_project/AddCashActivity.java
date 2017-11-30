@@ -1,5 +1,6 @@
 package com.peac.cock.peacock_project;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -47,7 +48,9 @@ public class AddCashActivity extends AppCompatActivity {
 
                 //uid에 맞는 정보 디비 입력
                 mDatabase.getReference().child("users").child(uid).child("asset").child("cash").push().setValue(cash);
-
+                Intent intent  = new Intent(getApplicationContext(),AssetActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
