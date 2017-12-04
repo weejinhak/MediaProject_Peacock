@@ -14,67 +14,53 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.peac.cock.peacock_project.projectDto.Card;
 
-/**
- * Created by wee on 2017. 11. 14..
- */
-
 public class AddCardActivity extends AppCompatActivity {
 
-
-    private FirebaseAuth mAuth;
     private FirebaseDatabase mDatabase;
-
     private String uid;
+
     private Card card;
     private String bankType;
+
+    private EditText cardEditText_nickName;
+    private EditText cardEditText_balance;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_add);
 
-        //fireBase Auth & Database
-        mAuth = FirebaseAuth.getInstance();
+        final FirebaseAuth mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance();
 
         card = new Card();
         uid = mAuth.getCurrentUser().getUid();
 
-        //get Id
-        Spinner cardArraySpiner = findViewById(R.id.add_card_layout_spinner_cardArrayItem);
-        final EditText cardEditText_nickName = findViewById(R.id.card_add_layout_editText_nickName);
-        final EditText cardEditText_balance = findViewById(R.id.card_add_layout_editText_balance);
-        Button cardAddButton = findViewById(R.id.card_add_layout_add_button);
+        cardEditText_nickName = findViewById(R.id.card_add_layout_editText_nickName);
+        cardEditText_balance = findViewById(R.id.card_add_layout_editText_balance);
 
-        cardArraySpiner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        final Spinner cardArraySpinner = findViewById(R.id.add_card_layout_spinner_cardArrayItem);
+        final Button cardAddButton = findViewById(R.id.card_add_layout_add_button);
+
+        cardArraySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 bankType = (String) parent.getItemAtPosition(position);
-                System.out.println(bankType);
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
+            public void onNothingSelected(AdapterView<?> parent) {  }
         });
 
-        cardAddButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                card.setBank(bankType);
-                card.setNickname(cardEditText_nickName.getText().toString());
-                card.setBalance(Integer.parseInt(cardEditText_balance.getText().toString()));
+        cardAddButton.setOnClickListener(v -> {
+            card.setBank(bankType);
+            card.setNickname(cardEditText_nickName.getText().toString());
+            card.setBalance(Integer.parseInt(cardEditText_balance.getText().toString()));
 
-                //uid에 맞는 정보 디비 입력
-                mDatabase.getReference().child("users").child(uid).child("asset").child("card").push().setValue(card);
-                Intent intent  = new Intent(getApplicationContext(),AssetActivity.class);
-                startActivity(intent);
-                finish();
-
-            }
+            mDatabase.getReference().child("users").child(uid).child("asset").child("card").push().setValue(card);
+            Intent intent  = new Intent(getApplicationContext(),AssetActivity.class);
+            startActivity(intent);
+            finish();
         });
-
-
     }
 }

@@ -12,10 +12,6 @@ import com.peac.cock.peacock_project.projectDto.Card;
 
 import java.util.ArrayList;
 
-/**
- * Created by wee on 2017. 11. 24..
- */
-
 public class AssetCardAdapter  extends BaseAdapter {
 
     private LayoutInflater inflater;
@@ -27,7 +23,6 @@ public class AssetCardAdapter  extends BaseAdapter {
         this.cardItems=cardItems;
         this.layout=layout;
     }
-
 
     @Override
     public int getCount() {

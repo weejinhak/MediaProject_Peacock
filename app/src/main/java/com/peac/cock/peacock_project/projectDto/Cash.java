@@ -9,8 +9,7 @@ public class Cash extends Asset {
     private String nickname;
     private int balance;
 
-    public Cash() {
-    }
+    public Cash() { }
 
     public Cash(String nickname, int balance) {
         this.nickname = nickname;

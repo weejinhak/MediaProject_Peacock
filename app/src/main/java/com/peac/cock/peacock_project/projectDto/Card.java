@@ -1,9 +1,5 @@
 package com.peac.cock.peacock_project.projectDto;
 
-/**
- * Created by wee on 2017. 11. 8..
- */
-
 public class Card extends Asset {
 
     private String bank;
@@ -20,11 +16,6 @@ public class Card extends Asset {
         this.bank = bank;
         this.nickname = nickname;
         this.balance = balance;
-    }
-
-    public Card(String bank, String nickname) {
-        this.bank = bank;
-        this.nickname = nickname;
     }
 
     public String getBank() {

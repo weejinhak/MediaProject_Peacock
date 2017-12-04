@@ -3,10 +3,6 @@ package com.peac.cock.peacock_project.projectAdapter;
 import android.app.Activity;
 import android.widget.Toast;
 
-/**
- * Created by wee on 2017. 11. 27..
- */
-
 public class BackPressCloseHandler {
     private long backKeyPressedTime = 0;
     private Toast toast;

@@ -10,10 +10,6 @@ import android.widget.TextView;
 
 import com.peac.cock.peacock_project.R;
 
-/**
- * Created by wee on 2017. 11. 14..
- */
-
 public class CategoryGridViewAdapter extends BaseAdapter {
 
     private Context mContext;
@@ -49,7 +45,6 @@ public class CategoryGridViewAdapter extends BaseAdapter {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         if (convertView == null) {
-            gridViewAndroid = new View(mContext);
             gridViewAndroid = inflater.inflate(R.layout.item_category_gridview, null);
             TextView textViewAndroid = gridViewAndroid.findViewById(R.id.category_gridView_text);
             ImageView imageViewAndroid = gridViewAndroid.findViewById(R.id.category_gridView_image);

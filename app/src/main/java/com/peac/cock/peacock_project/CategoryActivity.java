@@ -3,16 +3,11 @@ package com.peac.cock.peacock_project;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.View;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -24,23 +19,18 @@ import com.peac.cock.peacock_project.projectAdapter.CategoryGridViewAdapter;
 
 import java.util.ArrayList;
 
-/**
- * Created by wee on 2017. 11. 14..
- */
-
 public class CategoryActivity extends AppCompatActivity {
 
-    private FirebaseAuth mAuth;
     private FirebaseDatabase mDatabase;
+    private String uid;
+
     private ArrayList<String> getDbImageStringList;
     private ArrayList<Integer> getDbImageIdList;
-    private String uid;
+
     private String categoryType;
-    private int state;
+
     private CategoryGridViewAdapter categoryGridViewAdapter;
     private GridView categoryGridView;
-    private ImageButton addCategoryButton;
-    private ImageButton backButton;
 
     private String[] gridViewString;
     private int[] gridViewImageId;
@@ -61,55 +51,50 @@ public class CategoryActivity extends AppCompatActivity {
             categoryType = "수입";
         }
 
-        if(categoryType.equals("수입")) {
-            state = 0;
-        } else if(categoryType.equals("지출")) {
-            state = 1;
-        } else {
-            state = 2;
+        final int state;
+        switch (categoryType) {
+            case "수입":
+                state = 0;
+                break;
+            case "지출":
+                state = 1;
+                break;
+            default:
+                state = 2;
+                break;
         }
 
-
-        //firebase Auth정보 get
-        mAuth = FirebaseAuth.getInstance();
+        final FirebaseAuth mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance();
+        uid = mAuth.getCurrentUser().getUid();
 
         getDbImageStringList = new ArrayList<>();
         getDbImageIdList = new ArrayList<>();
-        uid = mAuth.getCurrentUser().getUid();
 
-        //get Id
         categoryGridView = findViewById(R.id.category_grid_view_image_text);
-        addCategoryButton = findViewById(R.id.category_grid_view_category_add_button);
-        backButton = findViewById(R.id.category_layout_back_button);
-        TabLayout tabLayout = findViewById(R.id.category_layout_tabs);
+
+        final ImageButton addCategoryButton = findViewById(R.id.category_grid_view_category_add_button);
+        final ImageButton backButton = findViewById(R.id.category_layout_back_button);
+
+        final TabLayout tabLayout = findViewById(R.id.category_layout_tabs);
 
         TabLayout.Tab tab = tabLayout.getTabAt(state);
         tab.select();
 
         callDatabase();
 
-        categoryGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
-            }
+        categoryGridView.setOnItemClickListener((parent, view, i, id) -> {
         });
 
-        addCategoryButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent.setClass(getApplicationContext(), CategoryAddActivity.class);
-                intent.putExtra("categoryType", categoryType);
-                startActivity(intent);
-            }
+        addCategoryButton.setOnClickListener(v -> {
+            intent.setClass(getApplicationContext(), CategoryAddActivity.class);
+            intent.putExtra("categoryType", categoryType);
+            startActivity(intent);
         });
 
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent.setClass(getApplicationContext(), SettingActivity.class);
-                startActivity(intent);
-            }
+        backButton.setOnClickListener(view -> {
+            intent.setClass(getApplicationContext(), SettingActivity.class);
+            startActivity(intent);
         });
 
 
@@ -117,7 +102,6 @@ public class CategoryActivity extends AppCompatActivity {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                System.out.println(tab.getPosition());
                 switch (tab.getPosition()) {
                     case 0:
                         categoryType = "수입";
@@ -143,9 +127,7 @@ public class CategoryActivity extends AppCompatActivity {
 
     }
 
-    //tab 클릭시 DB호출
     void callDatabase() {
-        //getDB
         DatabaseReference databaseReference = mDatabase.getReference();
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -155,10 +137,7 @@ public class CategoryActivity extends AppCompatActivity {
                 getDbImageStringList = new ArrayList<>();
                 getDbImageIdList = new ArrayList<>();
 
-                for (DataSnapshot fileSnapshot : dataSnapshot.child("users").child(uid).child("category").child(categoryType).getChildren()) {
-
-                    Log.d("fileSnapShot", String.valueOf(fileSnapshot));
-
+                for(DataSnapshot fileSnapshot : dataSnapshot.child("users").child(uid).child("category").child(categoryType).getChildren()) {
                     long id = (long) fileSnapshot.child("cateImageId").getValue();
                     int imgId = (int) id;
                     String imgString = fileSnapshot.child("cateImageString").getValue(String.class);

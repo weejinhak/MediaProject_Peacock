@@ -1,10 +1,9 @@
 package com.peac.cock.peacock_project;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.FloatingActionButton;
 import android.view.KeyEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -16,38 +15,23 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
-import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.peac.cock.peacock_project.projectAdapter.BackPressCloseHandler;
-import com.peac.cock.peacock_project.projectDto.LedgerDto;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
-
-    private TextView nameTextView;
-    private TextView emailTextView;
     private FirebaseAuth auth;
     private Intent intent;
     private WebView mWebView;
     private BackPressCloseHandler backPressCloseHandler;
 
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,59 +41,42 @@ public class MainActivity extends AppCompatActivity
 
         intent = new Intent();
 
-        //fire base Auth && database
         auth = FirebaseAuth.getInstance();
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-        //Toolbar setting
-        Toolbar toolbar = findViewById(R.id.app_bar_layout_my_toolbar);
+        final Toolbar toolbar = findViewById(R.id.app_bar_layout_my_toolbar);
         setSupportActionBar(toolbar);
 
-        // get ID
-        ImageButton assetGoButton = findViewById(R.id.main_layout_asset_go_button);
-        ImageButton analysisGoButton = findViewById(R.id.main_layout_analysis_go_button);
-        ImageButton detailGoButton = findViewById(R.id.main_layout_breakdown_go_button);
-        ImageButton settingGoButton = findViewById(R.id.main_layout_setting_go_button);
+        final ImageButton assetGoButton = findViewById(R.id.main_layout_asset_go_button);
+        final ImageButton analysisGoButton = findViewById(R.id.main_layout_analysis_go_button);
+        final ImageButton detailGoButton = findViewById(R.id.main_layout_breakdown_go_button);
+        final ImageButton settingGoButton = findViewById(R.id.main_layout_setting_go_button);
 
-        //webView
         mWebView = findViewById(R.id.main_webView);
         mWebView.getSettings().setJavaScriptEnabled(true);
         mWebView.loadUrl("http://www.podbbang.com/ch/14295");
         mWebView.setWebViewClient(new WebViewClientClass());
         mWebView.setVerticalScrollBarEnabled(true);
 
-        detailGoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent.setClass(getApplicationContext(), DetailTabActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        detailGoButton.setOnClickListener(view -> {
+            intent.setClass(getApplicationContext(), DetailTabActivity.class);
+            startActivity(intent);
+            finish();
         });
 
-        assetGoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent.setClass(getApplicationContext(), AssetActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        assetGoButton.setOnClickListener(view -> {
+            intent.setClass(getApplicationContext(), AssetActivity.class);
+            startActivity(intent);
+            finish();
         });
-        settingGoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent.setClass(getApplicationContext(), SettingActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        settingGoButton.setOnClickListener(v -> {
+            intent.setClass(getApplicationContext(), SettingActivity.class);
+            startActivity(intent);
+            finish();
         });
-        analysisGoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent.setClass(getApplicationContext(), AnalysisActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        analysisGoButton.setOnClickListener(v -> {
+            intent.setClass(getApplicationContext(), AnalysisActivity.class);
+            startActivity(intent);
+            finish();
         });
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -122,8 +89,8 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         View view = navigationView.getHeaderView(0);
 
-        nameTextView = view.findViewById(R.id.header_name_textView);
-        emailTextView = view.findViewById(R.id.header_email_textView);
+        final TextView nameTextView = view.findViewById(R.id.header_name_textView);
+        final TextView emailTextView = view.findViewById(R.id.header_email_textView);
 
         nameTextView.setText(auth.getCurrentUser().getDisplayName());
         emailTextView.setText(auth.getCurrentUser().getEmail());
@@ -131,30 +98,18 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+        return item.getItemId() == R.id.action_settings || super.onOptionsItemSelected(item);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
         if (id == R.id.nav_logout) {
@@ -163,11 +118,8 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
             finish();
-        }/*else if(id == R.id.nav_setting){
-            Intent intent = new Intent(this, SettingActivity.class);
-            startActivity(intent);
-        }*/
-        //navigation 수정하기
+        }
+
         if (id == R.id.nav_asset) {
             Intent intent = new Intent(this, AssetActivity.class);
             startActivity(intent);

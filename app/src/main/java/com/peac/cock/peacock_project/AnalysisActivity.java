@@ -1,10 +1,10 @@
 package com.peac.cock.peacock_project;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -55,21 +55,12 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
 
     private TextView categoryBudgetRegisterText;
 
-    // analysis page
     private ListView ledgerListViewPerCategory;
     private ListTab1Adapter analysisListAdapter;
-
-    // budget page
     private ListView budgetListViewPerCategory;
     private BudgetAdapter budgetListAdapter;
-
     private Button categoryBudgetRegisterButton;
     private FloatingActionButton categoryBudgetRegisterFloatingButton;
-
-    private ImageButton assetGoButton;
-    private ImageButton analysisGoButton;
-    private ImageButton detailGoButton;
-    private ImageButton settingGoButton;
 
     private TextView budgetMonthExtraAmount;
     private TextView budgetMonthInfoAmount1;
@@ -82,29 +73,28 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
     private Calendar today = Calendar.getInstance();
 
     private Date date = new Date();
+    @SuppressLint("SimpleDateFormat")
     private SimpleDateFormat sdf = new SimpleDateFormat("MM");
-  //  private int selectedDate = Integer.parseInt(sdf.format(date));
-    private int selectedDate = 11;
+    private int selectedDate = Integer.parseInt(sdf.format(date));
 
     private int[] entireBudget = new int[2];
 
     private List<CategoryBudgetChart> categoryBudgetSet;
     private HashMap<String, String> categoryOutgoing;
-
-    private HashMap<String, ArrayList<MessageItem>> ledgerLists; // 카테고리, 해당 카테고리 내역 리스트
-
-    private Intent intent;
+    private HashMap<String, ArrayList<MessageItem>> ledgerLists;
 
     private String currentTab = "analysis";
 
     private BackPressCloseHandler backPressCloseHandler;
 
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_analysis);
+
         backPressCloseHandler = new BackPressCloseHandler(this);
 
         intent = getIntent();
@@ -116,13 +106,12 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
         pieChart = findViewById(R.id.pie_chart);
 
         categoryBudgetRegisterText = findViewById(R.id.category_budget_register_text);
-
         categoryBudgetRegisterButton = findViewById(R.id.category_budget_register_button);
         categoryBudgetRegisterFloatingButton = findViewById(R.id.category_budget_register_floating_button);
 
         ledgerLists = new HashMap<>();
-        ledgerListViewPerCategory = findViewById(R.id.analysis_layout_detail_list);
 
+        ledgerListViewPerCategory = findViewById(R.id.analysis_layout_detail_list);
         budgetListViewPerCategory = findViewById(R.id.budget_layout_budget_list);
 
         categoryBudgetSet = new ArrayList<>();
@@ -130,10 +119,10 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
 
         budgetListAdapter = new BudgetAdapter(this, R.layout.activity_analysis_category_budget_item, categoryBudgetSet);
 
-        assetGoButton = findViewById(R.id.main_layout_asset_go_button);
-        analysisGoButton = findViewById(R.id.main_layout_analysis_go_button);
-        detailGoButton = findViewById(R.id.main_layout_breakdown_go_button);
-        settingGoButton = findViewById(R.id.main_layout_setting_go_button);
+        final ImageButton assetGoButton = findViewById(R.id.main_layout_asset_go_button);
+        final ImageButton analysisGoButton = findViewById(R.id.main_layout_analysis_go_button);
+        final ImageButton detailGoButton = findViewById(R.id.main_layout_breakdown_go_button);
+        final ImageButton settingGoButton = findViewById(R.id.main_layout_setting_go_button);
 
         budgetMonthExtraAmount = findViewById(R.id.budget_layout_month_extra_amount);
         budgetMonthInfoAmount1 = findViewById(R.id.budget_layout_month_info_amount1);
@@ -142,52 +131,32 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
         budgetPercentage = findViewById(R.id.budget_layout_percentage);
         budgetResultText = findViewById(R.id.budget_layout_budget_result_text);
 
-        categoryBudgetRegisterFloatingButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                intent.setClass(getApplicationContext(), CategoryBudgetRegisterActivity.class);
-                startActivity(intent);
-            }
+        categoryBudgetRegisterFloatingButton.setOnClickListener(view -> {
+            intent.setClass(getApplicationContext(), CategoryBudgetRegisterActivity.class);
+            startActivity(intent);
         });
 
-        categoryBudgetRegisterButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                intent.setClass(getApplicationContext(), CategoryBudgetRegisterActivity.class);
-                startActivity(intent);
-            }
+        categoryBudgetRegisterButton.setOnClickListener(view -> {
+            intent.setClass(getApplicationContext(), CategoryBudgetRegisterActivity.class);
+            startActivity(intent);
         });
 
-        detailGoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent.setClass(getApplicationContext(), DetailTabActivity.class);
-                startActivity(intent);
-            }
+        detailGoButton.setOnClickListener(view -> {
+            intent.setClass(getApplicationContext(), DetailTabActivity.class);
+            startActivity(intent);
         });
 
-        assetGoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent.setClass(getApplicationContext(), AssetActivity.class);
-                startActivity(intent);
-            }
+        assetGoButton.setOnClickListener(view -> {
+            intent.setClass(getApplicationContext(), AssetActivity.class);
+            startActivity(intent);
         });
-        settingGoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent.setClass(getApplicationContext(), SettingActivity.class);
-                startActivity(intent);
-            }
+        settingGoButton.setOnClickListener(v -> {
+            intent.setClass(getApplicationContext(), SettingActivity.class);
+            startActivity(intent);
         });
-        analysisGoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent.setClass(getApplicationContext(), AnalysisActivity.class);
-                startActivity(intent);
-            }
+        analysisGoButton.setOnClickListener(v -> {
+            intent.setClass(getApplicationContext(), AnalysisActivity.class);
+            startActivity(intent);
         });
 
         final TabHost host = findViewById(R.id.tab_host);
@@ -211,12 +180,9 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
 
         setupPieChart();
 
-        // set a chart value selected listener
         pieChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
-
             @Override
             public void onValueSelected(Entry e, Highlight h) {
-                // display msg when value selected
                 if (e == null)
                     return;
 
@@ -230,10 +196,7 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
             }
 
             @Override
-            public void onNothingSelected() {
-                //categoryOutgoing.get(e) + " = " + e.getData() + "%"
-
-            }
+            public void onNothingSelected() {  }
         });
     }
 
@@ -262,8 +225,6 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
             for (Map.Entry<String, String> c : categoryOutgoing.entrySet()) {
                 pieEntries.add(new PieEntry(Integer.parseInt(c.getValue()), c.getKey()));
             }
-        } else {
-            System.out.println("데이터 없음");
         }
 
         PieDataSet dataSet = new PieDataSet(pieEntries, "지출 패턴");
@@ -301,16 +262,13 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
 
 
         int maxDay = today.getActualMaximum(Calendar.DATE);
-    //    int remainDay = maxDay - today.get(Calendar.DATE) + 1;
-        int remainDay = 10;
+        int remainDay = maxDay - today.get(Calendar.DATE) + 1;
         String text2 = "예산을 맞추려면 하루에" + df.format(delta/remainDay) + "원씩 써야해요.";
         budgetMonthInfoAmount1.setText(text2);
 
-    //   int expectedOutgoing = entireBudget[1]*30/today.get(Calendar.DATE);
-        int expectedOutgoing = entireBudget[1]*30/20;
+        int expectedOutgoing = entireBudget[1]*30/today.get(Calendar.DATE);
         String text3 = "이렇게 쓴다면 이번달 지출은 " + df.format(expectedOutgoing) + "원으로 예상되네요.";
         budgetMonthInfoAmount2.setText(text3);
-
 
         String text4 = "예산 : " + df.format(entireBudget[0]) + "원\n지출 : " + df.format(entireBudget[1]) + "원";
         budgetResultText.setText(text4);
@@ -319,16 +277,12 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
             categoryBudgetRegisterText.setVisibility(View.VISIBLE);
             categoryBudgetRegisterButton.setVisibility(View.VISIBLE);
             categoryBudgetRegisterFloatingButton.setVisibility(View.GONE);
-            System.out.println("데이터 없음");
         } else {
             categoryBudgetRegisterText.setVisibility(View.GONE);
             categoryBudgetRegisterButton.setVisibility(View.GONE);
             categoryBudgetRegisterFloatingButton.setVisibility(View.VISIBLE);
-            System.out.println("데이터 있음");
         }
     }
-
-
 
     @Override
     protected void onStart() {
@@ -379,13 +333,11 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
 
                     String msgKey = fileSnapshot.getKey();
 
-                    //메시지 read 해올 때 카테고리 id 초기값으로  2131230977 줘야함.
                     MessageItem messageItem = new MessageItem(ledger.getCategory().getCateImageId(), msgContentToken[0], ledger.getDate(),
                             Integer.parseInt(ledger.getAmount()), msgKey);
 
                     if (ledgerLists.get(categoryName) == null) {
-                        ArrayList<MessageItem> msgItems = new ArrayList<>();
-                        ledgerLists.put(categoryName, msgItems);
+                        ledgerLists.put(categoryName, new ArrayList<>());
                     }
                     ledgerLists.get(categoryName).add(messageItem);
 
@@ -398,14 +350,9 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
             String text;
             CategoryBudgetChart categoryBudgetChart = new CategoryBudgetChart();
 
-
-            System.out.println("please : " + categoryBudget.toString());
-            System.out.println("please : " + categoryBudget.getCategory().getCateImageString());
-            System.out.println("please : " + categoryOutgoing.get("의복/미용"));
             int outgoing = Integer.parseInt(categoryOutgoing.get(categoryBudget.getCategory().getCateImageString()));
             int budget = Integer.parseInt(categoryBudget.getBudget());
             int percentage = outgoing*100/budget;
-
 
             categoryBudgetChart.setCategoryName(categoryBudget.getCategory().getCateImageString());
             categoryBudgetChart.setPercentage(percentage);
@@ -423,8 +370,6 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
             categoryBudgetChart.setBudgetNOutgoing(text);
 
             categoryBudgetSet.add(categoryBudgetChart);
-            System.out.println("please : " + categoryBudgetChart);
-            System.out.println("please : " + categoryBudgetSet);
         }
 
         budgetListAdapter.setCategoryBudgetCharts(categoryBudgetSet);
@@ -432,14 +377,10 @@ public class AnalysisActivity extends AppCompatActivity implements ValueEventLis
 
         setPieChartData();
         setBarChartData();
-
-
     }
 
     @Override
-    public void onCancelled(DatabaseError databaseError) {
-
-    }
+    public void onCancelled(DatabaseError databaseError) {   }
 
     @Override
     public void onBackPressed() {

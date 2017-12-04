@@ -1,13 +1,7 @@
 package com.peac.cock.peacock_project.projectDto;
 
-/**
- * Created by wee on 2017. 11. 8..
- */
-
 public class LedgerDto {
 
-    private String seq;
-    //String email;
     private String inOut;
     private String date;
     private String time;
@@ -16,14 +10,6 @@ public class LedgerDto {
     private String amount;
     private Asset asset;
     private String memo;
-
-    public String getSeq() {
-        return seq;
-    }
-
-    public void setSeq(String seq) {
-        this.seq = seq;
-    }
 
     public String getInOut() {
         return inOut;
@@ -73,16 +59,8 @@ public class LedgerDto {
         this.amount = amount;
     }
 
-    public Asset getAsset() {
-        return asset;
-    }
-
     public void setAsset(Asset asset) {
         this.asset = asset;
-    }
-
-    public String getMemo() {
-        return memo;
     }
 
     public void setMemo(String memo) {
@@ -92,7 +70,6 @@ public class LedgerDto {
     @Override
     public String toString() {
         return "LedgerDto{" +
-                "seq='" + seq + '\'' +
                 ", inOut='" + inOut + '\'' +
                 ", date='" + date + '\'' +
                 ", time='" + time + '\'' +

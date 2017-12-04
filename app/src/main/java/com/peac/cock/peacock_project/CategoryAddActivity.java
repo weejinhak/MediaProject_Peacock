@@ -6,22 +6,15 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
-import android.view.View;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.peac.cock.peacock_project.projectAdapter.CategoryGridViewAdapter;
 import com.peac.cock.peacock_project.projectDto.Category;
-
-/**
- * Created by wee on 2017. 11. 15..
- */
 
 public class CategoryAddActivity extends AppCompatActivity {
 
@@ -30,10 +23,7 @@ public class CategoryAddActivity extends AppCompatActivity {
     private ImageButton outgoingButton;
     private ImageButton transferButton;
     private Category mCategory;
-    private Button categoryAddButton;
-    private ImageButton backButton;
     private String categoryType;
-    private FirebaseAuth mAuth;
     private FirebaseDatabase mDatabase;
     private String uid;
     private Intent intent;
@@ -46,6 +36,7 @@ public class CategoryAddActivity extends AppCompatActivity {
             "집", "생활", "사랑",
             "휴대폰", "교통", "여행"
     };
+
     private int[] gridViewImageId = {
             R.drawable.category_item_baby, R.drawable.category_item_beauty, R.drawable.category_item_caffe,
             R.drawable.category_item_car, R.drawable.category_item_cigarette, R.drawable.category_item_culture,
@@ -66,6 +57,7 @@ public class CategoryAddActivity extends AppCompatActivity {
     private String[] incomingGridViewString = {
             "급여", "용돈", "사업수입", "금융수입", "돈받음"
     };
+
     private int[] incomingGridViewImageId = {
             R.drawable.category_item_incomming,
             R.drawable.category_item_incomming,
@@ -77,6 +69,7 @@ public class CategoryAddActivity extends AppCompatActivity {
             "이체", "카드대금", "저축", "현금", "투자",
             "보험", "대출"
     };
+
     private int[] transferGridViewImageId = {
             R.drawable.category_item_transfer,
             R.drawable.category_item_transfer,
@@ -99,17 +92,16 @@ public class CategoryAddActivity extends AppCompatActivity {
         intent = getIntent();
         categoryType = intent.getStringExtra("categoryType");
 
-        //fireBase Auth & Database
-        mAuth = FirebaseAuth.getInstance();
+        final FirebaseAuth mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance();
         uid = mAuth.getCurrentUser().getUid();
 
-        //getId
         incomingButton = findViewById(R.id.category_add_layout_incoming_button);
         outgoingButton = findViewById(R.id.category_add_layout_outgoing_button);
         transferButton = findViewById(R.id.category_add_layout_transfer_button);
-        categoryAddButton = findViewById(R.id.category_add_grid_view_category_add_button);
-        backButton = findViewById(R.id.category_add_back_button);
+
+        final Button categoryAddButton = findViewById(R.id.category_add_grid_view_category_add_button);
+        final ImageButton backButton = findViewById(R.id.category_add_back_button);
 
         mCategory = new Category();
 
@@ -126,104 +118,87 @@ public class CategoryAddActivity extends AppCompatActivity {
         categoryAddGridView = findViewById(R.id.category_add_grid_view_image_text);
         categoryAddGridView.setAdapter(adapterViewCategory);
 
-        categoryAddGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
-                System.out.println(categoryType);
-                if (categoryType.equals("지출")) {
-                    mCategory.setCateImageString(matchGridViewString[i]);
-                    mCategory.setCateImageId(gridViewImageId[i]);
-                }
-                if (categoryType.equals("수입")) {
-                    mCategory.setCateImageString(incomingGridViewString[i]);
-                    mCategory.setCateImageId(incomingGridViewImageId[i]);
-                }
-                if (categoryType.equals("이체")) {
-                    mCategory.setCateImageString(transferGridViewString[i]);
-                    mCategory.setCateImageId(transferGridViewImageId[i]);
-                }
+        categoryAddGridView.setOnItemClickListener((parent, view, i, id) -> {
+            if (categoryType.equals("지출")) {
+                mCategory.setCateImageString(matchGridViewString[i]);
+                mCategory.setCateImageId(gridViewImageId[i]);
+            }
+            if (categoryType.equals("수입")) {
+                mCategory.setCateImageString(incomingGridViewString[i]);
+                mCategory.setCateImageId(incomingGridViewImageId[i]);
+            }
+            if (categoryType.equals("이체")) {
+                mCategory.setCateImageString(transferGridViewString[i]);
+                mCategory.setCateImageId(transferGridViewImageId[i]);
             }
         });
 
-        // 초기 상태
-        if (categoryType.equals("지출")) {
-            outgoingButton.setBackgroundResource(R.drawable.handwriting_layout_active_outgoing_button);
-            incomingButton.setBackgroundResource(R.drawable.handwriting_layout_incoming_button);
-            transferButton.setBackgroundResource(R.drawable.handwriting_layout_transfer_button);
-        } else if (categoryType.equals("수입")) {
-            incomingButton.setBackgroundResource(R.drawable.handwriting_layout_active_incoming_button);
-            outgoingButton.setBackgroundResource(R.drawable.handwriting_layout_outgoing_button);
-            transferButton.setBackgroundResource(R.drawable.handwriting_layout_transfer_button);
-        } else {
-            transferButton.setBackgroundResource(R.drawable.handwriting_layout_active_transfer_button);
-            incomingButton.setBackgroundResource(R.drawable.handwriting_layout_incoming_button);
-            outgoingButton.setBackgroundResource(R.drawable.handwriting_layout_outgoing_button);
+        switch (categoryType) {
+            case "지출":
+                outgoingButton.setBackgroundResource(R.drawable.handwriting_layout_active_outgoing_button);
+                incomingButton.setBackgroundResource(R.drawable.handwriting_layout_incoming_button);
+                transferButton.setBackgroundResource(R.drawable.handwriting_layout_transfer_button);
+                break;
+            case "수입":
+                incomingButton.setBackgroundResource(R.drawable.handwriting_layout_active_incoming_button);
+                outgoingButton.setBackgroundResource(R.drawable.handwriting_layout_outgoing_button);
+                transferButton.setBackgroundResource(R.drawable.handwriting_layout_transfer_button);
+                break;
+            default:
+                transferButton.setBackgroundResource(R.drawable.handwriting_layout_active_transfer_button);
+                incomingButton.setBackgroundResource(R.drawable.handwriting_layout_incoming_button);
+                outgoingButton.setBackgroundResource(R.drawable.handwriting_layout_outgoing_button);
+                break;
         }
 
-        outgoingButton.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                categoryType = "지출";
-                adapterViewCategory = new CategoryGridViewAdapter(getApplicationContext(), gridViewString, gridViewImageId);
-                categoryAddGridView.setAdapter(adapterViewCategory);
+        outgoingButton.setOnTouchListener((view, motionEvent) -> {
+            categoryType = "지출";
+            adapterViewCategory = new CategoryGridViewAdapter(getApplicationContext(), gridViewString, gridViewImageId);
+            categoryAddGridView.setAdapter(adapterViewCategory);
 
-                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                    outgoingButton.setBackgroundResource(R.drawable.handwriting_layout_active_outgoing_button);
-                    incomingButton.setBackgroundResource(R.drawable.handwriting_layout_incoming_button);
-                    transferButton.setBackgroundResource(R.drawable.handwriting_layout_transfer_button);
-                }
-                return false;
+            if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                outgoingButton.setBackgroundResource(R.drawable.handwriting_layout_active_outgoing_button);
+                incomingButton.setBackgroundResource(R.drawable.handwriting_layout_incoming_button);
+                transferButton.setBackgroundResource(R.drawable.handwriting_layout_transfer_button);
             }
+            return false;
         });
 
-        incomingButton.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                categoryType = "수입";
-                adapterViewCategory = new CategoryGridViewAdapter(getApplicationContext(), incomingGridViewString, incomingGridViewImageId);
-                categoryAddGridView.setAdapter(adapterViewCategory);
-                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                    incomingButton.setBackgroundResource(R.drawable.handwriting_layout_active_incoming_button);
-                    outgoingButton.setBackgroundResource(R.drawable.handwriting_layout_outgoing_button);
-                    transferButton.setBackgroundResource(R.drawable.handwriting_layout_transfer_button);
-                }
-                return false;
+        incomingButton.setOnTouchListener((view, motionEvent) -> {
+            categoryType = "수입";
+            adapterViewCategory = new CategoryGridViewAdapter(getApplicationContext(), incomingGridViewString, incomingGridViewImageId);
+            categoryAddGridView.setAdapter(adapterViewCategory);
+            if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                incomingButton.setBackgroundResource(R.drawable.handwriting_layout_active_incoming_button);
+                outgoingButton.setBackgroundResource(R.drawable.handwriting_layout_outgoing_button);
+                transferButton.setBackgroundResource(R.drawable.handwriting_layout_transfer_button);
             }
+            return false;
         });
 
-        transferButton.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                categoryType = "이체";
-                adapterViewCategory = new CategoryGridViewAdapter(getApplicationContext(), transferGridViewString, transferGridViewImageId);
-                categoryAddGridView.setAdapter(adapterViewCategory);
-                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                    transferButton.setBackgroundResource(R.drawable.handwriting_layout_active_transfer_button);
-                    incomingButton.setBackgroundResource(R.drawable.handwriting_layout_incoming_button);
-                    outgoingButton.setBackgroundResource(R.drawable.handwriting_layout_outgoing_button);
-                }
-                return false;
+        transferButton.setOnTouchListener((view, motionEvent) -> {
+            categoryType = "이체";
+            adapterViewCategory = new CategoryGridViewAdapter(getApplicationContext(), transferGridViewString, transferGridViewImageId);
+            categoryAddGridView.setAdapter(adapterViewCategory);
+            if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                transferButton.setBackgroundResource(R.drawable.handwriting_layout_active_transfer_button);
+                incomingButton.setBackgroundResource(R.drawable.handwriting_layout_incoming_button);
+                outgoingButton.setBackgroundResource(R.drawable.handwriting_layout_outgoing_button);
             }
+            return false;
         });
 
-        categoryAddButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mDatabase.getReference().child("users").child(uid).child("category").child(categoryType).push().setValue(mCategory);
-                intent.setClass(getApplicationContext(), CategoryActivity.class);
-                intent.putExtra("categoryType", categoryType);
-                startActivity(intent);
-         //       finish();
-            }
+        categoryAddButton.setOnClickListener(view -> {
+            mDatabase.getReference().child("users").child(uid).child("category").child(categoryType).push().setValue(mCategory);
+            intent.setClass(getApplicationContext(), CategoryActivity.class);
+            intent.putExtra("categoryType", categoryType);
+            startActivity(intent);
         });
 
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent.setClass(getApplicationContext(), CategoryActivity.class);
-                intent.putExtra("categoryType", categoryType);
-                startActivity(intent);
-            }
+        backButton.setOnClickListener(view -> {
+            intent.setClass(getApplicationContext(), CategoryActivity.class);
+            intent.putExtra("categoryType", categoryType);
+            startActivity(intent);
         });
 
     }

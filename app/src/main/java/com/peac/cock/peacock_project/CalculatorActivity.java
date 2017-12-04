@@ -1,6 +1,5 @@
 package com.peac.cock.peacock_project;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -12,9 +11,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
-
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ScriptableObject;
 
@@ -24,9 +20,11 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
 
     private Context rhino;
     private String result;
-    private String evaluation;
 
     private ImageButton checkButton;
+    private ImageButton incomingButton;
+    private ImageButton outgoingButton;
+    private ImageButton transferButton;
 
     private Intent intent;
 
@@ -37,7 +35,6 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_calculator);
 
         rhino = Context.enter();
-        // turn off optimization to work with android
         rhino.setOptimizationLevel(-1);
 
         intent = getIntent();
@@ -52,9 +49,9 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
             result = intent.getStringExtra("amount");
         }
 
-        final ImageButton incomingButton = findViewById(R.id.calculator_layout_incoming_button);
-        final ImageButton outgoingButton = findViewById(R.id.calculator_layout_outgoing_button);
-        final ImageButton transferButton = findViewById(R.id.calculator_layout_transfer_button);
+        incomingButton = findViewById(R.id.calculator_layout_incoming_button);
+        outgoingButton = findViewById(R.id.calculator_layout_outgoing_button);
+        transferButton = findViewById(R.id.calculator_layout_transfer_button);
 
         checkButton = findViewById(R.id.calculator_layout_check_button);
         final ImageButton backButton = findViewById(R.id.calculator_layout_back_button);
@@ -101,66 +98,55 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
         checkButton.setOnClickListener(this);
         backButton.setOnClickListener(this);
 
-
-        // 초기 상태
-        if(state.equals("outgoing")) {
-            outgoingButton.setBackgroundResource(R.drawable.handwriting_layout_active_outgoing_button);
-            incomingButton.setBackgroundResource(R.drawable.handwriting_layout_incoming_button);
-            transferButton.setBackgroundResource(R.drawable.handwriting_layout_transfer_button);
-        } else if(state.equals("incoming")) {
-            incomingButton.setBackgroundResource(R.drawable.handwriting_layout_active_incoming_button);
-            outgoingButton.setBackgroundResource(R.drawable.handwriting_layout_outgoing_button);
-            transferButton.setBackgroundResource(R.drawable.handwriting_layout_transfer_button);
-        } else {
-            transferButton.setBackgroundResource(R.drawable.handwriting_layout_active_transfer_button);
-            incomingButton.setBackgroundResource(R.drawable.handwriting_layout_incoming_button);
-            outgoingButton.setBackgroundResource(R.drawable.handwriting_layout_outgoing_button);
+        switch (state) {
+            case "outgoing":
+                outgoingButton.setBackgroundResource(R.drawable.handwriting_layout_active_outgoing_button);
+                incomingButton.setBackgroundResource(R.drawable.handwriting_layout_incoming_button);
+                transferButton.setBackgroundResource(R.drawable.handwriting_layout_transfer_button);
+                break;
+            case "incoming":
+                incomingButton.setBackgroundResource(R.drawable.handwriting_layout_active_incoming_button);
+                outgoingButton.setBackgroundResource(R.drawable.handwriting_layout_outgoing_button);
+                transferButton.setBackgroundResource(R.drawable.handwriting_layout_transfer_button);
+                break;
+            default:
+                transferButton.setBackgroundResource(R.drawable.handwriting_layout_active_transfer_button);
+                incomingButton.setBackgroundResource(R.drawable.handwriting_layout_incoming_button);
+                outgoingButton.setBackgroundResource(R.drawable.handwriting_layout_outgoing_button);
+                break;
         }
 
-
-
-        outgoingButton.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if(motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                    outgoingButton.setBackgroundResource(R.drawable.handwriting_layout_active_outgoing_button);
-                    incomingButton.setBackgroundResource(R.drawable.handwriting_layout_incoming_button);
-                    transferButton.setBackgroundResource(R.drawable.handwriting_layout_transfer_button);
-                    state = "outgoing";
-                }
-                return false;
+        outgoingButton.setOnTouchListener((view, motionEvent) -> {
+            if(motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                outgoingButton.setBackgroundResource(R.drawable.handwriting_layout_active_outgoing_button);
+                incomingButton.setBackgroundResource(R.drawable.handwriting_layout_incoming_button);
+                transferButton.setBackgroundResource(R.drawable.handwriting_layout_transfer_button);
+                state = "outgoing";
             }
+            return false;
         });
 
-        incomingButton.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if(motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                    incomingButton.setBackgroundResource(R.drawable.handwriting_layout_active_incoming_button);
-                    outgoingButton.setBackgroundResource(R.drawable.handwriting_layout_outgoing_button);
-                    transferButton.setBackgroundResource(R.drawable.handwriting_layout_transfer_button);
-                    state = "incoming";
-                }
-                return false;
+        incomingButton.setOnTouchListener((view, motionEvent) -> {
+            if(motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                incomingButton.setBackgroundResource(R.drawable.handwriting_layout_active_incoming_button);
+                outgoingButton.setBackgroundResource(R.drawable.handwriting_layout_outgoing_button);
+                transferButton.setBackgroundResource(R.drawable.handwriting_layout_transfer_button);
+                state = "incoming";
             }
+            return false;
         });
 
-        transferButton.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if(motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                    transferButton.setBackgroundResource(R.drawable.handwriting_layout_active_transfer_button);
-                    incomingButton.setBackgroundResource(R.drawable.handwriting_layout_incoming_button);
-                    outgoingButton.setBackgroundResource(R.drawable.handwriting_layout_outgoing_button);
-                    state = "transfer";
-                }
-                return false;
+        transferButton.setOnTouchListener((view, motionEvent) -> {
+            if(motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                transferButton.setBackgroundResource(R.drawable.handwriting_layout_active_transfer_button);
+                incomingButton.setBackgroundResource(R.drawable.handwriting_layout_incoming_button);
+                outgoingButton.setBackgroundResource(R.drawable.handwriting_layout_outgoing_button);
+                state = "transfer";
             }
+            return false;
         });
     }
 
-
-    // 숫자 버튼 누를 때
     View.OnClickListener numberClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -169,12 +155,12 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
                 result = "";
                 checkButton.setBackgroundResource(R.drawable.handwriting_layout_active_check_button);
             }
-            resultView.setText(resultView.getText().toString() + ((Button) view).getText().toString());
+            String text = resultView.getText().toString() + ((Button) view).getText().toString();
+            resultView.setText(text);
             result += ((Button) view).getText().toString();
         }
     };
 
-    // 나머지 이미지 버튼 누를 때
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -194,7 +180,8 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
                         && !resultView.getText().toString().substring(resultView.length()-1, resultView.length()).equals("+")
                         && !resultView.getText().toString().substring(resultView.length()-1, resultView.length()).equals("x")
                         && !resultView.getText().toString().substring(resultView.length()-1, resultView.length()).equals("÷")) {
-                    resultView.setText(resultView.getText().toString() + "-");
+                    String text = resultView.getText().toString() + "-";
+                    resultView.setText(text);
                     result += "-";
                 }
                 break;
@@ -204,7 +191,8 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
                         && !resultView.getText().toString().substring(resultView.length()-1, resultView.length()).equals("+")
                         && !resultView.getText().toString().substring(resultView.length()-1, resultView.length()).equals("x")
                         && !resultView.getText().toString().substring(resultView.length()-1, resultView.length()).equals("÷")) {
-                    resultView.setText(resultView.getText().toString() + "+");
+                    String text = resultView.getText().toString() + "+";
+                    resultView.setText(text);
                     result += "+";
                 }
                 break;
@@ -214,7 +202,8 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
                         && !resultView.getText().toString().substring(resultView.length()-1, resultView.length()).equals("+")
                         && !resultView.getText().toString().substring(resultView.length()-1, resultView.length()).equals("x")
                         && !resultView.getText().toString().substring(resultView.length()-1, resultView.length()).equals("÷")) {
-                    resultView.setText(resultView.getText().toString() + "x");
+                    String text = resultView.getText().toString() + "x";
+                    resultView.setText(text);
                     result += "*";
                 }
                 break;
@@ -224,20 +213,19 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
                         && !resultView.getText().toString().substring(resultView.length()-1, resultView.length()).equals("+")
                         && !resultView.getText().toString().substring(resultView.length()-1, resultView.length()).equals("x")
                         && !resultView.getText().toString().substring(resultView.length()-1, resultView.length()).equals("÷")) {
-                    resultView.setText(resultView.getText().toString() + "÷");
+                    String text = resultView.getText().toString() + "÷";
+                    resultView.setText(text);
                     result += "/";
                 }
                 break;
             case R.id.calculator_layout_check_button:
                 intent.setClass(getApplicationContext(), HandwritingActivity.class);
 
+                final String evaluation;
                 try {
                     ScriptableObject scope = rhino.initStandardObjects();
-                    System.out.println("result : " + result);
                     evaluation = rhino.evaluateString(scope, result, "JavaScript", 1, null).toString();
-                    System.out.println("evaluation : " + evaluation);
                     evaluation = String.valueOf(Math.round(Float.parseFloat(evaluation)));
-                    System.out.println("evaluation : " + evaluation);
                 } finally {
                     Context.exit();
                 }
@@ -246,24 +234,17 @@ public class CalculatorActivity extends AppCompatActivity implements View.OnClic
                 intent.putExtra("state", state);
                 startActivity(intent);
                 break;
+
             case R.id.calculator_layout_back_button:
                 AlertDialog.Builder alt_bld = new AlertDialog.Builder(this);
                 alt_bld.setMessage("페이지에서 나가면 작성된 정보가 사라집니다. 그래도 나가시겠습니까?")
                         .setCancelable(false)
-                        .setPositiveButton("Yes",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        dialog.dismiss();
-                                        intent.setClass(getApplicationContext(), DetailTabActivity.class);
-                                        startActivity(intent);
-                                    }
-                                })
-                        .setNegativeButton("No",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        dialog.dismiss();
-                                    }
-                                });
+                        .setPositiveButton("Yes", (dialog, id) -> {
+                            dialog.dismiss();
+                            intent.setClass(getApplicationContext(), DetailTabActivity.class);
+                            startActivity(intent);
+                        })
+                        .setNegativeButton("No", (dialog, id) -> dialog.dismiss());
                 AlertDialog alert = alt_bld.create();
                 alert.setTitle("잠깐!");
                 alert.setIcon(R.drawable.calculator_layout_warning_icon);

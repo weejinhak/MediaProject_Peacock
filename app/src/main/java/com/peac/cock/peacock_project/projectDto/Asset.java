@@ -1,9 +1,5 @@
 package com.peac.cock.peacock_project.projectDto;
 
-/**
- * Created by wee on 2017. 11. 8..
- */
-
 public class Asset {
 
     private String nickname;
@@ -12,11 +8,6 @@ public class Asset {
     public Asset() {
         this.nickname = "";
         this.balance = 0;
-    }
-
-    public Asset(String nickname, int balance) {
-        this.nickname = nickname;
-        this.balance = balance;
     }
 
     public Asset(String nickname){

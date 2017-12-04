@@ -1,16 +1,11 @@
 package com.peac.cock.peacock_project.projectDto;
 
-/**
- * Created by wee on 2017. 11. 15..
- */
-
 public class Category {
 
     private String cateImageString;
     private int  cateImageId;
 
-    public Category() {
-    }
+    public Category() { }
 
     public Category(String cateImageString, int cateImageId) {
         this.cateImageString = cateImageString;

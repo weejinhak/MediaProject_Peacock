@@ -9,100 +9,64 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 
 import com.peac.cock.peacock_project.projectAdapter.BackPressCloseHandler;
-
-/**
- * Created by dmsru on 2017-11-15.
- */
 
 public class DetailTabActivity extends AppCompatActivity {
 
     protected Intent intent;
     private BackPressCloseHandler backPressCloseHandler;
 
-    /**
-     * The {@link android.support.v4.view.PagerAdapter} that will provide
-     * fragments for each of the sections. We use a
-     * {@link FragmentPagerAdapter} derivative, which will keep every
-     * loaded fragment in memory. If this becomes too memory intensive, it
-     * may be best to switch to a
-     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-     */
-    private SectionsPagerAdapter mSectionsPagerAdapter;
-
-    /**
-     * The {@link ViewPager} that will host the section contents.
-     */
-    private ViewPager mViewPager;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_tab_detail);
-        backPressCloseHandler=new BackPressCloseHandler(this);
+
+        backPressCloseHandler = new BackPressCloseHandler(this);
 
         intent = new Intent();
 
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        final SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-        // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
+        final ViewPager mViewPager = findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        FloatingActionButton fab = findViewById(R.id.main_layout_plus_button);
-
-        mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        final TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent.setClass(getApplicationContext(), CalculatorActivity.class);
-                startActivity(intent);
-            }
-        });
+        mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
+        final FloatingActionButton fab = findViewById(R.id.main_layout_plus_button);
         final ImageButton assetGoButton = findViewById(R.id.main_layout_asset_go_button);
         final ImageButton analysisGoButton = findViewById(R.id.main_layout_analysis_go_button);
         final ImageButton detailGoButton = findViewById(R.id.main_layout_breakdown_go_button);
         final ImageButton settingGoButton = findViewById(R.id.main_layout_setting_go_button);
 
-        detailGoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent.setClass(getApplicationContext(), DetailTabActivity.class);
-                startActivity(intent);
-            }
+        fab.setOnClickListener(view -> {
+            intent.setClass(getApplicationContext(), CalculatorActivity.class);
+            startActivity(intent);
         });
 
-        assetGoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent.setClass(getApplicationContext(), AssetActivity.class);
-                startActivity(intent);
-            }
+        detailGoButton.setOnClickListener(view -> {
+            intent.setClass(getApplicationContext(), DetailTabActivity.class);
+            startActivity(intent);
         });
-        settingGoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent.setClass(getApplicationContext(), SettingActivity.class);
-                startActivity(intent);
-            }
+
+        assetGoButton.setOnClickListener(view -> {
+            intent.setClass(getApplicationContext(), AssetActivity.class);
+            startActivity(intent);
         });
-        analysisGoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent.setClass(getApplicationContext(), AnalysisActivity.class);
-                startActivity(intent);
-            }
+        settingGoButton.setOnClickListener(view -> {
+            intent.setClass(getApplicationContext(), SettingActivity.class);
+            startActivity(intent);
+        });
+        analysisGoButton.setOnClickListener(view -> {
+            intent.setClass(getApplicationContext(), AnalysisActivity.class);
+            startActivity(intent);
         });
 
     }
@@ -110,40 +74,22 @@ public class DetailTabActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+        return item.getItemId() == R.id.action_settings || super.onOptionsItemSelected(item);
     }
 
-    //deleted PlaceholderFragment class from home
-    /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-        public SectionsPagerAdapter(FragmentManager fm) {
+        private SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
         @Override
         public Fragment getItem(int position) {
-            //Returning the current tabs
             switch (position) {
                 case 0:
-                    Tab1_content tab1 = new Tab1_content();
-                    return tab1;
+                    return new Tab1_content();
                 case 1:
-                    Tab2_content tab2 = new Tab2_content();
-                    return  tab2;
+                    return new Tab2_content();
 
                 default:
                     return null;
@@ -152,7 +98,6 @@ public class DetailTabActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            // Show 2 total pages.
             return 2;
         }
 

@@ -1,9 +1,5 @@
 package com.peac.cock.peacock_project.projectDto;
 
-/**
- * Created by dahye on 2017-12-01.
- */
-
 public class CategoryBudgetChart {
 
     String categoryName;
@@ -11,14 +7,7 @@ public class CategoryBudgetChart {
     int percentage;
     String budgetNOutgoing;
 
-    public CategoryBudgetChart() {   }
-
-    public CategoryBudgetChart(String categoryName, String extraAmount, int percentage, String budgetNOutgoing) {
-        this.categoryName = categoryName;
-        this.extraAmount = extraAmount;
-        this.percentage = percentage;
-        this.budgetNOutgoing = budgetNOutgoing;
-    }
+    public CategoryBudgetChart() {  }
 
     public String getCategoryName() {
         return categoryName;

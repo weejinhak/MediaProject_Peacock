@@ -45,7 +45,7 @@
             android:name=".EmailJoinActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".MemberInfoActivitiy"
+            android:name=".MemberInfoActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".AssetActivity"

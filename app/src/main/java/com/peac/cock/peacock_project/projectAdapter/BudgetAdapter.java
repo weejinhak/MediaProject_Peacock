@@ -1,25 +1,17 @@
 package com.peac.cock.peacock_project.projectAdapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.peac.cock.peacock_project.R;
 import com.peac.cock.peacock_project.projectDto.CategoryBudgetChart;
-import com.peac.cock.peacock_project.projectDto.MessageItem;
 
-import java.util.ArrayList;
 import java.util.List;
-
-/**
- * Created by dahye on 2017-11-30.
- */
 
 public class BudgetAdapter extends BaseAdapter{
     private LayoutInflater inflater;

@@ -1,22 +1,11 @@
 package com.peac.cock.peacock_project.projectDto;
 
-/**
- * Created by wee on 2017. 11. 15..
- */
-
 public class CategoryBudget {
 
     private Category category;
     private String budget;
 
-    public CategoryBudget() {
-
-    }
-
-    public CategoryBudget(Category category, String budget) {
-        this.category = category;
-        this.budget = budget;
-    }
+    public CategoryBudget() { }
 
     public Category getCategory() {
         return category;

@@ -14,13 +14,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-/**
- * Created by wee on 2017. 11. 8..
- */
-
 public class LoadingActivity extends AppCompatActivity {
-
-    private FirebaseDatabase mDatabase;
 
     private ArrayList<String> uidList =new ArrayList<>();
 
@@ -30,23 +24,19 @@ public class LoadingActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_loading);
 
-        mDatabase=FirebaseDatabase.getInstance();
+        final FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
 
         startLoading();
 
         DatabaseReference databaseReference = mDatabase.getReference();
-        //database get email && add ArrayList
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 dataSnapshot.getValue();
                 for (DataSnapshot fileSnapshot : dataSnapshot.child("users").getChildren()) {
                     String str = fileSnapshot.child("email").getValue(String.class);
-                    System.out.println(str);//이메일 파싱
-                    //System.out.println(fileSnapshot.getKey());//중요 -Uid 파싱
                     uidList.add(str);
                 }
-
             }
 
             @Override
@@ -60,14 +50,11 @@ public class LoadingActivity extends AppCompatActivity {
 
     private void startLoading() {
         Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(getBaseContext(), LoginActivity.class);
-                intent.putStringArrayListExtra("uidList",uidList);
-                startActivity(intent);
-                finish();
-            }
+        handler.postDelayed(() -> {
+            Intent intent = new Intent(getBaseContext(), LoginActivity.class);
+            intent.putStringArrayListExtra("uidList",uidList);
+            startActivity(intent);
+            finish();
         }, 2000);
     }
 

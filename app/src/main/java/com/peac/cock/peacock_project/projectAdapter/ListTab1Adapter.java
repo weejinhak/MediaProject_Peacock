@@ -14,16 +14,11 @@ import com.peac.cock.peacock_project.projectDto.MessageItem;
 
 import java.util.ArrayList;
 
-/**
- * Created by wee on 2017. 11. 25..
- */
-
 public class ListTab1Adapter extends BaseAdapter {
 
     private LayoutInflater inflater;
     private ArrayList<MessageItem> messageItems;
     private int layout;
-
 
     public ListTab1Adapter(Context context, int layout, ArrayList<MessageItem> messageItems) {
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
