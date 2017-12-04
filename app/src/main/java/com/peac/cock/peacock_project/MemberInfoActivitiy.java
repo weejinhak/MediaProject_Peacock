@@ -78,6 +78,8 @@ public class MemberInfoActivitiy extends AppCompatActivity {
             }
         });
 
+        mGender.setSelection(0);
+
 
         //정보입력버튼 클릭.
         join_ok_button.setOnClickListener(new View.OnClickListener() {
@@ -113,7 +115,7 @@ public class MemberInfoActivitiy extends AppCompatActivity {
                 userDto.setEmail(email);
                 userDto.setBirthday(mBirthday.getText().toString());
                 userDto.setName(mName.getText().toString());
-                userDto.setGender(mGender.getSelectedItem().toString().replace("\\s",""));
+                userDto.setGender(mGender.getSelectedItem().toString().replaceAll("\\p{Space}",""));
                 userDto.setJob(mJob.getText().toString());
                 userDto.setBudget(mMonthBudget.getText().toString()+"0000");
 

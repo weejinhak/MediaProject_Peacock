@@ -206,7 +206,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (!task.isSuccessful()) {
                         } else {
-                            Toast.makeText(LoginActivity.this, "구글 로그인이성공!!", Toast.LENGTH_SHORT).show();
+                        //    Toast.makeText(LoginActivity.this, "구글 로그인이성공!!", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

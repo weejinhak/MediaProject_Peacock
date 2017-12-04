@@ -41,7 +41,8 @@ public class Tab1_content extends Fragment implements ValueEventListener {
     private ImageButton button2;
     private Date date = new Date();
     private SimpleDateFormat sdf = new SimpleDateFormat("MM");
-    private int selectedDate = Integer.parseInt(sdf.format(date));
+ //   private int selectedDate = Integer.parseInt(sdf.format(date));
+    private int selectedDate = 11;
     private ArrayList<MessageItem> messageItems = new ArrayList<>();
     private ListView listView;
     private ListTab1Adapter listTab1Adapter;

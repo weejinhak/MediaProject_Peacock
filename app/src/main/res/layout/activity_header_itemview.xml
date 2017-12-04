@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -9,60 +10,62 @@
         android:layout_height="0.5dp"
         android:background="#000000" />
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <TextView
-        android:id="@+id/date_itemlist"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_weight="1"
-        android:text="날짜"
-        android:textSize="17sp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/income_itemlist"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="120dp"
-        android:text="5000원"
-        android:textSize="17sp"
-        android:textColor="@color/defaultColor"/>
+        <TextView
+            android:id="@+id/date_itemlist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:text="날짜"
+            android:textSize="17sp" />
 
-    <TextView
-        android:id="@+id/outgoing_itemlist"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="20dp"
-        android:text="5000원"
-        android:textSize="17sp"
-        android:textColor="#3F51B5"/>
+        <TextView
+            android:id="@+id/income_itemlist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="120dp"
+            android:layout_marginTop="10dp"
+            android:text="5000원"
+            android:textColor="@color/defaultColor"
+            android:textSize="17sp" />
 
-    <TextView
-        android:id="@+id/body_itemlist"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:text="0건"
-        android:textSize="17sp"
-        android:textColor="#009688"/>
-</LinearLayout>
+        <TextView
+            android:id="@+id/outgoing_itemlist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:text="5000원"
+            android:textColor="#3F51B5"
+            android:textSize="17sp" />
 
- <View
-     android:layout_width="match_parent"
-     android:layout_height="0.5dp"
-     android:background="#000000"
-     tools:layout_editor_absoluteX="0dp"
-     tools:layout_editor_absoluteY="43dp"
-     tools:ignore="MissingConstraints" />
+        <TextView
+            android:id="@+id/body_itemlist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:text="0건"
+            android:textColor="#009688"
+            android:textSize="17sp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#000000"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="43dp" />
+
 </android.support.constraint.ConstraintLayout>
